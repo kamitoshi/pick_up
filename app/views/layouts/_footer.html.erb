@@ -2,11 +2,7 @@
   <hr>
   <div class="row">
     <div class="col-4">
-    </div>
-    <div class="col-4">
-      <p>©Circrest　2020</p>
-    </div>
-    <div class="col-4">
+      <h3 class="class_name">Admin</h3>
       <% if current_admin %>
         <p>管理者でログインしています</p>
         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
@@ -15,5 +11,16 @@
         <%= link_to "ログイン", new_admin_session_path %>
       <% end %>
     </div>
+    <div class="col-4">
+      <h3 class="class_name">Shop</h3>
+      <% if current_shop %>
+        <p>『<%= current_shop.email %>』でログインしています</p>
+        <%= link_to "ログアウト", destroy_shop_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "新規登録", new_shop_registration_path %>
+        <%= link_to "ログイン", new_shop_session_path %>
+      <% end %>
+    </div>
+    
   </div>
 </div>
