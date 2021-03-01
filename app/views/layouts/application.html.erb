@@ -17,7 +17,11 @@
       <main>
         <div class="row" style="margin-right:0;">
           <div class="col-2" style="padding-right:0">
-            <%= render partial: 'layouts/sidebar' %>
+            <% if admin_signed_in? %>
+              <%= render partial: 'layouts/adminSidebar' %>
+            <% elsif shop_signed_in? %>
+              <%= render partial: 'layouts/shopSidebar' %>
+            <% end %>
           </div>
           <div class="col" style="padding:0">
             <h2>title</h2>
