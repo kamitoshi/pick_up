@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   devise_scope :shop do
     get 'shops/confirm_email', to: 'shops/registrations#confirm_email'
   end
+  resources :admins, only:[:index, :show, :edit, :update, :destroy]
   resources :shops, only:[:index, :show, :edit, :update, :destroy]
 
 end

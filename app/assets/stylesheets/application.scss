@@ -15,3 +15,14 @@
  */
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+
+.sidebar_box{
+  background-color: #aaa;
+}
+
+.content_box{
+  height:500px;
+  background-color: #fff;
+  margin:20px;
+  padding:10px;
+}
