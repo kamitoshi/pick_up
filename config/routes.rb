@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   end
   resources :admins, only:[:index, :show, :edit, :update, :destroy]
   resources :shops, only:[:index, :show, :edit, :update, :destroy]
+  resources :categories, only:[:index,:new, :create, :edit, :update, :destroy]
 
 end
