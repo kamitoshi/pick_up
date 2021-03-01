@@ -3,8 +3,8 @@
     <div class="col-8">
       <%= form_for @shop do |f| %>
         <div class="field">
-          <%= f.label :store_name, "店名" %><br>
-          <%= f.text_field :store_name, autofocus: true, autocomplete: "store_name", class:"form-control", placeholder: "店名" %>
+          <%= f.label :name, "店名" %><br>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-control", placeholder: "店名" %>
         </div>
 
         <div class="field">
@@ -28,8 +28,13 @@
         </div>
 
         <div class="field">
+          <%= f.label :city, "市区町村" %><br />
+          <%= f.text_field :city, autofocus: true, autocomplete: "city", class:"form-control", placeholder: "例:新宿区三丁目" %>
+        </div>
+
+        <div class="field">
           <%= f.label :address, "住所" %><br />
-          <%= f.text_field :address, autofocus: true, autocomplete: "address", class:"form-control", placeholder: "例:新宿区三丁目" %>
+          <%= f.text_field :address, autofocus: true, autocomplete: "address", class:"form-control", placeholder: "例:1−1−34" %>
         </div>
 
         <div class="field">

@@ -17,7 +17,7 @@ class Shop < ApplicationRecord
   }
 
   def full_address
-    self.prefecture + self.address
+    self.prefecture + self.city + self.address
   end
 
 end

@@ -37,10 +37,11 @@ ActiveRecord::Schema.define(version: 2021_02_28_045707) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.string "store_name", null: false
+    t.string "name", null: false
     t.string "phone_number", null: false
     t.string "postal_code", null: false
     t.integer "prefecture", null: false
+    t.string "city", null: false
     t.string "address", null: false
     t.text "introduction"
     t.string "url"
