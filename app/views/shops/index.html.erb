@@ -1,2 +1,31 @@
-<h1>Shops#index</h1>
-<p>Find me in app/views/shops/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <div class="shop_index_box">
+        <div class="shop_name-box">
+          <span class="font-30"><%= @shop.store_name %></span>
+        </div>
+        <div class="shop_info-box">
+          <div class="address">
+            <p>
+              〒<%= @shop.postal_code %><br>
+              <%= @shop.full_address %>
+            </p>
+          </div>
+          <div class="phone_number">
+            <p>電話番号：<%= @shop.phone_number %></p>
+          </div>
+          <div class="introduction">
+            <p>店紹介文</p>
+            <%= @shop.introduction %>
+          </div>
+          <% if @shop.url.present? %>
+            <div class="url">
+              <p>お店URL：<%= @shop.url %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
