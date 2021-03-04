@@ -1,0 +1,136 @@
+<div class="container-fluid" style="background-color:#eee">
+  <div class="row">
+    <div class="col-12" style="padding:0">
+      <div class="content_title_box">
+        <h3><%= @shop.name %></h3>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-4" style="padding:0">
+      <div class="content_box">
+        <h5>注文状況</h5>
+        <hr>
+        <div class="content_box_detail">
+          <table class="table table-hover table-borderless">
+            <tbody>
+              <tr>
+                <td>新規注文</td>
+              </tr>
+              <tr>
+                <td>調理中</td>
+              </tr>
+              <tr>
+                <td>完了</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-8" style="padding:0">
+      <div class="content_box">
+        <h5>売上</h5>
+        <div class="content_box_detail">
+          <hr>
+            <div class="row">
+              <div class="col-4 center">
+                <h4>¥0/0件</h4>
+                <p>今月の売上金額/売上件数</p>
+              </div>
+              <div class="col-4 center">
+                <h4>¥0/0件</h4>
+                <p>今日の売上金額/売上件数</p>
+              </div>
+              <div class="col-4 center">
+                <h4>¥0/0件</h4>
+                <p>前日の売上金額/売上件数</p>
+              </div>
+            </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4" style="padding:0">
+      <div class="content_box">
+        <h5>店舗情報</h5>
+        <hr>
+        <div class="content_box_detail">
+          <div class="shop_info-box">
+            <div class="shop_name-box">
+              <span class="font-30"><%= @shop.name %></span>
+            </div>
+            <div class="shop_info-box">
+              <div class="address">
+                <p>
+                  〒<%= @shop.postal_code %><br>
+                  <%= @shop.full_address %>
+                </p>
+              </div>
+              <div class="phone_number">
+                <p>電話番号：<%= @shop.phone_number %></p>
+              </div>
+              <div class="introduction">
+                <p>店紹介文</p>
+                <%= @shop.introduction %>
+              </div>
+              <% if @shop.url.present? %>
+                <div class="url">
+                  <p>お店URL：<%= @shop.url %></p>
+                </div>
+              <% end %>
+            </div>
+            <div class="shop_edit wid-40 ma-l pa-t-30">
+              <%= link_to "編集する", edit_admins_shop_path(@shop.id), class:"btn btn-primary wid-100" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4" style="padding:0">
+      <div class="content_box">
+        <h5>商品情報</h5>
+        <hr>
+        <div class="content_box_detail">
+          <table class="table table-hover table-borderless">
+            <tbody>
+              <tr>
+                <td>メニュー</td>
+              </tr>
+              <tr>
+                <td>メニュー</td>
+              </tr>
+              <tr>
+                <td>メニュー</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-4" style="padding:0">
+      <div class="content_box">
+        <h5>お知らせ</h5>
+        <hr>
+        <div class="content_box_detail">
+          <table class="table table-hover table-borderless">
+            <tbody>
+              <tr>
+                <td>メニュー</td>
+              </tr>
+              <tr>
+                <td>メニュー</td>
+              </tr>
+              <tr>
+                <td>メニュー</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
