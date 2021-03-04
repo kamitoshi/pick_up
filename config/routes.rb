@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
   namespace :admins do
     resources :menus, only:[:index, :show]
+    resources :shops
   end
   resources :admins, only:[:index, :show, :edit, :update, :destroy]
 
