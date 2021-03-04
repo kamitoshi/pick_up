@@ -2,22 +2,23 @@ class MenusController < ApplicationController
   
   def new
     @menu = Menu.new
+    @shops = Shop.all
   end
 
   def create
-    menu = Menu.new(menu_params)
     if admin_signed_in?
-      menu.shop_id = params[:shop_id]
-      if menu.save
+      @menu = Menu.new(menu_params)
+      byebug
+      if @menu.save
         flash[:success] = "メニューを追加しました"
-        redirect_to shops_menus_path
+        redirect_to admins_menus_path
       else
         flash[:danger] = "メニューの追加に失敗しました"
         render "new"
       end
     elsif shop_signed_in?
-      menu.shop_id = current_shop.id
-      if menu.save
+      @menu = current_shop.menus.build(menu_params)
+      if @menu.save
         flash[:success] = "メニューを追加しました"
         redirect_to shops_menus_path
       else
@@ -91,7 +92,7 @@ class MenusController < ApplicationController
   private
 
   def menu_params
-    params.require(:menu).permit(:shop_id, :name, :price, :special_price, :fee, :introduction, :is_active, :is_saling)
+    params.require(:menu).permit(:shop_id, :name, :price, :special_price, :fee, :introduction, :is_active, :is_saling, :genre, :menu_type)
   end
 
 end
