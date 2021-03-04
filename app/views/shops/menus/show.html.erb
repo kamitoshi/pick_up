@@ -1,0 +1,39 @@
+<div class="container-fluid" style="background-color:#eee">
+  <div class="row">
+    <div class="col-12">
+      <div class="width_box">
+        <h5>メニュー詳細</h5>
+        <hr>
+        <div class="content_box_detail">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th width="20%">商品名</th>
+                <td><%= @menu.name %></td>
+              </tr>
+              <tr>
+                <th>価格</th>
+                <td>¥<%= @menu.price %></td>
+              </tr>
+              <tr>
+                <th>セール価格</th>
+                <td>¥<%= @menu.special_price %></td>
+              </tr>
+              <tr>
+                <th>手数料</th>
+                <td><%= @menu.fee %>％</td>
+              </tr>
+              <tr>
+                <th>商品紹介文</th>
+                <td><%= @menu.introduction %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="return_btn center">
+          <%= link_to "一覧へ戻る", shops_menus_path, class: "btn btn-outline-success" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

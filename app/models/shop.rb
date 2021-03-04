@@ -16,6 +16,8 @@ class Shop < ApplicationRecord
     沖縄県:47
   }
 
+  has_many :menus, dependent: :destroy
+
   def full_address
     self.prefecture + self.city + self.address
   end
