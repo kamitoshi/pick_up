@@ -1,82 +1,82 @@
 <div class="sidebar_box">
   <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="card">
-    <div class="card-header" role="tab" id="headingOne">
-      <h5 class="mb-0">
-        <a class="text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="true" aria-controls="collapseOne">
-          商品管理
-        </a>
-      </h5>
-    </div><!-- /.card-header -->
-    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-        <table class="table table-hover table-borderless">
-          <tbody>
-            <tr data-href="#">
-              <td>商品一覧</td>
-            </tr>
-            <tr data-href="<%= categories_path %>">
-              <td>カテゴリー管理</td>
-            </tr>
-            <tr>
-              <td>メニュー</td>
-            </tr>
-          </tbody>
-        </table>
-      </div><!-- /.card-body -->
-    </div><!-- /.collapse -->
-  </div><!-- /.card -->
-  <div class="card">
-    <div class="card-header" role="tab" id="headingTwo">
-      <h5 class="mb-0">
-        <a class="collapsed text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">
-          受注管理
-        </a>
-      </h5>
-    </div><!-- /.card-header -->
-    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
-      <div class="card-body">
-        <table class="table table-hover">
-          <tbody>
-            <tr>
-              <td>メニュー</td>
-            </tr>
-            <tr>
-              <td>メニュー</td>
-            </tr>
-            <tr>
-              <td>メニュー</td>
-            </tr>
-          </tbody>
-        </table>
-      </div><!-- /.card-body -->
-    </div><!-- /.collapse -->
-  </div><!-- /.card -->
-  <div class="card">
-    <div class="card-header" role="tab" id="headingThree">
-      <h5 class="mb-0">
-        <a class="collapsed text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseThree" role="button" aria-expanded="false" aria-controls="collapseThree">
-          設定
-        </a>
-      </h5>
-    </div><!-- /.card-header -->
-    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
-      <div class="card-body">
-        <table class="table table-hover">
-          <tbody>
-            <tr>
-              <td>メニュー</td>
-            </tr>
-            <tr>
-              <td>メニュー</td>
-            </tr>
-            <tr>
-              <td>メニュー</td>
-            </tr>
-          </tbody>
-        </table>
-      </div><!-- /.card-body -->
-    </div><!-- /.collapse -->
-  </div><!-- /.card -->
-</div><!-- /#accordion -->
+    <div class="card">
+      <div class="card-header" role="tab" id="headingOne">
+        <h5 class="mb-0">
+          <a class="text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="true" aria-controls="collapseOne">
+            商品管理
+          </a>
+        </h5>
+      </div><!-- /.card-header -->
+      <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <table class="table table-borderless">
+            <tbody>
+              <tr data-href="<%= shops_menus_path %>">
+                <td class="pointer">商品一覧</td>
+              </tr>
+              <tr data-href="<%= new_menu_path %>">
+                <td class="pointer">商品の登録</td>
+              </tr>
+              <tr data-href="<%= categories_path %>">
+                <td class="pointer">カテゴリー管理</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.card-body -->
+      </div><!-- /.collapse -->
+    </div><!-- /.card -->
+    <div class="card">
+      <div class="card-header" role="tab" id="headingTwo">
+        <h5 class="mb-0">
+          <a class="collapsed text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">
+            受注管理
+          </a>
+        </h5>
+      </div><!-- /.card-header -->
+      <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>メニュー</td>
+              </tr>
+              <tr>
+                <td>メニュー</td>
+              </tr>
+              <tr>
+                <td>メニュー</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.card-body -->
+      </div><!-- /.collapse -->
+    </div><!-- /.card -->
+    <div class="card">
+      <div class="card-header" role="tab" id="headingThree">
+        <h5 class="mb-0">
+          <a class="collapsed text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseThree" role="button" aria-expanded="false" aria-controls="collapseThree">
+            設定
+          </a>
+        </h5>
+      </div><!-- /.card-header -->
+      <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+        <div class="card-body">
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>メニュー</td>
+              </tr>
+              <tr>
+                <td>メニュー</td>
+              </tr>
+              <tr>
+                <td>メニュー</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.card-body -->
+      </div><!-- /.collapse -->
+    </div><!-- /.card -->
+  </div><!-- /#accordion -->
 </div>

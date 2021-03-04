@@ -16,6 +16,10 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 
+p {
+  margin: 0;
+}
+
 .sidebar_box{
   background-color: #aaa;
 }
@@ -30,4 +34,10 @@
   background-color: #fff;
   margin:20px;
   padding:10px;
+}
+
+.form_box{
+  margin:20px;
+  padding:30px;
+  background-color: #fff;
 }

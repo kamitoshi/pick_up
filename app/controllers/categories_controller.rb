@@ -12,6 +12,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
+      flash[:success] = "カテゴリーを追加しました"
       redirect_to categories_path
     else
       @categories = Category.all
@@ -28,6 +29,7 @@ class CategoriesController < ApplicationController
   def update
     @target_category = Category.find(params[:id])
     if @target_category.update(category_params)
+      flash[:success] = "編集しました"
       redirect_to categories_path
     else
       redirect_to categories_path
