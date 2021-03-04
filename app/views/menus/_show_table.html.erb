@@ -1,0 +1,32 @@
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th width="20%">商品名</th>
+      <td><%= @menu.name %></td>
+    </tr>
+    <tr>
+      <th>商品タイプ</th>
+      <td><%= @menu.menu_type %></td>
+    </tr>
+    <tr>
+      <th>商品ジャンル</th>
+      <td><%= @menu.genre %></td>
+    </tr>
+    <tr>
+      <th>価格</th>
+      <td>¥<%= @menu.price %></td>
+    </tr>
+    <tr>
+      <th>セール価格</th>
+      <td>¥<%= @menu.special_price %></td>
+    </tr>
+    <tr>
+      <th>手数料</th>
+      <td><%= @menu.fee %>％</td>
+    </tr>
+    <tr>
+      <th>商品紹介文</th>
+      <td><%= @menu.introduction %></td>
+    </tr>
+  </tbody>
+</table>
