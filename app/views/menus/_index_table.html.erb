@@ -1,0 +1,30 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>価格</th>
+      <th>登録店舗</th>
+      <th width="10%"></th>
+      <th width="10%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @menus.present? %>
+      <% @menus.each do |menu| %>
+        <tr class="pointer" data-href="<%= admins_menu_path(menu) %>">
+          <td><%= menu.name %></td>
+          <td>¥<%= menu.price %></td>
+          <td><%= menu.shop.name %></td>
+          <td><%= link_to "編集", edit_menu_path(menu) %></td>
+          <td><%= link_to "削除", menu_path(menu), method: :delete %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td>
+          登録されたメニューがありません
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
