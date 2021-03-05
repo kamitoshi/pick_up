@@ -14,7 +14,7 @@ class Admins::ShopsController < ApplicationController
   def update
     if @shop.update(shop_params)
       flash[:success] = "変更を保存しました"
-      redirect_to shop_path(@shop)
+      redirect_to admins_shop_path(@shop)
     else
       flash[:danger] = "変更できませんでした"
       render :edit
@@ -27,7 +27,7 @@ class Admins::ShopsController < ApplicationController
       redirect_to delete_path
     else
       flash[:danger] = "退会処理ができませんでした"
-      redirect_to shop_path(current_shop)
+      redirect_to admins_shop_path(@shop)
     end
   end
 

@@ -4,7 +4,7 @@
       <div class="form_box">
         <h5>編集</h5>
         <hr>
-        <%= form_for @shop do |f| %>
+        <%= form_for @shop, url: admins_shop_path do |f| %>
           <div class="field">
             <%= f.label :name, "店名" %><br>
             <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-control", placeholder: "店名" %>
