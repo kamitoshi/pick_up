@@ -1,0 +1,20 @@
+<div class="container-fluid" style="background-color:#eee">
+  <div class="row">
+    <div class="col-12">
+      <div class="width_box">
+        <h5>メニュー詳細</h5>
+        <hr>
+        <div class="content_box_detail">
+          <%= render partial: 'menus/show_table' %>
+        </div>
+        <div class="order_btn center">
+          <%= link_to "今すぐ注文する", "#", class: "btn btn-outline-danger" %>
+          <%= link_to "カートに追加する", "#", class: "btn btn-outline-danger" %>
+        </div>
+        <div class="return_btn center">
+          <%= link_to "一覧へ戻る", users_menus_path, class: "btn btn-outline-success" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

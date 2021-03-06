@@ -12,6 +12,12 @@ Rails.application.routes.draw do
     passwords:     'shops/passwords',
     registrations: 'shops/registrations'
   }
+
+  devise_for :users, controllers: {
+    sessions:      'users/sessions',
+    passwords:     'users/passwords',
+    registrations: 'users/registrations'
+  }
   devise_scope :shop do
     get 'shops/confirm_email', to: 'shops/registrations#confirm_email'
   end
@@ -25,6 +31,11 @@ Rails.application.routes.draw do
     resources :menus, only:[:index, :show]
   end
   resources :shops, only:[:index, :show, :edit, :update, :destroy]
+
+  namespace :users do
+    resources :menus, only:[:index, :show]
+  end
+  resources :users, only:[:show, :edit, :update]
 
   resources :menus, only:[ :new, :create, :edit, :update, :destroy]
   
