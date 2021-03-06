@@ -1,0 +1,22 @@
+<div class="container-fluid" style="background-color:#eee">
+  <div class="row">
+    <div class="col-12">
+      <div class="width_box">
+        <div class="user_name-box">
+          <span class="font-30"><%= @user.full_name %></span>
+        </div>
+        <div class="user_info-box">
+          <div class="phone_number_box">
+            <p>電話番号：<%= @user.phone_number %></p>
+          </div>
+          <div class="email_box">
+            <p>Eメール：<%= @user.email %></p>
+          </div>
+        </div>
+        <div class="edit_btn right">
+          <%= link_to "編集", edit_user_path, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

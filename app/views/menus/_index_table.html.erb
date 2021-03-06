@@ -11,7 +11,7 @@
   <tbody>
     <% if @menus.present? %>
       <% @menus.each do |menu| %>
-        <tr class="pointer" data-href="<%= admins_menu_path(menu) %>">
+        <tr class="pointer" data-href="<%= path %>">
           <td><%= menu.name %></td>
           <td>¥<%= menu.price %></td>
           <td><%= menu.shop.name %></td>
