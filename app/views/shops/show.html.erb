@@ -2,19 +2,22 @@
   <div class="row">
     <div class="col-4" style="padding:0">
       <div class="content_box">
-        <h5>注文状況</h5>
+        <h5>本日の受注状況</h5>
         <hr>
         <div class="content_box_detail">
-          <table class="table table-hover table-borderless">
+          <table class="table table-borderless">
             <tbody>
-              <tr>
+              <tr class="pointer" data-href="#">
                 <td>新規注文</td>
+                <td><%= @new_orders.count %></td>
               </tr>
               <tr>
                 <td>調理中</td>
+                <td><%= @making_orders.count %></td>
               </tr>
               <tr>
                 <td>完了</td>
+                <td><%= @fix_orders.count %></td>
               </tr>
             </tbody>
           </table>
@@ -24,19 +27,31 @@
     <div class="col-8" style="padding:0">
       <div class="content_box">
         <h5>売上</h5>
-        <div class="content_box_detail">
+        <div class="content_box_detail center">
           <hr>
             <div class="row">
               <div class="col-4">
-                <h4>¥0/0件</h4>
+                <h4>
+                  ¥<%= @month_sales_money.to_s(:delimited) %>
+                  <span class="ma-l-10 ma-r-10">/</span>
+                  <%= @month_sales_count %>件
+                </h4>
                 <p>今月の売上金額/売上件数</p>
               </div>
               <div class="col-4">
-                <h4>¥0/0件</h4>
+                <h4>
+                  ¥<%= @today_sales_money.to_s(:delimited) %>
+                  <span class="ma-l-10 ma-r-10">/</span>
+                  <%= @today_sales_count %>件
+                </h4>
                 <p>今日の売上金額/売上件数</p>
               </div>
               <div class="col-4">
-                <h4>¥0/0件</h4>
+                <h4>
+                  ¥<%= @yesterday_sales_money.to_s(:delimited) %>
+                  <span class="ma-l-10 ma-r-10">/</span>
+                  <%= @yesterday_sales_count %>件
+                </h4>
                 <p>前日の売上金額/売上件数</p>
               </div>
             </div>
@@ -89,15 +104,18 @@
         <div class="content_box_detail">
           <table class="table table-hover table-borderless">
             <tbody>
-              <tr>
-                <td>メニュー</td>
-              </tr>
-              <tr>
-                <td>メニュー</td>
-              </tr>
-              <tr>
-                <td>メニュー</td>
-              </tr>
+              <% if @shop.menus.present? %>
+                <% @shop.menus.each do |menu| %>
+                  <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
+                    <td><%= menu.name %></td>
+                    <td>¥<%= menu.price %></td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr>
+                  <td>まだメニューが登録されていません</td>
+                </tr>
+              <% end %>
             </tbody>
           </table>
         </div>

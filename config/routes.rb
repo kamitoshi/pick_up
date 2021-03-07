@@ -35,9 +35,13 @@ Rails.application.routes.draw do
   namespace :users do
     resources :menus, only:[:index, :show]
   end
-  resources :users, only:[:show, :edit, :update]
+  resources :users, only:[:show, :edit, :update] do
+    resources :orders, only:[:index, :show]
+  end
 
-  resources :menus, only:[ :new, :create, :edit, :update, :destroy]
+  resources :menus, only:[:index, :show, :new, :create, :edit, :update, :destroy] do
+    resources :orders, only:[:new, :create, :destroy]
+  end
   
   resources :categories, only:[:index,:new, :create, :edit, :update, :destroy]
 

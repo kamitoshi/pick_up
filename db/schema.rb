@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_05_062213) do
+ActiveRecord::Schema.define(version: 2021_03_07_011403) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -53,6 +53,31 @@ ActiveRecord::Schema.define(version: 2021_03_05_062213) do
     t.integer "genre"
     t.integer "menu_type"
     t.index ["shop_id"], name: "index_menus_on_shop_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "menu_id"
+    t.string "menu_name"
+    t.integer "menu_price"
+    t.integer "menu_amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_id"], name: "index_order_items_on_menu_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "shop_id"
+    t.integer "user_id"
+    t.string "reserve_number", null: false
+    t.datetime "takeaway_datetime", null: false
+    t.text "requested"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_orders_on_shop_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "shops", force: :cascade do |t|

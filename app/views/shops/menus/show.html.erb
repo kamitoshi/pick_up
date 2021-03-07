@@ -5,42 +5,56 @@
         <h5>メニュー詳細</h5>
         <hr>
         <div class="content_box_detail">
-          <div class="new_btn right ma-b-20">
-            <%= link_to "メニュー追加", new_menu_path, class: "btn btn-primary" %>
-          </div>
-          <table class="table table-hover">
+          <table class="table">
             <thead>
               <tr>
-                <th>商品名</th>
-                <th>価格</th>
-                <th>登録店舗</th>
-                <th width="10%"></th>
-                <th width="10%"></th>
+                <th width="30%">商品名</th>
+                <td><%= @menu.name %></td>
               </tr>
-            </thead>
-            <tbody>
-              <% if @menus.present? %>
-                <% @menus.each do |menu| %>
-                  <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
-                    <td><%= menu.name %></td>
-                    <td>¥<%= menu.price %></td>
-                    <td><%= menu.shop.name %></td>
-                    <td><%= link_to "編集", edit_menu_path(menu) %></td>
-                    <td><%= link_to "削除", menu_path(menu), method: :delete %></td>
-                  </tr>
-                <% end %>
-              <% else %>
-                <tr>
-                  <td>
-                    登録されたメニューがありません
-                  </td>
-                </tr>
-              <% end %>
+              <tr>
+                <th>価格</th>
+                <td><%= @menu.price %></td>
+              </tr>
+              <tr>
+                <th>セール価格</th>
+                <td><%= @menu.special_price %></td>
+              </tr>
+              <tr>
+                <th>手数料</th>
+                <td><%= @menu.fee %></td>
+              </tr>
+              <tr>
+                <th>セール状態</th>
+                <td>
+                  <% if @menu.is_saling? %>
+                    キャンペーン中
+                  <% else %>
+                    通常販売
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <th>販売状態</th>
+                <td>
+                  <% if @menu.is_active? %>
+                    販売中
+                  <% else %>
+                    販売停止中
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <th>商品紹介文</th>
+                <td><%= @menu.introduction %></td>
+              </tr>
             </tbody>
           </table>
         </div>
+        <div class="order_btn center">
+          <%= link_to "メニュー情報を編集する", edit_menu_path(@menu.id), class: "btn btn-outline-danger" %>
+        </div>
         <div class="return_btn center">
-          <%= link_to "一覧へ戻る", shops_menus_path, class: "btn btn-outline-success" %>
+          <%= link_to "ホームへ戻る", shop_path(current_shop), class: "btn btn-outline-success" %>
         </div>
       </div>
     </div>

@@ -18,8 +18,88 @@ class Shop < ApplicationRecord
 
   has_many :menus, dependent: :destroy
 
+  has_many :orders, dependent: :nullify
+
   def full_address
     self.prefecture + self.city + self.address
+  end
+
+  # 今月の集計(今月の今日までの売り上げ)
+  def month_sales_money
+    orders = self.orders
+    month_orders = []
+    result = 0
+    orders.each do |order|
+      if order.takeaway_datetime.strftime("%Y/%m") == Date.today.strftime("%Y/%m") && order.takeaway_datetime.strftime("%Y/%m/%d") <= Date.today.strftime("%Y/%m/%d")
+        month_orders.push(order)
+      end
+    end
+    month_orders.each do |month_order|
+      result += month_order.total_payment
+    end
+    return result
+  end
+  def month_sales_count
+    orders = self.orders
+    month_orders = []
+    orders.each do |order|
+      if order.takeaway_datetime.strftime("%Y/%m") == Date.today.strftime("%Y/%m") && order.takeaway_datetime.strftime("%Y/%m/%d") <= Date.today.strftime("%Y/%m/%d")
+        month_orders.push(order)
+      end
+    end
+    return month_orders.count
+  end
+
+  # 今日の集計
+  def today_sales_money
+    orders = self.orders
+    today_orders = []
+    result = 0
+    orders.each do |order|
+      if order.takeaway_datetime.strftime("%Y/%m/%d") == Date.today.strftime("%Y/%m/%d")
+        today_orders.push(order)
+      end
+    end
+    today_orders.each do |today_order|
+      result += today_order.total_payment
+    end
+    return result
+  end
+  def today_sales_count
+    orders = self.orders
+    today_orders = []
+    orders.each do |order|
+      if order.takeaway_datetime.strftime("%Y/%m/%d") == Date.today.strftime("%Y/%m/%d")
+        today_orders.push(order)
+      end
+    end
+    return today_orders.count
+  end
+
+  # 前日の集計
+  def yesterday_sales_money
+    orders = self.orders
+    yesterday_orders = []
+    result = 0
+    orders.each do |order|
+      if order.takeaway_datetime.strftime("%Y/%m/%d") == Date.yesterday.strftime("%Y/%m/%d")
+        yesterday_orders.push(order)
+      end
+    end
+    yesterday_orders.each do |yesterday_order|
+      result += yesterday_order.total_payment
+    end
+    return result
+  end
+  def yesterday_sales_count
+    orders = self.orders
+    yesterday_orders = []
+    orders.each do |order|
+      if order.takeaway_datetime.strftime("%Y/%m/%d") == Date.yesterday.strftime("%Y/%m/%d")
+        yesterday_orders.push(order)
+      end
+    end
+    return yesterday_orders.count
   end
 
 end

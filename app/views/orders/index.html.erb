@@ -1,0 +1,41 @@
+<div class="container-fluid" style="background-color:#eee">
+  <div class="row">
+    <div class="col-12">
+      <div class="width_box">
+        <h5>注文履歴一覧</h5>
+        <div class="content_box_detail">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>予約店舗</th>
+                <th>注文商品</th>
+                <th>店舗名</th>
+                <th>受取日時</th>
+                <th width="15%">状態</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @orders.present? %>
+                <% @orders.each do |order| %>
+                  <tr class="pointer" data-href="<%= user_order_path(order.user, order) %>">
+                    <td><%= order.shop.name %></td>
+                    <td><%= order.order_items[0].menu_name %></td>
+                    <td><%= order.shop.name %></td>
+                    <td><%= order.takeaway_datetime %></td>
+                    <td><%= order.status %></td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr>
+                  <td>
+                    まだ注文がありません
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
