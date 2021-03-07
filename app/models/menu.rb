@@ -1,6 +1,8 @@
 class Menu < ApplicationRecord
   belongs_to :shop
 
+  has_many :order_items
+
   # categoryのアソシエーション
   has_many :menu_category, dependent: :destroy
   has_many :categories, through: :menu_category

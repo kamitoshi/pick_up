@@ -8,7 +8,7 @@
           <%= render partial: 'menus/show_table' %>
         </div>
         <div class="order_btn center">
-          <%= link_to "今すぐ注文する", "#", class: "btn btn-outline-danger" %>
+          <%= link_to "今すぐ注文する", new_menu_order_path(@menu.id), class: "btn btn-outline-danger" %>
           <%= link_to "カートに追加する", "#", class: "btn btn-outline-danger" %>
         </div>
         <div class="return_btn center">
