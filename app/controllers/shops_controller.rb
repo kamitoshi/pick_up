@@ -32,7 +32,7 @@ class ShopsController < ApplicationController
         render :edit
       end
     else
-      flash[:alert] = "他店の情報は編集できません"
+      flash[:danger] = "他店の情報は編集できません"
       redirect_to shops_path
     end
   end
@@ -42,18 +42,14 @@ class ShopsController < ApplicationController
       if @shop.destroy
         redirect_to delete_path
       else
-        flash[:alert] = "退会できませんでした"
+        flash[:danger] = "退会できませんでした"
         redirect_to shop_path(current_shop)
       end
     else
-      flash[:alert] = "他店を退会させることはできません"
+      flash[:danger] = "他店を退会させることはできません"
       redirect_to shops_path
     end
   end
-
-  def delete  
-  end
-
 
   private
 

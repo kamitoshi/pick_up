@@ -11,6 +11,7 @@ class Order < ApplicationRecord
     注文中: 0, 調理中: 1, 受け取り待ち: 2, 完了: 3
   }
 
+  # 該当のオーダーでいくらの料金が発生したのかを判別するメソッド
   def total_payment
     items = self.order_items
     result = 0
@@ -19,5 +20,10 @@ class Order < ApplicationRecord
     end
     return result
   end
-  
+
+  # 予約番号を採番するメソッド
+  def numbering_reserve_number(count)
+    self.reserve_number = count + 1
+  end
+
 end

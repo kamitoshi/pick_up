@@ -20,7 +20,13 @@
                     <td><%= menu.name %></td>
                     <td>¥<%= menu.price %></td>
                     <td><%= menu.shop.name %></td>
-                    <td><%= link_to "カートに入れる", "#", class: "btn btn-danger" %></td>
+                    <td>
+                      <% if current_user.cart_already_include(menu) %>
+                        <%= link_to "カートに追加する", "#", method: :patch, class: "btn btn-warning" %>
+                      <% else %>
+                        <%= link_to "カートに入れる", menu_cart_items_path(menu), method: :post, class: "btn btn-danger" %>
+                      <% end %>
+                    </td>
                   </tr>
                 <% end %>
               <% else %>
