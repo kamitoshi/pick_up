@@ -8,11 +8,15 @@
           <%= render partial: 'menus/show_table' %>
         </div>
         <div class="order_btn center">
-          <%= link_to "今すぐ注文する", new_menu_order_path(@menu.id), class: "btn btn-outline-danger" %>
-          <%= link_to "カートに追加する", "#", class: "btn btn-outline-danger" %>
+          <%= link_to "今すぐ注文する", new_menu_order_path(@menu.id), class: "btn btn-danger" %>
+          <% if current_user.cart_already_include(@menu) %>
+            <%= link_to "カートに追加する", "#", method: :patch, class: "btn btn-warning" %>
+          <% else %>
+            <%= link_to "カートに入れる", menu_cart_items_path(@menu), method: :post, class: "btn btn-danger" %>
+          <% end %>
         </div>
         <div class="return_btn center">
-          <%= link_to "一覧へ戻る", users_menus_path, class: "btn btn-outline-success" %>
+          <%= link_to "一覧へ戻る", menus_path, class: "btn btn-outline-success" %>
         </div>
       </div>
     </div>

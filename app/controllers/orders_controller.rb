@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
     @menu = Menu.find(params[:menu_id])
     orders = Order.where(shop_id: @menu.shop_id)
     @order = Order.new(order_params)
-    @order.reserve_number = orders.count + 1
+    @order.numbering_reserve_number(@order.shop.target_date_order_count(@order.takeaway_datetime))
     if @order.save
       order_item = OrderItem.create!(
         order_id: @order.id,

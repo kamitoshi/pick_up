@@ -32,15 +32,13 @@ Rails.application.routes.draw do
   end
   resources :shops, only:[:index, :show, :edit, :update, :destroy]
 
-  namespace :users do
-    resources :menus, only:[:index, :show]
-  end
   resources :users, only:[:show, :edit, :update] do
     resources :orders, only:[:index, :show]
   end
 
   resources :menus, only:[:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :orders, only:[:new, :create, :destroy]
+    resources :cart_items, only:[:index, :create, :update, :destroy]
   end
   
   resources :categories, only:[:index,:new, :create, :edit, :update, :destroy]

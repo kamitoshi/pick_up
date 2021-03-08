@@ -24,7 +24,7 @@ class Shop < ApplicationRecord
     self.prefecture + self.city + self.address
   end
 
-  # 今月の集計(今月の今日までの売り上げ)
+  # 今月の集計(今月の今日までの売り上げ金額と件数)
   def month_sales_money
     orders = self.orders
     month_orders = []
@@ -50,7 +50,7 @@ class Shop < ApplicationRecord
     return month_orders.count
   end
 
-  # 今日の集計
+  # 当日の売り上げ合計金額と件数を計算する
   def today_sales_money
     orders = self.orders
     today_orders = []
@@ -76,7 +76,7 @@ class Shop < ApplicationRecord
     return today_orders.count
   end
 
-  # 前日の集計
+  # 前日の売り上げ合計金額と件数を計算する
   def yesterday_sales_money
     orders = self.orders
     yesterday_orders = []
@@ -100,6 +100,17 @@ class Shop < ApplicationRecord
       end
     end
     return yesterday_orders.count
+  end
+
+  # 予約番号を採番するために必要なその日の注文件数を集計する
+  def target_date_order_count(date)
+    target_orders = []
+    self.orders.each do |order|
+      if date.strftime("%Y/%m/%d") == order.takeaway_datetime.strftime("%Y/%m/%d")
+        target_orders.push(order)
+      end
+    end
+    return target_orders.count
   end
 
 end

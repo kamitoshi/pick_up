@@ -9,15 +9,15 @@
             <tbody>
               <tr class="pointer" data-href="#">
                 <td>新規注文</td>
-                <td><%= @new_orders.count %></td>
+                <td><%= today_order_count(@new_orders) %></td>
               </tr>
               <tr>
                 <td>調理中</td>
-                <td><%= @making_orders.count %></td>
+                <td><%= today_order_count(@making_orders) %></td>
               </tr>
               <tr>
                 <td>完了</td>
-                <td><%= @fix_orders.count %></td>
+                <td><%= today_order_count(@fix_orders) %></td>
               </tr>
             </tbody>
           </table>
@@ -101,7 +101,7 @@
       <div class="content_box">
         <h5>商品情報</h5>
         <hr>
-        <div class="content_box_detail">
+        <div class="content_box_detail scroll-box">
           <table class="table table-hover table-borderless">
             <tbody>
               <% if @shop.menus.present? %>
