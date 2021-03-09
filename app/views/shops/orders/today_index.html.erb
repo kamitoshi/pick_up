@@ -1,0 +1,122 @@
+<div class="container-fluid" style="background-color:#eee">
+  <div class="row">
+    <div class="col-12">
+      <div class="width_box">
+        <h5>本日の未着手注文履歴一覧</h5>
+        <div class="content_box_detail">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>注文者</th>
+                <th>注文商品</th>
+                <th>金額</th>
+                <th>受取日時</th>
+                <th width="15%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @new_orders.present? %>
+                <% @new_orders.each do |order| %>
+                  <tr class="pointer" data-href="<%= shops_order_path(order) %>">
+                    <td><%= order.user.full_name %></td>
+                    <td><%= order.order_items[0].menu_name %></td>
+                    <td>¥<%= order.total_payment.to_s(:delimited) %></td>
+                    <td><%= order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
+                    <td><%= link_to "調理中にする", shops_order_path(order), method: :patch, class: "btn btn-danger" %></td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr>
+                  <td colspan=5>
+                    注文はありません
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="width_box">
+        <h5>本日の調理中注文履歴一覧</h5>
+        <div class="content_box_detail">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>注文者</th>
+                <th>注文商品</th>
+                <th>金額</th>
+                <th>受取日時</th>
+                <th width="15%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @making_orders.present? %>
+                <% @making_orders.each do |order| %>
+                  <tr class="pointer" data-href="<%= shops_order_path(order) %>">
+                    <td><%= order.user.full_name %></td>
+                    <td><%= order.order_items[0].menu_name %></td>
+                    <td>¥<%= order.total_payment.to_s(:delimited) %></td>
+                    <td><%= order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
+                    <td><%= link_to "完了にする", shops_order_path(order), method: :patch, class: "btn btn-success" %></td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr>
+                  <td colspan=5>
+                    調理中の注文はありません
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="width_box">
+        <h5>本日の完了注文履歴一覧</h5>
+        <div class="content_box_detail">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>注文者</th>
+                <th>注文商品</th>
+                <th>金額</th>
+                <th>受取日時</th>
+                <th width="15%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @fix_orders.present? %>
+                <% @fix_orders.each do |order| %>
+                  <tr class="pointer" data-href="<%= shops_order_path(order) %>">
+                    <td><%= order.user.full_name %></td>
+                    <td><%= order.order_items[0].menu_name %></td>
+                    <td>¥<%= order.total_payment.to_s(:delimited) %></td>
+                    <td><%= order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
+                    <td></td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr>
+                  <td colspan=5>
+                    完了した注文はありません
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="return_btn center">
+    <%= link_to "ホームへ戻る", shop_path(current_shop), class: "btn btn-outline-success" %>
+  </div>
+</div>
