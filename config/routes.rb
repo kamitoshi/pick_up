@@ -18,9 +18,7 @@ Rails.application.routes.draw do
     passwords:     'users/passwords',
     registrations: 'users/registrations'
   }
-  devise_scope :shop do
-    get 'shops/confirm_email', to: 'shops/registrations#confirm_email'
-  end
+
   namespace :admins do
     resources :menus, only:[:index, :show]
     resources :shops
@@ -29,8 +27,15 @@ Rails.application.routes.draw do
 
   namespace :shops do
     resources :menus, only:[:index, :show]
+    resources :orders, only:[:index, :show, :update, :destroy] do
+      collection do
+        get :today_index
+      end
+    end
   end
-  resources :shops, only:[:index, :show, :edit, :update, :destroy]
+  resources :shops, only:[:index, :show, :edit, :update, :destroy] do
+    resources :orders, only:[:index, :show]
+  end
 
   resources :users, only:[:show, :edit, :update] do
     resources :orders, only:[:index, :show]

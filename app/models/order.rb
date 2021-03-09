@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   validates :takeaway_datetime, presence: true
 
   enum status: {
-    注文中: 0, 調理中: 1, 受け取り待ち: 2, 完了: 3
+    注文中: 0, 調理中: 1, 完了: 2
   }
 
   # 該当のオーダーでいくらの料金が発生したのかを判別するメソッド
@@ -24,6 +24,15 @@ class Order < ApplicationRecord
   # 予約番号を採番するメソッド
   def numbering_reserve_number(count)
     self.reserve_number = count + 1
+  end
+
+  # 本日中のオーダーかどうか判断
+  def is_today?
+    if self.takeaway_datetime.strftime("%Y年%m月%d日") == Date.today.strftime("%Y年%m月%d日")
+      return true
+    else
+      return false
+    end
   end
 
 end
