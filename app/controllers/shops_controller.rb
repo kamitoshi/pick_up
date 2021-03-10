@@ -10,13 +10,6 @@ class ShopsController < ApplicationController
     @new_orders = Order.where(shop_id: @shop.id, status: 0)
     @making_orders = Order.where(shop_id: @shop.id, status: 1)
     @fix_orders = Order.where(shop_id: @shop.id, status: 2)
-
-    @today_sales_money = @shop.today_sales_money
-    @today_sales_count = @shop.today_sales_count
-    @month_sales_money = @shop.month_sales_money
-    @month_sales_count = @shop.month_sales_count
-    @yesterday_sales_money = @shop.yesterday_sales_money
-    @yesterday_sales_count = @shop.yesterday_sales_count
   end
 
   def edit
