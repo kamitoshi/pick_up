@@ -17,12 +17,12 @@
       <td>¥<%= @menu.price %></td>
     </tr>
     <tr>
-      <th>セール価格</th>
-      <td>¥<%= @menu.special_price %></td>
-    </tr>
-    <tr>
       <th>手数料</th>
       <td><%= @menu.fee %>％</td>
+    </tr>
+    <tr>
+      <th>販売店舗</th>
+      <td><%= @menu.shop.name %></td>
     </tr>
     <tr>
       <th>商品紹介文</th>

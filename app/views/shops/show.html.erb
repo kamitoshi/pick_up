@@ -32,25 +32,25 @@
             <div class="row">
               <div class="col-4">
                 <h4>
-                  ¥<%= @month_sales_money.to_s(:delimited) %>
+                  ¥<%= @shop.month_sales_money.to_s(:delimited) %>
                   <span class="ma-l-10 ma-r-10">/</span>
-                  <%= @month_sales_count %>件
+                  <%= @shop.month_sales_count %>件
                 </h4>
                 <p>今月の売上金額/売上件数</p>
               </div>
               <div class="col-4">
                 <h4>
-                  ¥<%= @today_sales_money.to_s(:delimited) %>
+                  ¥<%= @shop.today_sales_money.to_s(:delimited) %>
                   <span class="ma-l-10 ma-r-10">/</span>
-                  <%= @today_sales_count %>件
+                  <%= @shop.today_sales_count %>件
                 </h4>
                 <p>今日の売上金額/売上件数</p>
               </div>
               <div class="col-4">
                 <h4>
-                  ¥<%= @yesterday_sales_money.to_s(:delimited) %>
+                  ¥<%= @shop.yesterday_sales_money.to_s(:delimited) %>
                   <span class="ma-l-10 ma-r-10">/</span>
-                  <%= @yesterday_sales_count %>件
+                  <%= @shop.yesterday_sales_count %>件
                 </h4>
                 <p>前日の売上金額/売上件数</p>
               </div>

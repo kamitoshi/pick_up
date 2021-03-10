@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <div class="width_box">
-        <h5>メニュー一覧</h5>
+        <h5>登録メニュー一覧</h5>
         <div class="content_box_detail">
           <div class="new_btn right ma-b-20">
             <%= link_to "メニュー追加", new_menu_path, class: "btn btn-primary" %>
@@ -18,19 +18,62 @@
             </thead>
             <tbody>
               <% if @menus.present? %>
-                <% @menus.each do |menu| %>
-                  <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
-                    <td><%= menu.name %></td>
-                    <td>¥<%= menu.price %></td>
-                    <td><%= menu.fee %>%</td>
-                    <td>
-                      <% if menu.is_active? %>
-                        販売中
-                      <% else %>
-                        <span class="red">販売停止中</span>
-                      <% end %>
-                    </td>
+                <% if @food_menus.present? %>
+                  <tr class="table-active">
+                    <th colspan = 4>フードメニュー</th>
                   </tr>
+                  <% @food_menus.each do |menu| %>
+                    <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
+                      <td><%= menu.name %></td>
+                      <td>¥<%= menu.price %></td>
+                      <td><%= menu.fee %>%</td>
+                      <td>
+                        <% if menu.is_active? %>
+                          販売中
+                        <% else %>
+                          <span class="red">販売停止中</span>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                <% end %>
+                <% if @drink_menus.present? %>
+                  <tr class="table-active">
+                    <th colspan = 4>ドリンクメニュー</th>
+                  </tr>
+                  <% @drink_menus.each do |menu| %>
+                    <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
+                      <td><%= menu.name %></td>
+                      <td>¥<%= menu.price %></td>
+                      <td><%= menu.fee %>%</td>
+                      <td>
+                        <% if menu.is_active? %>
+                          販売中
+                        <% else %>
+                          <span class="red">販売停止中</span>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                <% end %>
+                <% if @dessert_menus.present? %>
+                  <tr class="table-active">
+                    <th colspan = 4>デザートメニュー</th>
+                  </tr>
+                  <% @dessert_menus.each do |menu| %>
+                    <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
+                      <td><%= menu.name %></td>
+                      <td>¥<%= menu.price %></td>
+                      <td><%= menu.fee %>%</td>
+                      <td>
+                        <% if menu.is_active? %>
+                          販売中
+                        <% else %>
+                          <span class="red">販売停止中</span>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
                 <% end %>
               <% else %>
                 <tr>
