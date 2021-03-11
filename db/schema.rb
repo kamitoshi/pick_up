@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_07_131812) do
+ActiveRecord::Schema.define(version: 2021_03_10_145043) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -88,6 +88,15 @@ ActiveRecord::Schema.define(version: 2021_03_07_131812) do
     t.datetime "updated_at", null: false
     t.index ["shop_id"], name: "index_orders_on_shop_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "shop_images", force: :cascade do |t|
+    t.integer "shop_id"
+    t.string "file_name"
+    t.boolean "is_main", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_shop_images_on_shop_id"
   end
 
   create_table "shops", force: :cascade do |t|

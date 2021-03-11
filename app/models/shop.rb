@@ -16,6 +16,8 @@ class Shop < ApplicationRecord
     沖縄県:47
   }
 
+  has_many :shop_images, dependent: :destroy
+
   has_many :menus, dependent: :destroy
 
   has_many :orders, dependent: :nullify

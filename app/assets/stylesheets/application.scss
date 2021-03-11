@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require dropzone/dropzone
  */
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
@@ -29,7 +30,7 @@ p {
   padding: 10px;
 }
 .content_box{
-  height:500px;
+  height:600px;
   background-color: #fff;
   margin:20px;
   padding:10px;
