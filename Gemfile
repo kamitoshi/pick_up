@@ -27,7 +27,9 @@ gem 'jbuilder', '~> 2.5'
 gem "devise"
 
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.8'
+gem 'carrierwave'
+gem "dropzonejs-rails"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -73,3 +75,6 @@ gem 'kaminari'
 gem 'rails-i18n'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+# トップページの売上をグラフで表示するため
+gem 'chartkick'
+gem 'chart-js-rails'

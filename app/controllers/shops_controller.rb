@@ -10,6 +10,18 @@ class ShopsController < ApplicationController
     @new_orders = Order.where(shop_id: @shop.id, status: 0)
     @making_orders = Order.where(shop_id: @shop.id, status: 1)
     @fix_orders = Order.where(shop_id: @shop.id, status: 2)
+    @week_data = []
+    @orders = Order.where(shop_id: @shop.id)
+    7.times do |i|
+      day = Date.today - i
+      data = []
+      @orders.each do |order|
+        if order.takeaway_datetime.strftime("%Y/%m/%d") == day.strftime("%Y/%m/%d")
+          data.push(order)
+        end
+      end
+      @week_data.push([date: day.strftime("%m/%d"), count: data.count])
+    end
   end
 
   def edit

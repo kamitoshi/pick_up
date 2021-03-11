@@ -12,9 +12,13 @@
 //
 //= require jquery
 //= require bootstrap-sprockets
+//= require Chart.min
 //= require rails-ujs
 //= require activestorage
 //= require_tree .
+//= require dropzone
+//= require chartkick
+//= require Chart.bundle
 
 jQuery(function ($) {
   //data-hrefの属性を持つtrを選択しclassにclickableを付加

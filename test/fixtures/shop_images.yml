@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  shop: one
+  image: MyString
+  is_main: false
+
+two:
+  shop: two
+  image: MyString
+  is_main: false

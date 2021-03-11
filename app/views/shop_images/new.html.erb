@@ -1,0 +1,32 @@
+<div class="container-fluid" style="background-color:#eee">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <div class="form_box">
+        <h3 class="center">画像編集</h3>
+        <hr>
+        <%= form_for @shop_image, url: shop_shop_images_path(current_shop) do |f|  %>
+          <%= f.hidden_field :shop_id, value: current_shop.id %>
+          <div class="field">
+            <%= f.file_field :file_name %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "登録" %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(function() {
+    // disable auto discover
+    Dropzone.autoDiscover = false;
+
+    $(".dropzone").dropzone({
+      maxFilesize: 1,
+      addRemoveLinks: true
+    });
+  });
+</script>
