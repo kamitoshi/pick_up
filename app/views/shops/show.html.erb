@@ -62,7 +62,33 @@
             </div>
           <hr>
         </div>
-        <canvas id="canvas"></canvas>
+        <div class="chat_box">
+          <!-- タブ部分 -->
+          <ul id="myTab" class="nav nav-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a href="#salesNumber" id="salesNumber-tab" class="nav-link active" role="tab" data-toggle="tab" aria-controls="salesNumber" aria-selected="true">売上件数</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a href="#salesPrice" id="salesPrice-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="salesPrice" aria-selected="false">売上金額</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a href="#monthSalesPrice" id="monthSalesPrice-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="monthSalesPrice" aria-selected="false">コンタクト</a>
+            </li>
+          </ul>
+
+          <!-- パネル部分 -->
+          <div id="myTabContent" class="tab-content mt-3">
+            <div id="salesNumber" class="tab-pane active" role="tabpanel" aria-labelledby="salesNumber-tab">
+              <canvas id="salesNumberCanvas"></canvas>
+            </div>
+            <div id="salesPrice" class="tab-pane" role="tabpanel" aria-labelledby="salesPrice-tab">
+              <canvas id="salesPriceCanvas"></canvas>
+            </div>
+            <div id="monthSalesPrice" class="tab-pane" role="tabpanel" aria-labelledby="monthSalesPrice-tab">
+              タブパネルのプレースホルダーコンテンツ。...
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -161,28 +187,29 @@
   </div>
 </div>
 <script>
-  var ctx = document.getElementById("canvas").getContext("2d");
+  // 直近１週間の売上件数をグラフ表示させる
+  var ctx = document.getElementById("salesNumberCanvas").getContext("2d");
   var myBar = new Chart(ctx, {
     type: 'bar',                           //◆棒グラフ
     data: {                                //◆データ
       labels: [
-        "<%= @week_data[0][0][:date] %>",
-        "<%= @week_data[1][0][:date] %>",
-        "<%= @week_data[2][0][:date] %>",
-        "<%= @week_data[3][0][:date] %>",
-        "<%= @week_data[4][0][:date] %>",
-        "<%= @week_data[5][0][:date] %>",
-        "<%= @week_data[6][0][:date] %>"
+        "<%= @week_sales_numbers[0][0][:date] %>",
+        "<%= @week_sales_numbers[1][0][:date] %>",
+        "<%= @week_sales_numbers[2][0][:date] %>",
+        "<%= @week_sales_numbers[3][0][:date] %>",
+        "<%= @week_sales_numbers[4][0][:date] %>",
+        "<%= @week_sales_numbers[5][0][:date] %>",
+        "<%= @week_sales_numbers[6][0][:date] %>"
       ],     //ラベル名
       datasets: [{                       //データ設定
         data: [
-          "<%= @week_data[0][0][:count] %>",
-          "<%= @week_data[1][0][:count] %>",
-          "<%= @week_data[2][0][:count] %>",
-          "<%= @week_data[3][0][:count] %>",
-          "<%= @week_data[4][0][:count] %>",
-          "<%= @week_data[5][0][:count] %>",
-          "<%= @week_data[6][0][:count] %>",
+          "<%= @week_sales_numbers[0][0][:count] %>",
+          "<%= @week_sales_numbers[1][0][:count] %>",
+          "<%= @week_sales_numbers[2][0][:count] %>",
+          "<%= @week_sales_numbers[3][0][:count] %>",
+          "<%= @week_sales_numbers[4][0][:count] %>",
+          "<%= @week_sales_numbers[5][0][:count] %>",
+          "<%= @week_sales_numbers[6][0][:count] %>",
         ],          //データ内容
         backgroundColor: '#4444FF'   //背景色
       }]
@@ -195,7 +222,7 @@
       title: {                           //タイトル設定
         display: true,                 //表示設定
         fontSize: 18,                  //フォントサイズ
-        text: ''                //ラベル
+        text: '売上件数'                //ラベル
       },
       scales: {                          //軸設定
         yAxes: [{                      //y軸設定
@@ -209,12 +236,88 @@
               min: 0,                   //最小値
               max: 10,                  //最大値
               fontSize: 18,             //フォントサイズ
-              stepSize: 5               //軸間隔
+              stepSize: 2              //軸間隔
           },
         }],
         xAxes: [{                         //x軸設定
           display: true,                //表示設定
-          barPercentage: 1.5,           //棒グラフ幅
+          barPercentage: 2,           //棒グラフ幅
+          categoryPercentage: 0.4,      //棒グラフ幅
+          scaleLabel: {                 //軸ラベル設定
+            display: true,             //表示設定
+            labelString: '日付',  //ラベル
+            fontSize: 18               //フォントサイズ
+          },
+          ticks: {
+            fontSize: 18             //フォントサイズ
+          },
+        }],
+      },
+      layout: {                             //レイアウト
+        padding: {                          //余白設定
+          left: 50,
+          right: 50,
+          top: 0,
+          bottom: 50
+        }
+      }
+    }
+  });
+  // 直近１週間の売上金額をグラフ表示させる
+  var ctx = document.getElementById("salesPriceCanvas").getContext("2d");
+  var myBar = new Chart(ctx, {
+    type: 'bar',                           //◆棒グラフ
+    data: {                                //◆データ
+      labels: [
+        "<%= @week_sales_prices[0][0][:date] %>",
+        "<%= @week_sales_prices[1][0][:date] %>",
+        "<%= @week_sales_prices[2][0][:date] %>",
+        "<%= @week_sales_prices[3][0][:date] %>",
+        "<%= @week_sales_prices[4][0][:date] %>",
+        "<%= @week_sales_prices[5][0][:date] %>",
+        "<%= @week_sales_prices[6][0][:date] %>"
+      ],     //ラベル名
+      datasets: [{                       //データ設定
+        data: [
+          "<%= @week_sales_prices[0][0][:price] %>",
+          "<%= @week_sales_prices[1][0][:price] %>",
+          "<%= @week_sales_prices[2][0][:price] %>",
+          "<%= @week_sales_prices[3][0][:price] %>",
+          "<%= @week_sales_prices[4][0][:price] %>",
+          "<%= @week_sales_prices[5][0][:price] %>",
+          "<%= @week_sales_prices[6][0][:price] %>",
+        ],          //データ内容
+        backgroundColor: '#4444FF'   //背景色
+      }]
+    },
+    options: {                             //◆オプション
+      responsive: true,                  //グラフ自動設定
+      legend: {                          //凡例設定
+        display: false                 //表示設定
+      },
+      title: {                           //タイトル設定
+        display: true,                 //表示設定
+        fontSize: 18,                  //フォントサイズ
+        text: '売上金額'                //ラベル
+      },
+      scales: {                          //軸設定
+        yAxes: [{                      //y軸設定
+          display: true,             //表示設定
+          scaleLabel: {              //軸ラベル設定
+              display: true,          //表示設定
+              labelString: '注文金額',  //ラベル
+              fontSize: 18               //フォントサイズ
+          },
+          ticks: {                      //最大値最小値設定
+              min: 0,                   //最小値
+              max: 50000,                  //最大値
+              fontSize: 18,             //フォントサイズ
+              stepSize: 5000              //軸間隔
+          },
+        }],
+        xAxes: [{                         //x軸設定
+          display: true,                //表示設定
+          barPercentage: 2,           //棒グラフ幅
           categoryPercentage: 0.4,      //棒グラフ幅
           scaleLabel: {                 //軸ラベル設定
             display: true,             //表示設定

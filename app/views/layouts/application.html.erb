@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <div class="container-fuild">
+    <div class="container-fuild wrapper">
       <header>
         <%= render partial: 'layouts/header' %>
       </header>
@@ -24,7 +24,6 @@
             <% end %>
           </div>
           <div class="col" style="padding:0">
-            <h2>title</h2>
             <%= render partial: 'shared/flash_message' %>
             <%= yield %>
           </div>

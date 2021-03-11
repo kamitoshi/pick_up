@@ -1,36 +1,7 @@
 <div class="container-fluid" style="background-color:#343a40">
   <div class="row">
-    <div class="col-4">
-      <h3 class="class_name">Admin</h3>
-      <% if current_admin %>
-        <p>管理者でログインしています</p>
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "新規登録", new_admin_registration_path %>
-        <%= link_to "ログイン", new_admin_session_path %>
-      <% end %>
-    </div>
-    <div class="col-4">
-      <h3 class="class_name">Shop</h3>
-      <% if current_shop %>
-        <p>『<%= current_shop.email %>』でログインしています</p>
-        <%= link_to "ログアウト", destroy_shop_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "新規登録", new_shop_registration_path %>
-        <%= link_to "ログイン", new_shop_session_path %>
-      <% end %>
-    </div>
-    <div class="col-4">
-      <h3 class="class_name">User</h3>
-      <% if current_user %>
-        <p>『<%= link_to current_user.email, user_path(current_user) %>』でログインしています</p>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <div class="auth_link">
-          <%= link_to "新規登録", new_user_registration_path %>
-          <%= link_to "ログイン", new_user_session_path %>
-        </div>
-      <% end %>
+    <div class="col-12">
+      <p style="padding:45px">©PickUp from Circrest 2021</p>
     </div>
   </div>
 </div>
