@@ -10,6 +10,7 @@
           <table class="table table-hover">
             <thead>
               <tr>
+                <th width="10%"></th>
                 <th>商品名</th>
                 <th>価格</th>
                 <th>登録店舗</th>
@@ -21,6 +22,13 @@
               <% if @menus.present? %>
                 <% @menus.each do |menu| %>
                   <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
+                    <td class="center">
+                      <% if menu.menu_images.present? %>
+                        <%= image_tag menu.menu_images[0].file_name.thumb50.to_s %>
+                      <% else %>
+                        <%= image_tag "noimage.png", size:"75x50" %>
+                      <% end %>
+                    </td>
                     <td><%= menu.name %></td>
                     <td>¥<%= menu.price %></td>
                     <td><%= menu.shop.name %></td>
@@ -30,7 +38,7 @@
                 <% end %>
               <% else %>
                 <tr>
-                  <td>
+                  <td colspan=5>
                     登録されたメニューがありません
                   </td>
                 </tr>
