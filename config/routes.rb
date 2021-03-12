@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'menu_images/new'
+  get 'menu_images/edit'
   root "home#index"
 
   devise_for :admins, controllers: {
@@ -43,6 +45,7 @@ Rails.application.routes.draw do
   end
 
   resources :menus, only:[:index, :show, :new, :create, :edit, :update, :destroy] do
+    resources :menu_images, only:[:index, :new, :create, :edit, :update, :destroy]
     resources :orders, only:[:new, :create, :destroy]
     resources :cart_items, only:[:index, :create, :update, :destroy]
   end

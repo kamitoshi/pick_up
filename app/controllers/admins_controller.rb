@@ -3,7 +3,26 @@ class AdminsController < ApplicationController
   before_action :set_admin, only:[:show, :edit, :update, :destroy]
 
   def index
-    @page_title = "管理者ホーム"
+    @orders = Order.all
+    @new_orders = Order.where(status: 0)
+    @making_orders = Order.where(status: 1)
+    @fix_orders = Order.where(status: 2)
+    @week_sales_numbers = []
+    @week_sales_prices = []
+    @orders = Order.all
+    7.times do |i|
+      day = Date.today - i
+      data = []
+      total_price = 0
+      @orders.each do |order|
+        if order.takeaway_datetime.strftime("%Y/%m/%d") == day.strftime("%Y/%m/%d")
+          data.push(order)
+          total_price += order.total_payment
+        end
+      end
+      @week_sales_numbers.push([date: day.strftime("%m/%d"), count: data.count])
+      @week_sales_prices.push([date: day.strftime("%m/%d"), price: total_price])
+    end
   end
 
   def show
