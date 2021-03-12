@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'menu_images/new'
-  get 'menu_images/edit'
   root "home#index"
 
   devise_for :admins, controllers: {
@@ -22,8 +20,9 @@ Rails.application.routes.draw do
   }
 
   namespace :admins do
-    resources :menus, only:[:index, :show]
     resources :shops
+    resources :menus, only:[:index, :show]
+    resources :users, only:[:index, :show, :edit, :update]
   end
   resources :admins, only:[:index, :show, :edit, :update, :destroy]
 
