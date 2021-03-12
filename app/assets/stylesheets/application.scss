@@ -29,8 +29,14 @@ p {
   margin: 20px;
   padding: 10px;
 }
-.content_box{
-  height:550px;
+.up_content_box{
+  background-color: #fff;
+  margin:20px;
+  padding:10px;
+  box-shadow: 0 0 8px gray;
+}
+.under_content_box{
+  height:500px;
   background-color: #fff;
   margin:20px;
   padding:10px;
