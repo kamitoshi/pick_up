@@ -1,4 +1,4 @@
-class ShopUploader < CarrierWave::Uploader::Base
+class MenusUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
@@ -10,7 +10,7 @@ class ShopUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.shop.id}"
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.menu.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -42,17 +42,13 @@ class ShopUploader < CarrierWave::Uploader::Base
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
-  #   "#{SecureRandom.uuid}.#{file.extension}" if original_filename
+  #   "something.jpg" if original_filename
   # end
 
-  #サムネイルの為に画像をリサイズ
-  # version :thumb50 do 
-  #   process resize_to_fill: [50, 50, "center"] 
-  # end 
-  # version :thumb100 do 
-  #   process resize_to_fill: [100, 100, "center"] 
-  # end 
-  # version :thumb300 do 
-  #   process resize_to_fit: [300, 200] 
-  # end 
+  version :thumb50 do 
+    process resize_to_fill: [50, 50, "center"] 
+  end
+  version :thumb100 do 
+    process resize_to_fill: [100, 100, "center"] 
+  end 
 end

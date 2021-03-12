@@ -1,0 +1,22 @@
+<div class="container-fluid" style="background-color:#eee">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <div class="form_box">
+        <h3 class="center">画像編集</h3>
+        <hr>
+        <%= form_for @menu_image, url: menu_menu_image_path(@menu, @menu_image), method: :patch do |f|  %>
+
+          <div class="field">
+            <%= image_tag @menu_image.file_name.url %>
+            <%= f.file_field :file_name %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "登録" %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -94,7 +94,7 @@
   </div>
   <div class="row">
     <div class="col-4" style="padding:0">
-      <div class="under_content_box">
+      <div class="under_content_box scroll-box">
         <h5>店舗情報</h5>
         <hr>
         <div class="content_box_detail">
@@ -140,15 +140,22 @@
       </div>
     </div>
     <div class="col-4" style="padding:0">
-      <div class="under_content_box">
+      <div class="under_content_box scroll-box">
         <h5>商品情報</h5>
         <hr>
-        <div class="content_box_detail scroll-box">
+        <div class="content_box_detail">
           <table class="table table-hover table-borderless">
             <tbody>
               <% if @shop.menus.present? %>
                 <% @shop.menus.each do |menu| %>
                   <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
+                    <td>
+                      <% if menu.menu_images.present? %>
+                        <div class="menu_image-box center ma-b-10">
+                          <%= image_tag menu.menu_images[0].file_name.thumb50.to_s %>
+                        </div>
+                      <% end %>
+                    </td>
                     <td><%= menu.name %></td>
                     <td>¥<%= menu.price %></td>
                   </tr>
@@ -164,7 +171,7 @@
       </div>
     </div>
     <div class="col-4" style="padding:0">
-      <div class="under_content_box">
+      <div class="under_content_box scroll-box">
         <h5>お知らせ</h5>
         <hr>
         <div class="content_box_detail">

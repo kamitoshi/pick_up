@@ -10,6 +10,7 @@
           <table class="table table-hover">
             <thead>
               <tr>
+                <th width="10%"></th>
                 <th>商品名</th>
                 <th>価格</th>
                 <th>手数料</th>
@@ -20,10 +21,11 @@
               <% if @menus.present? %>
                 <% if @food_menus.present? %>
                   <tr class="table-active">
-                    <th colspan = 4>フードメニュー</th>
+                    <th colspan = 5>フードメニュー</th>
                   </tr>
                   <% @food_menus.each do |menu| %>
                     <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
+                      <td><%= image_tag menu.menu_images[0].file_name.thumb50.to_s if menu.menu_images.present? %></td>
                       <td><%= menu.name %></td>
                       <td>¥<%= menu.price %></td>
                       <td><%= menu.fee %>%</td>
@@ -39,10 +41,11 @@
                 <% end %>
                 <% if @drink_menus.present? %>
                   <tr class="table-active">
-                    <th colspan = 4>ドリンクメニュー</th>
+                    <th colspan = 5>ドリンクメニュー</th>
                   </tr>
                   <% @drink_menus.each do |menu| %>
                     <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
+                      <td><%= image_tag menu.menu_images[0].file_name.thumb50.to_s if menu.menu_images.present? %></td>
                       <td><%= menu.name %></td>
                       <td>¥<%= menu.price %></td>
                       <td><%= menu.fee %>%</td>
@@ -58,10 +61,11 @@
                 <% end %>
                 <% if @dessert_menus.present? %>
                   <tr class="table-active">
-                    <th colspan = 4>デザートメニュー</th>
+                    <th colspan = 5>デザートメニュー</th>
                   </tr>
                   <% @dessert_menus.each do |menu| %>
                     <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
+                      <td><%= image_tag menu.menu_images[0].file_name.thumb50.to_s if menu.menu_images.present? %></td>
                       <td><%= menu.name %></td>
                       <td>¥<%= menu.price %></td>
                       <td><%= menu.fee %>%</td>

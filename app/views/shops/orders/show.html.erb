@@ -17,11 +17,11 @@
               </tr>
               <tr>
                 <th>予約日</th>
-                <td colspan=3><%= @order.created_at %></td>
+                <td colspan=3><%= @order.updated_at.strftime("%Y年%m月%d日") %></td>
               </tr>
               <tr>
-                <th>受取日時</th>
-                <td colspan=3><%= @order.takeaway_datetime %></td>
+                <th>受取希望日時</th>
+                <td colspan=3><%= @order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
               </tr>
               <tr>
                 <th>要望</th>
@@ -45,7 +45,9 @@
               <% end %>
             </tbody>
           </table>
+          <hr>
         </div>
+        
         <div class="return_btn center">
           <%= link_to "一覧へ戻る", shops_orders_path, class: "btn btn-success" %>
           <%= link_to "本日の一覧へ戻る", today_index_shops_orders_path, class: "btn btn-success" %>

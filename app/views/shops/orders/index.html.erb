@@ -8,9 +8,9 @@
             <thead>
               <tr>
                 <th>注文者</th>
+                <th>受取日時</th>
                 <th>注文商品</th>
                 <th>金額</th>
-                <th>受取日時</th>
                 <th width="15%">状態</th>
               </tr>
             </thead>
@@ -19,9 +19,9 @@
                 <% @orders.each do |order| %>
                   <tr class="pointer" data-href="<%= shops_order_path(order) %>">
                     <td><%= order.user.full_name %></td>
+                    <td><%= order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
                     <td><%= order.order_items[0].menu_name %></td>
                     <td>¥<%= order.total_payment.to_s(:delimited) %></td>
-                    <td><%= order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
                     <td><%= order.status %></td>
                   </tr>
                 <% end %>

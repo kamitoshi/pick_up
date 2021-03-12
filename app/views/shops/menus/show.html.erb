@@ -1,10 +1,22 @@
 <div class="container-fluid" style="background-color:#eee">
   <div class="row">
-    <div class="col-12">
+    <div class="col-8">
       <div class="width_box">
         <h5>メニュー詳細</h5>
         <hr>
         <div class="content_box_detail">
+          <div class="image_box">
+            <% if @menu.menu_images.present? %>
+              <div class="menu_image-box center ma-b-10">
+                <%= image_tag @menu.menu_images[0].file_name.url, class:"wid-50" %>
+              </div>
+              <div class="menu_image-box center">
+                <% @menu.menu_images.each do |image| %>
+                  <%= image_tag image.file_name.thumb100.to_s %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
           <table class="table">
             <thead>
               <tr>
@@ -50,14 +62,18 @@
             </tbody>
           </table>
         </div>
-        <div class="order_btn center">
-          <%= link_to "メニュー情報を編集する", edit_menu_path(@menu.id), class: "btn btn-outline-danger" %>
-        </div>
         <div class="return_btn center">
-          <%= link_to "一覧へ戻る", shops_menus_path, class: "btn btn-outline-primary" %>
+          <%= link_to "一覧へ", shops_menus_path, class: "btn btn-outline-primary" %>
         </div>
-        <div class="return_btn center">
-          <%= link_to "ホームへ戻る", shop_path(current_shop), class: "btn btn-outline-success" %>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="width_box">
+        <div class="edit_btn center">
+          <%= link_to "編集する", edit_menu_path(@menu.id), class: "btn btn-outline-success" %>
+        </div>
+        <div class="add_btn center">
+          <%= link_to "商品画像を追加する", new_menu_menu_image_path(@menu.id), class: "btn btn-outline-primary" %>
         </div>
       </div>
     </div>

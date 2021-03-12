@@ -1,0 +1,21 @@
+<div class="container-fluid" style="background-color:#eee">
+  <div class="row">
+    <div class="col-12">
+      <div class="width_box">
+        <h5><%= @menu.name %>画像一覧</h5>
+        <hr>
+        <% if @menu.menu_images.present? %>
+          <% @menu.menu_images.each do |image| %>
+            <div class="content_box_detail center">
+              <%= image_tag image.file_name.url %>
+              <div class="edit_btn ma-t-50">
+                <%= link_to "この画像を編集する", edit_menu_menu_image_path(@menu.id, image.id), class: "btn btn-primary" %>
+              </div>
+            </div>
+            <hr>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

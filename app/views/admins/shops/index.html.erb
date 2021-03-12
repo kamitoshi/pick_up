@@ -4,7 +4,6 @@
       <div class="width_box">
         <h5>登録店舗一覧</h5>
         <div class="content_box_detail">
-          <%= render partial: 'shops/index_table' %>
           <table class="table table-hover">
             <thead>
               <tr>
@@ -26,8 +25,8 @@
                 <% end %>
               <% else %>
                 <tr>
-                  <td>
-                    登録されたメニューがありません
+                  <td colspan=4>
+                    登録店舗がありません。
                   </td>
                 </tr>
               <% end %>
