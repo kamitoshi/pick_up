@@ -10,6 +10,8 @@ class User < ApplicationRecord
   validates :kana_first_name, presence: true
   validates :phone_number, presence: true
 
+  has_many :orders
+
   has_many :cart_items
 
   # フルネームで表示する
