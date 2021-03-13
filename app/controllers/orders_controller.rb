@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  layout "users_layout"
   def index
     @orders = Order.where(user_id: params[:user_id])
   end

@@ -4,7 +4,7 @@
       <div class="width_box">
         <h5>メニュー一覧</h5>
         <div class="content_box_detail">
-          <table class="table table-hover">
+          <table class="table">
             <thead>
               <tr>
                 <th>商品名</th>
@@ -16,17 +16,11 @@
             <tbody>
               <% if @menus.present? %>
                 <% @menus.each do |menu| %>
-                  <tr class="pointer" data-href="<%= menu_path(menu) %>">
+                  <tr>
                     <td><%= menu.name %></td>
                     <td>¥<%= menu.price %></td>
                     <td><%= menu.shop.name %></td>
-                    <td>
-                      <% if current_user.cart_already_include(menu) %>
-                        <%= link_to "カートに追加する", "#", method: :patch, class: "btn btn-warning" %>
-                      <% else %>
-                        <%= link_to "カートに入れる", menu_cart_items_path(menu), method: :post, class: "btn btn-danger" %>
-                      <% end %>
-                    </td>
+                    <td><%= link_to "注文に進む", menu_path(menu), class: "btn btn-danger" %></td>
                   </tr>
                 <% end %>
               <% else %>
