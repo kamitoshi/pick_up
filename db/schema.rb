@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_13_124403) do
+ActiveRecord::Schema.define(version: 2021_03_13_154503) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -56,6 +56,14 @@ ActiveRecord::Schema.define(version: 2021_03_13_124403) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["menu_id"], name: "index_menu_images_on_menu_id"
+  end
+
+  create_table "menu_tags", force: :cascade do |t|
+    t.integer "menu_id"
+    t.string "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_id"], name: "index_menu_tags_on_menu_id"
   end
 
   create_table "menus", force: :cascade do |t|

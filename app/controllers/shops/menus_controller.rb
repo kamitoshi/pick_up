@@ -17,5 +17,6 @@ class Shops::MenusController < ApplicationController
 
   def show
     @menu = Menu.find(params[:id])
+    @menu_tag = MenuTag.new
   end
 end
