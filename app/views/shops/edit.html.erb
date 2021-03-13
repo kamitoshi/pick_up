@@ -57,10 +57,43 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="shop_edit-sidebar wid-70 ma-a">
-        <%= link_to "店舗画像編集", new_shop_shop_image_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
-        <%= link_to "パスワード変更", edit_shop_registration_path, class:"btn btn-primary wid-100 ma-y-10" %>
-        <%= link_to "退会する", shop_path(current_shop), method: :delete, class:"btn btn-danger wid-100 ma-y-10" %>
+      <div class="width_box">
+        <div class="image_box">
+          <h5>店舗画像</h5>
+          <% if @shop.shop_images.present? %>
+            <div class="shop_image-box center ma-b-10">
+              <%= image_tag @shop.shop_images[0].file_name.url, size: "200x150" %>
+            </div>
+            <div class="shop_image-box center">
+              <% @shop.shop_images.each do |image| %>
+                <%= image_tag image.file_name.url, size: "100x75" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <hr>
+        <div class="tag_box">
+          <h5>タグ</h5>
+          <% if @shop.shop_tags.present? %>
+            <div class="shop_tag-box center">
+              <% @shop.shop_tags.each do |tag| %>
+                <%= link_to tag.content, edit_shop_shop_tag_path(current_shop, tag.id), class:"ma-x-10" %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="shop_tag-box center">
+              <p>タグが登録されていません</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="width_box">
+        <div class="shop_edit-sidebar wid-70 ma-a">
+          <%= link_to "店舗画像追加", new_shop_shop_image_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
+          <%= link_to "タグの追加", new_shop_shop_tag_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
+          <%= link_to "パスワード変更", edit_shop_registration_path, class:"btn btn-primary wid-100 ma-y-10" %>
+          <%= link_to "退会する", shop_path(current_shop), method: :delete, class:"btn btn-danger wid-100 ma-y-10" %>
+        </div>
       </div>
     </div>
   </div>
