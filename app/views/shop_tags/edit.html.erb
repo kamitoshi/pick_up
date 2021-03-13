@@ -1,0 +1,24 @@
+<div class="container-fluid" style="background-color:#eee">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <div class="form_box">
+        <h3 class="center">画像編集</h3>
+        <hr>
+        <%= form_for @shop_tag, url: shop_shop_tag_path(current_shop, @shop_tag) do |f|  %>
+
+          <div class="field">
+            <%= f.label :content, "タグ" %><br />
+            <%= f.text_field :content %>
+          </div>
+
+          <div class="actions center">
+            <%= f.submit "編集", class:"btn btn-primary" %>
+          </div>
+        <% end %>
+        <div class="destroy_btn center ma-t-30">
+          <%= link_to "削除", shop_shop_tag_path(current_shop, @shop_tag), method: :delete, class:"btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
