@@ -1,4 +1,5 @@
 class MenusController < ApplicationController
+  layout "users_layout", only:[:index, :show]
   def index
     @menus = Menu.all
   end
