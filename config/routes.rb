@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 
   resources :menus, only:[:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :menu_images, only:[:index, :new, :create, :edit, :update, :destroy]
+    resources :menu_tags, only:[:create, :destroy]
     resources :orders, only:[:new, :create, :destroy]
     resources :cart_items, only:[:create, :update]
   end

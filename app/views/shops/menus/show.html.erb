@@ -25,25 +25,11 @@
               </tr>
               <tr>
                 <th>価格</th>
-                <td><%= @menu.price %></td>
-              </tr>
-              <tr>
-                <th>セール価格</th>
-                <td><%= @menu.special_price %></td>
+                <td>¥<%= @menu.price %></td>
               </tr>
               <tr>
                 <th>手数料</th>
-                <td><%= @menu.fee %></td>
-              </tr>
-              <tr>
-                <th>セール状態</th>
-                <td>
-                  <% if @menu.is_saling? %>
-                    キャンペーン中
-                  <% else %>
-                    通常販売
-                  <% end %>
-                </td>
+                <td><%= @menu.fee %>％</td>
               </tr>
               <tr>
                 <th>販売状態</th>
@@ -52,6 +38,18 @@
                     販売中
                   <% else %>
                     販売停止中
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <th>タグ</th>
+                <td>
+                  <% if @menu.menu_tags.present? %>
+                    <% @menu.menu_tags.each do |tag| %>
+                      <span class="badge badge-pill badge-secondary"><%= tag.content %>|<%= link_to "x", menu_menu_tag_path(@menu, tag), method: :delete, class:"badge badge-pill badge-secondary" %></span>
+                    <% end %>
+                  <% else %>
+                    <p>タグが設定されていません</p>
                   <% end %>
                 </td>
               </tr>
@@ -69,7 +67,15 @@
     </div>
     <div class="col-4">
       <div class="width_box">
-        <div class="edit_btn center">
+        <h5>編集オプション</h5>
+        <hr>
+        <%= form_for @menu_tag, url: menu_menu_tags_path(@menu) do |f|  %>
+          <div class="field">
+            <%= f.text_field :content %>
+            <%= f.submit "タグを追加する", class:"btn btn-primary ma-l-20" %>
+          </div>
+        <% end %>
+        <div class="edit_btn center ma-t-30">
           <%= link_to "編集する", edit_menu_path(@menu.id), class: "btn btn-outline-success" %>
         </div>
         <div class="add_btn center">
