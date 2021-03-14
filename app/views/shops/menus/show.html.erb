@@ -70,16 +70,20 @@
         <h5>編集オプション</h5>
         <hr>
         <%= form_for @menu_tag, url: menu_menu_tags_path(@menu) do |f|  %>
-          <div class="field">
-            <%= f.text_field :content %>
-            <%= f.submit "タグを追加する", class:"btn btn-primary ma-l-20" %>
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <%= f.text_field :content, placeholder: "タグを入力", class:"form-control" %>
+            </div>
+            <div class="form-group col-md-4">
+              <%= f.submit "追加", class:"btn btn-primary" %>
+            </div>
           </div>
         <% end %>
         <div class="edit_btn center ma-t-30">
           <%= link_to "編集する", edit_menu_path(@menu.id), class: "btn btn-outline-success" %>
         </div>
-        <div class="add_btn center">
-          <%= link_to "商品画像を追加する", new_menu_menu_image_path(@menu.id), class: "btn btn-outline-primary" %>
+        <div class="add_btn center ma-t-30">
+          <%= link_to "商品画像を編集する", menu_menu_images_path(@menu), class: "btn btn-outline-primary" %>
         </div>
       </div>
     </div>

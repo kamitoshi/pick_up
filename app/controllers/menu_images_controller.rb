@@ -2,7 +2,7 @@ class MenuImagesController < ApplicationController
   before_action :set_menu
 
   def index
-
+    @menu_images = @menu.menu_images
   end
 
   def new
@@ -10,9 +10,40 @@ class MenuImagesController < ApplicationController
   end
 
   def create
-    @menu_image = MenuImage.new(menu_image_params)
-    @menu_image.save!
-    redirect_to shops_menu_path(@menu_image.menu.id)
+    if admin_signed_in?
+      if @menu.menu_images.count <= 4
+        @menu_image = MenuImage.new(menu_image_params)
+        if @menu_image.save
+          flash[:success] = "商品の画像を追加しました"
+          redirect_to menu_menu_images_path(@menu)
+        else
+          flash[:danger] = "画像を追加できませんでした"
+          render :new
+        end
+      else
+        flash[:danger] = "商品の画像は４枚までしか追加できません"
+        redirect_to menu_menu_images_path(@menu)
+      end
+    elsif shop_signed_in?
+      if @menu.menu_images.count <= 4
+        if @menu.shop == current_shop
+          @menu_image = MenuImage.new(menu_image_params)
+          if @menu_image.save
+            flash[:success] = "商品の画像を追加しました"
+            redirect_to menu_menu_images_path(@menu)
+          else
+            flash[:danger] = "画像を追加できませんでした"
+            render :new
+          end
+        else
+          flash[:danger] = "他店が出品した商品の画像は追加できません"
+          redirect_to root_path
+        end
+      else
+        flash[:danger] = "商品の画像は４枚までしか追加できません"
+        redirect_to menu_menu_images_path(@menu)
+      end
+    end
   end
 
   def edit
@@ -48,7 +79,7 @@ class MenuImagesController < ApplicationController
   end
 
   def destroy
-    @menu_image = MenuImage.find[params[:id]]
+    @menu_image = MenuImage.find(params[:id])
     if @menu_image.destroy
       flash[:success] = "画像を削除しました"
       redirect_to menu_menu_images_path(@menu)

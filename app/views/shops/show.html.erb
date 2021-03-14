@@ -94,9 +94,11 @@
   </div>
   <div class="row">
     <div class="col-4" style="padding:0">
-      <div class="under_content_box">
-        <h5>店舗情報</h5>
-        <hr>
+      <div class="under_content_box scroll-box">
+        <div class="title_box">
+          <h5>店舗情報</h5>
+          <hr>
+        </div>
         <div class="content_box_detail">
           <div class="shop_info-box">
             <% if @shop.shop_images.present? %>
@@ -141,8 +143,10 @@
     </div>
     <div class="col-4" style="padding:0">
       <div class="under_content_box">
-        <h5>商品情報</h5>
-        <hr>
+        <div class="title_box">
+          <h5>商品情報</h5>
+          <hr>
+        </div>
         <div class="content_box_detail scroll-box">
           <table class="table table-hover table-borderless">
             <tbody>
