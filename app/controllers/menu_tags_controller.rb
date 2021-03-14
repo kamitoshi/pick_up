@@ -34,7 +34,7 @@ class MenuTagsController < ApplicationController
         redirect_to shops_menu_path(@menu)
       end
     else
-      flash[:danger] = "他店のメニュータグは削除できません"
+      flash[:danger] = "他店のタグは削除できません"
       redirect_to root_path
     end
   end

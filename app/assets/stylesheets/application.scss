@@ -21,8 +21,9 @@ p {
   margin: 0;
 }
 
-.sidebar_box{
-  background-color: #aaa;
+.sidebar{
+  position: fixed;
+  width:100%;
 }
 .content_title_box {
   background-color: #fff;
