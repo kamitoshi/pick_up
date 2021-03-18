@@ -39,6 +39,10 @@ Rails.application.routes.draw do
     resources :shop_tags, only:[:new, :create, :edit, :update, :destroy]
   end
 
+  namespace :users do
+    resources :shops, only:[:index, :show]
+  end
+
   resources :users, only:[:show, :edit, :update] do
     resources :orders, only:[:index, :show]
     resources :cart_items, only:[:index]
@@ -55,7 +59,6 @@ Rails.application.routes.draw do
     resources :orders, only:[:new, :create]
   end
   resources :cart_items, only:[:destroy]
-  
   resources :categories, only:[:index,:new, :create, :edit, :update, :destroy]
 
 end
