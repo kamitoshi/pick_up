@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     end
   end
   resources :shops, only:[:index, :show, :edit, :update, :destroy] do
-    resources :shop_images, only:[:new, :create, :edit, :update, :destroy]
+    resources :shop_images, only:[:index, :new, :create, :edit, :update, :destroy]
     resources :shop_tags, only:[:new, :create, :edit, :update, :destroy]
   end
 
