@@ -11,7 +11,7 @@ class MenuImagesController < ApplicationController
 
   def create
     if admin_signed_in?
-      if @menu.menu_images.count <= 4
+      if @menu.menu_images.count < 4
         @menu_image = MenuImage.new(menu_image_params)
         if @menu_image.save
           flash[:success] = "商品の画像を追加しました"
@@ -25,7 +25,7 @@ class MenuImagesController < ApplicationController
         redirect_to menu_menu_images_path(@menu)
       end
     elsif shop_signed_in?
-      if @menu.menu_images.count <= 4
+      if @menu.menu_images.count < 4
         if @menu.shop == current_shop
           @menu_image = MenuImage.new(menu_image_params)
           if @menu_image.save

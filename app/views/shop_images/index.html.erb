@@ -2,21 +2,21 @@
   <div class="row">
     <div class="col-12">
       <div class="width_box">
-        <h5><%= @menu.name %>の画像一覧</h5>
+        <h5><%= @shop.name %>の画像一覧</h5>
         <hr>
-        <% if @menu.menu_images.present? %>
+        <% if @shop.shop_images.present? %>
           <% 4.times do |i| %>
             <div class="content_box_detail">
-              <% if @menu.menu_images[i].present? %>
-                <%= image_tag @menu.menu_images[i].file_name.url, size: "300x200" %>
+              <% if @shop.shop_images[i].present? %>
+                <%= image_tag @shop.shop_images[i].file_name.url, size: "300x200" %>
                 <div class="edit_btn ma-t-50">
-                  <%= link_to "この画像を編集する", edit_menu_menu_image_path(@menu, @menu.menu_images[i]), class: "btn btn-primary" %>
-                  <%= link_to "この画像を削除する", menu_menu_image_path(@menu, @menu.menu_images[i]), method: :delete, class: "btn btn-danger" %>
+                  <%= link_to "この画像を編集する", edit_shop_shop_image_path(@shop, @shop.shop_images[i]), class: "btn btn-primary" %>
+                  <%= link_to "この画像を削除する", shop_shop_image_path(@shop, @shop.shop_images[i]), method: :delete, class: "btn btn-danger" %>
                 </div>
               <% else %>
                 <%= image_tag "noimage.png" %>
                 <div class="add_btn ma-t-50">
-                  <%= link_to "画像を追加する", new_menu_menu_image_path(@menu), class: "btn btn-primary" %>
+                  <%= link_to "画像を追加する", new_shop_shop_image_path(@shop), class: "btn btn-primary" %>
                 </div>
               <% end %>
             </div>
@@ -27,10 +27,11 @@
             <div class="content_box_detail">
               <%= image_tag "noimage.png" %>
               <div class="add_btn ma-t-50">
-                <%= link_to "画像を追加する", new_menu_menu_image_path(@menu), class: "btn btn-primary" %>
+                <%= link_to "画像を追加する", new_shop_shop_image_path(@shop), class: "btn btn-primary" %>
               </div>
             </div>
             <hr>
+          <% end %>
         <% end %>
       </div>
     </div>
