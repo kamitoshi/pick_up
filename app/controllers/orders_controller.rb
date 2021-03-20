@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.numbering_reserve_number(@order.shop.target_date_order_count(@order.takeaway_datetime))
     if @order.save
-      order_item = OrderItem.create!(
+      order_item = OrderItem.create(
         order_id: @order.id,
         menu_id: @menu.id,
         menu_name: @menu.name,
@@ -28,6 +28,7 @@ class OrdersController < ApplicationController
         menu_amount: 1
       )
       flash[:success] = "注文しました"
+      OrderMailer.send_user_order(@order).deliver_later
       redirect_to menus_path
     else
       flash[:danger] = "注文できませんでした。入力内容を確認してください。"

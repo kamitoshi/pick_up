@@ -1,0 +1,21 @@
+<p>==========================================</p>
+<h4><span style="margin:0 10px"><%= @user.full_name %></span> 様より注文がありました</h4>
+<p>==========================================</p>
+
+<h5>受け取り希望時間</h5>
+<p><%= @order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></p>
+
+<h5>注文内容</h5>
+<ul>
+  <% @order.order_items.each do |item| %>
+    <li><%= item.menu_name %><span style="margin:0 30px">x</span><%= item.menu_amount %></li>
+  <% end %>
+</ul>
+
+<p>
+  注文内容を確認していただき、受け取り希望時間に
+  間に合う様に調理をお願いいたします。
+</p>
+
+
+
