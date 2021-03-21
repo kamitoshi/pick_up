@@ -24,6 +24,8 @@ class Shop < ApplicationRecord
 
   has_many :orders, dependent: :nullify
 
+  has_many :business_hours, dependent: :destroy
+
   def full_address
     self.prefecture + self.city + self.address
   end

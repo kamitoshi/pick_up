@@ -34,5 +34,21 @@ class Order < ApplicationRecord
       return false
     end
   end
-
+  
+  # 受け取り時間が営業時間中のオーダーか判断する
+  def is_business_time_order?
+    shop = self.shop
+    business_hours = shop.business_hours
+    takeaway_datetime = self.takeaway_datetime
+    now = Time.now
+    if now + 30 * 60 < takeaway_datetime
+      business_hours.each do |business_hour|
+        if takeaway_datetime.strftime("%H:%M") >= business_hour.opening.strftime("%H:%M") && takeaway_datetime.strftime("%H:%M") <= business_hour.closing.strftime("%H:%M")
+          return true
+        end
+      end
+    end
+    return false
+  end
+  
 end

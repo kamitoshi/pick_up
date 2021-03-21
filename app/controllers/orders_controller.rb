@@ -19,20 +19,25 @@ class OrdersController < ApplicationController
     orders = Order.where(shop_id: @menu.shop_id)
     @order = Order.new(order_params)
     @order.numbering_reserve_number(@order.shop.target_date_order_count(@order.takeaway_datetime))
-    if @order.save
-      order_item = OrderItem.create(
-        order_id: @order.id,
-        menu_id: @menu.id,
-        menu_name: @menu.name,
-        menu_price: @menu.price,
-        menu_amount: 1
-      )
-      flash[:success] = "注文しました"
-      OrderMailer.send_user_order(@order).deliver_later
-      redirect_to menus_path
+    if @order.is_business_time_order?
+      if @order.save
+        order_item = OrderItem.create(
+          order_id: @order.id,
+          menu_id: @menu.id,
+          menu_name: @menu.name,
+          menu_price: @menu.price,
+          menu_amount: 1
+        )
+        flash[:success] = "注文しました"
+        OrderMailer.send_user_order(@order).deliver_later
+        redirect_to menus_path
+      else
+        flash[:danger] = "注文できませんでした。入力内容を確認してください"
+        render "new"
+      end
     else
-      flash[:danger] = "注文できませんでした。入力内容を確認してください。"
-      render "new"
+      flash.now[:danger] = "受け取り希望時間をご確認ください"
+      render :new
     end
   end
 

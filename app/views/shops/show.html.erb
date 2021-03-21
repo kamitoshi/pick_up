@@ -116,16 +116,26 @@
             </div>
             <div class="shop_info-box">
               <div class="address">
+                <p><strong>住所</strong></p>
                 <p>
                   〒<%= @shop.postal_code %><br>
                   <%= @shop.full_address %>
                 </p>
               </div>
               <div class="phone_number">
-                <p>電話番号：<%= @shop.phone_number %></p>
+                <p><strong>電話番号</strong></p>
+                <p><%= @shop.phone_number %></p>
               </div>
+              <% if @shop.business_hours.present? %>
+                <div class="business_time">
+                  <p><strong>営業時間</strong></p>
+                  <% @shop.business_hours.each do |business_hour| %>
+                    <p><%= business_hour.job_time %>：<%= business_hour.opening.strftime("%H:%M") %>〜<%= business_hour.closing.strftime("%H:%M") %>（<%= business_hour.last_order.strftime("%H:%M") %>）</p>
+                  <% end %>
+                </div>
+              <% end %>
               <div class="introduction">
-                <p>店紹介文</p>
+                <p><strong>紹介文</strong></p>
                 <%= @shop.introduction %>
               </div>
               <% if @shop.url.present? %>
