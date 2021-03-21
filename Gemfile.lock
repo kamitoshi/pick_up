@@ -373,6 +373,7 @@ DEPENDENCIES
   mini_magick (~> 4.8)
   minitest
   minitest-reporters
+  omniauth
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-instagram
