@@ -16,12 +16,12 @@ class User < ApplicationRecord
 
   # フルネームで表示する
   def full_name
-    self.last_name + self.first_name
+    self.last_name + " " + self.first_name
   end
 
   # カナのフルネームを表示
   def kana_full_name
-    self.kana_last_name + self.kana_first_name
+    self.kana_last_name + " " + self.kana_first_name
   end
 
   # 該当の商品がすでにカートに入っているかを判別

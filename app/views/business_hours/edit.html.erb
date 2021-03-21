@@ -1,0 +1,36 @@
+<div class="container-fluid" style="background-color:#eee">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <div class="form_box">
+        <h3 class="center">営業時間編集</h3>
+        <hr>
+        <%= form_for @business_hour, url: shop_business_hour_path(current_shop, @business_hour) do |f|  %>
+          <div class="field ma-b-50">
+            <%= f.label :job_time, "営業時間帯" %><br />
+            <%= f.select :job_time, BusinessHour.job_times.keys, {include_blank: "選択してください"}, {class: "custom-select"} %>
+          </div>
+
+          <div class="field ma-b-50">
+            <%= f.label :opening, "開店時間" %><br>
+            <%= f.time_select :opening, prompt:true, ignore_data:true %>
+          </div>
+
+          <div class="field ma-b-50">
+            <%= f.label :closing, "閉店時間" %><br>
+            <%= f.time_select :closing, prompt:true, ignore_data:true %>
+          </div>
+
+          <div class="field ma-b-50">
+            <%= f.label :last_order, "ラストオーダー" %><br>
+            <%= f.time_select :last_order, prompt:true, ignore_data:true %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "編集" %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'business_hours/new'
+  get 'business_hours/edit'
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
   end
@@ -40,6 +42,7 @@ Rails.application.routes.draw do
   resources :shops, only:[:index, :show, :edit, :update, :destroy] do
     resources :shop_images, only:[:index, :new, :create, :edit, :update, :destroy]
     resources :shop_tags, only:[:new, :create, :edit, :update, :destroy]
+    resources :business_hours, only:[:index, :new, :create, :edit, :update, :destroy]
   end
 
   namespace :users do
