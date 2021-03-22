@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background-color:#eee">
+<div class="container-fluid background">
   <div class="row">
     <div class="col-4" style="padding:0">
       <div class="up_content_box">
@@ -130,7 +130,7 @@
                 <div class="business_time">
                   <p><strong>営業時間</strong></p>
                   <% @shop.business_hours.each do |business_hour| %>
-                    <p><%= business_hour.job_time %>：<%= business_hour.opening.strftime("%H:%M") %>〜<%= business_hour.closing.strftime("%H:%M") %>（<%= business_hour.last_order.strftime("%H:%M") %>）</p>
+                    <p><%= business_hour.job_time %>：<%= business_hour.opening.strftime("%H:%M") %>〜<%= business_hour.closing.strftime("%H:%M") %>（L.O<%= business_hour.last_order.strftime("%H:%M") %>）</p>
                   <% end %>
                 </div>
               <% end %>

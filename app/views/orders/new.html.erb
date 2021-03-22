@@ -1,8 +1,8 @@
-<div class="container-fluid" style="background-color:#eee">
+<div class="container-fluid background">
   <div class="row">
     <div class="col-8 offset-2">
       <div class="form_box">
-        <h3 class="center">注文日時</h3>
+        <h3 class="center">注文詳細</h3>
         <hr>
         <%= form_for @order, url: menu_orders_path do |f| %>
           <%= f.hidden_field :shop_id, value: @menu.shop_id %>
@@ -19,7 +19,7 @@
           </div>
 
           <div class="actions center">
-            <%= f.submit "登録", class: "btn btn-primary" %>
+            <%= f.submit "注文する", class: "button-fill" %>
           </div>
 
         <% end %>

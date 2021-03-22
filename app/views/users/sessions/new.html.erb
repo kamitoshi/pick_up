@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background-color:#eee">
+<div class="container-fluid background">
   <div class="row">
     <div class="col-8 offset-2">
       <div class="form_box">
@@ -7,12 +7,12 @@
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="field">
             <%= f.label :email, "メールアドレス" %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "入力してください", class:"form-under" %>
           </div>
 
           <div class="field">
             <%= f.label :password, "パスワード" %><br />
-            <%= f.password_field :password, autocomplete: "current-password", class:"form-control" %>
+            <%= f.password_field :password, autocomplete: "current-password", placeholder: "入力してください", class:"form-under" %>
           </div>
 
           <% if devise_mapping.rememberable? %>
@@ -22,8 +22,8 @@
             </div>
           <% end %>
 
-          <div class="actions">
-            <%= f.submit "ログイン" %>
+          <div class="actions center">
+            <%= f.submit "ログイン", class: "button-fill" %>
           </div>
         <% end %>
 

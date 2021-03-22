@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   validates :takeaway_datetime, presence: true
 
   enum status: {
-    注文中: 0, 調理中: 1, 完了: 2
+    注文中: 0, 完了: 1
   }
 
   # 該当のオーダーでいくらの料金が発生したのかを判別するメソッド

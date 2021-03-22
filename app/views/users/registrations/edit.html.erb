@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background-color:#eee">
+<div class="container-fluid background">
   <div class="row">
     <div class="col-8 offset-2">
       <h2>パスワード変更</h2>
@@ -14,7 +14,7 @@
 
           <div class="field">
             <%= f.label :current_password, "現在のパスワード" %><br />
-            <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control" %>
+            <%= f.password_field :current_password, autocomplete: "current-password", class:"form-under" %>
           </div>
 
           <div class="field">
@@ -22,16 +22,16 @@
             <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %>文字以上)</em>
             <% end %><br />
-            <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
+            <%= f.password_field :password, autocomplete: "new-password", class:"form-under" %>
           </div>
 
           <div class="field">
             <%= f.label :password_confirmation, "新しいパスワード確認" %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-under" %>
           </div>
 
-          <div class="actions">
-            <%= f.submit "パスワード変更" %>
+          <div class="actions center">
+            <%= f.submit "パスワード変更", class: "button-fill" %>
           </div>
         <% end %>
 
