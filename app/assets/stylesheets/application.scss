@@ -21,6 +21,12 @@ p {
   margin: 0;
 }
 
+.background{
+  background-color:#eee;
+  min-height: 92vh;
+
+}
+
 .sidebar{
   position: fixed;
   width:100%;
@@ -57,6 +63,12 @@ p {
 
 .sidebar_box{
   box-shadow: 0 0 8px gray;
+}
+
+.fixed_box{
+  position: fixed;
+  width:100%;
+  z-index:1000;
 }
 
 // フッターを一番下に固定する

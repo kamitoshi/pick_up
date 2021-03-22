@@ -1,8 +1,8 @@
-<div class="container-fluid" style="background-color:#eee">
+<div class="container-fluid background">
   <div class="row">
     <div class="col-8">
       <div class="form_box">
-        <h3 class="center">編集</h3>
+        <h3 class="center">店舗情報編集</h3>
         <hr>
         <%= form_for @shop do |f| %>
           <div class="field">
@@ -50,8 +50,8 @@
             <%= f.text_field :url, autofocus: true, autocomplete: "url", class:"form-control" %>
           </div>
 
-          <div class="actions">
-            <%= f.submit "編集" %>
+          <div class="actions center">
+            <%= f.submit "編集", class: "button-fill" %>
           </div>
         <% end %>
       </div>
@@ -91,7 +91,7 @@
         <div class="shop_edit-sidebar wid-70 ma-a">
           <%= link_to "店舗画像追加・編集", shop_shop_images_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
           <%= link_to "タグの管理", new_shop_shop_tag_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
-          <%= link_to "営業時間管理", new_shop_business_hour_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
+          <%= link_to "営業時間管理", shop_business_hours_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
           <%= link_to "パスワード変更", edit_shop_registration_path, class:"btn btn-primary wid-100 ma-y-10" %>
         </div>
       </div>

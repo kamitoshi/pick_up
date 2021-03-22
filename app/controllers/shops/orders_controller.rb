@@ -6,13 +6,10 @@ class Shops::OrdersController < ApplicationController
   def today_index
     orders = Order.where(shop_id: current_shop.id).order(takeaway_datetime: "desc")
     @new_orders = []
-    @making_orders = []
     @fix_orders = []
     orders.each do |order|
       if order.status == "注文中" && order.is_today?
         @new_orders.push(order)
-      elsif order.status == "調理中" && order.is_today?
-        @making_orders.push(order)
       elsif order.status == "完了" && order.is_today?
         @fix_orders.push(order)
       end
@@ -28,12 +25,7 @@ class Shops::OrdersController < ApplicationController
     if @order.status == "注文中"
       @order.status = 1
       @order.save
-      flash[:success] = "調理を開始しました。"
-      redirect_to today_index_shops_orders_path
-    elsif @order.status == "調理中"
-      @order.status = 2
-      @order.save
-      flash[:success] = "完成したことが注文者に通知されます。"
+      flash[:success] = "完成しました"
       redirect_to today_index_shops_orders_path
     else
       flash[:danger] = "変更できませんでした"

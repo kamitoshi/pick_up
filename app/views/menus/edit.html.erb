@@ -1,7 +1,9 @@
-<div class="container-fluid" style="background-color:#eee">
+<div class="container-fluid background">
   <div class="row">
     <div class="col-8 offset-2">
       <div class="form_box">
+        <h3 class="center">商品情報編集</h3>
+        <hr>
         <%= form_for @menu do |f| %>
           <div class="field ma-b-50">
             <%= f.label :name, "商品名" %><br>
@@ -30,7 +32,7 @@
           </div>
 
           <div class="actions center">
-            <%= f.submit "編集", class: "btn btn-primary" %>
+            <%= f.submit "編集", class: "button-fill" %>
           </div>
         <% end %>
       </div>

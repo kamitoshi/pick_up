@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'business_hours/new'
-  get 'business_hours/edit'
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
   end
@@ -24,6 +22,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+
+  devise_scope :user do
+    get 'confirm_email', to: 'users/registrations#confirm_email'
+  end
 
   namespace :admins do
     resources :shops

@@ -1,5 +1,7 @@
-<% flash.each do |key, message| %>
-  <p class="alert alert-<%= key %> center">
-    <%= message %>
-  </p>
-<% end %>
+<div class="fixed_box time-limit">
+  <% flash.each do |key, message| %>
+    <p class="alert alert-<%= key %> center">
+      <%= message %>
+    </p>
+  <% end %>
+</div>
