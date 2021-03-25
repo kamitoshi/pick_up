@@ -1,0 +1,35 @@
+<div class="container-fluid background">
+  <div class="row">
+    <div class="col-12">
+      <div class="width_box">
+        <h3 class="center">営業時間</h3>
+        <hr>
+        <% if @business_hours.present? %>
+          <% @business_hours.each do |business_hour| %>
+            <div class="row content_box_detail">
+              <div class="col-8">
+                <h5><%= business_hour.job_time %></h5>
+                <p>
+                  <%= business_hour.opening.strftime("%H:%M") %>
+                  <span class="ma-x-20">〜</span>
+                  <%= business_hour.closing.strftime("%H:%M") %>（L.O <%= business_hour.last_order.strftime("%H:%M") %>）
+                </p>
+              </div>
+              <div class="col-4">
+                <div class="edit_btn">
+                  <%= link_to "編集する", edit_shop_business_hour_path(@shop, business_hour), class: "btn btn-primary" %>
+                  <%= link_to "削除する", shop_business_hour_path(@shop, business_hour), method: :delete, class: "btn btn-danger" %>
+                </div>
+              </div>
+            </div>
+            <hr>
+          <% end %>
+        <% else %>
+          <div class="content_box_detail center">
+            <h5>まだ営業時間が設定されていません。</h5>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

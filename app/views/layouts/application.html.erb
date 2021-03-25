@@ -10,6 +10,25 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <%= render partial: 'layouts/header' %>
+    </header>
+    <div class="container-fuild" style="padding-top:70px">
+      <main>
+        <div class="row" style="margin-right:0;">
+          <div class="col-2" style="padding-right:0">
+            <% if admin_signed_in? %>
+              <%= render partial: 'layouts/adminSidebar' %>
+            <% elsif shop_signed_in? %>
+              <%= render partial: 'layouts/shopSidebar' %>
+            <% end %>
+          </div>
+          <div class="col-10" style="padding:0">
+            <%= render partial: 'shared/flash_message' %>
+            <%= yield %>
+          </div>
+        </div>
+      </main>
+    </div>
   </body>
 </html>

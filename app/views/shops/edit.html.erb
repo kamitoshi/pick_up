@@ -1,0 +1,100 @@
+<div class="container-fluid background">
+  <div class="row">
+    <div class="col-8">
+      <div class="form_box">
+        <h3 class="center">店舗情報編集</h3>
+        <hr>
+        <%= form_for @shop do |f| %>
+          <div class="field">
+            <%= f.label :name, "店名" %><br>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-control", placeholder: "店名" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :phone_number, "電話番号（ハイフンなし）" %><br />
+            <%= f.number_field :phone_number, autofocus: true, autocomplete: "phone_number", class:"form-control", placeholder: "例:08012345678" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :email, "メールアドレス" %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :postal_code, "郵便番号（ハイフンなし）" %><br />
+            <%= f.number_field :postal_code, autofocus: true, autocomplete: "postal_code", class:"form-control", placeholder: "例:1610001" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :prefecture, "都道府県" %><br>
+            <%= f.select :prefecture, Shop.prefectures.keys, {prompt: '選択してください'}, class: 'form-control' %>
+          </div>
+
+          <div class="field">
+            <%= f.label :city, "市区町村" %><br />
+            <%= f.text_field :city, autofocus: true, autocomplete: "city", class:"form-control", placeholder: "例:新宿区三丁目" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :address, "住所" %><br />
+            <%= f.text_field :address, autofocus: true, autocomplete: "address", class:"form-control", placeholder: "例:1−1−34" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :introduction, "店紹介文" %><br />
+            <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", class:"form-control" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :url, "ホームページURL" %><br>
+            <%= f.text_field :url, autofocus: true, autocomplete: "url", class:"form-control" %>
+          </div>
+
+          <div class="actions center">
+            <%= f.submit "編集", class: "button-fill" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="width_box">
+        <div class="image_box">
+          <h5>店舗画像</h5>
+          <% if @shop.shop_images.present? %>
+            <div class="shop_image-box center ma-b-10">
+              <%= image_tag @shop.shop_images[0].file_name.url, size: "200x150" %>
+            </div>
+            <div class="shop_image-box center">
+              <% @shop.shop_images.each do |image| %>
+                <%= image_tag image.file_name.url, size: "100x75" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <hr>
+        <div class="tag_box">
+          <h5>タグ</h5>
+          <% if @shop.shop_tags.present? %>
+            <div class="shop_tag-box center">
+              <% @shop.shop_tags.each do |tag| %>
+                <%= link_to tag.content, edit_shop_shop_tag_path(current_shop, tag.id), class:"ma-x-10" %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="shop_tag-box center">
+              <p>タグが登録されていません</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="width_box">
+        <div class="shop_edit-sidebar wid-70 ma-a">
+          <%= link_to "店舗画像追加・編集", shop_shop_images_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
+          <%= link_to "タグの管理", new_shop_shop_tag_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
+          <%= link_to "営業時間管理", shop_business_hours_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
+          <%= link_to "パスワード変更", edit_shop_registration_path, class:"btn btn-primary wid-100 ma-y-10" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

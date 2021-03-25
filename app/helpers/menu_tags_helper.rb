@@ -1,0 +1,2 @@
+module MenuTagsHelper
+end

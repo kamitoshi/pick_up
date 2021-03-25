@@ -6,7 +6,6 @@ ruby '2.5.7'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.5'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -25,9 +24,16 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem "devise"
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-instagram'
+gem 'omniauth-google-oauth2'
 
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.8'
+gem 'carrierwave'
+gem "dropzonejs-rails"
+gem 'fog'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -48,6 +54,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "letter_opener"
+  gem 'letter_opener_web'
 end
 
 group :test do
@@ -61,6 +69,14 @@ group :test do
   gem 'minitest-reporters'
 end
 
+group :development, :test do
+  gem 'sqlite3' #do ~ end内部に追加。他のgemは残してください。
+end
+
+group :production do
+  gem 'pg'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
@@ -68,8 +84,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'refile', require: 'refile/rails', github: 'manfe/refile'
 gem 'refile-mini_magick'
 gem 'jquery-rails'
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.4.1'
 gem 'kaminari'
 gem 'rails-i18n'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+# トップページの売上をグラフで表示するため
+gem 'chartkick'
+gem 'chart-js-rails'

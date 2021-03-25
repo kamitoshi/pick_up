@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# 管理者を作成する
+Admin.create(
+  :email => 'kamiya@circrest.com',
+  :password => 'admins2021'
+)

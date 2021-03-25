@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  references: 
+  references: 
+  reserve_number: MyString
+  reserve_date: 2021-03-06
+  takeaway_time: 2021-03-06 15:30:36
+
+two:
+  references: 
+  references: 
+  reserve_number: MyString
+  reserve_date: 2021-03-06
+  takeaway_time: 2021-03-06 15:30:36

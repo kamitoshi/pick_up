@@ -1,0 +1,39 @@
+<div class="container-fluid background">
+  <div class="row">
+    <div class="col-12">
+      <div class="width_box">
+        <h5><%= @shop.name %>の画像一覧</h5>
+        <hr>
+        <% if @shop.shop_images.present? %>
+          <% 4.times do |i| %>
+            <div class="content_box_detail">
+              <% if @shop.shop_images[i].present? %>
+                <%= image_tag @shop.shop_images[i].file_name.url, size: "300x200" %>
+                <div class="edit_btn ma-t-50">
+                  <%= link_to "この画像を編集する", edit_shop_shop_image_path(@shop, @shop.shop_images[i]), class: "btn btn-primary" %>
+                  <%= link_to "この画像を削除する", shop_shop_image_path(@shop, @shop.shop_images[i]), method: :delete, class: "btn btn-danger" %>
+                </div>
+              <% else %>
+                <%= image_tag "noimage.png" %>
+                <div class="add_btn ma-t-50">
+                  <%= link_to "画像を追加する", new_shop_shop_image_path(@shop), class: "btn btn-primary" %>
+                </div>
+              <% end %>
+            </div>
+            <hr>
+          <% end %>
+        <% else %>
+          <% 4.times do |i| %>
+            <div class="content_box_detail">
+              <%= image_tag "noimage.png" %>
+              <div class="add_btn ma-t-50">
+                <%= link_to "画像を追加する", new_shop_shop_image_path(@shop), class: "btn btn-primary" %>
+              </div>
+            </div>
+            <hr>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

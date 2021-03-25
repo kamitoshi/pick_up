@@ -1,0 +1,29 @@
+<div class="container-fluid background">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <div class="form_box">
+        <h3 class="center">注文詳細</h3>
+        <hr>
+        <%= form_for @order, url: menu_orders_path do |f| %>
+          <%= f.hidden_field :shop_id, value: @menu.shop_id %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+
+          <div class="field ma-b-50">
+            <%= f.label :takeaway_datetime, "受け取り希望日時" %><br />
+            <%= f.datetime_select :takeaway_datetime, default: Time.now + 30.minutes, use_month_numbers: true, date_separator: "/", datetime_separator: "<p>時間</p>", minute_step: 15, class:"form-control" %>
+          </div>
+
+          <div class="field ma-b-50">
+            <%= f.label :requested, "要望（あれば記入ください）" %><br />
+            <%= f.text_area :requested, autocomplete: "requested", class:"form-control" %>
+          </div>
+
+          <div class="actions center">
+            <%= f.submit "注文する", class: "button-fill" %>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

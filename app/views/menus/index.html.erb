@@ -1,0 +1,40 @@
+<div class="container-fluid background">
+  <div class="row">
+    <div class="col-12">
+      <div class="width_box">
+        <h5>メニュー一覧</h5>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <div class="content_box_detail">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>商品名</th>
+                <th>価格</th>
+                <th>登録店舗</th>
+                <th width="20%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @menus.present? %>
+                <% @menus.each do |menu| %>
+                  <tr>
+                    <td><%= menu.name %></td>
+                    <td>¥<%= menu.price %></td>
+                    <td><%= menu.shop.name %></td>
+                    <td><%= link_to "注文に進む", menu_path(menu), class: "btn btn-danger" %></td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr>
+                  <td>
+                    登録されたメニューがありません
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

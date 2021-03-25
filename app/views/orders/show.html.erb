@@ -1,0 +1,48 @@
+<div class="container-fluid background">
+  <div class="row">
+    <div class="col-12">
+      <div class="width_box">
+        <h5>注文履歴詳細</h5>
+        <hr>
+        <div class="content_box_detail">
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th>予約店舗</th>
+                <td colspan=3><%= @order.shop.name %></td>
+              </tr>
+              <tr>
+                <th>予約番号</th>
+                <td colspan=3><%= @order.reserve_number %></td>
+              </tr>
+              <tr>
+                <th>予約日</th>
+                <td colspan=3><%= @order.created_at %></td>
+              </tr>
+              <tr>
+                <th>受取日時</th>
+                <td colspan=3><%= @order.takeaway_datetime %></td>
+              </tr>
+              <tr>
+                <th>注文商品</th>
+                <td colspan=3></td>
+              </tr>
+              <% @order.order_items.each do |item| %>
+                <tr>
+                  <th></th>
+                  <td><%= item.menu_name %></td>
+                  <td>x</td>
+                  <td><%= item.menu_amount %></td>
+                </tr>
+              <% end %>
+              <tr>
+                <th>要望</th>
+                <td><%= @order.requested %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
