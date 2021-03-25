@@ -65,7 +65,7 @@ GEM
       execjs
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bootsnap (1.7.2)
+    bootsnap (1.7.3)
       msgpack (~> 1.0)
     bootstrap (4.4.1)
       autoprefixer-rails (>= 9.1.0)
@@ -107,7 +107,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.9.2)
+    devise-i18n (1.9.3)
       devise (>= 4.7.1)
     devise-i18n-views (0.3.7)
     domain_name (0.5.20190701)
@@ -118,12 +118,9 @@ GEM
     erubi (1.10.0)
     excon (0.79.0)
     execjs (2.7.0)
-    faraday (1.3.0)
-      faraday-net_http (~> 1.0)
+    faraday (0.17.4)
       multipart-post (>= 1.2, < 3)
-      ruby2_keywords
-    faraday-net_http (1.0.1)
-    ffi (1.14.2)
+    ffi (1.15.0)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
     fog (2.2.0)
@@ -188,9 +185,9 @@ GEM
       fog-core (~> 2.1)
       fog-json (~> 1.1)
       fog-xml (~> 0.1)
-    fog-core (2.1.0)
+    fog-core (2.2.3)
       builder
-      excon (~> 0.58)
+      excon (~> 0.71)
       formatador (~> 0.2)
       mime-types
     fog-digitalocean (0.4.0)
@@ -208,12 +205,11 @@ GEM
     fog-ecloud (0.3.0)
       fog-core
       fog-xml
-    fog-google (1.12.1)
-      fog-core (<= 2.1.0)
-      fog-json (~> 1.2)
-      fog-xml (~> 0.1.0)
-      google-api-client (>= 0.44.2, < 0.51)
-      google-cloud-env (~> 1.2)
+    fog-google (1.7.1)
+      fog-core
+      fog-json
+      fog-xml
+      google-api-client (~> 0.23.0)
     fog-internet-archive (0.0.2)
       fog-core
       fog-json
@@ -288,24 +284,21 @@ GEM
     formatador (0.2.5)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    google-api-client (0.50.0)
+    google-api-client (0.23.9)
       addressable (~> 2.5, >= 2.5.1)
-      googleauth (~> 0.9)
+      googleauth (>= 0.5, < 0.7.0)
       httpclient (>= 2.8.1, < 3.0)
-      mini_mime (~> 1.0)
+      mime-types (~> 3.0)
       representable (~> 3.0)
       retriable (>= 2.0, < 4.0)
-      rexml
-      signet (~> 0.12)
-    google-cloud-env (1.5.0)
-      faraday (>= 0.17.3, < 2.0)
-    googleauth (0.16.0)
-      faraday (>= 0.17.3, < 2.0)
+      signet (~> 0.9)
+    googleauth (0.6.7)
+      faraday (~> 0.12)
       jwt (>= 1.4, < 3.0)
       memoist (~> 0.16)
       multi_json (~> 1.11)
       os (>= 0.9, < 2.0)
-      signet (~> 0.14)
+      signet (~> 0.7)
     hashie (4.1.0)
     http-accept (1.7.0)
     http-cookie (1.0.3)
@@ -362,10 +355,9 @@ GEM
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.0225)
-    mimemagic (0.3.5)
+    mimemagic (0.3.6)
     mini_magick (4.11.0)
     mini_mime (1.0.2)
-    mini_portile2 (2.5.0)
     minitest (5.14.4)
     minitest-reporters (1.4.3)
       ansi
@@ -379,9 +371,8 @@ GEM
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     netrc (0.11.0)
-    nio4r (2.5.5)
-    nokogiri (1.11.1)
-      mini_portile2 (~> 2.5.0)
+    nio4r (2.5.7)
+    nokogiri (1.11.2-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
@@ -483,7 +474,6 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     retriable (3.1.2)
-    rexml (3.2.4)
     ruby-progressbar (1.11.0)
     ruby-vips (2.1.0)
       ffi (~> 1.12)
@@ -567,7 +557,7 @@ GEM
       nokogiri (~> 1.8)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
