@@ -92,3 +92,5 @@ gem 'devise-i18n-views'
 # トップページの売上をグラフで表示するため
 gem 'chartkick'
 gem 'chart-js-rails'
+# 環境変数を「.env」で管理するため
+gem 'dotenv-rails'
