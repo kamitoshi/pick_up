@@ -317,13 +317,28 @@
 }
 
 // display //
-.dis-flex-box {
+.flex-box {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: stretch;
 }
-.dis-flex-center {
+.flex-1{
+  flex:1;
+}
+.flex-2{
+  flex:2;
+}
+.flex-3{
+  flex:3;
+}
+.flex-4{
+  flex:4;
+}
+.flex-5{
+  flex:5;
+}
+.flex-center {
   display: flex;
   justify-content: center;
   align-items: stretch;

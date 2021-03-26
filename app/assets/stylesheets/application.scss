@@ -23,13 +23,36 @@ p {
 
 .background{
   background-color:#eee;
-  min-height: 92vh;
-
+  min-height: 100vh;
+  padding-top:70px;
+}
+.sidebar{
+  height:100vh;
+  background-color: #fff;
 }
 
-.sidebar{
+.head-bg{
+  background-color: #FDDC12;
+}
+
+.fix-15{
   position: fixed;
-  width:100%;
+  width:15%;
+  background-color: #fff;
+}
+.main-box{
+  padding-left:15%;
+}
+.text-body{
+  font-size: 16px;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    display:none;
+  }
+  .main-box {
+    padding-left: 0;
+  }
 }
 .content_title_box {
   background-color: #fff;
@@ -53,6 +76,7 @@ p {
   background-color: #fff;
   margin:20px;
   padding:10px;
+  box-shadow: 0 0 8px gray;
 }
 
 .form_box{

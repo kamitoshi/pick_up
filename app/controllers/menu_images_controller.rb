@@ -32,7 +32,7 @@ class MenuImagesController < ApplicationController
             flash[:success] = "商品の画像を追加しました"
             redirect_to menu_menu_images_path(@menu)
           else
-            flash[:danger] = "画像を追加できませんでした"
+            flash[:danger] = "画像を追加できませんでした。ファイルを選択してください"
             render :new
           end
         else
@@ -53,15 +53,10 @@ class MenuImagesController < ApplicationController
   def update
     @menu_image = MenuImage.find(params[:id])
     if admin_signed_in?
-      if @menu_image.update(menu_image_params)
-        flash[:success] = "変更を保存しました"
-        redirect_to menu_menu_images_path(@menu)
-      else
-        flash[:danger] = "変更できませんでした"
+      if params[:menu_image].nil?
+        flash.now[:danger] = "商品の画像を選択してください"
         render :edit
-      end
-    elsif shop_signed_in?
-      if @menu.shop == current_shop
+      else
         if @menu_image.update(menu_image_params)
           flash[:success] = "変更を保存しました"
           redirect_to menu_menu_images_path(@menu)
@@ -69,13 +64,26 @@ class MenuImagesController < ApplicationController
           flash[:danger] = "変更できませんでした"
           render :edit
         end
+      end
+    elsif shop_signed_in?
+      if @menu.shop == current_shop
+        if params[:menu_image].nil?
+          flash.now[:danger] = "商品の画像を選択してください"
+          render :edit
+        else
+          if @menu_image.update(menu_image_params)
+            flash[:success] = "変更を保存しました"
+            redirect_to menu_menu_images_path(@menu)
+          else
+            flash[:danger] = "変更できませんでした"
+            render :edit
+          end
+        end
       else
         flash[:danger] = "多店舗の商品画像は変更できません"
         redirect_to root_path
       end
-    end
-      
-      
+    end  
   end
 
   def destroy

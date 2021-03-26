@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <div class="form_box">
+        <h3 class="center">検索キーワード編集</h3>
+        <hr>
+        <%= form_for @menu_tag, url: menu_menu_tags_path(@menu) do |f|  %>
+          <%= f.hidden_field :menu_id, value: @menu.id %>
+          <div class="field">
+            <%= f.text_field :content, placeholder: "追加したいキーワードを入力", class: "form-control" %>
+          </div>
+
+          <div class="actions center">
+            <%= f.submit "追加", class: "button-fill" %>
+          </div>
+        <% end %>
+        <hr>
+        <h5>設定済みのキーワード</h5>
+        <div class="tag_index">
+          <% if @menu.menu_tags.present? %>
+            <% @menu.menu_tags.each do |tag| %>
+              <span class="badge badge-pill badge-secondary"><%= tag.content %><span class="ma-l-10">|</span><%= link_to "x", menu_menu_tag_path(@menu, tag), method: :delete, class:"badge badge-pill badge-secondary" %></span>
+            <% end %>
+          <% else %>
+            <p>検索キーワードが設定されていません</p>
+          <% end %>
+        </div>
+        <div class="edit_btn center ma-t-30">
+          <%= link_to "商品ページへ", shops_menu_path(@menu), class: "btn btn-outline-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

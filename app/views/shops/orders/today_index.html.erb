@@ -1,4 +1,4 @@
-<div class="container-fluid background">
+<div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="width_box">
@@ -22,7 +22,7 @@
                     <td><%= order.order_items[0].menu_name %></td>
                     <td>¥<%= order.total_payment.to_s(:delimited) %></td>
                     <td><%= order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
-                    <td><%= link_to "調理中にする", shops_order_path(order), method: :patch, class: "btn btn-danger" %></td>
+                    <td><%= link_to "完了にする", shops_order_path(order), method: :patch, class: "btn btn-danger" %></td>
                   </tr>
                 <% end %>
               <% else %>

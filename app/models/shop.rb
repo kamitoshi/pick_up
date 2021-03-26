@@ -119,4 +119,10 @@ class Shop < ApplicationRecord
     return target_orders.count
   end
 
+  # ショップの画像を最初のもの以外サムネイルで表示する
+  def not_main_images
+    images = self.shop_images
+    return images.drop(1)
+  end
+
 end
