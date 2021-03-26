@@ -1,25 +1,29 @@
 class MenuTagsController < ApplicationController
   before_action :set_menu
 
+  def new
+    @menu_tag = MenuTag.new
+  end
+
   def create
     menu_tags = MenuTag.where(menu_id: @menu.id)
     if menu_tags.count <= 10
       @menu_tag = @menu.menu_tags.build(menu_tag_params)
       if @menu.shop == current_shop
         if @menu_tag.save
-          flash[:success] = "タグを追加しました"
-          redirect_to shops_menu_path(@menu)
+          flash[:success] = "キーワードを追加しました"
+          redirect_to new_menu_menu_tag_path(@menu)
         else
-          flash[:danger] = "タグを追加できませんでした"
-          redirect_to shops_menu_path(@menu)
+          flash.now[:danger] = "追加できませんでした"
+          render :new
         end
       else
-        flash[:danger] = "他店のメニューにタグは追加できません"
+        flash[:danger] = "他店のメニューにキーワードは追加できません"
         redirect_to root_path
       end
     else
-      flash[:danger] = "タグは１０個までしか設定できません"
-      redirect_to shops_menu_path(@menu)
+      flash[:danger] = "キーワードは１０個までしか設定できません"
+      redirect_to new_menu_menu_tag_path(@menu)
     end
   end
 
@@ -28,13 +32,13 @@ class MenuTagsController < ApplicationController
     if @menu.shop == current_shop
       if @menu_tag.destroy
         flash[:success] = "削除しました"
-        redirect_to shops_menu_path(@menu)
+        redirect_to new_menu_menu_tag_path(@menu)
       else
         flash[:danger] = "削除できませんでした"
-        redirect_to shops_menu_path(@menu)
+        redirect_to new_menu_menu_tag_path(@menu)
       end
     else
-      flash[:danger] = "他店のタグは削除できません"
+      flash[:danger] = "他店のキーワードは削除できません"
       redirect_to root_path
     end
   end

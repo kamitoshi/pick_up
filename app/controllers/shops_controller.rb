@@ -27,8 +27,7 @@ class ShopsController < ApplicationController
 
   def show
     @new_orders = Order.where(shop_id: @shop.id, status: 0)
-    @making_orders = Order.where(shop_id: @shop.id, status: 1)
-    @fix_orders = Order.where(shop_id: @shop.id, status: 2)
+    @fix_orders = Order.where(shop_id: @shop.id, status: 1)
     @week_sales_numbers = []
     @week_sales_prices = []
     @orders = Order.where(shop_id: @shop.id)
@@ -45,6 +44,10 @@ class ShopsController < ApplicationController
       @week_sales_numbers.push([date: day.strftime("%m/%d"), count: data.count])
       @week_sales_prices.push([date: day.strftime("%m/%d"), price: total_price])
     end
+    menus = @shop.menus
+    @food_menus = menus.where(menu_type: 0)
+    @drink_menus = menus.where(menu_type: 1)
+    @dessert_menus = menus.where(menu_type: 2)
   end
 
   def edit

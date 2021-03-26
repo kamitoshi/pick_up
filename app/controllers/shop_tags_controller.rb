@@ -7,12 +7,12 @@ class ShopTagsController < ApplicationController
   def create
     @shop_tag = @shop.shop_tags.build(shop_tag_params)
     if @shop == current_shop
-      if @shop_tag.save!
+      if @shop_tag.save
         flash[:success] = "タグを追加しました"
         redirect_to edit_shop_path(current_shop)
       else
-        flash[:danger] = "タグを追加できませんでした"
-        redirect_to edit_shop_path(current_shop)
+        flash.now[:danger] = "タグを追加できませんでした"
+        render :new
       end
     else
       flash[:danger] = "他店のタグは追加できません"
@@ -27,12 +27,12 @@ class ShopTagsController < ApplicationController
   def update
     @shop_tag = ShopTag.find(params[:id])
     if @shop == current_shop
-      if @shop_tag.update!(shop_tag_params)
+      if @shop_tag.update(shop_tag_params)
         flash[:success] = "変更を保存しました"
         redirect_to edit_shop_path(current_shop)
       else
         flash[:danger] = "変更できませんでした"
-        redirect_to edit_shop_path(current_shop)
+        render :edit
       end
     else
       flash[:danger] = "他店のタグは編集できません"

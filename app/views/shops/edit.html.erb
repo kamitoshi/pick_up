@@ -1,6 +1,6 @@
-<div class="container-fluid background">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-8">
+    <div class="col-lg-8">
       <div class="form_box">
         <h3 class="center">店舗情報編集</h3>
         <hr>
@@ -56,7 +56,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-lg-4">
       <div class="width_box">
         <div class="image_box">
           <h5>店舗画像</h5>
@@ -65,15 +65,17 @@
               <%= image_tag @shop.shop_images[0].file_name.url, size: "200x150" %>
             </div>
             <div class="shop_image-box center">
-              <% @shop.shop_images.each do |image| %>
-                <%= image_tag image.file_name.url, size: "100x75" %>
-              <% end %>
+              <% if @shop.shop_images.count >= 2 %>
+                  <% @shop.not_main_images.each do |image| %>
+                    <%= image_tag image.file_name.url, size: "100x75" %>
+                  <% end %>
+                <% end %>
             </div>
           <% end %>
         </div>
         <hr>
         <div class="tag_box">
-          <h5>タグ</h5>
+          <h5>検索キーワード</h5>
           <% if @shop.shop_tags.present? %>
             <div class="shop_tag-box center">
               <% @shop.shop_tags.each do |tag| %>
@@ -82,7 +84,7 @@
             </div>
           <% else %>
             <div class="shop_tag-box center">
-              <p>タグが登録されていません</p>
+              <p>キーワードが登録されていません</p>
             </div>
           <% end %>
         </div>
@@ -90,7 +92,7 @@
       <div class="width_box">
         <div class="shop_edit-sidebar wid-70 ma-a">
           <%= link_to "店舗画像追加・編集", shop_shop_images_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
-          <%= link_to "タグの管理", new_shop_shop_tag_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
+          <%= link_to "検索キーワードの管理", new_shop_shop_tag_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
           <%= link_to "営業時間管理", shop_business_hours_path(current_shop), class:"btn btn-primary wid-100 ma-y-10" %>
           <%= link_to "パスワード変更", edit_shop_registration_path, class:"btn btn-primary wid-100 ma-y-10" %>
         </div>

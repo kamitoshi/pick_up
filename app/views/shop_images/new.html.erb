@@ -1,8 +1,8 @@
 <div class="container-fluid background">
   <div class="row">
-    <div class="col-8 offset-2">
+    <div class="col-lg-12">
       <div class="form_box">
-        <h3 class="center">画像編集</h3>
+        <h3 class="center">店舗イメージ画像追加</h3>
         <hr>
         <%= form_for @shop_image, url: shop_shop_images_path(current_shop) do |f|  %>
           <%= f.hidden_field :shop_id, value: current_shop.id %>
@@ -11,7 +11,7 @@
           </div>
 
           <div class="actions center">
-            <%= f.submit "登録", class: "button-fill"%>
+            <%= f.submit "追加", class: "button-fill"%>
           </div>
         <% end %>
 

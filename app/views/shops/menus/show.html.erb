@@ -1,24 +1,33 @@
-<div class="container-fluid background">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-8">
+    <div class="col-12">
       <div class="width_box">
         <h5>メニュー詳細</h5>
         <hr>
         <div class="content_box_detail">
-          <div class="image_box">
+          <div class="image_box pa-b-30">
             <% if @menu.menu_images.present? %>
               <div class="menu_image-box center ma-b-10">
-                <%= image_tag @menu.menu_images[0].file_name.url, class:"wid-50" %>
+                <%= image_tag @menu.menu_images[0].file_name.to_s, class:"wid-50" %>
               </div>
               <div class="menu_image-box center">
-                <% @menu.menu_images.each do |image| %>
-                  <%= image_tag image.file_name.thumb100.to_s %>
+                <% if @menu.menu_images.count >= 2 %>
+                  <% @menu.not_main_images.each do |image| %>
+                    <%= image_tag image.file_name.thumb100.to_s %>
+                  <% end %>
                 <% end %>
               </div>
+            <% else %>
+              <div class="menu_image-box center ma-b-10 border">
+                <%= image_tag "noimage.png", class:"wid-50" %>
+              </div>
             <% end %>
+            <div class="add_btn center ma-t-30">
+              <%= link_to "商品画像を編集", menu_menu_images_path(@menu), class: "btn btn-outline-primary" %>
+            </div>
           </div>
           <table class="table">
-            <thead>
+            <tbody>
               <tr>
                 <th width="30%">商品名</th>
                 <td><%= @menu.name %></td>
@@ -42,14 +51,15 @@
                 </td>
               </tr>
               <tr>
-                <th>タグ</th>
+                <th>検索キーワード</th>
                 <td>
                   <% if @menu.menu_tags.present? %>
                     <% @menu.menu_tags.each do |tag| %>
-                      <span class="badge badge-pill badge-secondary"><%= tag.content %>|<%= link_to "x", menu_menu_tag_path(@menu, tag), method: :delete, class:"badge badge-pill badge-secondary" %></span>
+                      <span class="badge badge-pill badge-secondary"><%= tag.content %></span>
                     <% end %>
+                    <span class="badge badge-pill badge-primary"><%= link_to "追加・編集", new_menu_menu_tag_path(@menu), class: "white" %></span>
                   <% else %>
-                    <p>タグが設定されていません</p>
+                    <p>検索キーワードが設定されていません</p>
                   <% end %>
                 </td>
               </tr>
@@ -61,29 +71,8 @@
           </table>
         </div>
         <div class="return_btn center">
-          <%= link_to "一覧へ", shops_menus_path, class: "btn btn-outline-primary" %>
-        </div>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="width_box">
-        <h5>編集オプション</h5>
-        <hr>
-        <%= form_for @menu_tag, url: menu_menu_tags_path(@menu) do |f|  %>
-          <div class="form-row">
-            <div class="form-group col-md-8">
-              <%= f.text_field :content, placeholder: "タグを入力", class:"form-control" %>
-            </div>
-            <div class="form-group col-md-4">
-              <%= f.submit "追加", class:"btn btn-primary" %>
-            </div>
-          </div>
-        <% end %>
-        <div class="edit_btn center ma-t-30">
           <%= link_to "編集する", edit_menu_path(@menu.id), class: "btn btn-outline-success" %>
-        </div>
-        <div class="add_btn center ma-t-30">
-          <%= link_to "商品画像を編集する", menu_menu_images_path(@menu), class: "btn btn-outline-primary" %>
+          <%= link_to "一覧へ", shops_menus_path, class: "btn btn-outline-primary" %>
         </div>
       </div>
     </div>
