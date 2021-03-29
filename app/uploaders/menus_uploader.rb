@@ -56,4 +56,7 @@ class MenusUploader < CarrierWave::Uploader::Base
   version :thumb100 do 
     process resize_to_fill: [100, 100, "center"] 
   end 
+  version :thumb_width do 
+    process resize_to_fill: [320, 180, "center"] 
+  end 
 end
