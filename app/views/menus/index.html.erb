@@ -1,39 +1,124 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <div class="width_box">
-        <h5>メニュー一覧</h5>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        <div class="content_box_detail">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>商品名</th>
-                <th>価格</th>
-                <th>登録店舗</th>
-                <th width="20%"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if @menus.present? %>
-                <% @menus.each do |menu| %>
-                  <tr>
-                    <td><%= menu.name %></td>
-                    <td>¥<%= menu.price %></td>
-                    <td><%= menu.shop.name %></td>
-                    <td><%= link_to "注文に進む", menu_path(menu), class: "btn btn-danger" %></td>
-                  </tr>
-                <% end %>
-              <% else %>
-                <tr>
-                  <td>
-                    登録されたメニューがありません
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+      <h5>メニュー一覧</h5>
+      <div class="content_box_detail">
+        <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
+          <% if @menus.present? %>
+            <% @menus.each do |menu| %>
+              <div class="col mb-4">
+                <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
+                  <%= image_tag "noimage.png", class:"scale-img" %>
+                  <div class="card-body">
+                    <h5 class="card-title"><%= menu.name %></h5>
+                    <p class="card-text">¥<%= menu.price %></p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="non_menu center">
+              <h4>登録された商品がありません</h4>
+            </div>
+          <% end %>
         </div>
+        <% if @menus.present? %>
+          <% @menus.each do |menu| %>
+            <div class="modal fade" id="modal<%= menu.id %>" tabindex="-1" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content container">
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-12 center">
+                        <% if menu.menu_images.present? %>
+                          <%= image_tag menu.menu_images[0].file_name.to_s, id:"sample_img", class: "wid-70" %>
+                        <% else %>
+                          <%= image_tag "noimage.png", class: "wid-100" %>
+                        <% end %>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-4">
+                        <h5><%= menu.name %></h5>
+                        <h6><%= menu.shop.name %></h6>
+                      </div>
+                      <div class="col-8">
+                        <p><%= menu.introduction %></p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="modal-foot ma-b-30">
+                    <hr>
+                    <%= form_for CartItem.new, url: menu_cart_items_path(menu) do |f| %>
+                      <%= f.hidden_field :shop_id, value: menu.shop_id %>
+                      <%= f.hidden_field :user_id, value: current_user.id %>
+                      <div class="row">
+                        <div class="col-sm-3 center">
+                          <h6>数量</h6>
+                          <span id="minusButton<%= menu.id %>" class="pointer">-</span><%= f.text_field :amount, id: "counterOutput#{menu.id}", class:"amount_input", value:1 %><span id="plusButton<%= menu.id %>" class="pointer">+</span>
+                        </div>
+                        <div class="col-sm-8 border-r">
+                          <div class="actions center">
+                            <%= link_to "今すぐ注文する", new_menu_order_path(menu), class: "button-fill" %>
+                            <%= f.submit "カートに追加する", class: "button-fill" %>
+                          </div>
+                        </div>
+                        <div class="col-sm-1">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="閉じる" class="ma-t-10">
+                            <span aria-hidden="true" class="ma-r-10">&times;</span>
+                          </button>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <script>
+              let counterOutput<%= menu.id %> = document.getElementById("counterOutput<%= menu.id %>");
+              // 加算機能
+              let plusButton<%= menu.id %> = document.getElementById("plusButton<%= menu.id %>");
+              let onClickPlusButton<%= menu.id %> = () => {
+                counterOutput<%= menu.id %>.value++;
+              };
+              plusButton<%= menu.id %>.addEventListener("click", onClickPlusButton<%= menu.id %>);
+
+              // 減算機能
+              let minusButton<%= menu.id %> = document.getElementById("minusButton<%= menu.id %>");
+              let onClickMinusButton<%= menu.id %> = () => {
+                if (counterOutput<%= menu.id %>.value > 1) {
+                  counterOutput<%= menu.id %>.value--; // カウント数が1以上のときだけ減算する
+                }
+              };
+              minusButton<%= menu.id %>.addEventListener("click", onClickMinusButton<%= menu.id %>);
+
+              // slide用
+              let image<%= menu.id %> = document.getElementById("image<%= menu.id %>");
+              let image<%= menu.id %>_num = 0;
+              let image<%= menu.id %>_count = <%= menu.menu_images.count %>;
+
+              // back
+              let backButton<%= menu.id %> = document.getElementById("backButton<%= menu.id %>");
+              let onClickBackButton<%= menu.id %> = () => {
+                let num = image<%= menu.id %>_num;
+                if(image<%= menu.id %>_num == 0){
+                  image<%= menu.id %>_num = image<%= menu.id %>_count - 1;
+                }else{
+                  image<%= menu.id %>_num ++;
+                }
+                console_log("ok");
+              };
+              backButton<%= menu.id %>.addEventListener("click", onClickBackButton<%= menu.id %>);
+
+
+            </script>
+          <% end %>
+        <% else %>
+          <div class="non_menu center">
+            <h4>メニューが登録されていません</h4>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

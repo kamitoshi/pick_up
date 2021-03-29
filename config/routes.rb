@@ -67,6 +67,7 @@ Rails.application.routes.draw do
   namespace :cart_items do
     resources :orders, only:[:new, :create]
   end
+  get "orders/fix", to: "orders#fix"
   resources :cart_items, only:[:destroy]
   resources :categories, only:[:index,:new, :create, :edit, :update, :destroy]
 

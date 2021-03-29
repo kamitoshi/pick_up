@@ -9,7 +9,7 @@ class ShopTagsController < ApplicationController
     if @shop == current_shop
       if @shop_tag.save
         flash[:success] = "タグを追加しました"
-        redirect_to edit_shop_path(current_shop)
+        redirect_to new_shop_shop_tag_path(current_shop)
       else
         flash.now[:danger] = "タグを追加できませんでした"
         render :new

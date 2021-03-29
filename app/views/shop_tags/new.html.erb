@@ -1,4 +1,4 @@
-<div class="container-fluid background">
+<div class="container-fluid">
   <div class="row">
     <div class="col-lg-12">
       <div class="form_box">
@@ -6,7 +6,7 @@
         <hr>
         <%= form_for @shop_tag, url: shop_shop_tags_path(current_shop) do |f|  %>
           <%= f.hidden_field :shop_id, value: current_shop.id %>
-          <div class="field">
+          <div class="field wid-70 ma-a">
             <%= f.text_field :content, class: "form-control", placeholder: "検索されたいキーワードを入力" %>
           </div>
 
@@ -19,7 +19,7 @@
         <% if @shop.shop_tags.present? %>
           <div class="shop_tag-box">
             <% @shop.shop_tags.each do |tag| %>
-              <%= link_to tag.content, edit_shop_shop_tag_path(current_shop, tag.id), class:"ma-x-10" %>
+              <span class="badge badge-pill badge-secondary"><%= tag.content %></span>
             <% end %>
           </div>
         <% else %>

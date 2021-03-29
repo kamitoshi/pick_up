@@ -5,10 +5,9 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
 
   validates :reserve_number, presence: true
-  validates :takeaway_datetime, presence: true
 
   enum status: {
-    注文中: 0, 完了: 1
+    注文中: 0, 完了: 1, キャンセル: 2
   }
 
   # 該当のオーダーでいくらの料金が発生したのかを判別するメソッド
@@ -34,6 +33,18 @@ class Order < ApplicationRecord
       return false
     end
   end
+
+  # オーダーの中で一番提供時間が長いものを基準にするメソッド
+  def long_serve_time
+    order_items = self.order_items
+    result = 0
+    order_items.each do |item|
+      if item.menu.estimated_time > result
+        result = item.menu.estimated_time
+      end
+    end
+    return result
+  end
   
   # 受け取り時間が営業時間中のオーダーか判断する
   def is_business_time_order?
@@ -41,7 +52,7 @@ class Order < ApplicationRecord
     business_hours = shop.business_hours
     takeaway_datetime = self.takeaway_datetime
     now = Time.now
-    if now + 30 * 60 < takeaway_datetime
+    if now + self.long_serve_time * 60 <= takeaway_datetime
       business_hours.each do |business_hour|
         if takeaway_datetime.strftime("%H:%M") >= business_hour.opening.strftime("%H:%M") && takeaway_datetime.strftime("%H:%M") <= business_hour.closing.strftime("%H:%M")
           return true

@@ -1,97 +1,90 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <div class="width_box">
-        <h5>メニュー詳細</h5>
-        <hr>
-        <div class="row">
-          <div class="col-4">
-            <div class="image_box">
-            <% if @menu.menu_images.present? %>
-              <div class="menu_image-box center ma-b-10">
-                <%= image_tag @menu.menu_images[0].file_name.url, class:"wid-50" %>
-              </div>
-              <div class="menu_image-box center">
-                <% @menu.menu_images.each do |image| %>
-                  <%= image_tag image.file_name.thumb100.to_s %>
+  <div class="width_box">
+    <div class="row">
+      <div class="col-md-6 offset-3">
+        <% if @menu.menu_images.present? %>
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <!-- インジケータの設定 -->
+            <ol class="carousel-indicators">
+              <% @menu.menu_images.count.times do |i| %>
+                <% if i == 0 %>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>" class="active"></li>
+                <% else %>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>"></li>
                 <% end %>
-              </div>
-            <% else %>
-              <div class="image_box center">
-                <%= image_tag "noimage.png", size:"300x200" %>
-              </div>
-            <% end %>
-          </div>
-          </div>
-          <div class="col-8">
-            <div class="content_box_detail">
-              <table class="table table-bordered">
-                <tbody>
-                  <tr>
-                    <th width="20%">商品名</th>
-                    <td><%= @menu.name %></td>
-                  </tr>
-                  <tr>
-                    <th>商品ジャンル</th>
-                    <td><%= @menu.genre %></td>
-                  </tr>
-                  <tr>
-                    <th>価格</th>
-                    <td>¥<%= @menu.price %></td>
-                  </tr>
-                  <tr>
-                    <th>販売店舗</th>
-                    <td><%= @menu.shop.name %></td>
-                  </tr>
-                  <tr>
-                    <th>商品紹介文</th>
-                    <td><%= @menu.introduction %></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-3 offset-3">
-            <div class="order_btn center">
-              <%= link_to "今すぐ注文する", new_menu_order_path(@menu), class: "btn btn-danger" %>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="order_btn center">
-              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
-                カートに入れる
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="return_btn center">
-          <%= link_to "一覧へ戻る", menus_path, class: "btn btn-outline-success" %>
-        </div>
+              <% end %>
+            </ol>
+            <!-- スライドさせる画像の設定 -->
+            <div class="carousel-inner">
+              <% @menu.menu_images.count.times do |i| %>
+                <% if i == 0 %>
+                  <div class="carousel-item active" data-interval="10000">
+                    <%= image_tag "noimage.png", class: "wid-100" %>
+                  </div><!-- /.carousel-item -->
+                <% else %>
+                  <div class="carousel-item" data-interval="false">
+                    <%= image_tag "noimage.png", class: "wid-100" %>
+                  </div><!-- /.carousel-item -->
+                <% end %>
+              <% end %>
+            </div><!-- /.carousel-inner -->
+            <!-- スライドコントロールの設定 -->
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">前へ</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <
+            </a>
+          </div><!-- /.carousel -->
+        <% else %>
+          <%= image_tag "noimage.png", class: "wid-100" %>
+        <% end %>
       </div>
     </div>
+    <div class="row">
+      <div class="col-4">
+        <h5><%= @menu.name %></h5>
+        <h6><%= @menu.shop.name %></h6>
+      </div>
+      <div class="col-8">
+        <p><%= @menu.introduction %></p>
+      </div>
+    </div>
+    <hr>
+    <%= form_for CartItem.new, url: menu_cart_items_path(@menu) do |f| %>
+      <%= f.hidden_field :shop_id, value: @menu.shop_id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <div class="row">
+        <div class="col-sm-4 center">
+          <h6>数量</h6>
+          <span id="minusButton<%= @menu.id %>" class="pointer">-</span><%= f.text_field :amount, id: "counterOutput#{@menu.id}", class:"amount_input", value:1 %><span id="plusButton<%= @menu.id %>" class="pointer">+</span>
+        </div>
+        <div class="col-sm-8">
+          <div class="actions center">
+            <%= link_to "今すぐ注文する", new_menu_order_path(@menu), class: "button-fill" %>
+            <%= f.submit "カートに追加する", class: "button-fill" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
+<script>
+  let counterOutput<%= @menu.id %> = document.getElementById("counterOutput<%= @menu.id %>");
+  // 加算機能
+  let plusButton<%= @menu.id %> = document.getElementById("plusButton<%= @menu.id %>");
+  let onClickPlusButton<%= @menu.id %> = () => {
+    counterOutput<%= @menu.id %>.value++;
+  };
+  plusButton<%= @menu.id %>.addEventListener("click", onClickPlusButton<%= @menu.id %>);
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">数量を選択してください</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <%= form_for CartItem.new, url: menu_cart_items_path(@menu) do |f| %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <div class="modal-body">
-          <%= f.number_field :amount, autofocus: true, value: 1 %>個
-        </div>
-        <div class="modal-footer center">
-          <%= f.submit "追加", class: "btn btn-primary" %>
-        </div><!-- /.modal-footer -->
-      <% end %>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+  // 減算機能
+  let minusButton<%= @menu.id %> = document.getElementById("minusButton<%= @menu.id %>");
+  let onClickMinusButton<%= @menu.id %> = () => {
+    if (counterOutput<%= @menu.id %>.value > 1) {
+      counterOutput<%= @menu.id %>.value--; // カウント数が1以上のときだけ減算する
+    }
+  };
+  minusButton<%= @menu.id %>.addEventListener("click", onClickMinusButton<%= @menu.id %>);
+</script>

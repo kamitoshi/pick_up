@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  layout "users_layout"
   def index
     if admin_signed_in?
       redirect_to admins_path
