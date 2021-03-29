@@ -45,15 +45,6 @@ ActiveRecord::Schema.define(version: 2021_03_21_104920) do
     t.index ["user_id"], name: "index_cart_items_on_user_id"
   end
 
-  create_table "menu_categories", force: :cascade do |t|
-    t.integer "menu_id"
-    t.integer "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_menu_categories_on_category_id"
-    t.index ["menu_id"], name: "index_menu_categories_on_menu_id"
-  end
-
   create_table "menu_images", force: :cascade do |t|
     t.integer "menu_id"
     t.string "file_name", null: false
