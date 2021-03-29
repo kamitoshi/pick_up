@@ -33,7 +33,6 @@ gem 'omniauth-google-oauth2'
 gem 'mini_magick', '~> 4.8'
 gem 'carrierwave'
 gem "dropzonejs-rails"
-gem 'fog'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -75,6 +74,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'fog-aws'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

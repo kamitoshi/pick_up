@@ -67,15 +67,13 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: 'pickup.circrest.com' }
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.smtp_settings = {
-    user_name: 'apikey',
-    password: ENV['SENDGRID_APIKEY'],
-    domain: 'herokuapp.com',
-    address: 'smtp.sendgrid.net',
     port: 587,
-    authentication: :plain,
+    address: 'smtp.gmail.com',
+    domain: 'smtp.gmail.com',
+    user_name: ENV["GMAIL_ADDRESS"],
+    password: ENV["GOOGLE_APP_PASSWORD"],
     enable_starttls_auto: true
   }
 
