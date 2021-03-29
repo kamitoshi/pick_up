@@ -116,3 +116,28 @@ footer {
   bottom: 0;
   /*下に固定*/
 }
+
+// 商品ホバーの画像をポップさせる
+.scale-img {
+  transition-duration: 0.5s;
+  /*変化の時間*/
+}
+
+.scale-img:hover {
+  transform: scale(1.2, 1.2);
+  /*画像の拡大*/
+  cursor: pointer;
+  /*カーソルをポインターにする*/
+}
+
+.scale-box {
+  overflow: hidden;
+  /*画像拡大時にはみ出た部分を隠す*/
+  cursor: pointer;
+}
+.scale-box:hover {
+  .scale-img {
+    transform: scale(1.2, 1.2);
+    /*画像の拡大*/
+  }
+}

@@ -38,17 +38,11 @@ ActiveRecord::Schema.define(version: 2021_03_21_104920) do
   create_table "cart_items", force: :cascade do |t|
     t.integer "user_id"
     t.integer "menu_id"
-    t.integer "amount"
+    t.integer "amount", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["menu_id"], name: "index_cart_items_on_menu_id"
     t.index ["user_id"], name: "index_cart_items_on_user_id"
-  end
-
-  create_table "categories", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "menu_categories", force: :cascade do |t|
@@ -62,7 +56,7 @@ ActiveRecord::Schema.define(version: 2021_03_21_104920) do
 
   create_table "menu_images", force: :cascade do |t|
     t.integer "menu_id"
-    t.string "file_name"
+    t.string "file_name", null: false
     t.boolean "is_main", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -80,25 +74,23 @@ ActiveRecord::Schema.define(version: 2021_03_21_104920) do
   create_table "menus", force: :cascade do |t|
     t.integer "shop_id"
     t.string "name", null: false
+    t.integer "menu_type", null: false
     t.integer "price", null: false
-    t.integer "special_price"
     t.integer "fee", null: false
+    t.integer "estimated_time", null: false
     t.text "introduction"
     t.boolean "is_active", default: true
-    t.boolean "is_saling", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "genre"
-    t.integer "menu_type"
     t.index ["shop_id"], name: "index_menus_on_shop_id"
   end
 
   create_table "order_items", force: :cascade do |t|
     t.integer "order_id"
     t.integer "menu_id"
-    t.string "menu_name"
-    t.integer "menu_price"
-    t.integer "menu_amount"
+    t.string "menu_name", null: false
+    t.integer "menu_price", null: false
+    t.integer "menu_amount", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["menu_id"], name: "index_order_items_on_menu_id"
@@ -109,7 +101,7 @@ ActiveRecord::Schema.define(version: 2021_03_21_104920) do
     t.integer "shop_id"
     t.integer "user_id"
     t.string "reserve_number", null: false
-    t.datetime "takeaway_datetime", null: false
+    t.datetime "takeaway_datetime"
     t.text "requested"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
@@ -120,7 +112,7 @@ ActiveRecord::Schema.define(version: 2021_03_21_104920) do
 
   create_table "shop_images", force: :cascade do |t|
     t.integer "shop_id"
-    t.string "file_name"
+    t.string "file_name", null: false
     t.boolean "is_main", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -57,9 +57,10 @@
                     <% @menu.menu_tags.each do |tag| %>
                       <span class="badge badge-pill badge-secondary"><%= tag.content %></span>
                     <% end %>
-                    <span class="badge badge-pill badge-primary"><%= link_to "追加・編集", new_menu_menu_tag_path(@menu), class: "white" %></span>
+                    <br><span class="badge badge-pill badge-primary"><%= link_to "追加・編集", new_menu_menu_tag_path(@menu), class: "white" %></span>
                   <% else %>
                     <p>検索キーワードが設定されていません</p>
+                    <span class="badge badge-pill badge-primary"><%= link_to "追加・編集", new_menu_menu_tag_path(@menu), class: "white" %></span>
                   <% end %>
                 </td>
               </tr>

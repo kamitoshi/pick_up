@@ -11,7 +11,6 @@
                 <th>注文商品</th>
                 <th>店舗名</th>
                 <th>受取日時</th>
-                <th width="15%"></th>
               </tr>
             </thead>
             <tbody>
@@ -21,8 +20,7 @@
                     <td><%= order.shop.name %></td>
                     <td><%= order.order_items[0].menu_name %></td>
                     <td><%= order.shop.name %></td>
-                    <td><%= order.takeaway_datetime %></td>
-                    <td><%= order.status %></td>
+                    <td><%= order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
                   </tr>
                 <% end %>
               <% else %>

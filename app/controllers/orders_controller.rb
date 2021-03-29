@@ -18,6 +18,9 @@ class OrdersController < ApplicationController
     @menu = Menu.find(params[:menu_id])
     orders = Order.where(shop_id: @menu.shop_id)
     @order = Order.new(order_params)
+    if @order.takeaway_datetime.nil?
+      @order.takeaway_datetime = Time.now + (@menu.estimated_time * 60)
+    end
     @order.numbering_reserve_number(@order.shop.target_date_order_count(@order.takeaway_datetime))
     if @order.is_business_time_order?
       if @order.save
@@ -26,11 +29,10 @@ class OrdersController < ApplicationController
           menu_id: @menu.id,
           menu_name: @menu.name,
           menu_price: @menu.price,
-          menu_amount: 1
+          menu_amount: params[:amount]
         )
-        flash[:success] = "注文しました"
         OrderMailer.send_user_order(@order).deliver_later
-        redirect_to menus_path
+        redirect_to orders_fix_path
       else
         flash[:danger] = "注文できませんでした。入力内容を確認してください"
         render "new"
@@ -39,6 +41,10 @@ class OrdersController < ApplicationController
       flash.now[:danger] = "受け取り希望時間をご確認ください"
       render :new
     end
+  end
+
+  def fix
+
   end
 
   def destroy

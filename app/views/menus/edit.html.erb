@@ -16,11 +16,6 @@
           </div>
 
           <div class="field ma-b-50">
-            <%= f.label :genre, "商品ジャンル" %><br />
-            <%= f.select :genre, Menu.genres.keys, {include_blank: "選択してください"}, {class: "custom-select"} %>
-          </div>
-
-          <div class="field ma-b-50">
             <%= f.label :price, "価格" %><br />
             <%= f.number_field :price, autofocus: true, autocomplete: "price", class:"form-control" %>
           </div>
@@ -30,6 +25,10 @@
             <%= f.number_field :fee, autofocus: true, autocomplete: "fee", class:"form-control", placeholder: "例:10" %>
           </div>
 
+          <div class="field ma-b-50">
+            <%= f.label :estimated_time, '完成までの目安時間' %>
+            <%= f.select :estimated_time, {'10分': 10, '20分': 20, '30分': 30, '40分': 40, '50分': 50, '60分': 60 }, { include_blank: '選択してください'}, {class: "custom-select"} %>
+          </div>
 
           <div class="field ma-b-50">
             <%= f.label :introduction, "商品紹介文" %><br />
