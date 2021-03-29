@@ -1,5 +1,4 @@
 class OrderMailer < ApplicationMailer
-  default from: "info@pickup.circrest.com"
   
   def send_user_order(order) #メソッドに対して引数を設定
     @user = order.user #ユーザー情報
