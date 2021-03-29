@@ -94,3 +94,5 @@ gem 'chartkick'
 gem 'chart-js-rails'
 # 環境変数を「.env」で管理するため
 gem 'dotenv-rails'
+# 時間の丸めを行う
+gem 'rounding'

@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :validatable, :omniauthable
+  devise :database_authenticatable, :registerable, #:confirmable,
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   validates :last_name, presence: true
   validates :first_name, presence: true
@@ -14,14 +14,11 @@ class User < ApplicationRecord
 
   has_many :cart_items
 
-  class User < ApplicationRecord
-    devise :omniauthable, omniauth_providers: %i[facebook twitter google_oauth2]
-    # omniauthのコールバック時に呼ばれるメソッド
-    def self.from_omniauth(auth)
-      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-        user.email = auth.info.email
-        user.password = Devise.friendly_token[0,20]
-      end
+  # omniauthのコールバック時に呼ばれるメソッド
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
     end
   end
 
@@ -50,6 +47,26 @@ class User < ApplicationRecord
     else
       return false
     end
+  end
+
+  # カートに入っている商品の中で一番完成予定が長いものを出力
+  def max_estimated_time
+    result = 0
+    self.cart_items.each do |item|
+      if item.menu.estimated_time > result
+        result = item.menu.estimated_time
+      end
+    end
+    return result
+  end
+
+  # カートに入っている商品の合計金額を算出
+  def cart_items_total_price
+    result = 0
+    self.cart_items.each do |item|
+      result += item.menu.price * item.amount
+    end
+    return result
   end
 
 end

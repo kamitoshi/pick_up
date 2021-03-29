@@ -1,14 +1,48 @@
-<div class="container-fluid background">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-8 offset-2">
+    <div class="col-lg-8 offset-2">
       <div class="form_box">
-        <h3 class="center">注文日時</h3>
+        <h3 class="center">まとめて注文</h3>
         <hr>
         <%= form_for @order, url: cart_items_orders_path do |f| %>
 
+          <% @cart_items.each do |cart_item| %>
+
+            <div class="field ma-b-50">
+              <div class="row">
+                <div class="col-3">
+                  <h5><%= cart_item.menu.name %></h5>
+                  <h6>¥<%= cart_item.menu.price %></h6>
+                  <h6>数量<span class="ma-x-20">：</span><%= cart_item.amount %></h6>
+                </div>
+                <div class="col-5 font-10">
+                  <%= cart_item.menu.introduction %>
+                </div>
+                <div class="col-4">
+                  <% if cart_item.menu.menu_images.present? %>
+                    <%= image_tag cart_item.menu.menu_images[0].file_name.thumb100.to_s %>
+                  <% else %>
+                    <%= image_tag "noimage.png", size:"150x100" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+          <% end %>
+
           <div class="field ma-b-50">
-            <%= f.label :takeaway_datetime, "受け取り希望日時" %><br />
-            <%= f.datetime_select :takeaway_datetime, default: Time.now + 30.minutes, use_month_numbers: true, date_separator: "/", datetime_separator: "<p>時間</p>", minute_step: 15, class:"form-control" %>
+            <h4>お会計金額:<span class="ma-l-30">¥</span><span id="menu_price"><%= current_user.cart_items_total_price %></span></h4>
+          </div>
+
+          <div class="field ma-b-50">
+            <h5>完成予定時間</h5>
+            <h6><%= current_user.max_estimated_time %><span class="ma-x-10">〜</span><%= current_user.max_estimated_time + 10 %>分</h6>
+          </div>
+
+          <div class="field ma-b-20">
+            <%= f.label :takeaway_datetime, "受け取り日時" %><br />
+            <%= f.datetime_select :takeaway_datetime, {minute_step: 10, default: Time.now.ceil_to(10.minutes) + (current_user.max_estimated_time*60), use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<label class="fb-txt my-2 ma-x-20"></label>'},{id: 'ymd-date'} %>
           </div>
 
           <div class="field ma-b-50">
@@ -17,7 +51,7 @@
           </div>
 
           <div class="actions center">
-            <%= f.submit "登録", class: "button-fill" %>
+            <%= f.submit "注文する", class: "button-fill" %>
           </div>
 
         <% end %>

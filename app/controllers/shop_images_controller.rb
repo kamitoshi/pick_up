@@ -12,12 +12,17 @@ class ShopImagesController < ApplicationController
     if @shop.shop_images.count < 4
       if @shop == current_shop
         @shop_image = @shop.shop_images.build(shop_image_params)
-        if @shop_image.save
-          flash[:success] = "店舗の画像を追加しました"
-          redirect_to shop_shop_images_path(current_shop)
-        else
-          flash.now[:danger] = "画像を追加できませんでした"
+        if params[:shop_image].nil?
+          flash.now[:danger] = "追加できませんでした。画像が選択されているか確認してください。"
           render :new
+        else
+          if @shop_image.save
+            flash[:success] = "店舗の画像を追加しました"
+            redirect_to shop_shop_images_path(current_shop)
+          else
+            flash.now[:danger] = "画像を追加できませんでした"
+            render :new
+          end
         end
       else
         flash[:danger] = "多店舗の画像は追加できません"
@@ -36,12 +41,17 @@ class ShopImagesController < ApplicationController
   def update
     if @shop == current_shop
       @shop_image = ShopImage.find(params[:id])
-      if @shop_image.update(shop_image_params)
-        flash[:success] = "編集を保存しました"
-        redirect_to shop_shop_images_path(current_shop)
+      if params[:shop_image].nil?
+        flash.now[:danger] = "編集できませんでした。画像が選択されているか確認してください。"
+          render :edit
       else
-        flash.now[:danger] = "編集できませんでした"
-        render :new
+        if @shop_image.update(shop_image_params)
+          flash[:success] = "編集を保存しました"
+          redirect_to shop_shop_images_path(current_shop)
+        else
+          flash.now[:danger] = "編集できませんでした"
+          render :edit
+        end
       end
     else
       flash[:danger] = "多店舗の画像は編集できません"
@@ -54,10 +64,10 @@ class ShopImagesController < ApplicationController
       @shop_image = ShopImage.find(params[:id])
       if @shop_image.destroy
         flash[:success] = "削除しました"
-        redirect_to shop_path(current_shop)
+        redirect_to shop_shop_images_path(current_shop)
       else
-        flash.now[:danger] = "削除できませんでした"
-        render :new
+        flash[:danger] = "削除できませんでした"
+        redirect_to shop_shop_images_path(current_shop)
       end
     else
       flash[:danger] = "多店舗の画像は削除できません"

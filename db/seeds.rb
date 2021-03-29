@@ -11,3 +11,17 @@ Admin.create(
   :email => 'kamiya@circrest.com',
   :password => 'admins2021'
 )
+
+Shop.create(
+  name: "テスト店舗",
+  phone_number: "09087654321",
+  email: "kamiya@circrest.com",
+  postal_code: "4460072",
+  prefecture: "愛知県",
+  city: "安城市",
+  address: "住吉町３−１−１８",
+  introduction: "店舗紹介文が入ります",
+  password: "test1111",
+  url: "https://circrest.com",
+  is_active: true
+)

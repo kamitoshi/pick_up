@@ -42,7 +42,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :shops, only:[:index, :show, :edit, :update, :destroy] do
+  resources :shops, only:[:show, :edit, :update, :destroy] do
     resources :shop_images, only:[:index, :new, :create, :edit, :update, :destroy]
     resources :shop_tags, only:[:new, :create, :edit, :update, :destroy]
     resources :business_hours, only:[:index, :new, :create, :edit, :update, :destroy]
@@ -59,7 +59,7 @@ Rails.application.routes.draw do
 
   resources :menus, only:[:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :menu_images, only:[:index, :new, :create, :edit, :update, :destroy]
-    resources :menu_tags, only:[:create, :destroy]
+    resources :menu_tags, only:[:new, :create, :destroy]
     resources :orders, only:[:new, :create, :destroy]
     resources :cart_items, only:[:create, :update]
   end
@@ -67,6 +67,7 @@ Rails.application.routes.draw do
   namespace :cart_items do
     resources :orders, only:[:new, :create]
   end
+  get "orders/fix", to: "orders#fix"
   resources :cart_items, only:[:destroy]
   resources :categories, only:[:index,:new, :create, :edit, :update, :destroy]
 

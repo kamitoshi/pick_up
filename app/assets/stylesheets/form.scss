@@ -1,6 +1,6 @@
 .field{
   margin-bottom:50px;
-  font-size: 22px;
+  font-size: 18px;
 }
 .form-under {
   box-sizing: border-box;
@@ -24,4 +24,17 @@
   border-top: none;
   border-right: none;
   border-left: none;
+}
+
+#ymd-date{
+  height: 40px;
+  width: 15%;
+  border: none;
+  border-bottom: 1px solid #555;
+}
+
+.amount_input{
+  width:50px;
+  border:none;
+  text-align: center;
 }

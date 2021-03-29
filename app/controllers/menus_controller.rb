@@ -16,7 +16,6 @@ class MenusController < ApplicationController
   def create
     if admin_signed_in?
       @menu = Menu.new(menu_params)
-      byebug
       if @menu.save
         flash[:success] = "メニューを追加しました"
         redirect_to admins_menus_path
@@ -30,7 +29,7 @@ class MenusController < ApplicationController
         flash[:success] = "メニューを追加しました"
         redirect_to shops_menus_path
       else
-        flash[:danger] = "メニューの追加に失敗しました"
+        flash[:danger] = "メニューの追加に失敗しました。入力内容を確認してください。"
         render "new"
       end
     else
@@ -100,7 +99,7 @@ class MenusController < ApplicationController
   private
 
   def menu_params
-    params.require(:menu).permit(:shop_id, :name, :price, :special_price, :fee, :introduction, :is_active, :is_saling, :genre, :menu_type)
+    params.require(:menu).permit(:shop_id, :name, :menu_type, :estimated_time, :price, :fee, :introduction, :is_active, :is_saling)
   end
 
 end
