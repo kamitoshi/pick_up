@@ -12,13 +12,22 @@ class CartItemsController < ApplicationController
   def create
     @menu = Menu.find(params[:menu_id])
     if user_signed_in?
-      @cart_item = @menu.cart_items.build(cart_item_params)
-      if @cart_item.save
+      if current_user.cart_already_include(@menu)
+        @cart_item = CartItem.find_by(menu_id: @menu.id, user_id: current_user.id)
+        @cart_item.update(
+          amount: @cart_item.amount + params[:cart_item][:amount].to_i
+        )
         flash[:success] = "カートに追加しました"
         redirect_to user_cart_items_path(current_user)
       else
-        flash[:danger] = "追加にできませんでした"
-        redirect_to menus_path
+        @cart_item = @menu.cart_items.build(cart_item_params)
+        if @cart_item.save
+          flash[:success] = "カートに追加しました"
+          redirect_to user_cart_items_path(current_user)
+        else
+          flash[:danger] = "追加にできませんでした"
+          redirect_to menus_path
+        end
       end
     else
       flash[:danger] = "カートに追加するにはログインが必要です"

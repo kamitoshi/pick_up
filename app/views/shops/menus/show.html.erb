@@ -8,7 +8,7 @@
           <div class="image_box pa-b-30">
             <% if @menu.menu_images.present? %>
               <div class="menu_image-box center ma-b-10">
-                <%= image_tag @menu.menu_images[0].file_name.to_s, class:"wid-50" %>
+                <%= image_tag @menu.menu_images[0].file_name.thumb_width.to_s, class:"wid-50" %>
               </div>
               <div class="menu_image-box center">
                 <% if @menu.menu_images.count >= 2 %>
@@ -66,7 +66,7 @@
               </tr>
               <tr>
                 <th>商品紹介文</th>
-                <td><%= @menu.introduction %></td>
+                <td style="overflow-wrap: break-word;"></td>
               </tr>
             </tbody>
           </table>

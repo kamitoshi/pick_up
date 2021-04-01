@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
   end
   root "home#index"
+  get "top", to: "home#top"
 
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',

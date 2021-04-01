@@ -1,29 +1,20 @@
-<div class="container-fluid">
+<div class="container-fluid head-pad">
   <div class="row">
-    <div class="col-lg-8 offset-2">
+    <div class="col-md-8 offset-md-2">
       <div class="form_box">
         <h3 class="center">まとめて注文</h3>
         <hr>
         <% if @cart_items.present? %>
           <% @cart_items.each do |cart_item| %>
 
-            <div class="field ma-b-50">
+            <div class="field">
               <div class="row">
-                <div class="col-3">
+                <div class="col-8">
                   <h5><%= cart_item.menu.name %></h5>
                   <h6>¥<%= cart_item.menu.price %></h6>
-                  <div class="amount_counter">
-                    <% if cart_item.amount == 1 %>
-                      <span id="minusButton">-</span>
-                    <% else %>
-                      <span id="minusButton"><%= link_to "-", menu_cart_item_path(cart_item.menu, cart_item, amount:"minus"), method: :patch %></span>
-                    <% end %>
-                    <span class="ma-x-20"><%= cart_item.amount %></span>
-                    <span id="plusButton"><%= link_to "+", menu_cart_item_path(cart_item.menu, cart_item, amount:"plus"), method: :patch %></span>
+                  <div class="intro_box">
+                    <%= cart_item.menu.introduction.truncate(40) %>
                   </div>
-                </div>
-                <div class="col-5 font-10">
-                  <%= cart_item.menu.introduction %>
                 </div>
                 <div class="col-4">
                   <% if cart_item.menu.menu_images.present? %>
@@ -31,6 +22,17 @@
                   <% else %>
                     <%= image_tag "noimage.png", size:"150x100" %>
                   <% end %>
+                </div>
+              </div>
+              <div class="row pa-l-30">
+                <div class="amount_counter">
+                  <% if cart_item.amount == 1 %>
+                    <span id="minusButton" class="pointer minusBtn"><%= link_to "-", cart_item_path(cart_item), method: :delete %></span>
+                  <% else %>
+                    <span id="minusButton" class="pointer minusBtn"><%= link_to "-", menu_cart_item_path(cart_item.menu, cart_item, amount:"minus"), method: :patch %></span>
+                  <% end %>
+                  <span class="ma-x-20"><%= cart_item.amount %></span>
+                  <span id="plusButton" class="pointer plusBtn"><%= link_to "+", menu_cart_item_path(cart_item.menu, cart_item, amount:"plus"), method: :patch %></span>
                 </div>
               </div>
             </div>
