@@ -4,4 +4,11 @@
       <p style="padding:45px">©PickUp from Circrest 2021</p>
     </div>
   </div>
+  <div class="row">
+    <div class="col-12">
+      <% if user_signed_in? %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      <% end %>
+    </div>
+  </div>
 </div>
