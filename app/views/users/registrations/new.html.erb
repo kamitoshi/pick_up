@@ -1,12 +1,19 @@
-<div class="container-fluid background">
+<div class="container-fluid head-pad">
   <div class="row">
-    <div class="col-8 offset-2">
+    <div class="col-md-8 offset-md-2">
       <div class="form_box">
-        <h2 class="center">新規登録</h2>
+        <% if params[:data] %>
+          <h2 class="center">新規登録<span class="font-20 ma-l-20">for <%= params[:data][:provider] %></span></h2>
+        <% else %>
+          <h2 class="center">新規登録</h2>
+        <% end %>
         <hr>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
-          
+          <% if params[:data] %>
+            <%= f.hidden_field :uid, value: params[:data][:uid] %>
+            <%= f.hidden_field :provider, value: params[:data][:provider] %>
+          <% end %>
           <div class="field">
             <%= f.label :last_name, "氏名" %>
             <div class="row">
@@ -38,7 +45,11 @@
 
           <div class="field">
             <%= f.label :email, "メールアドレス" %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-under", placeholder: "〇〇〇@example.com" %>
+            <% if params[:data] %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", value: params[:data][:info][:email], class:"form-under", placeholder: "〇〇〇@example.com" %>
+            <% else %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-under", placeholder: "〇〇〇@example.com" %>
+            <% end %>
           </div>
 
           <div class="field">
