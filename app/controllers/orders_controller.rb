@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
           menu_id: @menu.id,
           menu_name: @menu.name,
           menu_price: @menu.price,
-          menu_amount: params[:amount]
+          menu_amount: params[:order][:amount]
         )
         OrderMailer.send_user_order(@order).deliver_later
         redirect_to orders_fix_path

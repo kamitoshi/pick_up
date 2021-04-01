@@ -61,5 +61,15 @@ class Order < ApplicationRecord
     end
     return false
   end
+
+  def order_items_name
+    if self.order_items.count == 1
+      item = self.order_items[0]
+      return item.menu_name
+    else
+      item = self.order_items[0]
+      return item.menu_name
+    end
+  end
   
 end
