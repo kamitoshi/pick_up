@@ -1,6 +1,6 @@
-<div class="container-fluid">
+<div class="container-fluid head-pad">
   <div class="row">
-    <div class="col-lg-8 offset-2">
+    <div class="col-md-8 offset-md-2">
       <div class="form_box">
         <h3 class="center">まとめて注文</h3>
         <hr>
@@ -8,15 +8,14 @@
 
           <% @cart_items.each do |cart_item| %>
 
-            <div class="field ma-b-50">
+            <div class="field">
               <div class="row">
-                <div class="col-3">
+                <div class="col-8">
                   <h5><%= cart_item.menu.name %></h5>
                   <h6>¥<%= cart_item.menu.price %></h6>
-                  <h6>数量<span class="ma-x-20">：</span><%= cart_item.amount %></h6>
-                </div>
-                <div class="col-5 font-10">
-                  <%= cart_item.menu.introduction %>
+                  <div class="intro_box">
+                    <%= cart_item.menu.introduction.truncate(40) %>
+                  </div>
                 </div>
                 <div class="col-4">
                   <% if cart_item.menu.menu_images.present? %>
@@ -25,6 +24,9 @@
                     <%= image_tag "noimage.png", size:"150x100" %>
                   <% end %>
                 </div>
+              </div>
+              <div class="row ma-l-30">
+                <h6>数量<span class="ma-x-20">：</span><%= cart_item.amount %></h6>
               </div>
             </div>
 
@@ -42,7 +44,7 @@
 
           <div class="field ma-b-20">
             <%= f.label :takeaway_datetime, "受け取り日時" %><br />
-            <%= f.datetime_select :takeaway_datetime, {minute_step: 10, default: Time.now.ceil_to(10.minutes) + (current_user.max_estimated_time*60), use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<label class="fb-txt my-2 ma-x-20"></label>'},{id: 'ymd-date'} %>
+            <%= f.datetime_select :takeaway_datetime, {minute_step: 10, default: Time.now.ceil_to(10.minutes) + (current_user.max_estimated_time*60), use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<label class="fb-txt my-2 ma-x-10"></label>'},{id: 'ymd-date'} %>
           </div>
 
           <div class="field ma-b-50">

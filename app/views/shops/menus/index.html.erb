@@ -25,7 +25,7 @@
                   </tr>
                   <% @food_menus.each do |menu| %>
                     <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
-                      <td><%= image_tag menu.menu_images[0].file_name.thumb50.to_s if menu.menu_images.present? %></td>
+                      <td><%= image_tag menu.menu_images[0].file_name.thumb100.to_s if menu.menu_images.present? %></td>
                       <td><%= menu.name %></td>
                       <td>¥<%= menu.price %></td>
                       <td><%= menu.fee %>%</td>
@@ -45,7 +45,7 @@
                   </tr>
                   <% @drink_menus.each do |menu| %>
                     <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
-                      <td><%= image_tag menu.menu_images[0].file_name.thumb50.to_s if menu.menu_images.present? %></td>
+                      <td><%= image_tag menu.menu_images[0].file_name.thumb100.to_s if menu.menu_images.present? %></td>
                       <td><%= menu.name %></td>
                       <td>¥<%= menu.price %></td>
                       <td><%= menu.fee %>%</td>
@@ -65,7 +65,7 @@
                   </tr>
                   <% @dessert_menus.each do |menu| %>
                     <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
-                      <td><%= image_tag menu.menu_images[0].file_name.thumb50.to_s if menu.menu_images.present? %></td>
+                      <td><%= image_tag menu.menu_images[0].file_name.thumb100.to_s if menu.menu_images.present? %></td>
                       <td><%= menu.name %></td>
                       <td>¥<%= menu.price %></td>
                       <td><%= menu.fee %>%</td>

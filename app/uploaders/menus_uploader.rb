@@ -50,13 +50,16 @@ class MenusUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
-  version :thumb50 do 
-    process resize_to_fill: [50, 50, "center"] 
-  end
   version :thumb100 do 
     process resize_to_fill: [100, 100, "center"] 
   end 
   version :thumb_width do 
     process resize_to_fill: [320, 180, "center"] 
+  end 
+  version :thumb_vertical do 
+    process resize_to_fill: [250, 320, "center"] 
+  end 
+  version :thumb_square do 
+    process resize_to_fill: [300, 250, "center"] 
   end 
 end

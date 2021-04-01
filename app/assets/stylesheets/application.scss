@@ -17,8 +17,12 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 
-p {
+p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
+}
+
+.head-pad{
+  padding-top:70px;
 }
 
 .background{
@@ -80,8 +84,8 @@ p {
 }
 
 .form_box{
-  margin:20px;
-  padding:30px;
+  margin: 0 20px;
+  padding:20px;
   background-color: #fff;
 }
 
@@ -124,12 +128,21 @@ footer {
 }
 
 .scale-img:hover {
-  transform: scale(1.2, 1.2);
+  transform: scale(1.1, 1.1);
   /*画像の拡大*/
   cursor: pointer;
   /*カーソルをポインターにする*/
 }
 
+.card{
+  border:none;
+  .card-body{
+    padding: 0.5rem 0.75rem;
+    h5{
+      margin-bottom: 0;
+    }
+  }
+}
 .scale-box {
   overflow: hidden;
   /*画像拡大時にはみ出た部分を隠す*/
@@ -137,7 +150,11 @@ footer {
 }
 .scale-box:hover {
   .scale-img {
-    transform: scale(1.2, 1.2);
+    transform: scale(1.1, 1.1);
     /*画像の拡大*/
   }
+}
+
+.intro_box{
+  overflow-wrap: break-word;
 }

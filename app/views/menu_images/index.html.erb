@@ -8,7 +8,7 @@
           <% 4.times do |i| %>
             <div class="content_box_detail">
               <% if @menu.menu_images[i].present? %>
-                <%= image_tag @menu.menu_images[i].file_name.url, size: "300x200" %>
+                <%= image_tag @menu.menu_images[i].file_name.thumb_width.to_s %>
                 <div class="edit_btn ma-t-50">
                   <%= link_to "この画像を編集する", edit_menu_menu_image_path(@menu, @menu.menu_images[i]), class: "btn btn-primary" %>
                   <%= link_to "この画像を削除する", menu_menu_image_path(@menu, @menu.menu_images[i]), method: :delete, class: "btn btn-danger" %>
