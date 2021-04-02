@@ -1,7 +1,11 @@
 class MenusController < ApplicationController
-  layout "users_layout", only:[:index, :show]
+  layout "users_layout", only:[:index, :search, :show]
   def index
     @menus = Menu.all
+  end
+
+  def search
+      @menus = Menu.all
   end
 
   def show

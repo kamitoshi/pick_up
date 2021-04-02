@@ -7,9 +7,9 @@
         <% if @cart_items.present? %>
           <% @cart_items.each do |cart_item| %>
 
-            <div class="field">
+            <div class="field" style="margin-bottom:0">
               <div class="row">
-                <div class="col-8">
+                <div class="col-8 pa-l-30">
                   <h5><%= cart_item.menu.name %></h5>
                   <h6>¥<%= cart_item.menu.price %></h6>
                   <div class="intro_box">
@@ -20,7 +20,7 @@
                   <% if cart_item.menu.menu_images.present? %>
                     <%= image_tag cart_item.menu.menu_images[0].file_name.thumb100.to_s %>
                   <% else %>
-                    <%= image_tag "noimage.png", size:"150x100" %>
+                    <%= image_tag "noimage.png", width: "100" %>
                   <% end %>
                 </div>
               </div>
@@ -40,11 +40,11 @@
             <hr>
           <% end %>
         <% end %>
-        <div class="field ma-b-50">
-          <h4>お会計金額:<span class="ma-l-30">¥</span><span id="menu_price"><%= current_user.cart_items_total_price %></span></h4>
+        <div class="field">
+          <h5>お会計金額:<span class="ma-l-30">¥</span><span id="menu_price"><%= current_user.cart_items_total_price %></span></h5>
         </div>
 
-        <div class="field ma-b-50">
+        <div class="field">
           <h5>完成予定時間</h5>
           <h6><%= current_user.max_estimated_time %><span class="ma-x-10">〜</span><%= current_user.max_estimated_time + 10 %>分</h6>
         </div>
