@@ -59,6 +59,9 @@ Rails.application.routes.draw do
   end
 
   resources :menus, only:[:index, :show, :new, :create, :edit, :update, :destroy] do
+    collection do
+      get :search
+    end
     resources :menu_images, only:[:index, :new, :create, :edit, :update, :destroy]
     resources :menu_tags, only:[:new, :create, :destroy]
     resources :orders, only:[:new, :create, :destroy]

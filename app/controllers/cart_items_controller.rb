@@ -20,7 +20,7 @@ class CartItemsController < ApplicationController
         flash[:success] = "カートに追加しました"
         redirect_to user_cart_items_path(current_user)
       else
-        @cart_item = @menu.cart_items.build(cart_item_params)
+        @cart_item = current_user.cart_items.build(cart_item_params)
         if @cart_item.save
           flash[:success] = "カートに追加しました"
           redirect_to user_cart_items_path(current_user)

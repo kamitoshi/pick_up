@@ -3,7 +3,7 @@
 	<div class="inner">
 		<!-- ロゴ -->
 		<div class="logo">
-			<a href="index.html">
+			<a href="/">
         <%= image_tag "logo2.png", size:"100x70" %>
       </a>
 		</div>
@@ -12,12 +12,20 @@
     <nav id="mainNav">
 			<div class="panel">
 				<ul>
-					<li class="active"><a href="#">トップ<br><span>Top</span></a></li>
-					<li><a href="#">ごあいさつ<br><span>Greeting</span></a></li>
-					<li><a href="#">サービス概要<br><span>Service</span></a></li>
-					<li><a href="#">弊社の取り組み<br><span>Approach</span></a></li>
-					<li><a href="#">会社情報<br><span>Company</span></a></li>
-					<li><a href="#">お問い合わせ<br><span>Contact</span></a></li>
+					<li><a href="/">ホーム<br><span>Home</span></a></li>
+					<li><a href="#">PickUpとは<br><span>About</span></a></li>
+					<li><a href="#">ご購入方法<br><span>Method</span></a></li>
+					<% if user_signed_in? %>
+						<li><a href="/users/<%= current_user.id %>/cart_items">お買い物かご<br><span>Cart</span></a></li>
+					<% else %>
+						<li><a href="#" data-toggle="modal" data-target="#authModal">お買い物かご<br><span>Cart</span></a></li>
+					<% end %>
+					
+					<% if user_signed_in? %>
+						<li><a href="/users/<%= current_user.id %>"><%= current_user.full_name %><br><span>User</span></a></li>
+					<% else %>
+						<li><a href="#" data-toggle="modal" data-target="#authModal">ログイン<br><span>Login</span></a></li>
+					<% end %>
 				</ul>
       </div>
     </nav>

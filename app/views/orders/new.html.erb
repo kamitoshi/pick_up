@@ -17,11 +17,11 @@
                   <%= @menu.introduction.truncate(40) %>
                 </div>
               </div>
-              <div class="col-4">
+              <div class="col-4 center">
                 <% if @menu.menu_images.present? %>
                   <%= image_tag @menu.menu_images[0].file_name.thumb100.to_s %>
                 <% else %>
-                  <%= image_tag "noimage.png", size:"150x100" %>
+                  <%= image_tag "noimage.png", size:"100x50" %>
                 <% end %>
               </div>
             </div>
@@ -36,21 +36,21 @@
 
           <hr>
 
-          <div class="field ma-b-50">
+          <div class="field">
             <h4>お会計金額:<span class="ma-l-30">¥</span><span id="menu_price"><%= @menu.price %></span></h4>
           </div>
 
-          <div class="field ma-b-50">
+          <div class="field">
             <h5>完成予定時間</h5>
             <h6><%= @menu.estimated_time %><span class="ma-x-10">〜</span><%= @menu.estimated_time + 10 %>分</h6>
           </div>
 
-          <div class="field ma-b-20">
+          <div class="field">
             <%= f.label :takeaway_datetime, "受け取り日時" %><br />
-            <%= f.datetime_select :takeaway_datetime, {minute_step: 10, default: Time.now.ceil_to(10.minutes) + (@menu.estimated_time*60), use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<label class="fb-txt my-2 ma-x-10"></label>'},{id: 'ymd-date'} %>
+            <%= f.datetime_select :takeaway_datetime, {minute_step: 10, default: Time.now.ceil_to(10.minutes) + (@menu.estimated_time*60), use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<label class="fb-txt my-2 dis-b"></label>'},{id: 'ymd-date'} %>
           </div>
 
-          <div class="field ma-b-50">
+          <div class="field">
             <%= f.label :requested, "要望（あれば記入ください）" %><br />
             <%= f.text_area :requested, autocomplete: "requested", class:"form-control" %>
           </div>
