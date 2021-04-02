@@ -54,4 +54,10 @@ class ShopUploader < CarrierWave::Uploader::Base
   version :thumb_width do 
     process resize_to_fill: [320, 180, "center"] 
   end 
+  version :thumb_vertical do 
+    process resize_to_fill: [250, 320, "center"] 
+  end 
+  version :thumb_square do 
+    process resize_to_fill: [300, 250, "center"] 
+  end
 end

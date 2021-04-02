@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+          <div class="modal-content container">
+            <div class="modal-body">
+              <div class="row ma-b-50">
+                <div class="col-md-12 center">
+                  <%= image_tag "logo.png" %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 center">
+                  <%= link_to 'Eメールアドレスでログイン', new_user_session_path, class:"button-fill", style:"width:300px" %>
+                </div>
+              </div>
+              <div class="title-border">または</div>
+              <div class="row">
+                <div class="col-md-12 center">
+                  <a href="/users/auth/facebook">
+                    <%= image_tag "f_logo.png", size:"40x40", class:"ma-x-20" %>
+                  </a>
+                  <a href="/users/auth/google_oauth2">
+                    <%= image_tag "g_logo.png", size:"40x40", class:"ma-x-20" %>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+    </div>
+  </div>
+</div>

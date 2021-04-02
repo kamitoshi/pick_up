@@ -88,6 +88,11 @@ p, h1, h2, h3, h4, h5, h6 {
   padding:20px;
   background-color: #fff;
 }
+@media (max-width: 768px) {
+  .form_box{
+    padding:20px 10px;
+  }
+}
 
 .sidebar_box{
   box-shadow: 0 0 8px gray;
@@ -157,4 +162,28 @@ footer {
 
 .intro_box{
   overflow-wrap: break-word;
+}
+
+.search{
+  margin-top:20px;
+}
+
+.title-border {
+  display: flex;
+  align-items: center;
+}
+
+.title-border:before,
+.title-border:after {
+  border-top: 1px solid;
+  content: "";
+  flex-grow: 1;
+}
+
+.title-border:before {
+  margin-right: 1rem;
+}
+
+.title-border:after {
+  margin-left: 1rem;
 }

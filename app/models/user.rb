@@ -15,11 +15,28 @@ class User < ApplicationRecord
   has_many :cart_items
 
   # omniauthのコールバック時に呼ばれるメソッド
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
+  # def self.from_omniauth(auth)
+  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+  #     uid:      auth.uid,
+  #     provider: auth.provider,
+  #     user.email = auth.info.email
+  #     user.password = Devise.friendly_token[0,20]
+  #   end
+  # end
+
+  # facebook用
+  def self.find_for_oauth(auth)
+    user = User.where(uid: auth.uid, provider: auth.provider).first
+
+    unless user
+      user = User.new(
+        uid:      auth.uid,
+        provider: auth.provider,
+        email:    auth.info.email,
+        password: Devise.friendly_token[0, 20]
+      )
     end
+    user
   end
 
   # フルネームで表示する

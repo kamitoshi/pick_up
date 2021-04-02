@@ -7,7 +7,16 @@
 <!-- / メイン画像 -->
 <!-- サーチバー  -->
 <div class="search_bar">
-  
+  <%= form_tag search_menus_path, method: :get do %>
+    <div class="row">
+      <div class="col-6 offset-2">
+        <%= text_field_tag :search, params[:search], placeholder: "キーワードを入力", class: "form-control search" %>
+      </div>
+      <div class="col-2">
+        <%= submit_tag "検索する", :name => nil, class: "btn btn-outline-secondary search" %>
+      </div>
+    </div>
+  <% end %>
 </div>
 <!-- / サーチバー  -->
 
@@ -19,7 +28,7 @@
           <div class="gridWrapperTitle">
             <h6>おすすめ商品</h6>
           </div>
-          <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3">
+          <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
             <% @menus.each do |menu| %>
               <div class="col mb-4">
                 <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">

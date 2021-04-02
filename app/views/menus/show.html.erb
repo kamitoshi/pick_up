@@ -1,73 +1,37 @@
-<div class="container-fluid">
-  <div class="width_box">
-    <div class="row">
-      <div class="col-md-6 offset-3">
-        <% if @menu.menu_images.present? %>
-          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <!-- インジケータの設定 -->
-            <ol class="carousel-indicators">
-              <% @menu.menu_images.count.times do |i| %>
-                <% if i == 0 %>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>" class="active"></li>
-                <% else %>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>"></li>
-                <% end %>
-              <% end %>
-            </ol>
-            <!-- スライドさせる画像の設定 -->
-            <div class="carousel-inner">
-              <% @menu.menu_images.count.times do |i| %>
-                <% if i == 0 %>
-                  <div class="carousel-item active" data-interval="10000">
-                    <%= image_tag "noimage.png", class: "wid-100" %>
-                  </div><!-- /.carousel-item -->
-                <% else %>
-                  <div class="carousel-item" data-interval="false">
-                    <%= image_tag "noimage.png", class: "wid-100" %>
-                  </div><!-- /.carousel-item -->
-                <% end %>
-              <% end %>
-            </div><!-- /.carousel-inner -->
-            <!-- スライドコントロールの設定 -->
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">前へ</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-              <
-            </a>
-          </div><!-- /.carousel -->
-        <% else %>
-          <%= image_tag "noimage.png", class: "wid-100" %>
-        <% end %>
-      </div>
+<div class="container-fluid head-pad">
+  <div class="row">
+    <div class="col-md-8 offset-md-2 center">
+      <% if @menu.menu_images.present? %>
+        <%= image_tag @menu.menu_images[0].file_name.thumb_square.to_s, id:"sample_img", class: "wid-70" %>
+      <% else %>
+        <%= image_tag "noimage.png", class: "wid-100" %>
+      <% end %>
     </div>
-    <div class="row">
-      <div class="col-4">
-        <h5><%= @menu.name %></h5>
-        <h6><%= @menu.shop.name %></h6>
-      </div>
-      <div class="col-8">
-        <p><%= @menu.introduction %></p>
-      </div>
+    <div class="col-md-4 offset-md-2">
+      <h5><%= @menu.name %></h5>
+      <h6><%= @menu.shop.name %></h6>
+      <br>
+      <h6>¥<%= @menu.price %></h6>
     </div>
-    <hr>
-    <%= form_for CartItem.new, url: menu_cart_items_path(@menu) do |f| %>
-      <%= f.hidden_field :shop_id, value: @menu.shop_id %>
-      <%= f.hidden_field :user_id, value: current_user.id %>
-      <div class="row">
-        <div class="col-sm-4 center">
-          <h6>数量</h6>
-          <span id="minusButton<%= @menu.id %>" class="pointer">-</span><%= f.text_field :amount, id: "counterOutput#{@menu.id}", class:"amount_input", value:1 %><span id="plusButton<%= @menu.id %>" class="pointer">+</span>
+    <div class="col-md-6">
+      <p><%= @menu.introduction %></p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-8 offset-md-2 center" style="padding-top: 0.8rem;">
+      <%= form_for CartItem.new, url: menu_cart_items_path(@menu) do |f| %>
+        <%= f.hidden_field :shop_id, value: @menu.shop_id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <span id="minusButton<%= @menu.id %>" class="pointer minusBtn">-</span>
+        <%= f.text_field :amount, id: "counterOutput#{@menu.id}", class:"amount_input", value:1 %>
+        <span id="plusButton<%= @menu.id %>" class="pointer plusBtn">+</span>
+        <div class="actions center">
+          <%= f.submit "カートに追加する", class: "button-fill" %>
+          <%= link_to "今すぐ注文する", new_menu_order_path(@menu), class: "button-fill" %>
         </div>
-        <div class="col-sm-8">
-          <div class="actions center">
-            <%= link_to "今すぐ注文する", new_menu_order_path(@menu), class: "button-fill" %>
-            <%= f.submit "カートに追加する", class: "button-fill" %>
-          </div>
-        </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
 <script>
