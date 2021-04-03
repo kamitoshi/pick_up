@@ -1,8 +1,6 @@
 <!-- メイン画像 -->
 <div id="mainBanner" class="mainImg">
-  <div class="inner">
-		<%= image_tag "main_img.jpg", alt: "" %>
-	</div>
+	<%= image_tag "main_img.jpg", alt: "" %>
 </div>
 <!-- / メイン画像 -->
 <!-- サーチバー  -->
@@ -12,88 +10,88 @@
 <!-- / サーチバー  -->
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <div class="content_box_detail">
-        <% if @menus.present? %>
-          <div class="gridWrapperTitle">
-            <h6>おすすめ商品</h6>
-          </div>
-          <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3">
-            <% @menus.each do |menu| %>
-              <div class="col mb-4">
-                <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
-                  <% if menu.menu_images.present? %>
-                    <%= image_tag menu.menu_images[0].file_name.thumb_width.to_s, class:"scale-img wid-100" %>
-                  <% else %>
-                    <%= image_tag "noimage.png" %>
-                  <% end %>
-                  <div class="card-body">
-                    <h5 class="card-title"><%= menu.name %></h5>
-                    <p class="card-text">¥<%= menu.price %></p>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        <% else %>
-          <div class="non_menu center">
-            <h4>登録された商品がありません</h4>
-          </div>
-        <% end %>
-        
-        <% if @menus.present? %>
-          <div class="gridWrapperTitle">
-            <h6>人気メニュー</h6>
-          </div>
-          <div class="row row-cols-3 row-cols-lg-5 row-cols-md-4 row-cols-sm-3">
-            <% @menus.each do |menu| %>
-              <div class="col mb-4">
-                <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
-                  <% if menu.menu_images.present? %>
-                    <%= image_tag menu.menu_images[0].file_name.thumb_width.to_s, class:"scale-img wid-100" %>
-                  <% else %>
-                    <%= image_tag "noimage.png" %>
-                  <% end %>
-                  <div class="card-body">
-                    <h5 class="card-title"><%= menu.name %></h5>
-                    <p class="card-text">¥<%= menu.price %></p>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-
-        <% if @menus.present? %>
-          <div class="gridWrapperTitle">
-            <h6>人気レストラン</h6>
-          </div>
-          <div class="row row-cols-3 row-cols-lg-5 row-cols-md-4 row-cols-sm-3">
-            <% @menus.each do |menu| %>
-              <div class="col mb-4">
-                <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
-                  <% if menu.menu_images.present? %>
-                    <%= image_tag menu.menu_images[0].file_name.thumb_width.to_s, class:"scale-img wid-100" %>
-                  <% else %>
-                    <%= image_tag "noimage.png" %>
-                  <% end %>
-                  <div class="card-body">
-                    <h5 class="card-title"><%= menu.name %></h5>
-                    <p class="card-text">¥<%= menu.price %></p>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      
-        <% if @menus.present? %>
-          <% @menus.each do |menu| %>
-            <%= render partial: "menus/modal", locals: {menu: menu} %>
-          <% end %>
-        <% end %>
-      </div>
+  <% if @menus.present? %>
+    <div class="gridWrapperTitle">
+      <h6>おすすめ商品</h6>
     </div>
-  </div>
+    <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3">
+      <% @menus.each do |menu| %>
+        <div class="col mb-4">
+          <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
+            <% if menu.menu_images.present? %>
+              <%= image_tag menu.menu_images[0].file_name.thumb_width.to_s, class:"scale-img wid-100" %>
+            <% else %>
+              <%= image_tag "noimage.png" %>
+            <% end %>
+            <div class="card-body">
+              <p class="c-title" >【<%= menu.name %>】<%= menu.shop.name %></p>
+              <p class="c-text">
+                ¥<%= price(menu.price) %>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="non_menu center">
+      <h4>登録された商品がありません</h4>
+    </div>
+  <% end %>
+  
+  <% if @menus.present? %>
+    <div class="gridWrapperTitle">
+      <h6>人気メニュー</h6>
+    </div>
+    <div class="row row-cols-2 row-cols-lg-5 row-cols-md-4 row-cols-sm-3">
+      <% @menus.each do |menu| %>
+        <div class="col mb-4">
+          <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
+            <% if menu.menu_images.present? %>
+              <%= image_tag menu.menu_images[0].file_name.thumb_width.to_s, class:"scale-img wid-100" %>
+            <% else %>
+              <%= image_tag "noimage.png" %>
+            <% end %>
+            <div class="card-body">
+              <p class="c-title" >【<%= menu.name %>】<%= menu.shop.name %></p>
+              <p class="c-text">
+                ¥<%= price(menu.price) %>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @menus.present? %>
+    <div class="gridWrapperTitle">
+      <h6>人気レストラン</h6>
+    </div>
+    <div class="row row-cols-2 row-cols-lg-5 row-cols-md-4 row-cols-sm-3">
+      <% @menus.each do |menu| %>
+        <div class="col mb-4">
+          <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
+            <% if menu.menu_images.present? %>
+              <%= image_tag menu.menu_images[0].file_name.thumb_width.to_s, class:"scale-img wid-100" %>
+            <% else %>
+              <%= image_tag "noimage.png" %>
+            <% end %>
+            <div class="card-body">
+              <p class="c-title" ><%= menu.shop.name %></p>
+              <p class="c-text">
+                
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @menus.present? %>
+    <% @menus.each do |menu| %>
+      <%= render partial: "menus/modal", locals: {menu: menu} %>
+    <% end %>
+  <% end %>
 </div>

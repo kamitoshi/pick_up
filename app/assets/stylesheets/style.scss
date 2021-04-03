@@ -7,7 +7,6 @@ Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {border: 0;font-family: inherit;font-size: 100%;font-style: inherit;font-weight: inherit;margin: 0;outline: 0;padding: 0;vertical-align: baseline;}
 :focus {outline: 0;}
 
-ol, ul {list-style: none;}
 table {border-collapse: separate;border-spacing: 0;}
 caption, th, td {font-weight: normal;text-align: left;}
 blockquote:before, blockquote:after,q:before, q:after {content: "";}
@@ -41,6 +40,10 @@ width:100%;
 position:relative;
 }
 
+.wrapper{
+	padding-top:70px;
+}
+
 .inner{
 margin:0 auto;
 width:100%;
@@ -52,7 +55,7 @@ width:100%;
 *************/
 #header{
 	overflow: hidden;
-	box-shadow: 0 0 2px 2px;
+	box-shadow: 0 0 4px 2px #aaa;
 	position: fixed;
 	z-index: 1000;
 	width: 100vw;
@@ -87,18 +90,21 @@ font-size:11px;
 color:#444;
 }
 
+.non_style{
+	list-style: none;
+}
+
 
 /**************************
 /* メイン画像（トップページ+サブページ）
 **************************/
 #mainBanner{
 margin:0 auto;
-padding-top:70px;
 width:100%;
 line-height:0;
 }
 
-#mainBanner .inner{position:relative;}
+#mainBanner{position:relative;}
 
 #mainBanner img{
 max-width:100%;

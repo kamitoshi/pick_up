@@ -6,7 +6,7 @@
           <div class="modal-content container">
             <div class="modal-body">
               <div class="row">
-                <div class="col-md-12 center">
+                <div class="col-md-12 center ma-b-20">
                   <% if menu.menu_images.present? %>
                     <%= image_tag menu.menu_images[0].file_name.thumb_square.to_s, id:"sample_img", class: "wid-70" %>
                   <% else %>
@@ -16,11 +16,13 @@
               </div>
               <div class="row">
                 <div class="col-4">
-                  <h5><%= menu.name %></h5>
-                  <h6><%= menu.shop.name %></h6>
+                  <p class="m-title"><%= menu.name %></p>
+                  <p class="m-text">【<%= menu.shop.name %>】</p>
+                  <br>
+                  <p class="m-text">¥<%= price(menu.price) %></p>
                 </div>
                 <div class="col-8">
-                  <p><%= menu.introduction %></p>
+                  <p class="m-text"><%= menu.introduction %></p>
                 </div>
               </div>
             </div>
@@ -30,22 +32,22 @@
               <%= form_for CartItem.new, url: menu_cart_items_path(menu) do |f| %>
                 <%= f.hidden_field :menu_id, value: menu.id %>
                 <div class="row">
-                  <div class="col-sm-3 center" style="padding-top: 0.8rem;">
+                  <div class="col-sm-7 right">
                     <span id="minusButton<%= menu.id %>" class="pointer minusBtn">-</span><%= f.text_field :amount, id: "counterOutput#{menu.id}", class:"amount_input", value:1 %><span id="plusButton<%= menu.id %>" class="pointer plusBtn">+</span>
+                    <%= f.submit "カートに追加する", class: "button-fill" %>
                   </div>
-                  <div class="col-sm-8 border-r">
-                    <div class="actions center">
-                      <%= f.submit "カートに追加する", class: "button-fill" %>
-                      <%= link_to "今すぐ注文する", new_menu_order_path(menu), class: "button-fill" %>
-                    </div>
-                  </div>
-                  <div class="col-sm-1" style="padding-top: 0.8rem;">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="閉じる" class="ma-t-10">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+                  <div class="col-sm-4 right">
+                    <%= link_to "今すぐ注文する", new_menu_order_path(menu), class: "button-fill" %>
                   </div>
                 </div>
               <% end %>
+              <div class="row ma-t-20">
+                <div class="col-4 offset-8">
+                  <div class="actions center">
+                    <a href="#"class="arrow2" data-dismiss="modal" aria-label="閉じる">戻る</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

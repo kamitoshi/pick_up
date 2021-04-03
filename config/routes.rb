@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   end
   root "home#index"
   get "top", to: "home#top"
+  get "about", to: "home#about"
+  get "method", to: "home#method"
+  get "privacy", to: "home#privacy"
+  get "term", to: "home#term"
 
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',
