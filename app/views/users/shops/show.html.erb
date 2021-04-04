@@ -1,8 +1,15 @@
 <!-- メイン画像 -->
 <div id="mainBanner" class="mainImg">
 	<%= image_tag "shops_img.jpg", alt: "" %>
+  <div id="shopImage"></div>
 </div>
 <!-- / メイン画像 -->
+<script>
+  $(document).ready(function(){
+    
+  });
+  
+</script>
 <!-- サーチバー  -->
 <div class="search_bar">
   
@@ -21,8 +28,8 @@
             <div class="row no-gutters">
               <div class="col-8">
                 <div class="card-body">
-                  <h6 class="c-title"><%= menu.name %></h6>
-                  <p class="c-text"><%= menu.introduction.truncate(20) %></p>
+                  <h6><%= menu.name %></h6>
+                  <p class="c-text"><%= menu.introduction.truncate(100) %></p>
                   <h6 class="c-title">¥<%= price(menu.price) %></h6>
                 </div>
               </div>

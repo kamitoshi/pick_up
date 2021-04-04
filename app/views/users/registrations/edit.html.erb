@@ -1,8 +1,9 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <h2>パスワード変更</h2>
-      <div class="form_box">
+      <div class="content_box">
+        <h3 class="center">パスワード変更</h3>
+        <hr>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -35,11 +36,8 @@
           </div>
         <% end %>
 
-        <h3>Cancel my account</h3>
+        <%= link_to "戻る", :back %>
 
-        <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-        <%= link_to "Back", :back %>
       </div>     
     </div>
   </div>

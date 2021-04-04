@@ -1,11 +1,11 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <div class="form_box">
+      <div class="content_box">
         <% if params[:data] %>
-          <h2 class="center">新規登録<span class="font-20 ma-l-20">for <%= params[:data][:provider] %></span></h2>
+          <h3 class="center">新規登録<span class="font-20 ma-l-20">for <%= params[:data][:provider] %></span></h3>
         <% else %>
-          <h2 class="center">新規登録</h2>
+          <h3 class="center">新規登録</h3>
         <% end %>
         <hr>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>

@@ -76,17 +76,19 @@
               <div class="row no-gutters" data-href="<%= users_shop_path(shop) %>">
                 <div class="col-8">
                   <div class="card-body">
-                    <h6 class="c-title"><%= shop.name %></h6>
+                    <h6><%= shop.name %></h6>
                     <p class="c-text">
-                    <% if shop.shop_tags.present? %>
-                      <% shop.shop_tags.each do |tag| %>
-                        <span><%= tag.content %></span>
+                      <% if shop.shop_tags.present? %>
+                        <% shop.shop_tags.each do |tag| %>
+                          <span><%= tag.content %></span>
+                        <% end %>
+                      <% else %>
+                        検索キーワードがありません
                       <% end %>
-                    <% else %>
-                      検索キーワードがありません
-                    <% end %>
-                  </p>
-                    <p class="c-text"><%= shop.introduction.truncate(20) %></p>
+                    </p>
+                    <div class="intro_box">
+                      <p class="c-text"><%= shop.introduction %></p>
+                    </div>
                   </div>
                 </div>
                 <div class="col-4">
