@@ -1,7 +1,7 @@
-<div class="container-fluid" style="background-color:#eee">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-lg-12">
-      <div class="form_box">
+    <div class="col-md-8 offset-md-2">
+      <div class="content_box">
         <h3 class="center">編集</h3>
         <hr>
         <%= form_for @user do |f| %>
@@ -40,13 +40,13 @@
           </div>
 
           <div class="actions center">
-            <%= f.submit "編集", class: "btn btn-primary" %>
+            <%= f.submit "編集", class: "button-fill" %>
           </div>
         <% end %>
       </div>
     </div>
-    <div class="col-4">
-      <div class="form_box">
+    <div class="col-sm-4 offset-sm-4">
+      <div class="content_box">
         <div class="user_edit-sidebar wid-70 ma-a">
           <%= link_to "パスワード変更", edit_user_registration_path, class:"btn btn-outline-info wid-100 ma-y-10" %>
           <%= link_to "退会する", user_path(current_user), method: :delete, class:"btn btn-danger wid-100 ma-y-10" %>

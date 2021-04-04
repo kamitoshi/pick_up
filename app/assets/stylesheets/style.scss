@@ -7,7 +7,6 @@ Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {border: 0;font-family: inherit;font-size: 100%;font-style: inherit;font-weight: inherit;margin: 0;outline: 0;padding: 0;vertical-align: baseline;}
 :focus {outline: 0;}
 
-ol, ul {list-style: none;}
 table {border-collapse: separate;border-spacing: 0;}
 caption, th, td {font-weight: normal;text-align: left;}
 blockquote:before, blockquote:after,q:before, q:after {content: "";}
@@ -41,6 +40,10 @@ width:100%;
 position:relative;
 }
 
+.wrapper{
+	padding-top:70px;
+}
+
 .inner{
 margin:0 auto;
 width:100%;
@@ -52,7 +55,7 @@ width:100%;
 *************/
 #header{
 	overflow: hidden;
-	box-shadow: 0 0 2px 2px;
+	box-shadow: 0 0 4px 2px #aaa;
 	position: fixed;
 	z-index: 1000;
 	width: 100vw;
@@ -87,22 +90,71 @@ font-size:11px;
 color:#444;
 }
 
+.non_style{
+	list-style: none;
+}
+
+.user_icon{
+	position: absolute;
+	right: 60px;
+	top: 20px;
+	padding: 2px 7px;
+	background-color: #fff;
+	color: #EFAA29;
+	border-radius: 50%;
+	border: 2px solid #EFAA29;
+}
+.menu_icon{
+	position: absolute;
+	right: 10px;
+	top: 20px;
+	padding: 2px 7px;
+	background-color: #fff;
+	color: #EFAA29;
+	border-radius: 50%;
+	border: 2px solid #EFAA29;
+}
+.search_icon{
+	position: absolute;
+	left: 10px;
+	top: 20px;
+	padding: 2px 7px;
+	color: #EFAA29;
+}
+
+@media only screen and (min-width:940px) {
+	.menu_icon{
+		display:none;
+	}
+	.user_icon{
+		display:none;
+	}
+}
+
+
 
 /**************************
 /* メイン画像（トップページ+サブページ）
 **************************/
 #mainBanner{
 margin:0 auto;
-padding-top:70px;
 width:100%;
 line-height:0;
 }
 
-#mainBanner .inner{position:relative;}
+#mainBanner{position:relative;}
 
 #mainBanner img{
 max-width:100%;
 height:auto;
+}
+
+#shopImage{
+	position: absolute;
+	width:100%;
+	height:100%;
+	top:0;
+	z-index: 999;
 }
 
 .slogan{
@@ -132,7 +184,7 @@ color:#666;
 
 .search_bar{
 	height: 75px;
-	background-color: #FDDC12;
+	background-color: #EFAA29;
 	margin-bottom:30px;
 }
 
@@ -251,76 +303,6 @@ clear:right;
 margin:3px 0 10px 10px;
 }
 
-
-
-// /*************
-// テーブル
-// *************/
-// table.table{
-// border-collapse:collapse;
-// width:100%;
-// margin:10px auto;
-// }
-
-// table.table th,table.table td{
-// padding:5px;
-// border:1px solid #cd8e29;
-// }
-
-// table.table th{
-// text-align:right;
-// font-weight:bold;
-// letter-spacing:1px;
-// white-space:nowrap;
-// color:#fff;
-// background:#a06019;
-// border-left:#cd8e29 5px solid
-// }
-
-// table.table td{border-left:#cd8e29 3px double}
-
-
-
-/*************
-サブ（フッター前）コンテンツ
-*************/
-#sub ul{padding:10px;}
-
-#sub li{
-margin-bottom:10px;
-padding-bottom:10px;
-border-bottom:1px dashed #ebebeb;
-}
-
-#sub li:last-child{
-border:0;
-margin-bottom:0;
-}
-
-#sub li a{display:block;}
-
-#sub ul.list{padding-bottom:7px;}
-
-#sub ul.list li{
-clear:both;
-margin-bottom:4px;
-padding:4px 0;
-overflow:hidden;
-}
-
-* html #sub ul.list li{height:1%;}
-
-#sub ul.list li img{
-float:left;
-margin:0 10px 0 0;
-}
-
-#sub ul.list li{
-font-size:12px;
-line-height:1.35;
-}
-
-
 /*************
 /* フッター
 *************/
@@ -332,11 +314,6 @@ background:#cd8e29;
 }
 
 * html #footer{height:1%;}
-
-.tel strong{
-font-size:20px;
-font-weight:bold;
-}
 
 #footer a{color:#fff;}
 #footer a:hover{color:#ccc;}
@@ -499,15 +476,6 @@ font-weight:bold;
 
 	nav div.panel{float:none;}
 	
-	.grid{
-		float:left;
-		width:48%;
-		margin:10px 2% 0 0;
-		.info{
-			margin-top:10px;
-		}
-	}
-	
 	.grid img{
 	float:left;
 	margin-bottom: 10px;
@@ -567,6 +535,8 @@ font-weight:bold;
 	padding-bottom:10px;
 	margin-bottom:8px;
 	}
+
+	
 }
 
 

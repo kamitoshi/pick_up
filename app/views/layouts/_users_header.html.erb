@@ -8,13 +8,31 @@
       </a>
 		</div>
 		<!-- / ロゴ -->
+		<div class="search_icon" data-toggle="modal" data-target="#searchModal">
+			<i class="fas fa-search fa-lg"></i>
+		</div>
+		<% if user_signed_in? %>
+			<div class="user_icon" data-toggle="modal" data-target="#userModal">
+				<i class="fas fa-user"></i>
+			</div>
+			<div class="menu_icon" data-href="<%= user_cart_items_path(current_user) %>">
+				<i class="fas fa-shopping-bag"></i>
+			</div>
+		<% else %>
+			<div class="user_icon" data-toggle="modal" data-target="#authModal">
+				<i class="fas fa-user"></i>
+			</div>
+			<div class="menu_icon" data-toggle="modal" data-target="#authModal">
+			<i class="fas fa-shopping-bag"></i>
+		</div>
+		<% end %>
 	  <!-- メインナビゲーション -->
     <nav id="mainNav">
 			<div class="panel">
-				<ul>
+				<ul class="non_style">
 					<li><a href="/">ホーム<br><span>Home</span></a></li>
-					<li><a href="#">PickUpとは<br><span>About</span></a></li>
-					<li><a href="#">ご購入方法<br><span>Method</span></a></li>
+					<li><a href="/about">PickUpとは<br><span>About</span></a></li>
+					<li><a href="/method">ご購入方法<br><span>Method</span></a></li>
 					<% if user_signed_in? %>
 						<li><a href="/users/<%= current_user.id %>/cart_items">お買い物かご<br><span>Cart</span></a></li>
 					<% else %>
@@ -29,7 +47,6 @@
 				</ul>
       </div>
     </nav>
-		<!-- メインナビゲーション -->
   </div>
 </div>
 <!-- / ヘッダー -->

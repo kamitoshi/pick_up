@@ -1,57 +1,67 @@
-<div class="container-fluid head-pad">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-8 offset-md-2">
-      <div class="form_box">
+    <div class="col-sm-8 offset-sm-2">
+      <div class="content_box">
         <h3 class="center">まとめて注文</h3>
         <hr>
         <% if @cart_items.present? %>
+          <div class="row ma-b-30">
+            <div class="col-md-12">
+              <h4 class="center"><%= @cart_items[0].menu.shop.name %>へのオーダー</h4>
+            </div>
+          </div>
           <% @cart_items.each do |cart_item| %>
-
-            <div class="field" style="margin-bottom:0">
-              <div class="row">
-                <div class="col-8 pa-l-30">
-                  <h5><%= cart_item.menu.name %></h5>
-                  <h6>¥<%= cart_item.menu.price %></h6>
-                  <div class="intro_box">
-                    <%= cart_item.menu.introduction.truncate(40) %>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <% if cart_item.menu.menu_images.present? %>
-                    <%= image_tag cart_item.menu.menu_images[0].file_name.thumb100.to_s %>
-                  <% else %>
-                    <%= image_tag "noimage.png", width: "100" %>
-                  <% end %>
+            <div class="row">
+              <div class="col-8">
+                <h5><%= cart_item.menu.name %></h5>
+                <h6>¥<%= price(cart_item.menu.price) %></h6>
+                <div class="intro_box font-10">
+                  <%= cart_item.menu.introduction.truncate(40) %>
                 </div>
               </div>
-              <div class="row pa-l-30">
-                <div class="amount_counter">
-                  <% if cart_item.amount == 1 %>
-                    <span id="minusButton" class="pointer minusBtn"><%= link_to "-", cart_item_path(cart_item), method: :delete %></span>
-                  <% else %>
-                    <span id="minusButton" class="pointer minusBtn"><%= link_to "-", menu_cart_item_path(cart_item.menu, cart_item, amount:"minus"), method: :patch %></span>
-                  <% end %>
-                  <span class="ma-x-20"><%= cart_item.amount %></span>
-                  <span id="plusButton" class="pointer plusBtn"><%= link_to "+", menu_cart_item_path(cart_item.menu, cart_item, amount:"plus"), method: :patch %></span>
-                </div>
+              <div class="col-4 center">
+                <% if cart_item.menu.menu_images.present? %>
+                  <%= image_tag cart_item.menu.menu_images[0].file_name.thumb_square.to_s, class: "wid-100" %>
+                <% else %>
+                  <%= image_tag "noimage.png", class: "wid-100" %>
+                <% end %>
+              </div>
+            </div>
+            <div class="row pa-l-30 pa-t-30">
+              <div class="amount_counter">
+                <% if cart_item.amount == 1 %>
+                  <span id="minusButton" class="pointer minusBtn"><%= link_to "-", cart_item_path(cart_item), method: :delete %></span>
+                <% else %>
+                  <span id="minusButton" class="pointer minusBtn"><%= link_to "-", menu_cart_item_path(cart_item.menu, cart_item, amount:"minus"), method: :patch %></span>
+                <% end %>
+                <span class="ma-x-20"><%= cart_item.amount %></span>
+                <span id="plusButton" class="pointer plusBtn"><%= link_to "+", menu_cart_item_path(cart_item.menu, cart_item, amount:"plus"), method: :patch %></span>
               </div>
             </div>
 
             <hr>
           <% end %>
+        <% else %>
+          <h5 class="center" style="height:100px">カートに商品は入っていません。</h5>
         <% end %>
         <div class="field">
-          <h5>お会計金額:<span class="ma-l-30">¥</span><span id="menu_price"><%= current_user.cart_items_total_price %></span></h5>
+          <h5>お会計金額:<span class="ma-l-30">¥</span><span id="menu_price"><%= price(current_user.cart_items_total_price) %></span></h5>
         </div>
 
-        <div class="field">
-          <h5>完成予定時間</h5>
-          <h6><%= current_user.max_estimated_time %><span class="ma-x-10">〜</span><%= current_user.max_estimated_time + 10 %>分</h6>
-        </div>
+        <% if @cart_items.present? %>
+          <div class="field">
+            <h5>完成予定時間</h5>
+            <h6><%= current_user.max_estimated_time %><span class="ma-x-10">〜</span><%= current_user.max_estimated_time + 10 %>分</h6>
+          </div>
+        <% end %>
 
         <div class="actions center">
-          <%= link_to "買い物を続ける", menus_path, class: "button-fill" %>
-          <%= link_to "注文に進む", new_cart_items_order_path, class: "button-fill" %>
+          <% if @cart_items.present? %>
+            <%= link_to "買い物を続ける", users_shop_path(@cart_items[0].menu.shop), class: "button-fill" %>
+            <%= link_to "注文に進む", new_cart_items_order_path, class: "button-fill" %>
+          <% else %>
+            <%= link_to "買い物を続ける", root_path, class: "button-fill" %>
+          <% end %>
         </div>
       </div>
     </div>

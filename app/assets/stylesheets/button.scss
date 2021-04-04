@@ -68,18 +68,40 @@
   padding: 0.3em 1.2em;
   margin: 0.8rem;
   font-size: 12px;
-  color: #EFAA29;
+  color: #fff;
+  background-color: #EFAA29;
   text-decoration: none;
   user-select: none;
   border: 1px #EFAA29 solid;
   box-shadow: inset #EFAA29 0 0 0 0;
   transition: 0.3s;
-  width: 150px;
+  width: 120px;
 }
 
 .button-fill:hover {
+  opacity: .7;
   color: #fff;
-  box-shadow: inset #EFAA29 0 0 0 2em;
+}
+
+.main-btn {
+  background: #EFAA29;
+  /* 背景色 */
+  color: #fff;
+  /* 文字色 */
+  padding: 16px 40px;
+  /* 上下の余白、左右の余白 */
+  text-decoration: none;
+  /* デフォルトで入る下線を消す */
+  border-radius: 30px;
+  /* 角を丸くする */
+  transition-property: opacity;
+  -webkit-transition-property: opacity;
+  transition-duration: .5s;
+  -webkit-transition-duration: .5s;
+}
+
+.main-btn:hover {
+  opacity: .7;
 }
 
 // シンプルなボタン
@@ -115,4 +137,37 @@
     text-decoration: none;
     color: #EFAA29;
   }
+}
+a.arrow2 {
+  text-decoration: none;
+  color: #555;
+  display: inline-block;
+  padding-right: 16px;
+  position: relative;
+  &:hover{
+    color:#000;
+  }
+}
+
+a.arrow2:before,
+a.arrow2:after {
+  content: "";
+  display: block;
+  -webkit-transform: skewX(45deg);
+  transform: skewX(45deg);
+  position: absolute;
+  right: 0;
+  bottom: 6px;
+}
+
+a.arrow2:before {
+  width: 12px;
+  height: 3px;
+  background: #555;
+}
+
+a.arrow2:after {
+  width: 4px;
+  height: 8px;
+  background: #555;
 }

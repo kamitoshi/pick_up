@@ -21,6 +21,10 @@ p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+textarea{
+  height:200px;
+}
+
 .head-pad{
   padding-top:70px;
 }
@@ -83,6 +87,10 @@ p, h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 8px gray;
 }
 
+.content_box{
+  padding-top:20px;
+}
+
 .form_box{
   margin: 0 20px;
   padding:20px;
@@ -124,15 +132,47 @@ footer {
   /*←絶対位置*/
   bottom: 0;
   /*下に固定*/
+  background-color: #EFAA29;
 }
 
+
+.scale-box {
+  overflow: hidden;
+  /*画像拡大時にはみ出た部分を隠す*/
+  cursor: pointer;
+}
+
+.scale-box:hover {
+  .scale-img {
+    transform: scale(1.1, 1.1);
+    /*画像の拡大*/
+  }
+  .shop_scale-img {
+    transform: scale(1.1, 1.1);
+  }
+}
 // 商品ホバーの画像をポップさせる
 .scale-img {
   transition-duration: 0.5s;
   /*変化の時間*/
+  
 }
 
 .scale-img:hover {
+  transform: scale(1.1, 1.1);
+  /*画像の拡大*/
+  cursor: pointer;
+  /*カーソルをポインターにする*/
+}
+// 商品ホバーの画像をポップさせる
+.shop_scale-img {
+  transition-duration: 0.5s;
+  /*変化の時間*/
+  padding:5px;
+
+}
+
+.shop_scale-img:hover {
   transform: scale(1.1, 1.1);
   /*画像の拡大*/
   cursor: pointer;
@@ -146,17 +186,6 @@ footer {
     h5{
       margin-bottom: 0;
     }
-  }
-}
-.scale-box {
-  overflow: hidden;
-  /*画像拡大時にはみ出た部分を隠す*/
-  cursor: pointer;
-}
-.scale-box:hover {
-  .scale-img {
-    transform: scale(1.1, 1.1);
-    /*画像の拡大*/
   }
 }
 
@@ -186,4 +215,17 @@ footer {
 
 .title-border:after {
   margin-left: 1rem;
+}
+
+.c-title{
+  font-size: 10px;
+}
+.c-text{
+  font-size: 8px;
+}
+.m-title{
+  font-size: 12px;
+}
+.m-text{
+  font-size: 10px;
 }

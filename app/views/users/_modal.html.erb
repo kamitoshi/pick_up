@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content container">
+            <div class="modal-body">
+              <div class="modal_title">
+                <h4>登録情報</h4>
+              </div>
+              <hr>
+              <div class="user_name">
+                <h5>氏名：<%= current_user.full_name %></h5>
+              </div>
+              <div class="user_name">
+                <h6>メールアドレス<br><%= current_user.email %></h6>
+              </div>
+              <div class="user_name">
+                <h6>電話番号<br><%= current_user.phone_number %></h6>
+              </div>
+              <hr>
+              <div class="edit_btn right">
+                <%= link_to "編集", edit_user_path(current_user), class: "btn btn-success" %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-danger" %>
+              </div>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+    </div>
+  </div>
+</div>
