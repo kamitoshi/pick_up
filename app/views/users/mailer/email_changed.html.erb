@@ -1,7 +1,20 @@
 <p>Hello <%= @email %>!</p>
 
 <% if @resource.try(:unconfirmed_email?) %>
-  <p>We're contacting you to notify you that your email is being changed to <%= @resource.unconfirmed_email %>.</p>
+  <p>
+    申し訳ありません。<br>
+    メールアドレスの変更手続きを受け付けましたが、<br>
+    「<%= @resource.unconfirmed_email %>」<br>
+    のメールアドレスへの変更ができませんでした。<br>
+    お手数ですが、運営までお問い合わせください。
+  </p>
 <% else %>
-  <p>We're contacting you to notify you that your email has been changed to <%= @resource.email %>.</p>
+  <p>
+    メールアドレスを変更しました。<br>
+    変更後メールアドレス「<%= @resource.email %>」
+  </p>
+  <br>
+  <p>
+    引き続き、PickUpをよろしくお願いいたします。
+  </p>
 <% end %>
