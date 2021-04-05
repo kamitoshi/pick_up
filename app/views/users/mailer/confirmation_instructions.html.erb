@@ -1,5 +1,10 @@
-<p>Welcome <%= @email %>!</p>
+<p><%= @resource.full_name %>様</p>
+<br>
+<p>この度は、PickUpへのご登録ありがとうございます。</p>
+<p>
+  ご登録されたメールアドレスは、ご注文の確認など弊社からの連絡手段として利用させていただきます。<br>
+  SNS連携により認証されたご利用者様にも、メールアドレスの変更などがある場合がございますのでメールを受け取ることを確認させたいただいております。<br>
+  お手数ですが下記URLより、ご協力をお願い申し上げます。<br>
+</p>
 
-<p>You can confirm your account email through the link below:</p>
-
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p><%= link_to 'メールが届いたことを確認する', confirmation_url(@resource, confirmation_token: @token) %></p>

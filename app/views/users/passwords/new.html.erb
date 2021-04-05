@@ -1,15 +1,15 @@
-<div class="container-fluid head-pad">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <div class="form_box">
-        <h3 class="center">パスワード再設定メールの送信</h3>
+        <h4 class="center">パスワード再設定メールの送信</h4>
         <hr>
         <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
           <%= render "users/shared/error_messages", resource: resource %>
 
           <div class="field">
             <%= f.label :email, "メールアドレス" %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "パスワード再設定用メールを受け取るメールアドレスを入力", class: "form-under", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレスを入力", class: "form-under", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
           </div>
 
           <div class="actions center">
@@ -17,7 +17,10 @@
           </div>
         <% end %>
 
-        <%= render "devise/shared/links" %>
+        <div class="back_btn right">
+          <%= link_to "戻る", :back, class: "arrow2" %>
+        </div>
+
       </div>     
     </div>
   </div>
