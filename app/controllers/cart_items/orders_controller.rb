@@ -13,7 +13,6 @@ class CartItems::OrdersController < ApplicationController
     @order = current_user.orders.build(order_params)
     @order.shop_id = @shop.id
     if @order.is_business_time_order?
-      @order.numbering_reserve_number(@order.shop.target_date_order_count(@order.takeaway_datetime))
       if @order.save
         @cart_items.each do |cart_item|
           OrderItem.create(
@@ -21,6 +20,7 @@ class CartItems::OrdersController < ApplicationController
             menu_id: cart_item.menu.id,
             menu_name: cart_item.menu.name,
             menu_price: cart_item.menu.price,
+            menu_fee: cart_item.menu.fee,
             menu_amount: cart_item.amount
           )
           cart_item.destroy

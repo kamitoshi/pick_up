@@ -41,100 +41,13 @@ position:relative;
 }
 
 .wrapper{
-	padding-top:70px;
+	padding-top:55px;
 }
 
 .inner{
 margin:0 auto;
 width:100%;
 }
-
-
-/*************
-/* ヘッダー
-*************/
-#header{
-	overflow: hidden;
-	box-shadow: 0 0 4px 2px #aaa;
-	position: fixed;
-	z-index: 1000;
-	width: 100vw;
-	background: #fff;
-	height: 70px;
-}
-
-* html #header{height:1%;}
-
-
-/*************
-/* ロゴ
-*************/
-#header .logo{
-float:left;
-}
-
-.logo a{
-font-size:20px;
-font-weight:bold;
-line-height:1;
-font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
-}
-
-.logo span{
-font-size:12px;
-font-weight:normal;
-}
-
-#header h1{
-font-size:11px;
-color:#444;
-}
-
-.non_style{
-	list-style: none;
-}
-
-.user_icon{
-	position: absolute;
-	right: 60px;
-	top: 20px;
-	padding: 2px 7px;
-	background-color: #fff;
-	color: #EFAA29;
-	border-radius: 50%;
-	border: 2px solid #EFAA29;
-}
-.menu_icon{
-	position: absolute;
-	right: 10px;
-	top: 20px;
-	padding: 2px 7px;
-	background-color: #fff;
-	color: #EFAA29;
-	border-radius: 50%;
-	border: 2px solid #EFAA29;
-}
-.search_icon{
-	position: absolute;
-	left: 10px;
-	top: 20px;
-	padding: 2px 7px;
-	color: #EFAA29;
-}
-
-@media only screen and (min-width:940px) {
-	.menu_icon{
-		display:none;
-	}
-	.user_icon{
-		display:none;
-	}
-	.search_icon{
-		display:none;
-	}
-}
-
-
 
 /**************************
 /* メイン画像（トップページ+サブページ）
@@ -327,7 +240,7 @@ background:#cd8e29;
 /* PC用 */
 @media only screen and (min-width:940px){	
 	#wrapper,.inner{
-	width:940px;
+	width:90%;
 	padding:0;
 	}
 	
@@ -357,7 +270,7 @@ background:#cd8e29;
 	display:block;
 	padding: 10px 15px;
 	line-height:1.2;
-	border-top:5px solid #cd8e29;
+	border-top:5px solid #EFAA29;
 	}
 	
 	nav#mainNav ul span{
@@ -419,12 +332,12 @@ background:#cd8e29;
 	width:100%;
 	margin:0 auto;
 	padding:0;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(1, #cd8e29), color-stop(0.00, #a06019));
-	background: -webkit-linear-gradient(top, #a06019 0%, #cd8e29 100%);
-	background: -moz-linear-gradient(top, #a06019 0%, #cd8e29 100%);
-	background: -o-linear-gradient(top, #a06019 0%, #cd8e29 100%);
-	background: -ms-linear-gradient(top, #a06019 0%, #cd8e29 100%);
-	background: linear-gradient(top, #a06019 0%, #cd8e29 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1, #EFAA29), color-stop(0.00, #a06019));
+	background: -webkit-linear-gradient(top, #a06019 0%, #EFAA29 100%);
+	background: -moz-linear-gradient(top, #a06019 0%, #EFAA29 100%);
+	background: -o-linear-gradient(top, #a06019 0%, #EFAA29 100%);
+	background: -ms-linear-gradient(top, #a06019 0%, #EFAA29 100%);
+	background: linear-gradient(top, #a06019 0%, #EFAA29 100%);
 	}
 
 	nav#mainNav a.menu{

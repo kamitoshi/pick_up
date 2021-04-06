@@ -4,10 +4,8 @@ class Order < ApplicationRecord
 
   has_many :order_items, dependent: :destroy
 
-  validates :reserve_number, presence: true
-
   enum status: {
-    注文中: 0, 完了: 1, キャンセル: 2
+    新規注文: 0, 受付注文: 1, 完了注文: 2, キャンセル注文: 3
   }
 
   # 該当のオーダーでいくらの料金が発生したのかを判別するメソッド

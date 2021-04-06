@@ -1,13 +1,16 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-8 offset-md-2">
       <div class="form_box">
-        <h5 class="center">新規商品登録</h5>
+        <h5>新規商品登録</h5>
+        <div class="back_btn right">
+          <%= link_to "戻る", :back, class: "arrow2" %>
+        </div>
         <hr>
         <%= form_for @menu do |f| %>
           <div class="field ma-b-50">
             <%= f.label :name, "商品名" %><br>
-            <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-control" %>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-under", placeholder: "商品名を入力してください" %>
           </div>
 
           <div class="field ma-b-50">
@@ -17,12 +20,12 @@
 
           <div class="field ma-b-50">
             <%= f.label :price, "価格" %><br />
-            <%= f.number_field :price, autofocus: true, autocomplete: "price", class:"form-control" %>
+            <%= f.number_field :price, autofocus: true, autocomplete: "price", class:"form-under", placeholder: "商品の価格を入力してください" %>
           </div>
 
           <div class="field ma-b-50">
-            <%= f.label :fee, "手数料（％）" %><br />
-            <%= f.number_field :fee, autofocus: true, autocomplete: "fee", class:"form-control", placeholder: "例:10" %>
+            <%= f.label :fee, "手数料（％）" %><span class="font-10">※商品が売れた時の販売手数料です</span><br />
+            <%= f.number_field :fee, autofocus: true, autocomplete: "fee", class:"form-under", placeholder: "販売手数料を入力してください" %>
           </div>
 
           <div class="field ma-b-50">
@@ -32,7 +35,7 @@
 
           <div class="field ma-b-50">
             <%= f.label :introduction, "商品紹介文" %><br />
-            <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", class:"form-control" %>
+            <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", class:"form-control", placeholder: "商品の紹介文を記入してください" %>
           </div>
           
           <% if admin_signed_in? %>

@@ -45,10 +45,10 @@ class ShopTagsController < ApplicationController
     if @shop == current_shop
       if @shop_tag.destroy
         flash[:success] = "削除しました"
-        redirect_to edit_shop_path(current_shop)
+        redirect_to new_shop_shop_tag_path(current_shop)
       else
         flash[:danger] = "削除できませんでした"
-        redirect_to edit_shop_path(current_shop)
+        redirect_to new_shop_shop_tag_path(current_shop)
       end
     else
       flash[:danger] = "他店のタグは削除できません"

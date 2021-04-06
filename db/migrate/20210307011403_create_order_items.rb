@@ -5,6 +5,7 @@ class CreateOrderItems < ActiveRecord::Migration[5.2]
       t.references :menu, foreign_key: true
       t.string :menu_name, null: false
       t.integer :menu_price, null: false
+      t.integer :menu_fee, null: false
       t.integer :menu_amount, null: false
 
       t.timestamps
