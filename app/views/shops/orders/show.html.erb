@@ -1,8 +1,11 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
-      <div class="width_box">
+    <div class="col-md-8 offset-md-2">
+      <div class="content_box">
         <h5>注文履歴詳細</h5>
+        <div class="back_btn right">
+          <%= link_to "戻る", :back, class: "arrow2" %>
+        </div>
         <hr>
         <div class="content_box_detail">
           <table class="table table-borderless">
@@ -14,10 +17,6 @@
               <tr>
                 <th>予約番号</th>
                 <td colspan=3><%= @order.reserve_number %></td>
-              </tr>
-              <tr>
-                <th>予約日</th>
-                <td colspan=3><%= @order.updated_at.strftime("%Y年%m月%d日") %></td>
               </tr>
               <tr>
                 <th>受取希望日時</th>
@@ -32,15 +31,13 @@
           <table class="table table-striped">
             <tbody>
               <tr>
-                <th>注文商品</th>
                 <td>商品名</td>
                 <td>数量</td>
               </tr>
               <% @order.order_items.each do |item| %>
                 <tr>
-                  <th></th>
                   <td><%= item.menu_name %></td>
-                  <td><%= item.menu_amount %>個</td>
+                  <td><%= item.menu_amount %></td>
                 </tr>
               <% end %>
             </tbody>
@@ -48,10 +45,11 @@
           <hr>
         </div>
         
-        <div class="return_btn center">
-          <%= link_to "一覧へ戻る", shops_orders_path, class: "btn btn-success" %>
-          <%= link_to "本日の一覧へ戻る", today_index_shops_orders_path, class: "btn btn-success" %>
+        <div class="return_btn center ma-b-50">
+          <%= link_to "注文を受け付ける", shops_order_path(status: 1), method: :patch, class: "btn btn-success btn-sm" %>
+          <%= link_to "注文を断る", shops_order_path(status: 3), method: :patch, class: "btn btn-danger btn-sm" %>
         </div>
+
       </div>
     </div>
   </div>

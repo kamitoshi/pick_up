@@ -1,13 +1,22 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-8 offset-md-2">
       <div class="form_box">
-        <h3 class="center">商品画像の追加</h3>
+        <h5>『<%= @menu.name %>』の画像追加</h5>
+        <div class="back_btn right">
+          <%= link_to "戻る", menu_menu_images_path(@menu), class: "arrow2" %>
+        </div>
         <hr>
         <%= form_for @menu_image, url: menu_menu_images_path(@menu.id) do |f|  %>
-          <%= f.hidden_field :menu_id, value: @menu.id %>
+          
           <div class="field">
-            <%= f.file_field :file_name %>
+            <%= image_tag "noimage.png", class:"wid-100" %>
+            <%= f.file_field :file_name, class: "font-10" %>
+          </div>
+          
+          <div class="field">
+            <%= f.check_box :is_main, {class: "check_box"}, true, false %>
+            <%= f.label :is_main, "この画像をメインにする" %>
           </div>
 
           <div class="actions center">

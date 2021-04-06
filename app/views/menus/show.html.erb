@@ -22,7 +22,6 @@
     <div class="col-md-8 offset-md-2 center" style="padding-top: 0.8rem;">
       <%= form_for CartItem.new, url: menu_cart_items_path(@menu) do |f| %>
         <%= f.hidden_field :shop_id, value: @menu.shop_id %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
         <span id="minusButton<%= @menu.id %>" class="pointer minusBtn">-</span>
         <%= f.text_field :amount, id: "counterOutput#{@menu.id}", class:"amount_input", value:1 %>
         <span id="plusButton<%= @menu.id %>" class="pointer plusBtn">+</span>

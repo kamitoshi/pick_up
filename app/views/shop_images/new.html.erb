@@ -1,17 +1,26 @@
-<div class="container-fluid background">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-8 offset-md-2">
       <div class="form_box">
-        <h3 class="center">店舗イメージ画像追加</h3>
+        <h5>『<%= @shop.name %>』の画像追加</h5>
+        <div class="back_btn right">
+          <%= link_to "戻る", shop_shop_images_path(@shop), class: "arrow2" %>
+        </div>
         <hr>
-        <%= form_for @shop_image, url: shop_shop_images_path(current_shop) do |f|  %>
-          <%= f.hidden_field :shop_id, value: current_shop.id %>
+        <%= form_for @shop_image, url: shop_shop_images_path(@shop.id) do |f|  %>
+          
           <div class="field">
-            <%= f.file_field :file_name %>
+            <%= image_tag "noimage.png", class:"wid-100" %>
+            <%= f.file_field :file_name, class: "font-10" %>
+          </div>
+          
+          <div class="field">
+            <%= f.check_box :is_main, {class: "check_box"}, true, false %>
+            <%= f.label :is_main, "この画像をメインにする" %>
           </div>
 
           <div class="actions center">
-            <%= f.submit "追加", class: "button-fill"%>
+            <%= f.submit "追加する", class: "button-fill" %>
           </div>
         <% end %>
 

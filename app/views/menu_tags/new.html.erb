@@ -1,8 +1,12 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-8 offset-2">
+    <div class="col-md-8 offset-md-2">
       <div class="form_box">
-        <h3 class="center">検索キーワード編集</h3>
+        <h5>
+          『<%= @menu.name %>』の検索キーワード</h5>
+        <div class="back_btn right">
+          <%= link_to "戻る", shops_menu_path(@menu), class: "arrow2" %>
+        </div>
         <hr>
         <%= form_for @menu_tag, url: menu_menu_tags_path(@menu) do |f|  %>
           <%= f.hidden_field :menu_id, value: @menu.id %>
@@ -24,9 +28,6 @@
           <% else %>
             <p>検索キーワードが設定されていません</p>
           <% end %>
-        </div>
-        <div class="edit_btn center ma-t-30">
-          <%= link_to "商品ページへ", shops_menu_path(@menu), class: "btn btn-outline-primary" %>
         </div>
       </div>
     </div>

@@ -1,10 +1,9 @@
-<!-- ヘッダー -->
 <div id="header">
 	<div class="inner">
 		<!-- ロゴ -->
 		<div class="logo">
 			<a href="/">
-        <%= image_tag "logo2.png", size:"100x70" %>
+        <%= image_tag "logo2.png", size:"80x55" %>
       </a>
 		</div>
 		<!-- / ロゴ -->
@@ -15,14 +14,14 @@
 			<div class="user_icon" data-toggle="modal" data-target="#userModal">
 				<i class="fas fa-user"></i>
 			</div>
-			<div class="menu_icon" data-href="<%= user_cart_items_path(current_user) %>">
+			<div class="cart_icon" data-href="<%= user_cart_items_path(current_user) %>">
 				<i class="fas fa-shopping-bag"></i>
 			</div>
 		<% else %>
 			<div class="user_icon" data-toggle="modal" data-target="#authModal">
 				<i class="fas fa-user"></i>
 			</div>
-			<div class="menu_icon" data-toggle="modal" data-target="#authModal">
+			<div class="cart_icon" data-toggle="modal" data-target="#authModal">
 			<i class="fas fa-shopping-bag"></i>
 		</div>
 		<% end %>
@@ -49,4 +48,3 @@
     </nav>
   </div>
 </div>
-<!-- / ヘッダー -->

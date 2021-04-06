@@ -1,15 +1,25 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-8 offset-md-2">
       <div class="form_box">
-        <h3 class="center">店舗イメージ画像編集</h3>
+        <h5>『<%= @shop.name %>』の画像編集</h5>
+        <div class="back_btn right">
+          <%= link_to "戻る", shop_shop_images_path(@shop), class: "arrow2" %>
+        </div>
         <hr>
         <%= form_for @shop_image, url: shop_shop_image_path(@shop, @shop_image), method: :patch do |f|  %>
 
           <div class="field">
-            <%= image_tag @shop_image.file_name.url, width:"80%" %>
-            <%= f.file_field :file_name %>
+            <%= image_tag @shop_image.file_name.url, class: "wid-100" %>
+            <%= f.file_field :file_name, class: "font-10" %>
           </div>
+
+          <% unless @shop_image.is_main? %>
+            <div class="field">
+              <%= f.check_box :is_main, {class: "check_box"}, true, false %>
+              <%= f.label :is_main, "この画像をメインにする" %>
+            </div>
+          <% end %>
 
           <div class="actions center">
             <%= f.submit "編集", class: "button-fill" %>

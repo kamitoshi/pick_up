@@ -21,10 +21,6 @@ class OrdersController < ApplicationController
     @shop = @menu.shop
     orders = Order.where(shop_id: @menu.shop_id)
     @order = Order.new(order_params)
-    if @order.takeaway_datetime.nil?
-      @order.takeaway_datetime = Time.now + (@menu.estimated_time * 60)
-    end
-    @order.numbering_reserve_number(@order.shop.target_date_order_count(@order.takeaway_datetime))
     if @order.is_business_time_order?
       if params[:order][:amount].blank? || params[:order][:amount] == "0"
         @amount = params[:order][:amount]
@@ -36,6 +32,7 @@ class OrdersController < ApplicationController
             menu_id: @menu.id,
             menu_name: @menu.name,
             menu_price: @menu.price,
+            menu_fee: @menu.fee,
             menu_amount: params[:order][:amount].to_i
           )
           if order_item.save

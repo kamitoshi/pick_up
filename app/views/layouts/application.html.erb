@@ -13,25 +13,20 @@
   </head>
 
   <body>
-    <header>
-      <%= render partial: 'layouts/header' %>
-    </header>
-    <div class="container-fuild background">
-      <main>
-        <div class="flex-box">
-          <div class="flex-1 fix-15">
-            <% if shop_signed_in? %>
-              <%= render partial: 'layouts/shopSidebar' %>
-            <% elsif admin_signed_in? %>
-              <%= render partial: 'layouts/adminSidebar' %>
-            <% end %>
-          </div>
-          <div class="flex-5 main-box">
-            <%= render partial: 'shared/flash_message' %>
-            <%= yield %>
-          </div>
-        </div>
-      </main>
+    <%= render partial: 'layouts/header' %>
+    <div class="wrapper">
+      <%= render partial: 'shared/flash_message' %>
+      <%= yield %>
+      <footer class="center">
+        <%= render partial: "layouts/footer" %>
+      </footer>
+      <% if shop_signed_in?%>
+        <%= render partial: 'layouts/menu_modal' %>
+        <%= render partial: 'shops/menus_modal' %>
+        <%= render partial: 'shops/orders_modal' %>
+        <%= render partial: 'shops/sales_modal' %>
+        <%= render partial: 'shops/shop_modal' %>
+      <% end %>
     </div>
     <script>
       jQuery(function ($) {
