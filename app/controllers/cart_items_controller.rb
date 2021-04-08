@@ -1,5 +1,5 @@
 class CartItemsController < ApplicationController
-  layout "users_layout"
+  before_action :admin_or_user!
   def index
     if user_signed_in?
       @cart_items = CartItem.where(user_id: current_user.id)
@@ -67,5 +67,12 @@ class CartItemsController < ApplicationController
 
   def cart_item_params
     params.require(:cart_item).permit(:user_id, :menu_id, :amount)
+  end
+
+  def admin_or_user!
+    unless admin_signed_in? || user_signed_in?
+      flash[:danger] = "カートに追加するにはログインが必要です"
+      redirect_to root_path
+    end
   end
 end

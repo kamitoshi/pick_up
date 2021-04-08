@@ -3,6 +3,9 @@
     <div class="col-md-8 offset-md-2">
       <div class="form_box">
         <h3 class="center">営業時間設定</h3>
+        <div class="back_btn right">
+          <%= link_to "戻る", shop_path(current_shop), class: "arrow2" %>
+        </div>
         <hr>
         <%= form_for @business_hour, url: shop_business_hours_path(current_shop) do |f|  %>
           <div class="field">

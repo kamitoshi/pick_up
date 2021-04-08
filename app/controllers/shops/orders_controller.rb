@@ -1,4 +1,7 @@
 class Shops::OrdersController < ApplicationController
+  layout "shop_app"
+  before_action :admin_or_shop!
+  
   def index
     @orders = Order.where(shop_id: current_shop.id).order(takeaway_datetime: "desc")
   end
@@ -33,11 +36,13 @@ class Shops::OrdersController < ApplicationController
       @order.numbering_reserve_number(@order.shop.target_date_reception_order_count(@order.takeaway_datetime))
       @order.save
       flash[:success] = "注文受付完了。注文者に受付完了メールを送付しました。"
+      OrderMailer.send_return_reception_order(@order).deliver_later
       redirect_to today_index_shops_orders_path
     elsif params[:status] == "3"
       @order.status = 3
       @order.save
       flash[:danger] = "注文キャンセル完了。注文者にキャンセルメールを送付しました。"
+      OrderMailer.send_return_cancel_order(@order).deliver_later
       redirect_to today_index_shops_orders_path
     else
       flash[:danger] = "変更できませんでした"
@@ -52,6 +57,13 @@ class Shops::OrdersController < ApplicationController
   end
   def order_item_params
     params.require(:order_item).permit(:order_id, :menu_id, :menu_name, :menu_price, :menu_amount)
+  end
+
+  def admin_or_shop!
+    unless admin_signed_in? || shop_signed_in?
+      flash[:danger] = "店舗ユーザーとしてログインしてください"
+      redirect_to root_path
+    end
   end
 
 end

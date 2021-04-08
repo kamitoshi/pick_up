@@ -1,0 +1,26 @@
+<p>申し訳ございません。</p>
+<p>
+  ただいま店内が大変混雑しており、<br>
+  注文をお受けすることができません。
+</p>
+<p>
+  お手数ですが、受け取り時間を変更して新しくご注文するか、<br>
+  直接店舗にご連絡いただきますようお願い申し上げます。
+</p>
+<br>
+
+<p>店舗の電話番号：<%= link_to @shop.phone_number, "tel:" + @shop.phone_number %></p>
+
+<h3>注文内容</h3>
+<ul style="list-style:none;">
+  <% @order.order_items.each do |item| %>
+    <li><%= item.menu_name %><span style="margin:0 20px">x</span><%= item.menu_amount %></li>
+  <% end %>
+</ul>
+
+<br>
+<br>
+<br>
+
+<a href="https://pickup.circrest.com/">Pickupへ</a>
+

@@ -1,8 +1,11 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <div class="content_box">
+      <div class="form_box">
         <h3 class="center">編集</h3>
+        <div class="back_btn right">
+          <%= link_to "戻る", user_path(current_user), class: "arrow2" %>
+        </div>
         <hr>
         <%= form_for @user do |f| %>
           <div class="field">
@@ -48,8 +51,8 @@
     <div class="col-sm-4 offset-sm-4">
       <div class="content_box">
         <div class="user_edit-sidebar wid-50 ma-a">
-          <%= link_to "パスワード変更", edit_user_registration_path, class:"btn btn-outline-info wid-100 ma-y-10" %>
-          <%= link_to "退会する", user_path(current_user), method: :delete, class:"btn btn-danger wid-100 ma-y-10" %>
+          <%= link_to "パスワード変更", edit_user_registration_path, class:"btn btn-outline-info wid-100 ma-y-10 btn-sm" %>
+          <%= link_to "退会する", user_path(current_user), method: :delete, class:"btn btn-danger wid-100 ma-y-10 btn-sm" %>
         </div>
       </div>
     </div>

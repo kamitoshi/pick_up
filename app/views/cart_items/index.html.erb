@@ -12,16 +12,16 @@
           </div>
           <% @cart_items.each do |cart_item| %>
             <div class="row">
-              <div class="col-8">
+              <div class="col-7">
                 <h5><%= cart_item.menu.name %></h5>
                 <h6>¥<%= price(cart_item.menu.price) %></h6>
                 <div class="intro_box font-10">
-                  <%= cart_item.menu.introduction.truncate(40) %>
+                  <%= introduction(cart_item.menu.introduction.truncate(40)) %>
                 </div>
               </div>
-              <div class="col-4 center">
+              <div class="col-5 center">
                 <% if cart_item.menu.menu_images.present? %>
-                  <%= image_tag cart_item.menu.menu_images[0].file_name.thumb_square.to_s, class: "wid-100" %>
+                  <%= image_tag cart_item.menu.main_image.file_name.thumb_square.to_s, class: "wid-100" %>
                 <% else %>
                   <%= image_tag "noimage.png", class: "wid-100" %>
                 <% end %>

@@ -21,9 +21,9 @@
 			<div class="user_icon" data-toggle="modal" data-target="#authModal">
 				<i class="fas fa-user"></i>
 			</div>
-			<div class="cart_icon" data-toggle="modal" data-target="#authModal">
-			<i class="fas fa-shopping-bag"></i>
-		</div>
+			<div class="menu_icon" data-toggle="modal" data-target="#userMenuModal">
+				<i class="fas fa-bars fa-2x"></i>
+			</div>
 		<% end %>
 	  <!-- メインナビゲーション -->
     <nav id="mainNav">
@@ -35,7 +35,7 @@
 					<% if user_signed_in? %>
 						<li><a href="/users/<%= current_user.id %>/cart_items">お買い物かご<br><span>Cart</span></a></li>
 					<% else %>
-						<li><a href="#" data-toggle="modal" data-target="#authModal">お買い物かご<br><span>Cart</span></a></li>
+						<li><a href="/top">飲食店様向け<br><span>Shops</span></a></li>
 					<% end %>
 					
 					<% if user_signed_in? %>

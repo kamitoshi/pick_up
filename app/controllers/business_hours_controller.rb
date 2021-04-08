@@ -1,4 +1,6 @@
 class BusinessHoursController < ApplicationController
+  layout "shop_app"
+  before_action :admin_or_shop!
   before_action :set_shop
   def index
     @business_hours = @shop.business_hours.order(job_time: "asc")
@@ -69,5 +71,12 @@ class BusinessHoursController < ApplicationController
 
   def set_shop
     @shop = Shop.find(params[:shop_id])
+  end
+
+  def admin_or_shop!
+    unless admin_signed_in? || shop_signed_in?
+      flash[:danger] = "店舗ユーザーとしてログインしてください"
+      redirect_to root_path
+    end
   end
 end

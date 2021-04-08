@@ -6,18 +6,7 @@
 </div>
 <!-- / メイン画像 -->
 <!-- サーチバー  -->
-<div class="search_bar">
-  <%= form_tag search_menus_path, method: :get do %>
-    <div class="row">
-      <div class="col-6 offset-2">
-        <%= text_field_tag :search, params[:search], placeholder: "キーワードを入力", class: "form-control search" %>
-      </div>
-      <div class="col-2">
-        <%= submit_tag "検索する", :name => nil, class: "btn btn-outline-secondary search" %>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= render partial: "layouts/search_bar" %>
 <!-- / サーチバー  -->
 
 <div class="container-fluid">
@@ -33,7 +22,7 @@
               <div class="col mb-4">
                 <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
                   <% if menu.menu_images.present? %>
-                    <%= image_tag menu.menu_images[0].file_name.thumb_width.to_s, class:"scale-img wid-100" %>
+                    <%= image_tag menu.main_image.file_name.thumb_width.to_s, class:"scale-img wid-100" %>
                   <% else %>
                     <%= image_tag "noimage.png" %>
                   <% end %>
@@ -60,7 +49,7 @@
               <div class="col mb-4">
                 <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
                   <% if menu.menu_images.present? %>
-                    <%= image_tag menu.menu_images[0].file_name.thumb_width.to_s, class:"scale-img wid-100" %>
+                    <%= image_tag menu.main_image.file_name.thumb_width.to_s, class:"scale-img wid-100" %>
                   <% else %>
                     <%= image_tag "noimage.png" %>
                   <% end %>
@@ -83,7 +72,7 @@
               <div class="col mb-4">
                 <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
                   <% if menu.menu_images.present? %>
-                    <%= image_tag menu.menu_images[0].file_name.thumb_width.to_s, class:"scale-img wid-100" %>
+                    <%= image_tag menu.main_image.file_name.thumb_width.to_s, class:"scale-img wid-100" %>
                   <% else %>
                     <%= image_tag "noimage.png" %>
                   <% end %>

@@ -8,21 +8,20 @@
               <div class="row">
                 <div class="col-md-12 center ma-b-20">
                   <% if menu.menu_images.present? %>
-                    <%= image_tag menu.menu_images[0].file_name.thumb_square.to_s, id:"sample_img", class: "wid-70" %>
+                    <%= image_tag menu.main_image.file_name.thumb_square.to_s, id:"sample_img", class: "wid-70" %>
                   <% else %>
                     <%= image_tag "noimage.png", class: "wid-100" %>
                   <% end %>
                 </div>
               </div>
               <div class="row">
-                <div class="col-4">
+                <div class="col-md-4">
                   <p class="m-title"><%= menu.name %></p>
                   <p class="m-text">【<%= menu.shop.name %>】</p>
-                  <br>
-                  <p class="m-text">¥<%= price(menu.price) %></p>
+                  <p class="m-text ma-y-10">¥<%= price(menu.price) %></p>
                 </div>
-                <div class="col-8">
-                  <p class="m-text"><%= menu.introduction %></p>
+                <div class="col-md-8">
+                  <p class="m-text"><%= introduction(menu.introduction) %></p>
                 </div>
               </div>
             </div>

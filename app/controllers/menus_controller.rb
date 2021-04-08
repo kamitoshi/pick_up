@@ -1,7 +1,15 @@
 class MenusController < ApplicationController
-  layout "users_layout", only:[:index, :search, :show]
+  layout "shop_app", only:[:new, :edit]
+  before_action :admin_or_shop!, only:[:new, :create, :edit, :update, :destroy]
+
   def index
-    @menus = Menu.all
+    if params[:search]
+      all_menus = Menu.all
+      @search = params[:search]
+      @menus = all_menus.where('name LIKE ?',"%#{@search}%")
+    else
+      @menus = Menu.all
+    end
   end
 
   def search
@@ -104,6 +112,13 @@ class MenusController < ApplicationController
 
   def menu_params
     params.require(:menu).permit(:shop_id, :name, :menu_type, :estimated_time, :price, :fee, :introduction, :is_active, :is_saling)
+  end
+
+  def admin_or_shop!
+    unless admin_signed_in? || shop_signed_in?
+      flash[:danger] = "店舗ユーザーとしてログインしてください"
+      redirect_to root_path
+    end
   end
 
 end
