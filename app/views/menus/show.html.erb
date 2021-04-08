@@ -1,6 +1,6 @@
-<div class="container-fluid head-pad">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-8 offset-md-2 center">
+    <div class="col-md-8 offset-md-2 center ma-y-20">
       <% if @menu.menu_images.present? %>
         <%= image_tag @menu.main_image.file_name.thumb_square.to_s, id:"sample_img", class: "wid-70" %>
       <% else %>
@@ -11,10 +11,10 @@
       <h5><%= @menu.name %></h5>
       <h6><%= @menu.shop.name %></h6>
       <br>
-      <h6>¥<%= @menu.price %></h6>
+      <h6>¥<%= price(@menu.price) %></h6>
     </div>
-    <div class="col-md-6">
-      <p><%= @menu.introduction %></p>
+    <div class="col-md-4">
+      <p><%= introduction(@menu.introduction) %></p>
     </div>
   </div>
   <hr>

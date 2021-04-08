@@ -1,40 +1,43 @@
-<div class="container">
-  <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3">
-    <div class="col mb-4">
-      <div class="card">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">カードのタイトル</h5>
-          <p class="card-text">これは、追加コンテンツへの自然な導入として以下のテキストをサポートする、より幅広いカードです。このコンテンツはもう少し長くなります。</p>
-        </div>
-      </div>
+<!-- メイン画像 -->
+<div id="mainBanner" class="mainImg">
+	<%= image_tag "main_img.jpg", alt: "" %>
+</div>
+<!-- / メイン画像 -->
+<!-- サーチバー  -->
+<%= render partial: "layouts/search_bar" %>
+<!-- / サーチバー  -->
+
+<div class="container-fluid">
+  <% if @shops.present? %>
+    <div class="gridWrapperTitle">
+      <h6>レストラン一覧</h6>
     </div>
-    <div class="col mb-4">
-      <div class="card">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">カードのタイトル</h5>
-          <p class="card-text">これは、追加コンテンツへの自然な導入として以下のテキストをサポートする、より幅広いカードです。このコンテンツはもう少し長くなります。</p>
-        </div>
-      </div>
+    <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3">
+      <% @shops.each do |shop| %>
+        <%= link_to users_shop_path(shop), class: "black" do %>
+          <div class="col mb-4">
+            <%= image_tag shop.main_image.file_name.thumb_width.to_s, class:"wid-100", style: "padding:1px;" %>
+            <div class="card-img-overlay grad">
+              <h6><%= shop.name %></h6>
+              <p class="c-text">
+                <% if shop.shop_tags.present? %>
+                  <% shop.shop_tags.each do |tag| %>
+                    <span><%= tag.content %></span>
+                  <% end %>
+                <% else %>
+                  検索キーワードがありません
+                <% end %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     </div>
-    <div class="col mb-4">
-      <div class="card">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">カードのタイトル</h5>
-          <p class="card-text">これは、追加コンテンツへの自然な導入として以下のテキストをサポートする、より幅広いカードです。このコンテンツはもう少し長くなります。</p>
-        </div>
-      </div>
-    </div>
-    <div class="col mb-4">
-      <div class="card">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">カードのタイトル</h5>
-          <p class="card-text">これは、追加コンテンツへの自然な導入として以下のテキストをサポートする、より幅広いカードです。このコンテンツはもう少し長くなります。</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <% end %>
+
+  <% if @menus.present? %>
+    <% @menus.each do |menu| %>
+      <%= render partial: "menus/modal", locals: {menu: menu} %>
+    <% end %>
+  <% end %>
 </div>

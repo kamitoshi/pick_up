@@ -96,3 +96,5 @@ gem 'chart-js-rails'
 gem 'dotenv-rails'
 # 時間の丸めを行う
 gem 'rounding'
+# 検索を行うため
+gem 'ransack'

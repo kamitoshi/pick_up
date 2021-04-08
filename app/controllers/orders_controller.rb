@@ -74,10 +74,4 @@ class OrdersController < ApplicationController
     params.require(:order_item).permit(:order_id, :menu_id, :menu_name, :menu_price, :menu_amount)
   end
 
-  def admin_or_user!
-    unless admin_signed_in? || user_signed_in?
-      flash[:danger] = "注文するにはログインが必要です"
-      redirect_to root_path
-    end
-  end
 end
