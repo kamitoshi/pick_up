@@ -8,37 +8,46 @@
 <!-- / サーチバー  -->
 
 <div class="container-fluid">
-  <h6 class="ma-b-20">『<%= @search %>』で検索した商品：<%= @menus.count %>件</h6>
-  <% if @menus.present? %>
-    <div class="row row-cols-2 row-cols-lg-5 row-cols-md-4 row-cols-sm-3">
-      <% @menus.each do |menu| %>
-        <div class="col mb-4">
-          <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
-            <% if menu.menu_images.present? %>
-              <%= image_tag menu.main_image.file_name.thumb_width.to_s, class:"scale-img wid-100" %>
-            <% else %>
-              <%= image_tag "noimage.png", class: "wid-100" %>
-            <% end %>
-            <div class="card-body">
-              <p class="c-title"><%= menu.name %></p>
-              <p class="c-subtitle">【<%= menu.shop.name %>】</p>
-              <p class="c-text right">
-                ¥<%= price(menu.price) %>
-              </p>
+  <div class="row">
+    <div class="col-md-3 searchSidebar">
+      <%= render partial: "layouts/detail_search", locals:{q: @q} %>
+    </div>
+    <div class="col-md-9">
+      <% unless @search.blank? %>
+        <h6 class="ma-b-20">『<%= @search %>』で検索した商品：<%= @menus.count %>件</h6>
+      <% end %>
+      <% if @menus.present? %>
+        <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3">
+          <% @menus.each do |menu| %>
+            <div class="col mb-4">
+              <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
+                <% if menu.menu_images.present? %>
+                  <%= image_tag menu.main_image.file_name.thumb_width.to_s, class:"scale-img wid-100" %>
+                <% else %>
+                  <%= image_tag "noimage.png", class: "wid-100" %>
+                <% end %>
+                <div class="card-body">
+                  <p class="c-title"><%= menu.name %></p>
+                  <p class="c-subtitle">【<%= menu.shop.name %>】</p>
+                  <p class="c-text right">
+                    ¥<%= price(menu.price) %>
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="non_search pa-30">
+          <h5 class="center">検索されたメニューはありませんでした</h5>
         </div>
       <% end %>
     </div>
-  <% else %>
-    <div class="non_search pa-30">
-      <h5 class="center">検索されたメニューはありませんでした</h5>
-    </div>
-  <% end %>
 
-  <% if @menus.present? %>
-    <% @menus.each do |menu| %>
-      <%= render partial: "menus/modal", locals: {menu: menu} %>
+    <% if @menus.present? %>
+      <% @menus.each do |menu| %>
+        <%= render partial: "menus/modal", locals: {menu: menu} %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

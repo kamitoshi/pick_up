@@ -25,6 +25,7 @@
 
     <% if user_signed_in? %>
       <%= render partial: 'users/modal' %>
+      <%= render partial: 'layouts/detail_search_modal', locals:{q: @q} %>
     <% end %>
     <%= render partial: 'layouts/user_menu_modal' %>
     

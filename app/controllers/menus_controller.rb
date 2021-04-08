@@ -1,6 +1,7 @@
 class MenusController < ApplicationController
   layout "shop_app", only:[:new, :edit]
   before_action :admin_or_shop!, only:[:new, :create, :edit, :update, :destroy]
+  before_action :set_ransack
 
   def index
     if params[:search]
@@ -13,7 +14,8 @@ class MenusController < ApplicationController
   end
 
   def search
-      @menus = Menu.all
+    @search_menu = Menu.ransack(params[:q]) 
+    @menus = @search_menu.result.page(params[:page])
   end
 
   def show
@@ -112,13 +114,6 @@ class MenusController < ApplicationController
 
   def menu_params
     params.require(:menu).permit(:shop_id, :name, :menu_type, :estimated_time, :price, :fee, :introduction, :is_active, :is_saling)
-  end
-
-  def admin_or_shop!
-    unless admin_signed_in? || shop_signed_in?
-      flash[:danger] = "店舗ユーザーとしてログインしてください"
-      redirect_to root_path
-    end
   end
 
 end

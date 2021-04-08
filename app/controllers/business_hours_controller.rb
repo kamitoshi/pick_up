@@ -72,11 +72,5 @@ class BusinessHoursController < ApplicationController
   def set_shop
     @shop = Shop.find(params[:shop_id])
   end
-
-  def admin_or_shop!
-    unless admin_signed_in? || shop_signed_in?
-      flash[:danger] = "店舗ユーザーとしてログインしてください"
-      redirect_to root_path
-    end
-  end
+  
 end

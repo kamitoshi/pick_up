@@ -17,7 +17,7 @@
               <div class="row">
                 <div class="col-md-4">
                   <p class="m-title"><%= menu.name %></p>
-                  <p class="m-text">【<%= menu.shop.name %>】</p>
+                  <p class="m-text">【<%= link_to menu.shop.name, users_shop_path(menu.shop) %>】</p>
                   <p class="m-text ma-y-10">¥<%= price(menu.price) %></p>
                 </div>
                 <div class="col-md-8">

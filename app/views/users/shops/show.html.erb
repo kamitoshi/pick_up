@@ -4,6 +4,7 @@
   <div id="shopImage"></div>
   <div id="shopInfo">
     <h3 class="center"><%= @shop.name %></h3>
+    </p>
   </div>
 </div>
 <!-- / メイン画像 -->
@@ -33,7 +34,7 @@
             <% else %>
               <%= image_tag "noimage.png", class: "wid-100" %>
             <% end %>
-            <div class="pa-x-10">
+            <div class="card-body">
               <p class="c-title" ><%= menu.name %></p>
               <p class="c-title right">
                 ¥<%= price(menu.price) %>
@@ -62,7 +63,7 @@
             <% else %>
               <%= image_tag "noimage.png", class: "wid-100" %>
             <% end %>
-            <div class="pa-x-10">
+            <div class="card-body">
               <p class="c-title" ><%= menu.name %></p>
               <p class="c-title right">
                 ¥<%= price(menu.price) %>
@@ -87,7 +88,7 @@
             <% else %>
               <%= image_tag "noimage.png", class: "wid-100" %>
             <% end %>
-            <div class="pa-x-10">
+            <div class="card-body">
               <p class="c-title" ><%= menu.name %></p>
               <p class="c-title right">
                 ¥<%= price(menu.price) %>

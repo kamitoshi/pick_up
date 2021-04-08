@@ -30,11 +30,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:last_name, :first_name, :kana_last_name, :kana_first_name, :phone_number, :email)
   end
 
-  def admin_or_user!
-    unless admin_signed_in? || user_signed_in?
-      flash[:danger] = "ログインしてください"
-      redirect_to root_path
-    end
-  end
-
 end
