@@ -8,7 +8,7 @@
           <div class="image_box">
             <% if @menu.menu_images.present? %>
               <div class="menu_image-box center ma-b-10">
-                <%= image_tag @menu.menu_images[0].file_name.url, class:"wid-50" %>
+                <%= image_tag @menu.main_image.file_name.url, class:"wid-50" %>
               </div>
               <div class="menu_image-box center">
                 <% @menu.menu_images.each do |image| %>

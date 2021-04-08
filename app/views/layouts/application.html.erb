@@ -13,40 +13,20 @@
   </head>
 
   <body>
-    <%= render partial: 'layouts/header' %>
+    <%= render partial: "layouts/users_header" %>
     <div class="wrapper">
       <%= render partial: 'shared/flash_message' %>
       <%= yield %>
       <footer class="center">
         <%= render partial: "layouts/footer" %>
       </footer>
-      <% if shop_signed_in?%>
-        <%= render partial: 'layouts/menu_modal' %>
-        <%= render partial: 'shops/menus_modal' %>
-        <%= render partial: 'shops/orders_modal' %>
-        <%= render partial: 'shops/sales_modal' %>
-        <%= render partial: 'shops/shop_modal' %>
-      <% end %>
+      <%= render partial: 'users/auth_modal' %>
     </div>
-    <script>
-      jQuery(function ($) {
-        //data-hrefの属性を持つtrを選択しclassにclickableを付加
-        $("tr[data-href]")
-          .addClass("clickable")
 
-        //クリックイベント
-        .click(function (e) {
-          //e.targetはクリックした要素自体、それがa要素以外であれば
-          if (!$(e.target).is("a")) {
-            //その要素の先祖要素で一番近いtrの
-            //data-href属性の値に書かれているURLに遷移する
-            window.location = $(e.target).closest("tr").data("href");
-          }
-        });
-      });
-      $(function(){
-        setTimeout("$('.time-limit').fadeOut('slow')", 3000) 
-      })
-    </script>
+    <% if user_signed_in? %>
+      <%= render partial: 'users/modal' %>
+    <% end %>
+    <%= render partial: 'layouts/user_menu_modal' %>
+    
   </body>
 </html>

@@ -1,16 +1,17 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8 offset-md-2">
+
       <div class="content_box">
         <h5>登録メニュー一覧</h5>
         <div class="back_btn right">
-          <%= link_to "戻る", :back, class: "arrow2" %>
+          <%= link_to "戻る", shops_path, class: "arrow2" %>
         </div>
         <div class="content_box_detail">
+
           <table class="table table-hover">
             <thead>
               <tr>
-                <th width="25%"></th>
                 <th>商品名</th>
                 <th>価格</th>
               </tr>
@@ -23,7 +24,6 @@
                   </tr>
                   <% @food_menus.each do |menu| %>
                     <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
-                      <td><%= image_tag menu.menu_images[0].file_name.thumb_width.to_s, class: "wid-100" if menu.menu_images.present? %></td>
                       <td><%= menu.name %></td>
                       <td>¥<%= price(menu.price) %></td>
                     </tr>
@@ -35,7 +35,6 @@
                   </tr>
                   <% @drink_menus.each do |menu| %>
                     <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
-                      <td><%= image_tag menu.menu_images[0].file_name.thumb_width.to_s if menu.menu_images.present? %></td>
                       <td><%= menu.name %></td>
                       <td>¥<%= price(menu.price) %></td>
                     </tr>
@@ -47,7 +46,6 @@
                   </tr>
                   <% @dessert_menus.each do |menu| %>
                     <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
-                      <td><%= image_tag menu.menu_images[0].file_name.thumb_width.to_s if menu.menu_images.present? %></td>
                       <td><%= menu.name %></td>
                       <td>¥<%= price(menu.price) %></td>
                     </tr>
@@ -62,8 +60,10 @@
               <% end %>
             </tbody>
           </table>
+
         </div>
       </div>
+
     </div>
   </div>
 </div>

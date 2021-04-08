@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  layout "users_layout", only:[:index, :about, :method, :privacy, :term]
+  layout "shop_app", only:[:top]
   def index
     @menus = Menu.all
     @shops = Shop.all

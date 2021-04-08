@@ -1,4 +1,6 @@
 class ShopImagesController < ApplicationController
+  layout "shop_app"
+  before_action :admin_or_shop!
   before_action :set_shop
 
   def index
@@ -74,21 +76,22 @@ class ShopImagesController < ApplicationController
   end
 
   def update
+    @shop_image = ShopImage.find(params[:id])
     if @shop == current_shop
-      if params[:menu_image][:is_main] == "true"
-        @main_image = @menu.menu_images.find_by(is_main: true)
-        if @menu_image.update(menu_image_params)
+      if params[:shop_image][:is_main] == "true"
+        @main_image = @shop.shop_images.find_by(is_main: true)
+        if @shop_image.update(shop_image_params)
           @main_image.update(is_main: false)
           flash[:success] = "変更を保存しました"
-          redirect_to menu_menu_images_path(@menu)
+          redirect_to shop_shop_images_path(@shop)
         else
           flash[:danger] = "変更できませんでした"
           render :edit
         end
       else
-        if @menu_image.update(menu_image_params)
+        if @shop_image.update(shop_image_params)
           flash[:success] = "変更を保存しました"
-          redirect_to menu_menu_images_path(@menu)
+          redirect_to shop_shop_images_path(@shop)
         else
           flash[:danger] = "変更できませんでした"
           render :edit
@@ -130,4 +133,12 @@ class ShopImagesController < ApplicationController
   def set_shop
     @shop = Shop.find(params[:shop_id])
   end
+
+  def admin_or_shop!
+    unless admin_signed_in? || shop_signed_in?
+      flash[:danger] = "店舗ユーザーとしてログインしてください"
+      redirect_to root_path
+    end
+  end
+
 end

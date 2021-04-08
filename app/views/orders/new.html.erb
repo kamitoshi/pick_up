@@ -9,7 +9,7 @@
           <%= f.hidden_field :user_id, value: current_user.id %>
 
           <div class="row">
-            <div class="col-8">
+            <div class="col-7">
               <h5><%= @menu.name %></h5>
               <h6>【<%= @menu.shop.name %>】</h6>
               <h6>¥<%= price(@menu.price) %></h6>
@@ -17,9 +17,9 @@
                 <%= @menu.introduction.truncate(40) %>
               </div>
             </div>
-            <div class="col-4 center">
+            <div class="col-5 center">
               <% if @menu.menu_images.present? %>
-                <%= image_tag @menu.menu_images[0].file_name.thumb_square.to_s, class: "wid-100" %>
+                <%= image_tag @menu.main_image.file_name.thumb_square.to_s, class: "wid-100" %>
               <% else %>
                 <%= image_tag "noimage.png", class: "wid-100" %>
               <% end %>

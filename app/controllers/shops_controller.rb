@@ -1,5 +1,6 @@
 class ShopsController < ApplicationController
-  before_action :only_shop!, only:[:index, :edit, :update, :destroy]
+  layout "shop_app"
+  before_action :admin_or_shop!
   before_action :set_shop, only:[:show, :edit, :update, :destroy]
 
   def index
@@ -93,8 +94,9 @@ class ShopsController < ApplicationController
     @shop = Shop.find(params[:id])
   end
 
-  def only_shop!
-    unless shop_signed_in?
+  def admin_or_shop!
+    unless admin_signed_in? || shop_signed_in?
+      flash[:danger] = "店舗ユーザーとしてログインしてください"
       redirect_to root_path
     end
   end

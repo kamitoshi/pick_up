@@ -19,6 +19,11 @@ class Menu < ApplicationRecord
     フード: 0, ドリンク: 1, デザート: 2
   }
 
+  def main_image
+    return self.menu_images.find_by(is_main: true)
+  end
+
+
   # メインの画像以外をサムネイルで表示する
   def not_main_images
     images = self.menu_images

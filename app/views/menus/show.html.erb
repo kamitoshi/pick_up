@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-8 offset-md-2 center">
       <% if @menu.menu_images.present? %>
-        <%= image_tag @menu.menu_images[0].file_name.thumb_square.to_s, id:"sample_img", class: "wid-70" %>
+        <%= image_tag @menu.main_image.file_name.thumb_square.to_s, id:"sample_img", class: "wid-70" %>
       <% else %>
         <%= image_tag "noimage.png", class: "wid-100" %>
       <% end %>

@@ -24,7 +24,7 @@
                   <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
                     <td class="center">
                       <% if menu.menu_images.present? %>
-                        <%= image_tag menu.menu_images[0].file_name.thumb50.to_s %>
+                        <%= image_tag menu.main_image.file_name.thumb50.to_s %>
                       <% else %>
                         <%= image_tag "noimage.png", size:"75x50" %>
                       <% end %>

@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
-  layout "users_layout"
+  before_action :admin_or_user!
+
   def index
     @orders = Order.where(user_id: params[:user_id])
   end
@@ -71,5 +72,12 @@ class OrdersController < ApplicationController
   end
   def order_item_params
     params.require(:order_item).permit(:order_id, :menu_id, :menu_name, :menu_price, :menu_amount)
+  end
+
+  def admin_or_user!
+    unless admin_signed_in? || user_signed_in?
+      flash[:danger] = "注文するにはログインが必要です"
+      redirect_to root_path
+    end
   end
 end

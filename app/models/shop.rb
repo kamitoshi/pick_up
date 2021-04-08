@@ -113,10 +113,16 @@ class Shop < ApplicationRecord
     target_orders = []
     self.orders.each do |order|
       if date.strftime("%Y/%m/%d") == order.takeaway_datetime.strftime("%Y/%m/%d") && order.status == "受付注文"
-        target_orders.push(order)
+        if order.status == "受付注文" || order.status == "完了注文"
+          target_orders.push(order)
+        end
       end
     end
     return target_orders.count
+  end
+
+  def main_image
+    return self.shop_images.find_by(is_main: true)
   end
 
   # ショップの画像を最初のもの以外サムネイルで表示する

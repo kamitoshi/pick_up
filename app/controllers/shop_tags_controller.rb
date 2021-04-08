@@ -1,5 +1,8 @@
 class ShopTagsController < ApplicationController
+  layout "shop_app"
+  before_action :admin_or_shop!
   before_action :set_shop
+
   def new
     @shop_tag = ShopTag.new
   end
@@ -65,4 +68,12 @@ class ShopTagsController < ApplicationController
   def set_shop
     @shop = Shop.find(params[:shop_id])
   end
+  
+  def admin_or_shop!
+    unless admin_signed_in? || shop_signed_in?
+      flash[:danger] = "店舗ユーザーとしてログインしてください"
+      redirect_to root_path
+    end
+  end
+
 end

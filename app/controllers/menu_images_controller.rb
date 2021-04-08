@@ -1,4 +1,6 @@
 class MenuImagesController < ApplicationController
+  layout "shop_app"
+  before_action :admin_or_shop!
   before_action :set_menu
 
   def index
@@ -201,5 +203,12 @@ class MenuImagesController < ApplicationController
 
   def set_menu
     @menu = Menu.find(params[:menu_id])
+  end
+
+  def admin_or_shop!
+    unless admin_signed_in? || shop_signed_in?
+      flash[:danger] = "店舗ユーザーとしてログインしてください"
+      redirect_to root_path
+    end
   end
 end

@@ -9,27 +9,22 @@
           <% @cart_items.each do |cart_item| %>
 
             <div class="row">
-              <div class="col-8">
+              <div class="col-7">
                 <h5><%= cart_item.menu.name %></h5>
                 <h6>¥<%= price(cart_item.menu.price) %></h6>
-                <div class="intro_box">
-                  <%= cart_item.menu.introduction.truncate(30) %>
+                <div class="intro_box font-10">
+                  <%= introduction(cart_item.menu.introduction.truncate(30)) %>
                 </div>
+                <h6 class="ma-t-10">数量<span class="ma-x-20">：</span><%= cart_item.amount %></h6>
               </div>
-              <div class="col-4 center">
+              <div class="col-5 center">
                 <% if cart_item.menu.menu_images.present? %>
-                  <%= image_tag cart_item.menu.menu_images[0].file_name.thumb_vertical.to_s, class: "wid-100" %>
+                  <%= image_tag cart_item.menu.main_image.file_name.thumb_square.to_s, class: "wid-100" %>
                 <% else %>
                   <%= image_tag "noimage.png", size:"100x50" %>
                 <% end %>
               </div>
             </div>
-            <div class="row ma-t-20">
-              <div class="col-sm-12">
-                <h6>数量<span class="ma-x-20">：</span><%= cart_item.amount %></h6>
-              </div>
-            </div>
-
             <hr>
           <% end %>
 

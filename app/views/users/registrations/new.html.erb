@@ -3,10 +3,19 @@
     <div class="col-md-8 offset-md-2">
       <div class="form_box">
         <% if params[:data] %>
-          <h3 class="center">新規登録<span class="font-20 ma-l-20">for <%= params[:data][:provider] %></span></h3>
+          <% if params[:data][:provider] == "facebook" %>
+            <h3 class="center">新規登録<span class="font-20 ma-l-20">for<%= image_tag "f_logo.png", size:"30x30", class:"ma-x-20" %></span></h3>
+          <% elsif params[:data][:provider] == "google_oauth2" %>
+            <h3 class="center">新規登録<span class="font-20 ma-l-20">for<%= image_tag "g_logo.png", size:"30x30", class:"ma-x-20" %></span></h3>
+          <% end %>
         <% else %>
           <h3 class="center">新規登録</h3>
         <% end %>
+
+        <div class="back_btn right">
+          <%= link_to "戻る", :back, class: "arrow2" %>
+        </div>
+
         <hr>
         <% unless params[:data] %>
           <div class="row ma-y-30">
@@ -87,10 +96,6 @@
           <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
             <%= link_to "本人確認用のメールが届いていない方はこちら", new_confirmation_path(resource_name), class: "font-10 ma-y-10" %><br />
           <% end %>
-        </div>
-
-        <div class="back_btn right">
-          <%= link_to "戻る", :back, class: "arrow2" %>
         </div>
 
       </div>  

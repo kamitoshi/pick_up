@@ -1,5 +1,4 @@
 class CartItems::OrdersController < ApplicationController
-  layout "users_layout"
   def new
     @order = Order.new
     @order_item = OrderItem.new
