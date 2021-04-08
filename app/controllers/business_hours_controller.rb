@@ -1,4 +1,6 @@
 class BusinessHoursController < ApplicationController
+  layout "shop_app"
+  before_action :admin_or_shop!
   before_action :set_shop
   def index
     @business_hours = @shop.business_hours.order(job_time: "asc")
@@ -70,4 +72,5 @@ class BusinessHoursController < ApplicationController
   def set_shop
     @shop = Shop.find(params[:shop_id])
   end
+  
 end

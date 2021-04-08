@@ -1,7 +1,9 @@
-<div class="fixed_box time-limit">
-  <% flash.each do |key, message| %>
-    <p class="alert alert-<%= key %> center">
-      <%= message %>
-    </p>
-  <% end %>
-</div>
+
+<% flash.each do |key, message| %>
+  <div class="alert alert-<%= key %> alert-dismissible fade show" role="alert" style="margin:10px 20px;">
+    <%= message %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="閉じる">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>

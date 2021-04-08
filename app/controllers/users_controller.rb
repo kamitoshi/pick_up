@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  layout "users_layout"
+  before_action :admin_or_user!
   def show
     @user = User.find(params[:id])
   end

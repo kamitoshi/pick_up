@@ -13,45 +13,21 @@
   </head>
 
   <body>
-    <header>
-      <%= render partial: 'layouts/header' %>
-    </header>
-    <div class="container-fuild background">
-      <main>
-        <div class="flex-box">
-          <div class="flex-1 fix-15">
-            <% if shop_signed_in? %>
-              <%= render partial: 'layouts/shopSidebar' %>
-            <% elsif admin_signed_in? %>
-              <%= render partial: 'layouts/adminSidebar' %>
-            <% end %>
-          </div>
-          <div class="flex-5 main-box">
-            <%= render partial: 'shared/flash_message' %>
-            <%= yield %>
-          </div>
-        </div>
-      </main>
+    <%= render partial: "layouts/users_header" %>
+    <div class="wrapper">
+      <%= render partial: 'shared/flash_message' %>
+      <%= yield %>
+      <footer class="center">
+        <%= render partial: "layouts/footer" %>
+      </footer>
+      <%= render partial: 'users/auth_modal' %>
     </div>
-    <script>
-      jQuery(function ($) {
-        //data-hrefの属性を持つtrを選択しclassにclickableを付加
-        $("tr[data-href]")
-          .addClass("clickable")
 
-        //クリックイベント
-        .click(function (e) {
-          //e.targetはクリックした要素自体、それがa要素以外であれば
-          if (!$(e.target).is("a")) {
-            //その要素の先祖要素で一番近いtrの
-            //data-href属性の値に書かれているURLに遷移する
-            window.location = $(e.target).closest("tr").data("href");
-          }
-        });
-      });
-      $(function(){
-        setTimeout("$('.time-limit').fadeOut('slow')", 3000) 
-      })
-    </script>
+    <% if user_signed_in? %>
+      <%= render partial: 'users/modal' %>
+      <%= render partial: 'layouts/detail_search_modal', locals:{q: @q} %>
+    <% end %>
+    <%= render partial: 'layouts/user_menu_modal' %>
+    
   </body>
 </html>

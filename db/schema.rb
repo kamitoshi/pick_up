@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2021_03_21_104920) do
     t.integer "menu_id"
     t.string "menu_name", null: false
     t.integer "menu_price", null: false
+    t.integer "menu_fee", null: false
     t.integer "menu_amount", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -91,7 +92,7 @@ ActiveRecord::Schema.define(version: 2021_03_21_104920) do
   create_table "orders", force: :cascade do |t|
     t.integer "shop_id"
     t.integer "user_id"
-    t.string "reserve_number", null: false
+    t.string "reserve_number"
     t.datetime "takeaway_datetime"
     t.text "requested"
     t.integer "status", default: 0

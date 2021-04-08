@@ -1,0 +1,6 @@
+<div class="search_bar">
+  <%= form_tag menus_path, method: :get do %>
+    <%= text_field_tag :search, params[:search], class: 'searchText', placeholder:"キーワードを入力して検索" %>
+    <%= submit_tag "検索", class:"searchButton" %>
+  <% end%>  
+</div>

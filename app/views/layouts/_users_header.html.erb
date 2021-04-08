@@ -1,30 +1,29 @@
-<!-- ヘッダー -->
 <div id="header">
 	<div class="inner">
 		<!-- ロゴ -->
 		<div class="logo">
 			<a href="/">
-        <%= image_tag "logo2.png", size:"100x70" %>
+        <%= image_tag "logo2.png", size:"80x55" %>
       </a>
 		</div>
 		<!-- / ロゴ -->
-		<div class="search_icon" data-toggle="modal" data-target="#searchModal">
+		<div class="search_icon" data-toggle="modal" data-target="#detailSearchModal">
 			<i class="fas fa-search fa-lg"></i>
 		</div>
 		<% if user_signed_in? %>
 			<div class="user_icon" data-toggle="modal" data-target="#userModal">
 				<i class="fas fa-user"></i>
 			</div>
-			<div class="menu_icon" data-href="<%= user_cart_items_path(current_user) %>">
+			<div class="cart_icon" data-href="<%= user_cart_items_path(current_user) %>">
 				<i class="fas fa-shopping-bag"></i>
 			</div>
 		<% else %>
 			<div class="user_icon" data-toggle="modal" data-target="#authModal">
 				<i class="fas fa-user"></i>
 			</div>
-			<div class="menu_icon" data-toggle="modal" data-target="#authModal">
-			<i class="fas fa-shopping-bag"></i>
-		</div>
+			<div class="menu_icon" data-toggle="modal" data-target="#userMenuModal">
+				<i class="fas fa-bars fa-2x"></i>
+			</div>
 		<% end %>
 	  <!-- メインナビゲーション -->
     <nav id="mainNav">
@@ -36,7 +35,7 @@
 					<% if user_signed_in? %>
 						<li><a href="/users/<%= current_user.id %>/cart_items">お買い物かご<br><span>Cart</span></a></li>
 					<% else %>
-						<li><a href="#" data-toggle="modal" data-target="#authModal">お買い物かご<br><span>Cart</span></a></li>
+						<li><a href="/top">飲食店様向け<br><span>Shops</span></a></li>
 					<% end %>
 					
 					<% if user_signed_in? %>
@@ -49,4 +48,3 @@
     </nav>
   </div>
 </div>
-<!-- / ヘッダー -->

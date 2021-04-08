@@ -1,5 +1,8 @@
 class ShopTagsController < ApplicationController
+  layout "shop_app"
+  before_action :admin_or_shop!
   before_action :set_shop
+
   def new
     @shop_tag = ShopTag.new
   end
@@ -45,10 +48,10 @@ class ShopTagsController < ApplicationController
     if @shop == current_shop
       if @shop_tag.destroy
         flash[:success] = "削除しました"
-        redirect_to edit_shop_path(current_shop)
+        redirect_to new_shop_shop_tag_path(current_shop)
       else
         flash[:danger] = "削除できませんでした"
-        redirect_to edit_shop_path(current_shop)
+        redirect_to new_shop_shop_tag_path(current_shop)
       end
     else
       flash[:danger] = "他店のタグは削除できません"
@@ -65,4 +68,5 @@ class ShopTagsController < ApplicationController
   def set_shop
     @shop = Shop.find(params[:shop_id])
   end
+  
 end

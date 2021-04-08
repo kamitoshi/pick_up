@@ -3,6 +3,9 @@
     <div class="col-md-8 offset-md-2">
       <div class="form_box">
         <h3 class="center">営業時間設定</h3>
+        <div class="back_btn right">
+          <%= link_to "戻る", shop_path(current_shop), class: "arrow2" %>
+        </div>
         <hr>
         <%= form_for @business_hour, url: shop_business_hours_path(current_shop) do |f|  %>
           <div class="field">
@@ -12,17 +15,17 @@
 
           <div class="field">
             <%= f.label :opening, "開店時間" %><br>
-            <%= f.time_select :opening, prompt:true, ignore_data:true %>
+            <%= f.time_select :opening, {prompt:true, ignore_data:true}, class: "wid-20" %>
           </div>
 
           <div class="field">
             <%= f.label :closing, "閉店時間" %><br>
-            <%= f.time_select :closing, prompt:true, ignore_data:true %>
+            <%= f.time_select :closing, {prompt:true, ignore_data:true}, class: "wid-20" %>
           </div>
 
           <div class="field">
             <%= f.label :last_order, "ラストオーダー" %><br>
-            <%= f.time_select :last_order, prompt:true, ignore_data:true %>
+            <%= f.time_select :last_order, {prompt:true, ignore_data:true}, class: "wid-20" %>
           </div>
 
           <div class="actions center">

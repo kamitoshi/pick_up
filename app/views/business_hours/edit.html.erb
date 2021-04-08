@@ -2,7 +2,10 @@
   <div class="row">
     <div class="col-8 offset-2">
       <div class="form_box">
-        <h3 class="center">営業時間編集</h3>
+        <h5 class="center">営業時間編集</h5>
+        <div class="back_btn right">
+          <%= link_to "戻る", shop_path(current_shop), class: "arrow2" %>
+        </div>
         <hr>
         <%= form_for @business_hour, url: shop_business_hour_path(current_shop, @business_hour) do |f|  %>
           <div class="field ma-b-50">

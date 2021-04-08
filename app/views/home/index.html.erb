@@ -4,9 +4,7 @@
 </div>
 <!-- / メイン画像 -->
 <!-- サーチバー  -->
-<div class="search_bar">
-  
-</div>
+<%= render partial: "layouts/search_bar" %>
 <!-- / サーチバー  -->
 
 <div class="container-fluid">
@@ -19,13 +17,14 @@
         <div class="col mb-4">
           <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
             <% if menu.menu_images.present? %>
-              <%= image_tag menu.menu_images[0].file_name.thumb_width.to_s, class:"scale-img wid-100" %>
+              <%= image_tag menu.main_image.file_name.thumb_width.to_s, class:"scale-img wid-100" %>
             <% else %>
               <%= image_tag "noimage.png", class: "wid-100" %>
             <% end %>
             <div class="card-body">
-              <p class="c-title" >【<%= menu.name %>】<%= menu.shop.name %></p>
-              <p class="c-text">
+              <p class="c-title"><%= menu.name %></p>
+              <p class="c-subtitle">【<%= menu.shop.name %>】</p>
+              <p class="c-text right">
                 ¥<%= price(menu.price) %>
               </p>
             </div>
@@ -48,13 +47,14 @@
         <div class="col mb-4">
           <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
             <% if menu.menu_images.present? %>
-              <%= image_tag menu.menu_images[0].file_name.thumb_width.to_s, class:"scale-img wid-100" %>
+              <%= image_tag menu.main_image.file_name.thumb_width.to_s, class:"scale-img wid-100" %>
             <% else %>
               <%= image_tag "noimage.png", class: "wid-100" %>
             <% end %>
             <div class="card-body">
-              <p class="c-title" >【<%= menu.name %>】<%= menu.shop.name %></p>
-              <p class="c-text">
+              <p class="c-title"><%= menu.name %></p>
+              <p class="c-subtitle">【<%= menu.shop.name %>】</p>
+              <p class="c-text right">
                 ¥<%= price(menu.price) %>
               </p>
             </div>
@@ -68,37 +68,22 @@
     <div class="gridWrapperTitle">
       <h6>人気レストラン</h6>
     </div>
-    <div class="row row-cols-2 row-cols-lg-3 row-cols-md-2">
+    <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3">
       <% @shops.each do |shop| %>
         <%= link_to users_shop_path(shop), class: "black" do %>
           <div class="col mb-4">
-            <div class="card scale-box border">
-              <div class="row no-gutters" data-href="<%= users_shop_path(shop) %>">
-                <div class="col-8">
-                  <div class="card-body">
-                    <h6><%= shop.name %></h6>
-                    <p class="c-text">
-                      <% if shop.shop_tags.present? %>
-                        <% shop.shop_tags.each do |tag| %>
-                          <span><%= tag.content %></span>
-                        <% end %>
-                      <% else %>
-                        検索キーワードがありません
-                      <% end %>
-                    </p>
-                    <div class="intro_box">
-                      <p class="c-text"><%= shop.introduction %></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <% if shop.shop_images.present? %>
-                    <%= image_tag shop.shop_images[0].file_name.thumb_vertical.to_s, class:"shop_scale-img wid-100" %>
-                  <% else %>
-                    <%= image_tag "noimage.png", class: "wid-100" %>
+            <%= image_tag shop.main_image.file_name.thumb_width.to_s, class:"wid-100", style: "padding:1px;" %>
+            <div class="card-img-overlay grad">
+              <h6><%= shop.name %></h6>
+              <p class="c-text">
+                <% if shop.shop_tags.present? %>
+                  <% shop.shop_tags.each do |tag| %>
+                    <span><%= tag.content %></span>
                   <% end %>
-                </div>
-              </div>
+                <% else %>
+                  検索キーワードがありません
+                <% end %>
+              </p>
             </div>
           </div>
         <% end %>
@@ -112,4 +97,3 @@
     <% end %>
   <% end %>
 </div>
-

@@ -1,22 +1,33 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-12">
-      <div class="width_box">
-        <div class="user_name-box">
-          <span class="font-30"><%= @user.full_name %></span>
+    <div class="col-md-8 offset-md-2">
+      <div class="content_box">
+        <h3 class="center">アカウント登録情報</h3>
+        <div class="back_btn right">
+          <%= link_to "戻る", :back, class: "arrow2" %>
         </div>
-        <div class="user_info-box">
-          <div class="phone_number_box">
-            <p>電話番号：<%= @user.phone_number %></p>
-          </div>
-          <div class="email_box">
-            <p>Eメール：<%= @user.email %></p>
-          </div>
-        </div>
-        <div class="edit_btn right">
-          <%= link_to "編集", edit_user_path(current_user), class: "btn btn-primary" %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-danger" %>
-        </div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>氏名</th>
+              <td><%= @user.full_name %></td>
+            </tr>
+            <tr>
+              <th>電話番号</th>
+              <td><%= @user.phone_number %></td>
+            </tr>
+            <tr>
+              <th>メールアドレス</th>
+              <td><%= @user.email %></td>
+            </tr>
+            <tr class="right">
+              <td colspan=2>
+                <%= link_to "編集", edit_user_path(current_user), class: "btn btn-primary btn-sm" %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

@@ -1,4 +1,6 @@
 class Shops::MenusController < ApplicationController
+  layout "shop_app"
+  before_action :authenticate_shop!
   def index
     @menus = Menu.where(shop_id: current_shop.id)
     @food_menus = []

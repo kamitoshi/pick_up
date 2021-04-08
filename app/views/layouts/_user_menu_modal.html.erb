@@ -1,0 +1,33 @@
+<div class="modal fade" id="userMenuModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content container global_menu_modal">
+      <div class="modal-body">
+        <div class="modal_title">
+          <h5 class="center">メニュー</h5>
+        </div>
+        <hr>
+        
+        <table class="table table-borderless">
+          <tbody>
+            <tr class="pointer" data-href="<%= root_path %>">
+              <td><i class="fas fa-home"></i>ホーム</td>
+            </tr>
+            <tr class="pointer" data-href="<%= about_path %>">
+              <td>Pickupとは</td>
+            </tr>
+            <tr class="pointer" data-href="<%= method_path %>">
+              <td>ご購入方法</td>
+            </tr>
+            <tr class="pointer" data-href="<%= top_path %>">
+              <td>飲食店様向け</td>
+            </tr>
+            <tr class="pointer" data-href="<%= new_user_session_path %>">
+              <td>ログイン</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

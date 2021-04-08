@@ -8,7 +8,7 @@
           <div class="shop_info-box">
             <% if @shop.shop_images.present? %>
               <div class="shop_image-box center ma-b-10">
-                <%= image_tag @shop.shop_images[0].file_name.url, size: "200x150" %>
+                <%= image_tag @shop.main_image.file_name.url, size: "200x150" %>
               </div>
               <div class="shop_image-box center">
                 <% @shop.shop_images.each do |image| %>
@@ -152,7 +152,7 @@
                     <td>
                       <% if menu.menu_images.present? %>
                         <div class="menu_image-box center ma-b-10">
-                          <%= image_tag menu.menu_images[0].file_name.thumb50.to_s %>
+                          <%= image_tag menu.main_image.file_name.thumb50.to_s %>
                         </div>
                       <% end %>
                     </td>

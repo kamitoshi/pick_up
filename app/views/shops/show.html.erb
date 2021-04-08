@@ -1,403 +1,99 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4">
-      <div class="up_content_box">
-        <h5>
-          <%= link_to "本日の受注状況", today_index_shops_orders_path %>
-          <% if today_order_count(@new_orders) >= 1 %>
-            <span class="blinking red">新着</span>
-          <% end %>
-        </h5>
+    <div class="col-md-8 offset-md-2">
+      <div class="content_box">
+        <h5>店舗情報詳細</h5>
+        <div class="back_btn right">
+          <%= link_to "戻る", shops_path, class: "arrow2" %>
+        </div>
         <hr>
         <div class="content_box_detail">
-          <table class="table table-borderless">
-            <tbody>
-              <tr data-href="<%= today_index_shops_orders_path %>" class="pointer">
-                <td>新規注文</td>
-                <td><%= today_order_count(@new_orders) %></td>
-              </tr>
-              <tr data-href="<%= today_index_shops_orders_path %>" class="pointer">
-                <td>完了注文</td>
-                <td><%= today_order_count(@fix_orders) %></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-8">
-      <div class="up_content_box">
-        <h5>売上</h5>
-        <div class="content_box_detail center">
-          <hr>
-            <div class="row">
-              <div class="col-4">
-                <h5>
-                  ¥<%= @shop.month_sales_money.to_s(:delimited) %>
-                  <span class="ma-l-10 ma-r-10">/</span>
-                  <%= @shop.month_sales_count %>件
-                </h5>
-                <p>今月の売上金額/売上件数</p>
-              </div>
-              <div class="col-4">
-                <h5>
-                  ¥<%= @shop.today_sales_money.to_s(:delimited) %>
-                  <span class="ma-l-10 ma-r-10">/</span>
-                  <%= @shop.today_sales_count %>件
-                </h5>
-                <p>今日の売上金額/売上件数</p>
-              </div>
-              <div class="col-4">
-                <h5>
-                  ¥<%= @shop.yesterday_sales_money.to_s(:delimited) %>
-                  <span class="ma-l-10 ma-r-10">/</span>
-                  <%= @shop.yesterday_sales_count %>件
-                </h5>
-                <p>前日の売上金額/売上件数</p>
-              </div>
-            </div>
-          <hr>
-        </div>
-        <div class="chat_box">
-          <!-- タブ部分 -->
-          <ul id="myTab" class="nav nav-tabs" role="tablist">
-            <li class="nav-item" role="presentation">
-              <a href="#salesNumber" id="salesNumber-tab" class="nav-link active" role="tab" data-toggle="tab" aria-controls="salesNumber" aria-selected="true">売上件数</a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a href="#salesPrice" id="salesPrice-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="salesPrice" aria-selected="false">売上金額</a>
-            </li>
-          </ul>
-
-          <!-- パネル部分 -->
-          <div id="myTabContent" class="tab-content mt-3">
-            <div id="salesNumber" class="tab-pane active" role="tabpanel" aria-labelledby="salesNumber-tab">
-              <canvas id="salesNumberCanvas"></canvas>
-            </div>
-            <div id="salesPrice" class="tab-pane" role="tabpanel" aria-labelledby="salesPrice-tab">
-              <canvas id="salesPriceCanvas"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12" style="padding:0">
-      <div class="width_box">
-        <h5>お知らせ</h5>
-        <hr>
-        <div class="content_box_detail">
-          <table class="table table-hover table-borderless">
-            <tbody>
-              <tr>
-                <td>メニュー</td>
-              </tr>
-              <tr>
-                <td>メニュー</td>
-              </tr>
-              <tr>
-                <td>メニュー</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6" style="padding:0">
-      <div class="under_content_box scroll-box">
-        <div class="title_box">
-          <h5>店舗情報</h5>
-          <hr>
-        </div>
-        <div class="content_box_detail">
-          <div class="shop_name-box">
-            <h5><%= @shop.name %></h5>
-          </div>
-          <div class="shop_info-box">
+          <div class="image_box pa-b-30">
             <% if @shop.shop_images.present? %>
               <div class="shop_image-box center ma-b-10">
-                <%= image_tag @shop.shop_images[0].file_name.to_s, size: "200x150" %>
+                <%= image_tag @shop.shop_images[0].file_name.thumb_width.to_s, class:"wid-100" %>
               </div>
               <div class="shop_image-box center">
                 <% if @shop.shop_images.count >= 2 %>
                   <% @shop.not_main_images.each do |image| %>
-                    <%= image_tag image.file_name.to_s, size: "100x75" %>
+                    <%= image_tag image.file_name.thumb100.to_s %>
                   <% end %>
                 <% end %>
               </div>
+            <% else %>
+              <div class="shop_image-box center ma-b-10 border">
+                <%= image_tag "noimage.png", class:"wid-100" %>
+              </div>
             <% end %>
-            <div class="shop_info-box">
-              <div class="address">
-                <p><strong>住所</strong></p>
-                <p>
+            <div class="add_btn ma-t-30 right">
+              <%= link_to "商品画像を追加・編集する", shop_shop_images_path(@shop) %>
+            </div>
+          </div>
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>店舗名</th>
+                <td><%= @shop.name %></td>
+              </tr>
+              <tr>
+                <th>電話番号</th>
+                <td><%= @shop.phone_number %></td>
+              </tr>
+              <tr>
+                <th>メールアドレス</th>
+                <td><%= @shop.email %></td>
+              </tr>
+              <tr>
+                <th>住所</th>
+                <td>
                   〒<%= @shop.postal_code %><br>
                   <%= @shop.full_address %>
-                </p>
-              </div>
-              <div class="phone_number">
-                <p><strong>電話番号</strong></p>
-                <p><%= @shop.phone_number %></p>
-              </div>
-              <% if @shop.business_hours.present? %>
-                <div class="business_time">
-                  <p><strong>営業時間</strong></p>
-                  <% @shop.business_hours.each do |business_hour| %>
-                    <p><%= business_hour.job_time %>：<%= business_hour.opening.strftime("%H:%M") %>〜<%= business_hour.closing.strftime("%H:%M") %>（L.O<%= business_hour.last_order.strftime("%H:%M") %>）</p>
+                </td>
+              </tr>
+              <tr>
+                <th>営業時間</th>
+                <% if @shop.business_hours.present? %>
+                  <td>
+                    <% @shop.business_hours.each do |business_hour| %>
+                      <p>
+                        <%= business_hour.job_time %><br>
+                        <%= business_hour.opening.strftime("%H:%M") %>〜<%= business_hour.closing.strftime("%H:%M") %><br>
+                        （L.O <%= business_hour.last_order.strftime("%H:%M") %>）</p>
+                    <% end %>
+                    <p class="right"><%= link_to "営業時間を管理する", shop_business_hours_path(current_shop) %></p>
+                  </td>
+                <% else %>
+                  <td>
+                    <p>まだ、営業時間が登録されていません</p>
+                    <p class="right"><%= link_to "営業時間を管理する", shop_business_hours_path(current_shop) %></p>
+                  </td>
+                <% end %>
+              </tr>
+              <tr>
+                <th>検索キーワード</th>
+                <td>
+                  <% if @shop.shop_tags.present? %>
+                    <% @shop.shop_tags.each do |tag| %>
+                      <span class="ma-r-10"><%= tag.content %></span>
+                    <% end %>
+                    <p class="right"><%= link_to "キーワードを管理する", new_shop_shop_tag_path(@shop) %></p>
+                  <% else %>
+                    <p>検索キーワードが設定されていません</p>
+                    <p class="right"><%= link_to "キーワードを管理する", new_shop_shop_tag_path(@shop) %></p>
                   <% end %>
-                </div>
-              <% end %>
-              <div class="introduction">
-                <p><strong>紹介文</strong></p>
-                <%= @shop.introduction %>
-              </div>
-              <% if @shop.url.present? %>
-                <div class="url">
-                  <p>お店URL：<%= @shop.url %></p>
-                </div>
-              <% end %>
-            </div>
-            <div class="shop_edit wid-40 ma-l pa-t-30">
-              <%= link_to "編集する", edit_shop_path(current_shop), class:"btn btn-primary wid-100" %>
-            </div>
-          </div>
+                </td>
+              </tr>
+              <tr>
+                <th>店舗紹介文</th>
+                <td style="overflow-wrap: break-word;"><%= introduction(@shop.introduction) %></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-    </div>
-    <div class="col-lg-6" style="padding:0">
-      <div class="under_content_box scroll-box">
-        <div class="title_box">
-          <h5>登録商品一覧</h5>
-          <hr>
-        </div>
-        <div class="content_box_detail">
-          <!-- タブ部分 -->
-          <ul id="myTab" class="nav nav-tabs" role="tablist">
-            <li class="nav-item" role="presentation">
-              <a href="#foodIndex" id="foodIndex-tab" class="nav-link active" role="tab" data-toggle="tab" aria-controls="foodIndex" aria-selected="true">フード</a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a href="#drinkIndex" id="drinkIndex-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="drinkIndex" aria-selected="false">ドリンク</a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a href="#dessertIndex" id="dessertIndex-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="dessertIndex" aria-selected="false">デザート</a>
-            </li>
-          </ul>
-          <!-- パネル部分 -->
-          <div id="myTabContent" class="tab-content mt-3">
-            <div id="foodIndex" class="tab-pane active" role="tabpanel" aria-labelledby="foodIndex-tab">
-              <table class="table table-hover table-borderless">
-                <tbody>
-                  <% if @food_menus.present? %>
-                    <% @food_menus.each do |menu| %>
-                      <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
-                        <td><%= menu.name %></td>
-                        <td>¥<%= menu.price %></td>
-                      </tr>
-                    <% end %>
-                  <% else %>
-                    <tr>
-                      <td>まだメニューが登録されていません</td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
-            <div id="drinkIndex" class="tab-pane" role="tabpanel" aria-labelledby="drinkIndex-tab">
-              <table class="table table-hover table-borderless">
-                <tbody>
-                  <% if @drink_menus.present? %>
-                    <% @drink_menus.each do |menu| %>
-                      <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
-                        <td><%= menu.name %></td>
-                        <td>¥<%= menu.price %></td>
-                      </tr>
-                    <% end %>
-                  <% else %>
-                    <tr>
-                      <td>まだメニューが登録されていません</td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
-            <div id="dessertIndex" class="tab-pane" role="tabpanel" aria-labelledby="dessertIndex-tab">
-              <table class="table table-hover table-borderless">
-                <tbody>
-                  <% if @dessert_menus.present? %>
-                    <% @dessert_menus.each do |menu| %>
-                      <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
-                        <td><%= menu.name %></td>
-                        <td>¥<%= menu.price %></td>
-                      </tr>
-                    <% end %>
-                  <% else %>
-                    <tr>
-                      <td>まだメニューが登録されていません</td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <div class="return_btn center ma-b-30">
+          <%= link_to "編集する", edit_shop_path(@shop.id), class: "btn btn-outline-success" %>
         </div>
       </div>
     </div>
   </div>
 </div>
-<script>
-  // 直近１週間の売上件数をグラフ表示させる
-  var ctx = document.getElementById("salesNumberCanvas").getContext("2d");
-  var myBar = new Chart(ctx, {
-    type: 'bar',                           //◆棒グラフ
-    data: {                                //◆データ
-      labels: [
-        "<%= @week_sales_numbers[0][0][:date] %>",
-        "<%= @week_sales_numbers[1][0][:date] %>",
-        "<%= @week_sales_numbers[2][0][:date] %>",
-        "<%= @week_sales_numbers[3][0][:date] %>",
-        "<%= @week_sales_numbers[4][0][:date] %>",
-        "<%= @week_sales_numbers[5][0][:date] %>",
-        "<%= @week_sales_numbers[6][0][:date] %>"
-      ],     //ラベル名
-      datasets: [{                       //データ設定
-        data: [
-          "<%= @week_sales_numbers[0][0][:count] %>",
-          "<%= @week_sales_numbers[1][0][:count] %>",
-          "<%= @week_sales_numbers[2][0][:count] %>",
-          "<%= @week_sales_numbers[3][0][:count] %>",
-          "<%= @week_sales_numbers[4][0][:count] %>",
-          "<%= @week_sales_numbers[5][0][:count] %>",
-          "<%= @week_sales_numbers[6][0][:count] %>",
-        ],          //データ内容
-        backgroundColor: '#4444FF'   //背景色
-      }]
-    },
-    options: {                             //◆オプション
-      responsive: true,                  //グラフ自動設定
-      legend: {                          //凡例設定
-        display: false                 //表示設定
-      },
-      title: {                           //タイトル設定
-        display: true,                 //表示設定
-        fontSize: 18,                  //フォントサイズ
-        text: '売上件数'                //ラベル
-      },
-      scales: {                          //軸設定
-        yAxes: [{                      //y軸設定
-          display: true,             //表示設定
-          scaleLabel: {              //軸ラベル設定
-              display: true,          //表示設定
-              labelString: '注文件数',  //ラベル
-              fontSize: 18               //フォントサイズ
-          },
-          ticks: {                      //最大値最小値設定
-              min: 0,                   //最小値
-              max: 10,                  //最大値
-              fontSize: 18,             //フォントサイズ
-              stepSize: 2              //軸間隔
-          },
-        }],
-        xAxes: [{                         //x軸設定
-          display: true,                //表示設定
-          barPercentage: 2,           //棒グラフ幅
-          categoryPercentage: 0.4,      //棒グラフ幅
-          scaleLabel: {                 //軸ラベル設定
-            display: true,             //表示設定
-            labelString: '日付',  //ラベル
-            fontSize: 18               //フォントサイズ
-          },
-          ticks: {
-            fontSize: 18             //フォントサイズ
-          },
-        }],
-      },
-      layout: {                             //レイアウト
-        padding: {                          //余白設定
-          left: 50,
-          right: 50,
-          top: 0,
-          bottom: 50
-        }
-      }
-    }
-  });
-  // 直近１週間の売上金額をグラフ表示させる
-  var ctx = document.getElementById("salesPriceCanvas").getContext("2d");
-  var myBar = new Chart(ctx, {
-    type: 'bar',                           //◆棒グラフ
-    data: {                                //◆データ
-      labels: [
-        "<%= @week_sales_prices[0][0][:date] %>",
-        "<%= @week_sales_prices[1][0][:date] %>",
-        "<%= @week_sales_prices[2][0][:date] %>",
-        "<%= @week_sales_prices[3][0][:date] %>",
-        "<%= @week_sales_prices[4][0][:date] %>",
-        "<%= @week_sales_prices[5][0][:date] %>",
-        "<%= @week_sales_prices[6][0][:date] %>"
-      ],     //ラベル名
-      datasets: [{                       //データ設定
-        data: [
-          "<%= @week_sales_prices[0][0][:price] %>",
-          "<%= @week_sales_prices[1][0][:price] %>",
-          "<%= @week_sales_prices[2][0][:price] %>",
-          "<%= @week_sales_prices[3][0][:price] %>",
-          "<%= @week_sales_prices[4][0][:price] %>",
-          "<%= @week_sales_prices[5][0][:price] %>",
-          "<%= @week_sales_prices[6][0][:price] %>",
-        ],          //データ内容
-        backgroundColor: '#4444FF'   //背景色
-      }]
-    },
-    options: {                             //◆オプション
-      responsive: true,                  //グラフ自動設定
-      legend: {                          //凡例設定
-        display: false                 //表示設定
-      },
-      title: {                           //タイトル設定
-        display: true,                 //表示設定
-        fontSize: 18,                  //フォントサイズ
-        text: '売上金額'                //ラベル
-      },
-      scales: {                          //軸設定
-        yAxes: [{                      //y軸設定
-          display: true,             //表示設定
-          scaleLabel: {              //軸ラベル設定
-              display: true,          //表示設定
-              labelString: '注文金額',  //ラベル
-              fontSize: 18               //フォントサイズ
-          },
-          ticks: {                      //最大値最小値設定
-              min: 0,                   //最小値
-              max: 50000,                  //最大値
-              fontSize: 18,             //フォントサイズ
-              stepSize: 5000              //軸間隔
-          },
-        }],
-        xAxes: [{                         //x軸設定
-          display: true,                //表示設定
-          barPercentage: 2,           //棒グラフ幅
-          categoryPercentage: 0.4,      //棒グラフ幅
-          scaleLabel: {                 //軸ラベル設定
-            display: true,             //表示設定
-            labelString: '日付',  //ラベル
-            fontSize: 18               //フォントサイズ
-          },
-          ticks: {
-            fontSize: 18             //フォントサイズ
-          },
-        }],
-      },
-      layout: {                             //レイアウト
-        padding: {                          //余白設定
-          left: 50,
-          right: 50,
-          top: 0,
-          bottom: 50
-        }
-      }
-    }
-  });
-</script>

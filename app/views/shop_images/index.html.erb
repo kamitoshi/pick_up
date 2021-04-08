@@ -1,20 +1,28 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
-      <div class="width_box">
-        <h5><%= @shop.name %>の画像一覧</h5>
+    <div class="col-md-8 offset-md-2">
+      <div class="content_box">
+        <h5>『<%= @shop.name %>』の画像一覧</h5>
+        <div class="back_btn right">
+          <%= link_to "戻る", shop_path(@shop), class: "arrow2" %>
+        </div>
         <hr>
-        <% if @shop.shop_images.present? %>
+        <% if @shop_images.present? %>
           <% 4.times do |i| %>
             <div class="content_box_detail">
-              <% if @shop.shop_images[i].present? %>
-                <%= image_tag @shop.shop_images[i].file_name.url, size: "300x200" %>
+              <% if @shop_images[i].present? %>
+                <% if @shop_images[i].is_main? %>
+                  <h6 class="center ma-b-20">〜メイン画像〜</h6>
+                <% end %>
+                <%= image_tag @shop_images[i].file_name.thumb_width.to_s, class: "wid-100" %>
                 <div class="edit_btn ma-t-50">
-                  <%= link_to "この画像を編集する", edit_shop_shop_image_path(@shop, @shop.shop_images[i]), class: "btn btn-primary" %>
-                  <%= link_to "この画像を削除する", shop_shop_image_path(@shop, @shop.shop_images[i]), method: :delete, class: "btn btn-danger" %>
+                  <%= link_to "この画像を編集する", edit_shop_shop_image_path(@shop, @shop_images[i]), class: "btn btn-primary" %>
+                  <% unless @shop_images[i] == @main_image %>
+                    <%= link_to "この画像を削除する", shop_shop_image_path(@shop, @shop_images[i]), method: :delete, class: "btn btn-danger" %>
+                  <% end %>
                 </div>
               <% else %>
-                <%= image_tag "noimage.png" %>
+                <%= image_tag "noimage.png", class:"wid-100" %>
                 <div class="add_btn ma-t-50">
                   <%= link_to "画像を追加する", new_shop_shop_image_path(@shop), class: "btn btn-primary" %>
                 </div>
@@ -25,7 +33,7 @@
         <% else %>
           <% 4.times do |i| %>
             <div class="content_box_detail">
-              <%= image_tag "noimage.png" %>
+              <%= image_tag "noimage.png", class:"wid-100" %>
               <div class="add_btn ma-t-50">
                 <%= link_to "画像を追加する", new_shop_shop_image_path(@shop), class: "btn btn-primary" %>
               </div>
@@ -33,9 +41,6 @@
             <hr>
           <% end %>
         <% end %>
-        <div class="back_btn center">
-          <%= link_to "戻る", edit_shop_path(@shop), class: "btn btn-outline-success" %>
-        </div>
       </div>
     </div>
   </div>

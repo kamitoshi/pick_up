@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Shops::UnlocksController < Devise::UnlocksController
+  layout "shop_app"
   # GET /resource/unlock/new
   # def new
   #   super

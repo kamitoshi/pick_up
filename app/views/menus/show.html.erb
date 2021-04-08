@@ -1,8 +1,8 @@
-<div class="container-fluid head-pad">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-8 offset-md-2 center">
+    <div class="col-md-8 offset-md-2 center ma-y-20">
       <% if @menu.menu_images.present? %>
-        <%= image_tag @menu.menu_images[0].file_name.thumb_square.to_s, id:"sample_img", class: "wid-70" %>
+        <%= image_tag @menu.main_image.file_name.thumb_square.to_s, id:"sample_img", class: "wid-70" %>
       <% else %>
         <%= image_tag "noimage.png", class: "wid-100" %>
       <% end %>
@@ -11,10 +11,10 @@
       <h5><%= @menu.name %></h5>
       <h6><%= @menu.shop.name %></h6>
       <br>
-      <h6>¥<%= @menu.price %></h6>
+      <h6>¥<%= price(@menu.price) %></h6>
     </div>
-    <div class="col-md-6">
-      <p><%= @menu.introduction %></p>
+    <div class="col-md-4">
+      <p><%= introduction(@menu.introduction) %></p>
     </div>
   </div>
   <hr>
@@ -22,7 +22,6 @@
     <div class="col-md-8 offset-md-2 center" style="padding-top: 0.8rem;">
       <%= form_for CartItem.new, url: menu_cart_items_path(@menu) do |f| %>
         <%= f.hidden_field :shop_id, value: @menu.shop_id %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
         <span id="minusButton<%= @menu.id %>" class="pointer minusBtn">-</span>
         <%= f.text_field :amount, id: "counterOutput#{@menu.id}", class:"amount_input", value:1 %>
         <span id="plusButton<%= @menu.id %>" class="pointer plusBtn">+</span>

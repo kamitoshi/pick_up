@@ -1,4 +1,6 @@
 class MenuTagsController < ApplicationController
+  layout "shop_app"
+  before_action :admin_or_shop!
   before_action :set_menu
 
   def new
@@ -52,4 +54,5 @@ class MenuTagsController < ApplicationController
   def set_menu
     @menu = Menu.find(params[:menu_id])
   end
+
 end
