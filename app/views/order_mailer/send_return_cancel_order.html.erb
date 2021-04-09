@@ -1,26 +1,66 @@
-<p>申し訳ございません。</p>
+<p>==========================================</p>
 <p>
-  ただいま店内が大変混雑しており、<br>
-  注文をお受けすることができません。
+  このメールはご注文に関する大切なご連絡です。<br>
+  必ず内容をご確認ください。
+</p>
+<p>==========================================</p>
+
+<h3 class="user_name"><%= @user.full_name %>様</h3>
+
+<p>『Pickup』をご利用いただき、誠にありがとうございます。</p>
+<br>
+<p>
+  大変申し訳ございません。<br>
+  ご希望の時間でのご用意が難しいため<br>
+  注文を受け付けることができませんでした。
 </p>
 <p>
-  お手数ですが、受け取り時間を変更して新しくご注文するか、<br>
+  お手数ですが、受け取り時間を変更してご注文いただくか、<br>
   直接店舗にご連絡いただきますようお願い申し上げます。
 </p>
 <br>
-
-<p>店舗の電話番号：<%= link_to @shop.phone_number, "tel:" + @shop.phone_number %></p>
-
-<h3>注文内容</h3>
-<ul style="list-style:none;">
-  <% @order.order_items.each do |item| %>
-    <li><%= item.menu_name %><span style="margin:0 20px">x</span><%= item.menu_amount %></li>
-  <% end %>
-</ul>
+<p><%= @shop.name %>の電話番号：<%= link_to @shop.phone_number, "tel:" + @shop.phone_number %></p>
+<br>
+<p class="ma-y-20">============【注文情報を記載】============</p>
+<p>［注文日時］<%= @order.created_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
+<p>［ご注文者］<%= @user.full_name %></p>
+<p>［受け取り店舗］<%= @shop.name %></p>
+<p>［受け取り日時］<%= @order.takeaway_datetime.strftime("%Y年%m月%d日 %H時%M分") %></p>
+<table class="table ma-y-20">
+  <thead>
+    <tr>
+      <td width="20%">商品名</td>
+      <td width="10%">数量</td>
+      <td width="20%">金額</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="20%"></td>
+      <td width="10%"></td>
+      <td width="20%"></td>
+    </tr>
+    <% @order.order_items.each do |item| %>
+      <tr>
+        <td><%= item.menu_name %></td>
+        <td><%= item.menu_amount %></td>
+        <td><%= item.menu_price * item.menu_amount %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p>［合計金額］<%= @order.total_payment %>円</p>
 
 <br>
-<br>
-<br>
-
 <a href="https://pickup.circrest.com/">Pickupへ</a>
+
+
+<p>□■□■□■□■□■□■□■□■□■□■□■□■□■□■□</p>
+<h3>Pickup</h3>
+<p>運営：Circrest</p>
+<p>住所：〒446−0072 愛知県安城市住吉町3−1−18</p>
+<p>TEL：080−5113−4214</p>
+<p>問い合わせ先：info@circrest.com</p>
+<p>対応時間：9:00〜20:00</p>
+<p>□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■</p>
 
