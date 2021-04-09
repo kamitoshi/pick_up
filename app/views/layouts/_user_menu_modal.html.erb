@@ -9,20 +9,20 @@
         
         <table class="table table-borderless">
           <tbody>
-            <tr class="pointer" data-href="<%= root_path %>">
-              <td><i class="fas fa-home"></i>ホーム</td>
+            <tr>
+              <td><i class="fas fa-home"></i><%= link_to "ホーム", root_path %></td>
             </tr>
-            <tr class="pointer" data-href="<%= about_path %>">
-              <td>Pickupとは</td>
+            <tr>
+              <td><%= link_to "Pickupとは", about_path %></td>
             </tr>
-            <tr class="pointer" data-href="<%= method_path %>">
-              <td>ご購入方法</td>
+            <tr>
+              <td><%= link_to "ご購入方法", method_path %></td>
             </tr>
-            <tr class="pointer" data-href="<%= top_path %>">
-              <td>飲食店様向け</td>
+            <tr>
+              <td><%= link_to "飲食店様向け", top_path %></td>
             </tr>
-            <tr class="pointer" data-href="<%= new_user_session_path %>">
-              <td>ログイン</td>
+            <tr>
+              <td><%= link_to "ログイン", new_user_session_path %></td>
             </tr>
           </tbody>
         </table>
