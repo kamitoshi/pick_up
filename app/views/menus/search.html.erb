@@ -9,13 +9,8 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3 swearchSidebar">
-      <%= render partial: "layouts/detail_search", locals:{q: @q} %>
-    </div>
-    <div class="col-md-9">
-      <% unless @search.blank? %>
-        <h6 class="ma-b-20">『<%= @search %>』で検索した商品：<%= @menus.count %>件</h6>
-      <% end %>
+    <div class="col-md-12">
+      <h6 class="ma-b-20">検索した商品：<%= @menus.count %>件</h6>
       <% if @menus.present? %>
         <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3">
           <% @menus.each do |menu| %>

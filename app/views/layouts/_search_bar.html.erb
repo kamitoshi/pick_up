@@ -1,6 +1,62 @@
 <div class="search_bar">
-  <%= form_tag menus_path, method: :get do %>
-    <%= text_field_tag :search, params[:search], class: 'searchText', placeholder:"キーワードを入力して検索" %>
-    <%= submit_tag "検索", class:"searchButton" %>
-  <% end%>  
+  <div class="container">
+    <div class="row">
+      <div class="col-6 left">
+        <p>
+          <a class="white ma-r-30" data-toggle="collapse" href="#searchBar" role="button" aria-expanded="false" aria-controls="searchBar">
+            <i class="fas fa-search"></i>検索する
+          </a>
+        </p>
+      </div>
+      <div class="col-6 right">
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+<div class="collapse" id="searchBar">
+  <%= search_form_for @q, url: search_menus_path, method: :get do |f| %>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4" id="detailSearch">
+          <div class="detail_search__group ma-t-10">
+            <div class="detail_search__group--label">
+              <i class="fas fa-search"></i><span>商品名</span><br>
+              <%= f.search_field :name_cont, placeholder: "例）ハンバーグ", class: "form-under" %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4" id="detailSearch">
+          <div class="detail_search__group ma-t-10">
+            <div class="detail_search__group--label">
+              <i class="fas fa-search"></i><span>検索キーワード</span><br>
+              <%= f.search_field :menu_tags_content_cont, placeholder: "例）おしゃれ", class: "form-under" %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4" id="detailSearch">
+          <div class="detail_search__group ma-t-10">
+            <div class="detail_search__group--label">
+              <i class="fas fa-search"></i><span>価格</span>
+              <div class="detail_search__group--forms">
+                <div class="row">
+                  <div class="col">
+                    <%= f.search_field :price_gteq, class:"form-under", placeholder: "下限価格" %>
+                  </div>
+                  <div class="col">
+                    <%= f.search_field :price_lteq, class:"form-under", placeholder: "上限価格" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail_search__btns right ma-y-30">
+        <%= f.submit "検索", class:"button-fill" %>
+      </div>
+    </div>
+  <% end %>
 </div>

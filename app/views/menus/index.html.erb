@@ -9,15 +9,12 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3 searchSidebar">
-      <%= render partial: "layouts/detail_search", locals:{q: @q} %>
-    </div>
-    <div class="col-md-9">
+    <div class="col-md-12">
       <% unless @search.blank? %>
         <h6 class="ma-b-20">『<%= @search %>』で検索した商品：<%= @menus.count %>件</h6>
       <% end %>
       <% if @menus.present? %>
-        <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3">
+        <div class="row row-cols-2 row-cols-lg-5 row-cols-md-4 row-cols-sm-3">
           <% @menus.each do |menu| %>
             <div class="col mb-4">
               <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
@@ -42,12 +39,13 @@
           <h5 class="center">検索されたメニューはありませんでした</h5>
         </div>
       <% end %>
-    </div>
 
-    <% if @menus.present? %>
-      <% @menus.each do |menu| %>
-        <%= render partial: "menus/modal", locals: {menu: menu} %>
+      <% if @menus.present? %>
+        <% @menus.each do |menu| %>
+          <%= render partial: "menus/modal", locals: {menu: menu} %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
+  
 </div>
