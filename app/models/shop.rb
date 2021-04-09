@@ -37,7 +37,9 @@ class Shop < ApplicationRecord
     result = 0
     orders.each do |order|
       if order.takeaway_datetime.strftime("%Y/%m") == Date.today.strftime("%Y/%m") && order.takeaway_datetime.strftime("%Y/%m/%d") <= Date.today.strftime("%Y/%m/%d")
-        month_orders.push(order)
+        if order.status == "受付注文" || order.status == "完了注文"
+          month_orders.push(order)
+        end
       end
     end
     month_orders.each do |month_order|
@@ -50,7 +52,9 @@ class Shop < ApplicationRecord
     month_orders = []
     orders.each do |order|
       if order.takeaway_datetime.strftime("%Y/%m") == Date.today.strftime("%Y/%m") && order.takeaway_datetime.strftime("%Y/%m/%d") <= Date.today.strftime("%Y/%m/%d")
-        month_orders.push(order)
+        if order.status == "受付注文" || order.status == "完了注文"
+          month_orders.push(order)
+        end
       end
     end
     return month_orders.count
@@ -63,7 +67,9 @@ class Shop < ApplicationRecord
     result = 0
     orders.each do |order|
       if order.takeaway_datetime.strftime("%Y/%m/%d") == Date.today.strftime("%Y/%m/%d")
-        today_orders.push(order)
+        if order.status == "受付注文" || order.status == "完了注文"
+          today_orders.push(order)
+        end
       end
     end
     today_orders.each do |today_order|
@@ -76,7 +82,9 @@ class Shop < ApplicationRecord
     today_orders = []
     orders.each do |order|
       if order.takeaway_datetime.strftime("%Y/%m/%d") == Date.today.strftime("%Y/%m/%d")
-        today_orders.push(order)
+        if order.status == "受付注文" || order.status == "完了注文"
+          today_orders.push(order)
+        end
       end
     end
     return today_orders.count
@@ -89,7 +97,9 @@ class Shop < ApplicationRecord
     result = 0
     orders.each do |order|
       if order.takeaway_datetime.strftime("%Y/%m/%d") == Date.yesterday.strftime("%Y/%m/%d")
-        yesterday_orders.push(order)
+        if order.status == "受付注文" || order.status == "完了注文"
+          yesterday_orders.push(order)
+        end
       end
     end
     yesterday_orders.each do |yesterday_order|
@@ -102,7 +112,9 @@ class Shop < ApplicationRecord
     yesterday_orders = []
     orders.each do |order|
       if order.takeaway_datetime.strftime("%Y/%m/%d") == Date.yesterday.strftime("%Y/%m/%d")
-        yesterday_orders.push(order)
+        if order.status == "受付注文" || order.status == "完了注文"
+          yesterday_orders.push(order)
+        end
       end
     end
     return yesterday_orders.count

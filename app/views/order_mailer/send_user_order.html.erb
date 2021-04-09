@@ -2,24 +2,45 @@
 <h4><span style="margin:0 10px"><%= @user.full_name %></span> 様より注文がありました</h4>
 <p>==========================================</p>
 
-<h5>受け取り希望時間</h5>
-<p><%= @order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></p>
-
-<h5>注文内容</h5>
-<ul style="list-style:none;">
-  <% @order.order_items.each do |item| %>
-    <li><%= item.menu_name %><span style="margin:0 20px">x</span><%= item.menu_amount %></li>
-  <% end %>
-</ul>
-
-<br>
-<br>
-<br>
-
 <p>
   ご注文内容と受け取り希望時間をご確認いただき、<br>
-  注文の受付完了の処理をしてください。<br>
+  注文の受付処理を行ってください。<br>
 </p>
+
+<p class="ma-y-20">============【注文情報】============</p>
+<p>［注文日時］<%= @order.created_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
+<p>［ご注文者］<%= @user.full_name %></p>
+<p>［受け取り日時］<%= @order.takeaway_datetime.strftime("%Y年%m月%d日 %H時%M分") %></p>
+<table class="table ma-y-20">
+  <thead>
+    <tr>
+      <td width="20%">商品名</td>
+      <td width="10%">数量</td>
+      <td width="20%">金額</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="20%"></td>
+      <td width="10%"></td>
+      <td width="20%"></td>
+    </tr>
+    <% @order.order_items.each do |item| %>
+      <tr>
+        <td><%= item.menu_name %></td>
+        <td><%= item.menu_amount %></td>
+        <td><%= item.menu_price * item.menu_amount %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p>［合計金額］<%= @order.total_payment %>円</p>
+
+<br>
+<br>
+<br>
+
+
 
 <a href="https://pickup.circrest.com/shops/orders/<%= @order.id %>">注文受付処理をする</a>
 

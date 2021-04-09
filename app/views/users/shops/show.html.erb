@@ -1,6 +1,10 @@
 <!-- メイン画像 -->
 <div id="mainBanner" class="mainImg">
-  <span class="shopImage" style="background-image:url(<%= @shop.shop_images[0].file_name.to_s %>);" alt="店舗画像"></span>
+  <% if @shop.shop_images.present? %>
+    <span class="shopImage" style="background-image:url(<%= @shop.main_image.file_name.to_s %>);" alt="店舗画像"></span>
+  <% else %>
+    <span class="shopImage" style="background-image:url(<%= asset_path('shops_img.jpg') %>);" alt="店舗画像"></span>
+  <% end %>
   <div id="shopImage"></div>
   <div id="shopInfo">
     <h3 class="center"><%= @shop.name %></h3>
