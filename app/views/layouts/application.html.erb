@@ -4,6 +4,7 @@
     <title>PickUp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= favicon_link_tag('logo.png') %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
 
@@ -25,9 +26,9 @@
 
     <% if user_signed_in? %>
       <%= render partial: 'users/modal' %>
-      <%= render partial: 'layouts/detail_search_modal', locals:{q: @q} %>
     <% end %>
     <%= render partial: 'layouts/user_menu_modal' %>
+    <%= render partial: 'layouts/detail_search_modal', locals:{q: @q} %>
     
   </body>
 </html>
