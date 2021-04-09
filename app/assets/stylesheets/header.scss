@@ -10,6 +10,21 @@
   background: #fff;
   height: 55px;
 }
+#shopHeader{
+  box-shadow: 0 0 4px 2px #aaa;
+  height: 55px;
+  padding:0 1rem;
+  background-color: #fff;
+}
+#navbarScroll{
+  z-index:10;
+  margin-top: 4px;
+  background-color: #FFF;
+  .dropdown-menu{
+    border:none;
+    background-color: #EFAA29;
+  }
+}
 
 * html #header {
   height: 1%;

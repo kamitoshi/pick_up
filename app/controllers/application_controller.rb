@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   def admin_or_shop!
     unless admin_signed_in? || shop_signed_in?
-      flash[:danger] = "店舗ユーザーとしてログインしてください"
+      flash[:danger] = "該当のページは店舗ユーザーとしてログインしていない場合閲覧できません"
       redirect_to new_shop_session_path
     end
   end

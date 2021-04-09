@@ -13,14 +13,16 @@
   </head>
 
   <body>
-    <%= render partial: 'layouts/header' %>
+    <header>
+      <%= render partial: 'layouts/shop_header' %>
+    </header>
     <div class="wrapper">
       <%= render partial: 'shared/flash_message' %>
       <%= yield %>
       <footer class="center">
         <%= render partial: "layouts/footer" %>
       </footer>
-      <% if shop_signed_in?%>
+      <% if shop_signed_in? %>
         <%= render partial: 'layouts/menu_modal' %>
         <%= render partial: 'shops/menus_modal' %>
         <%= render partial: 'shops/orders_modal' %>
