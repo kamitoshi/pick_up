@@ -2,14 +2,22 @@
   <div class="container">
     <div class="row">
       <div class="col-6 left">
+        <%= search_form_for @q, url: search_menus_path, method: :get, id: "submit_form" do |f| %>
+          <%= f.hidden_field :name_cont %>
+          <%= f.hidden_field :menu_tags_content_cont %>
+          <%= f.hidden_field :price_gteq %>
+          <%= f.hidden_field :price_lteq %>
+          <div class="detail_search_sort">
+            <%= f.select :sorts, { '並び替え': '', '価格の安い順': 'price asc', '価格の高い順': 'price desc' } , { onchange: 'this.form.submit()'} , {id: "submit_select"} %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-6 right">
         <p>
           <a class="white ma-r-30" data-toggle="collapse" href="#searchBar" role="button" aria-expanded="false" aria-controls="searchBar">
             <i class="fas fa-search"></i>検索する
           </a>
         </p>
-      </div>
-      <div class="col-6 right">
-        
       </div>
     </div>
   </div>
@@ -60,3 +68,10 @@
     </div>
   <% end %>
 </div>
+<script type="text/javascript">
+$(function(){
+  $("#submit_select").change(function(){
+    $("#submit_form").submit();
+  });
+});
+</script>
