@@ -1,61 +1,52 @@
 class CartItemsController < ApplicationController
   before_action :admin_or_user!
   def index
-    if user_signed_in?
-      @cart_items = CartItem.where(user_id: current_user.id)
-    else
-      flash[:danger] = "ログインしてください"
-      redirect_to new_user_session_path
-    end
+    @cart_items = CartItem.where(user_id: current_user.id)
   end
 
   def create
     @menu = Menu.find(params[:menu_id])
-    if user_signed_in?
-      if current_user.cart_items.blank?
-        if current_user.cart_already_include(@menu)
-          @cart_item = CartItem.find_by(menu_id: @menu.id, user_id: current_user.id)
-          @cart_item.update(
-            amount: @cart_item.amount + params[:cart_item][:amount].to_i
-          )
-          flash[:success] = "カートに追加しました"
-          redirect_to user_cart_items_path(current_user)
-        else
-          @cart_item = current_user.cart_items.build(cart_item_params)
-          if @cart_item.save
-            flash[:success] = "カートに追加しました"
-            redirect_to user_cart_items_path(current_user)
-          else
-            flash[:danger] = "追加にできませんでした"
-            redirect_to menus_path
-          end
-        end
-      elsif current_user.cart_items.present? && current_user.cart_items[0].menu.shop == @menu.shop
-        if current_user.cart_already_include(@menu)
-          @cart_item = CartItem.find_by(menu_id: @menu.id, user_id: current_user.id)
-          @cart_item.update(
-            amount: @cart_item.amount + params[:cart_item][:amount].to_i
-          )
-          flash[:success] = "カートに追加しました"
-          redirect_to user_cart_items_path(current_user)
-        else
-          @cart_item = current_user.cart_items.build(cart_item_params)
-          if @cart_item.save
-            flash[:success] = "カートに追加しました"
-            redirect_to user_cart_items_path(current_user)
-          else
-            flash[:danger] = "追加にできませんでした"
-            redirect_to menus_path
-          end
-        end
+    if current_user.cart_items.blank?
+      if current_user.cart_already_include(@menu)
+        @cart_item = CartItem.find_by(menu_id: @menu.id, user_id: current_user.id)
+        @cart_item.update(
+          amount: @cart_item.amount + params[:cart_item][:amount].to_i
+        )
+        flash[:success] = "カートに追加しました"
+        redirect_to user_cart_items_path(current_user)
       else
-        flash[:danger] = "すでにカートの中に多店舗の商品があるため追加できません"
-        redirect_to menu_path(@menu)
+        @cart_item = current_user.cart_items.build(cart_item_params)
+        if @cart_item.save
+          flash[:success] = "カートに追加しました"
+          redirect_to user_cart_items_path(current_user)
+        else
+          flash[:danger] = "追加にできませんでした"
+          redirect_to menus_path
+        end
+      end
+    elsif current_user.cart_items.present? && current_user.cart_items[0].menu.shop == @menu.shop
+      if current_user.cart_already_include(@menu)
+        @cart_item = CartItem.find_by(menu_id: @menu.id, user_id: current_user.id)
+        @cart_item.update(
+          amount: @cart_item.amount + params[:cart_item][:amount].to_i
+        )
+        flash[:success] = "カートに追加しました"
+        redirect_to user_cart_items_path(current_user)
+      else
+        @cart_item = current_user.cart_items.build(cart_item_params)
+        if @cart_item.save
+          flash[:success] = "カートに追加しました"
+          redirect_to user_cart_items_path(current_user)
+        else
+          flash[:danger] = "追加にできませんでした"
+          redirect_to menus_path
+        end
       end
     else
-      flash[:danger] = "カートに追加するにはログインが必要です"
-      redirect_to root_path
+      flash[:danger] = "すでにカートの中に多店舗の商品があるため追加できません"
+      redirect_to menu_path(@menu)
     end
+
   end
 
   def update
