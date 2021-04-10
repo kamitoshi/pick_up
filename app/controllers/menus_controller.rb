@@ -1,21 +1,16 @@
 class MenusController < ApplicationController
   layout "shop_app", only:[:new, :edit]
   before_action :admin_or_shop!, only:[:new, :create, :edit, :update, :destroy]
-  before_action :set_ransack
+  before_action :set_menu_ransack
 
   def index
-    if params[:search]
-      all_menus = Menu.all
-      @search = params[:search]
-      @menus = all_menus.where('name LIKE ?',"%#{@search}%")
-    else
-      @menus = Menu.all
-    end
+    @menus = Menu.all.page(params[:page]).per(20)
   end
 
   def search
     @search_menu = Menu.ransack(params[:q]) 
-    @menus = @search_menu.result.page(params[:page])
+    @search_menus = @search_menu.result
+    @menus = @search_menu.result.page(params[:page]).per(20)
   end
 
   def show

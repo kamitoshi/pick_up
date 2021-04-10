@@ -231,3 +231,34 @@ footer {
   background: -webkit-linear-gradient(155deg, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0) 100%);
   background: linear-gradient(155deg, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0) 100%);
 }
+
+.leftMargin{
+  margin-left: -25px;
+}
+
+/*ページネーション自体のデザイン*/
+.pagination{
+  font-size: 10px;
+  justify-content: center;
+}
+.pagination>li>a {
+  border: none;
+  /*枠線をなくす*/
+  color: #696969;
+  /*文字の色を変える*/
+  justify-content: center;
+}
+
+/* 表示しているページ番号のデザイン */
+.pagination>.active>a {
+  background: #5b9640;
+  /*背景の色を変える*/
+  border-radius: 15px;
+  /*角を丸くする*/
+}
+
+/*ホバー時のデザイン*/
+.pagination>li>a:hover {
+  border-radius: 15px;
+  /*角を丸くする*/
+}

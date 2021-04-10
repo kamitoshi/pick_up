@@ -23,6 +23,11 @@
 <!-- / サーチバー  -->
 
 <div class="container-fluid">
+  <div class="row right ma-b-20">
+    <div class="col-md-12">
+      <%= link_to "戻る", :back, class: "arrow2" %>
+    </div>
+  </div>
   <% if @food_menus.present? %>
     <div class="gridWrapperTitle">
       <h6>フード</h6>

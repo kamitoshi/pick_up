@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :admin_or_user!
 
   def index
-    @orders = Order.where(user_id: params[:user_id])
+    @orders = Order.where(user_id: params[:user_id]).order(takeaway_datetime: "desc").page(params[:page]).per(20)
   end
 
   def show

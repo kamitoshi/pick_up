@@ -13,13 +13,67 @@ class BusinessHoursController < ApplicationController
   end
 
   def create
+    all_day_business_hour = @shop.business_hours.find_by(job_time: "終日")
     @business_hour = @shop.business_hours.build(business_hour_params)
-    if @business_hour.save
-      flash[:success] = "営業時間を設定しました"
-      redirect_to shop_business_hours_path(current_shop)
+    if @business_hour.job_time == "終日"
+      if all_day_business_hour.present?
+        flash[:danger] = "すでに終日の営業時間が設定されています。編集から営業時間の変更をお願いします。"
+        redirect_to shop_business_hours_path(@shop)
+      else
+        if @business_hour.save
+          flash[:success] = "#{@business_hour.job_time}の営業時間を設定しました"
+          redirect_to shop_business_hours_path(@shop)
+        else
+          flash[:danger] = "設定に失敗しました"
+          render :new
+        end
+      end
     else
-      flash[:danger] = "設定に失敗しました"
-      render :new
+      if all_day_business_hour.present?
+        flash[:danger] = "#{@business_hour.job_time}を設定するには、終日営業時間を削除してください。"
+        redirect_to shop_business_hours_path(@shop)
+      else
+        if @business_hour.job_time == "モーニング"
+          if @shop.business_hours.find_by(job_time: "モーニング").present?
+            flash[:danger] = "すでにモーニングの営業時間が設定されています。編集から営業時間の変更をお願いします。"
+            redirect_to shop_business_hours_path(@shop)
+          else
+            if @business_hour.save
+              flash[:success] = "#{@business_hour.job_time}の営業時間を設定しました"
+              redirect_to shop_business_hours_path(@shop)
+            else
+              flash[:danger] = "設定に失敗しました"
+              render :new
+            end
+          end
+        elsif @business_hour.job_time == "ランチ"
+          if @shop.business_hours.find_by(job_time: "ランチ").present?
+            flash[:danger] = "すでにランチの営業時間が設定されています。編集から営業時間の変更をお願いします。"
+            redirect_to shop_business_hours_path(@shop)
+          else
+            if @business_hour.save
+              flash[:success] = "#{@business_hour.job_time}の営業時間を設定しました"
+              redirect_to shop_business_hours_path(@shop)
+            else
+              flash[:danger] = "設定に失敗しました"
+              render :new
+            end
+          end
+        elsif @business_hour.job_time == "ディナー"
+          if @shop.business_hours.find_by(job_time: "ディナー").present?
+            flash[:danger] = "すでにディナーの営業時間が設定されています。編集から営業時間の変更をお願いします。"
+            redirect_to shop_business_hours_path(@shop)
+          else
+            if @business_hour.save
+              flash[:success] = "#{@business_hour.job_time}の営業時間を設定しました"
+              redirect_to shop_business_hours_path(@shop)
+            else
+              flash[:danger] = "設定に失敗しました"
+              render :new
+            end
+          end
+        end
+      end
     end
   end
 

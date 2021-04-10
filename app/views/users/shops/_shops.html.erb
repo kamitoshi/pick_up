@@ -1,0 +1,25 @@
+<div class="row row-cols-2 row-cols-lg-4 row-cols-md-3">
+  <% shops.each do |shop| %>
+    <%= link_to users_shop_path(shop), class: "black" do %>
+      <div class="col mb-4">
+        <% if shop.shop_images.present? %>
+          <%= image_tag shop.main_image.file_name.thumb_width.to_s, class:"wid-100", style: "padding:1px;" %>
+        <% else %>
+          <%= image_tag "noimage.png", class:"wid-100", style: "padding:1px;" %>
+        <% end %>
+        <div class="card-img-overlay grad">
+          <h6><%= shop.name %></h6>
+          <p class="font-10">
+            <% if shop.shop_tags.present? %>
+              <% shop.shop_tags.each do |tag| %>
+                <span><%= tag.content %></span>
+              <% end %>
+            <% else %>
+              検索キーワードがありません
+            <% end %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

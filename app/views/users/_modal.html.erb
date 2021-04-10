@@ -24,6 +24,11 @@
                   </tr>
                   <tr class="right">
                     <td colspan=2>
+                      <%= link_to "今までの注文履歴を確認する", user_orders_path(current_user), class: "button-fill" %>
+                    </td>
+                  </tr>
+                  <tr class="right">
+                    <td colspan=2>
                       <%= link_to "編集", edit_user_path(current_user), class: "btn btn-primary btn-sm" %>
                       <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-danger btn-sm" %>
                     </td>
