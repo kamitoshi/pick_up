@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_action :set_ransack
 
   def admin_or_shop!
     unless admin_signed_in? || shop_signed_in?
@@ -15,8 +14,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_ransack
+  def set_menu_ransack
     @q = Menu.ransack(params[:q])
+  end
+  def set_shop_ransack
+    @q = Shop.ransack(params[:q])
   end
 
 end

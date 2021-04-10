@@ -4,7 +4,7 @@
 </div>
 <!-- / メイン画像 -->
 <!-- サーチバー  -->
-<%= render partial: "layouts/search_bar" %>
+<%= render partial: "layouts/shop_search_bar" %>
 <!-- / サーチバー  -->
 
 <div class="container-fluid">
@@ -12,36 +12,11 @@
     <div class="gridWrapperTitle">
       <h6>レストラン一覧</h6>
     </div>
-    <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3">
-      <% @shops.each do |shop| %>
-        <%= link_to users_shop_path(shop), class: "black" do %>
-          <div class="col mb-4">
-            <% if shop.shop_images.present? %>
-              <%= image_tag shop.main_image.file_name.thumb_width.to_s, class:"wid-100", style: "padding:1px;" %>
-            <% else %>
-              <%= image_tag "noimage.png", class:"wid-100", style: "padding:1px;" %>
-            <% end %>
-            <div class="card-img-overlay grad">
-              <h6><%= shop.name %></h6>
-              <p class="c-text">
-                <% if shop.shop_tags.present? %>
-                  <% shop.shop_tags.each do |tag| %>
-                    <span><%= tag.content %></span>
-                  <% end %>
-                <% else %>
-                  検索キーワードがありません
-                <% end %>
-              </p>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+    <%= render partial: "users/shops/shops", locals:{shops: @shops} %>
+    <div class="row center ma-b-20">
+      <div class="col-md-12">
+        <%= paginate @shops %>
+      </div>
     </div>
-  <% end %>
-
-  <% if @menus.present? %>
-    <% @menus.each do |menu| %>
-      <%= render partial: "menus/modal", locals: {menu: menu} %>
-    <% end %>
   <% end %>
 </div>

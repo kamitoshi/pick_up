@@ -4,23 +4,23 @@
 </div>
 <!-- / メイン画像 -->
 <!-- サーチバー  -->
-<%= render partial: "layouts/search_bar" %>
+<%= render partial: "layouts/shop_search_bar" %>
 <!-- / サーチバー  -->
 
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <h6 class="ma-b-20">検索した商品：<%= @search_menus.count %>件</h6>
-      <% if @menus.present? %>
-        <%= render partial: "menus/menus", locals:{menus: @menus} %>
+      <h6 class="ma-b-20">検索した店舗：<%= @search_shops.count %>件</h6>
+      <% if @shops.present? %>
+        <%= render partial: "users/shops/shops", locals:{shops: @shops} %>
         <div class="row center ma-b-20">
           <div class="col-md-12">
-            <%= paginate @menus %>
+            <%= paginate @shops %>
           </div>
         </div>
       <% else %>
         <div class="non_search pa-30">
-          <h5 class="center">検索されたメニューはありませんでした</h5>
+          <h5 class="center">検索された店舗はありませんでした</h5>
         </div>
       <% end %>
     </div>
