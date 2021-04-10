@@ -131,7 +131,7 @@ jQuery(function ($) {
       },
       title: {                           //タイトル設定
         display: true,                 //表示設定
-        fontSize: 18,                  //フォントサイズ
+        fontSize: 12,                  //フォントサイズ
         text: '売上件数'                //ラベル
       },
       scales: {                          //軸設定
@@ -140,12 +140,12 @@ jQuery(function ($) {
           scaleLabel: {              //軸ラベル設定
               display: true,          //表示設定
               labelString: '注文件数',  //ラベル
-              fontSize: 18               //フォントサイズ
+              fontSize: 12               //フォントサイズ
           },
           ticks: {                      //最大値最小値設定
               min: 0,                   //最小値
               max: 10,                  //最大値
-              fontSize: 18,             //フォントサイズ
+              fontSize: 12,             //フォントサイズ
               stepSize: 2              //軸間隔
           },
         }],
@@ -156,21 +156,14 @@ jQuery(function ($) {
           scaleLabel: {                 //軸ラベル設定
             display: true,             //表示設定
             labelString: '日付',  //ラベル
-            fontSize: 18               //フォントサイズ
+            fontSize: 12               //フォントサイズ
           },
           ticks: {
-            fontSize: 18             //フォントサイズ
+            fontSize: 12             //フォントサイズ
           },
         }],
-      },
-      layout: {                             //レイアウト
-        padding: {                          //余白設定
-          left: 50,
-          right: 50,
-          top: 0,
-          bottom: 50
-        }
       }
+      
     }
   });
   // 直近１週間の売上金額をグラフ表示させる
@@ -207,7 +200,7 @@ jQuery(function ($) {
       },
       title: {                           //タイトル設定
         display: true,                 //表示設定
-        fontSize: 16,                  //フォントサイズ
+        fontSize: 12,                  //フォントサイズ
         text: '売上金額'                //ラベル
       },
       scales: {                          //軸設定
@@ -216,12 +209,12 @@ jQuery(function ($) {
           scaleLabel: {              //軸ラベル設定
               display: true,          //表示設定
               labelString: '注文金額',  //ラベル
-              fontSize: 16               //フォントサイズ
+              fontSize: 12               //フォントサイズ
           },
           ticks: {                      //最大値最小値設定
               min: 0,                   //最小値
               max: 50000,                  //最大値
-              fontSize: 16,             //フォントサイズ
+              fontSize: 12,             //フォントサイズ
               stepSize: 10000              //軸間隔
           },
         }],
@@ -232,20 +225,12 @@ jQuery(function ($) {
           scaleLabel: {                 //軸ラベル設定
             display: true,             //表示設定
             labelString: '日付',  //ラベル
-            fontSize: 16               //フォントサイズ
+            fontSize: 12               //フォントサイズ
           },
           ticks: {
-            fontSize: 16             //フォントサイズ
+            fontSize: 12             //フォントサイズ
           },
         }],
-      },
-      layout: {                             //レイアウト
-        padding: {                          //余白設定
-          left: 50,
-          right: 50,
-          top: 0,
-          bottom: 50
-        }
       }
     }
   });
