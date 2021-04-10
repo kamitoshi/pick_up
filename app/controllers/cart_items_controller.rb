@@ -44,7 +44,7 @@ class CartItemsController < ApplicationController
       end
     else
       flash[:danger] = "すでにカートの中に多店舗の商品があるため追加できません"
-      redirect_to menu_path(@menu)
+      redirect_to user_cart_items_path(current_user)
     end
 
   end
