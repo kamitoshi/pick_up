@@ -10,7 +10,7 @@
         <%= form_for @business_hour, url: shop_business_hour_path(current_shop, @business_hour) do |f|  %>
           <div class="field ma-b-50">
             <%= f.label :job_time, "営業時間帯" %><br />
-            <%= f.select :job_time, BusinessHour.job_times.keys, {include_blank: "選択してください"}, {class: "custom-select"} %>
+            <%= f.select :job_time, BusinessHour.job_times.keys, {include_blank: "選択してください"}, {class: "custom-select", disabled: true} %>
           </div>
 
           <div class="field ma-b-50">
