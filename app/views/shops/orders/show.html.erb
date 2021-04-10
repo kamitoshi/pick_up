@@ -52,11 +52,12 @@
           <hr>
         </div>
         
-        <div class="return_btn center ma-b-50">
-          <%= link_to "注文を受け付ける", shops_order_path(status: 1), method: :patch, data: { confirm: '注文を受け付けてよろしいですか?' }, class: "btn btn-success btn-sm ma-10" %>
-          <%= link_to "注文を断る", shops_order_path(status: 3), method: :patch, data: { confirm: '注文をキャンセルしてもよろしいですか?' }, class: "btn btn-danger btn-sm ma-10" %>
-        </div>
-
+        <% if @order.status == "新規注文" %>
+          <div class="return_btn center ma-b-50">
+            <%= link_to "注文を受け付ける", shops_order_path(status: 1), method: :patch, data: { confirm: '注文を受け付けてよろしいですか?' }, class: "btn btn-success btn-sm ma-10" %>
+            <%= link_to "注文を断る", shops_order_path(status: 3), method: :patch, data: { confirm: '注文をキャンセルしてもよろしいですか?' }, class: "btn btn-danger btn-sm ma-10" %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@ class Shops::OrdersController < ApplicationController
   before_action :admin_or_shop!
   
   def index
-    @orders = Order.where(shop_id: current_shop.id).order(takeaway_datetime: "desc")
+    @orders = Order.where(shop_id: current_shop.id).order(takeaway_datetime: "desc").page(params[:page]).per(20)
   end
 
   def today_index

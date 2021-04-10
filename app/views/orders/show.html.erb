@@ -1,8 +1,11 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-12">
-      <div class="width_box">
+    <div class="col-md-8 offset-md-2">
+      <div class="content_box">
         <h5>注文履歴詳細</h5>
+        <div class="back_btn right">
+          <%= link_to "戻る", user_orders_path(current_user), class: "arrow2" %>
+        </div>
         <hr>
         <div class="content_box_detail">
           <table class="table table-borderless">
@@ -20,7 +23,7 @@
                 <td colspan=3><%= @order.updated_at.strftime("%Y年%m月%d日") %></td>
               </tr>
               <tr>
-                <th>受取希望日時</th>
+                <th>受取日時</th>
                 <td colspan=3><%= @order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
               </tr>
               <tr>
