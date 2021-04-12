@@ -60,12 +60,12 @@
                         <%= business_hour.opening.strftime("%H:%M") %>〜<%= business_hour.closing.strftime("%H:%M") %><br>
                         （L.O <%= business_hour.last_order.strftime("%H:%M") %>）</p>
                     <% end %>
-                    <p class="right"><%= link_to "営業時間を管理する", shop_business_hours_path(current_shop) %></p>
+                    <p class="right"><%= link_to "営業時間を管理する", shop_business_hours_path(@shop) %></p>
                   </td>
                 <% else %>
                   <td>
                     <p>まだ、営業時間が登録されていません</p>
-                    <p class="right"><%= link_to "営業時間を管理する", shop_business_hours_path(current_shop) %></p>
+                    <p class="right"><%= link_to "営業時間を管理する", shop_business_hours_path(@shop) %></p>
                   </td>
                 <% end %>
               </tr>

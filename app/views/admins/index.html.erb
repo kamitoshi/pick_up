@@ -1,41 +1,12 @@
-<div class="container-fluid" style="background-color:#eee">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-4" style="padding:0">
-      <div class="up_content_box">
-        <h5>
-          <%= link_to "本日の受注状況", today_index_shops_orders_path %>
-          <% if today_order_count(@new_orders) >= 1 %>
-            <span class="blinking red">新着</span>
-          <% end %>
-        </h5>
-        <hr>
-        <div class="content_box_detail">
-          <table class="table table-borderless">
-            <tbody>
-              <tr>
-                <td>新規注文</td>
-                <td><%= today_order_count(@new_orders) %></td>
-              </tr>
-              <tr>
-                <td>調理中</td>
-                <td><%= today_order_count(@making_orders) %></td>
-              </tr>
-              <tr>
-                <td>完了</td>
-                <td><%= today_order_count(@fix_orders) %></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="col-8" style="padding:0">
-      <div class="up_content_box">
-        <h5>売上</h5>
+    <div class="col-lg-12">
+      <div class="content_box">
+        <h5>全体売上</h5>
         <div class="content_box_detail center">
           <hr>
             <div class="row">
-              <div class="col-4">
+              <div class="col-6">
                 <h4>
                   ¥<%= month_sales_money(@orders).to_s(:delimited) %>
                   <span class="ma-l-10 ma-r-10">/</span>
@@ -43,21 +14,13 @@
                 </h4>
                 <p>今月の売上金額/売上件数</p>
               </div>
-              <div class="col-4">
+              <div class="col-6">
                 <h4>
                   ¥<%= today_sales_money(@orders).to_s(:delimited) %>
                   <span class="ma-l-10 ma-r-10">/</span>
                   <%= today_sales_count(@orders) %>件
                 </h4>
                 <p>今日の売上金額/売上件数</p>
-              </div>
-              <div class="col-4">
-                <h4>
-                  ¥<%= yesterday_sales_money(@orders).to_s(:delimited) %>
-                  <span class="ma-l-10 ma-r-10">/</span>
-                  <%= yesterday_sales_count(@orders) %>件
-                </h4>
-                <p>前日の売上金額/売上件数</p>
               </div>
             </div>
           <hr>
@@ -169,7 +132,7 @@
       },
       title: {                           //タイトル設定
         display: true,                 //表示設定
-        fontSize: 18,                  //フォントサイズ
+        fontSize: 12,                  //フォントサイズ
         text: '売上件数'                //ラベル
       },
       scales: {                          //軸設定
@@ -177,13 +140,13 @@
           display: true,             //表示設定
           scaleLabel: {              //軸ラベル設定
               display: true,          //表示設定
-              labelString: '注文件数',  //ラベル
-              fontSize: 18               //フォントサイズ
+              labelString: '件数',  //ラベル
+              fontSize: 12               //フォントサイズ
           },
           ticks: {                      //最大値最小値設定
               min: 0,                   //最小値
               max: 10,                  //最大値
-              fontSize: 18,             //フォントサイズ
+              fontSize: 12,             //フォントサイズ
               stepSize: 2              //軸間隔
           },
         }],
@@ -194,20 +157,12 @@
           scaleLabel: {                 //軸ラベル設定
             display: true,             //表示設定
             labelString: '日付',  //ラベル
-            fontSize: 18               //フォントサイズ
+            fontSize: 12               //フォントサイズ
           },
           ticks: {
-            fontSize: 18             //フォントサイズ
+            fontSize: 12             //フォントサイズ
           },
         }],
-      },
-      layout: {                             //レイアウト
-        padding: {                          //余白設定
-          left: 50,
-          right: 50,
-          top: 0,
-          bottom: 50
-        }
       }
     }
   });
@@ -245,7 +200,7 @@
       },
       title: {                           //タイトル設定
         display: true,                 //表示設定
-        fontSize: 18,                  //フォントサイズ
+        fontSize: 12,                  //フォントサイズ
         text: '売上金額'                //ラベル
       },
       scales: {                          //軸設定
@@ -253,13 +208,13 @@
           display: true,             //表示設定
           scaleLabel: {              //軸ラベル設定
               display: true,          //表示設定
-              labelString: '注文金額',  //ラベル
-              fontSize: 18               //フォントサイズ
+              labelString: '金額',  //ラベル
+              fontSize: 12               //フォントサイズ
           },
           ticks: {                      //最大値最小値設定
               min: 0,                   //最小値
               max: 50000,                  //最大値
-              fontSize: 18,             //フォントサイズ
+              fontSize: 12,             //フォントサイズ
               stepSize: 5000              //軸間隔
           },
         }],
@@ -270,20 +225,12 @@
           scaleLabel: {                 //軸ラベル設定
             display: true,             //表示設定
             labelString: '日付',  //ラベル
-            fontSize: 18               //フォントサイズ
+            fontSize: 12               //フォントサイズ
           },
           ticks: {
-            fontSize: 18             //フォントサイズ
+            fontSize: 12             //フォントサイズ
           },
         }],
-      },
-      layout: {                             //レイアウト
-        padding: {                          //余白設定
-          left: 50,
-          right: 50,
-          top: 0,
-          bottom: 50
-        }
       }
     }
   });

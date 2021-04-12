@@ -1,10 +1,10 @@
 <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
-  <% if shop_signed_in? %>
+  <% if admin_signed_in? %>
     <div class="card">
       <div class="card-header" role="tab" id="headingOne">
         <h5 class="mb-0">
-          <a class="text-body d-block p-3 m-n3" href="<%= shops_path %>" role="button">
-            <i class="fas fa-home"></i><span class="ma-l-10">ホーム</span>
+          <a class="text-body d-block p-3 m-n3" href="<%= admins_path %>" role="button">
+            <i class="fas fa-home"></i><span class="ma-l-10">管理者</span>
           </a>
         </h5>
       </div><!-- /.card-header -->
@@ -13,7 +13,7 @@
       <div class="card-header" role="tab" id="headingOne">
         <h5 class="mb-0">
           <a class="text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="true" aria-controls="collapseOne">
-            <i class="fas fa-utensils"></i><span class="ma-l-10">商品管理</span>
+            <i class="fas fa-store"></i><span class="ma-l-10">店舗管理</span>
           </a>
         </h5>
       </div><!-- /.card-header -->
@@ -21,11 +21,28 @@
         <div class="card-body">
           <table class="table table-borderless">
             <tbody>
-              <tr data-href="<%= shops_menus_path %>">
-                <td class="pointer">商品一覧</td>
+              <tr class="pointer" data-href="<%= admins_shops_path %>">
+                <td>登録店舗一覧</td>
               </tr>
-              <tr data-href="<%= new_menu_path %>">
-                <td class="pointer">商品新規登録</td>
+            </tbody>
+          </table>
+        </div><!-- /.card-body -->
+      </div><!-- /.collapse -->
+    </div><!-- /.card -->
+    <div class="card">
+      <div class="card-header" role="tab" id="headingOne">
+        <h5 class="mb-0">
+          <a class="text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseUsers" role="button" aria-expanded="true" aria-controls="collapseUsers">
+            <i class="fas fa-users"></i><span class="ma-l-10">ユーザー管理</span>
+          </a>
+        </h5>
+      </div><!-- /.card-header -->
+      <div id="collapseUsers" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <table class="table table-borderless">
+            <tbody>
+              <tr class="pointer" data-href="<%= admins_users_path %>">
+                <td>登録ユーザー一覧</td>
               </tr>
             </tbody>
           </table>
@@ -36,7 +53,7 @@
       <div class="card-header" role="tab" id="headingTwo">
         <h5 class="mb-0">
           <a class="collapsed text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">
-            <i class="fas fa-store"></i><span class="ma-l-10">店舗管理</span>
+            <i class="fas fa-utensils"></i><span class="ma-l-10">商品管理</span>
           </a>
         </h5>
       </div><!-- /.card-header -->
@@ -44,17 +61,8 @@
         <div class="card-body">
           <table class="table table-borderless">
             <tbody>
-              <tr class="pointer" data-href="<%= shop_path(current_shop) %>">
-                <td>店舗情報確認</td>
-              </tr>
-              <tr class="pointer" data-href="<%= edit_shop_path(current_shop) %>">
-                <td>店舗情報編集</td>
-              </tr>
-              <tr class="pointer" data-href="<%= shop_shop_images_path(current_shop) %>">
-                <td>店舗画像追加・編集</td>
-              </tr>
-              <tr class="pointer" data-href="<%= shop_business_hours_path(current_shop) %>">
-                <td>営業時間管理</td>
+              <tr data-href="<%= admins_menus_path %>">
+                <td class="pointer">商品一覧</td>
               </tr>
             </tbody>
           </table>
@@ -73,10 +81,10 @@
         <div class="card-body">
           <table class="table table-borderless">
             <tbody>
-              <tr data-href="<%= today_index_shops_orders_path %>">
-                <td class="pointer">本日の注文履歴</td>
+              <tr data-href="#">
+                <td class="pointer">本日の注文</td>
               </tr>
-              <tr data-href="<%= shops_orders_path %>">
+              <tr data-href="#">
                 <td class="pointer">注文履歴</td>
               </tr>
             </tbody>
@@ -106,7 +114,10 @@
                 <td>年間売上</td>
               </tr>
               <tr class="pointer" data-href="#">
-                <td>メニュー別売上</td>
+                <td>タイプ別売上</td>
+              </tr>
+              <tr class="pointer" data-href="#">
+                <td>販売手数料管理</td>
               </tr>
             </tbody>
           </table>
@@ -116,8 +127,18 @@
     <div class="card">
       <div class="card-header" role="tab" id="headingOne">
         <h5 class="mb-0">
-          <a class="text-body d-block p-3 m-n3" href="<%= destroy_shop_session_path %>" data-method="delete" role="button">
+          <a class="text-body d-block p-3 m-n3" href="<%= destroy_admin_session_path %>" data-method="delete" role="button">
             <i class="fas fa-sign-out-alt"></i><span class="ma-l-10">ログアウト</span>
+          </a>
+        </h5>
+      </div><!-- /.card-header -->
+    </div><!-- /.card -->
+  <% else %>
+    <div class="card">
+      <div class="card-header" role="tab" id="headingOne">
+        <h5 class="mb-0">
+          <a class="text-body d-block p-3 m-n3" href="<%= new_admin_session_path %>" role="button">
+            <i class="fas fa-sign-in-alt"></i><span class="ma-l-10">ログイン</span>
           </a>
         </h5>
       </div><!-- /.card-header -->

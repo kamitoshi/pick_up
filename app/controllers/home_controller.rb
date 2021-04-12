@@ -4,6 +4,8 @@ class HomeController < ApplicationController
   def index
     if shop_signed_in?
       redirect_to shops_path
+    elsif admin_signed_in?
+      redirect_to admins_path
     end
     @recommend_menus = Menu.all.page(params[:page]).per(10)
     @popular_menus = Menu.all.page(params[:page]).per(15)

@@ -1,4 +1,5 @@
 class AdminsController < ApplicationController
+  layout "shop_app"
   before_action :only_admin!, only:[:index, :edit, :update, :destroy]
   before_action :set_admin, only:[:show, :edit, :update, :destroy]
 

@@ -1,10 +1,12 @@
 class Admins::UsersController < ApplicationController
+  layout "shop_app"
   def index
     @users = User.all
   end
 
   def show
     @user = User.find(params[:id])
+    @orders = @user.orders
   end
 
   def edit

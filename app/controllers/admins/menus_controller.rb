@@ -1,4 +1,5 @@
 class Admins::MenusController < ApplicationController
+  layout "shop_app"
   def index
     @menus = Menu.all
   end
