@@ -7,58 +7,9 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarScroll">
     <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll">
-      <% if shop_signed_in? %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="menuDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            商品管理
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="menuDropdown">
-            <li><a class="dropdown-item" href="<%= shops_menus_path %>">登録商品一覧</a></li>
-            <li><a class="dropdown-item" href="<%= new_menu_path %>">商品新規登録</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="orderDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            注文管理
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="orderDropdown">
-            <li><a class="dropdown-item" href="<%= today_index_shops_orders_path %>">本日の注文</a></li>
-            <li><a class="dropdown-item" href="<%= shops_orders_path %>">受注履歴</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="saleDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            売上管理
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="saleDropdown">
-            <li><a class="dropdown-item" href="#">本日の売上</a></li>
-            <li><a class="dropdown-item" href="#">年間売上</a></li>
-            <li><a class="dropdown-item" href="#">月間売上</a></li>
-            <li><a class="dropdown-item" href="#">週間売上</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="shopDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            店舗管理
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="shopDropdown">
-            <li><a class="dropdown-item" href="<%= shop_path(current_shop) %>">店舗情報確認</a></li>
-            <li><a class="dropdown-item" href="<%= edit_shop_path(current_shop) %>">店舗情報編集</a></li>
-            <li><a class="dropdown-item" href="<%= shop_shop_images_path(current_shop) %>">店舗画像追加・編集</a></li>
-            <li><a class="dropdown-item" href="<%= shop_business_hours_path(current_shop) %>">営業時間管理</a></li>
-            <div class="dropdown-divider"></div>
-              <%= link_to "ログアウト", destroy_shop_session_path, method: :delete, class: "dropdown-item" %>
-            </div>
-          </ul>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <a class="nav-link" href="/top">店舗様向け</a>
-        </li>
-        <li class="nav-item">
-          <%= link_to "ログイン", new_shop_session_path, class: "nav-link" %>
-        </li>
-      <% end %>
+      <div class="humbargerMenu">
+        <%= render partial: 'layouts/shopSidebar' %>
+      </div>
     </ul>
   </div>
 </nav>

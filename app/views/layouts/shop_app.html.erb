@@ -16,19 +16,23 @@
     <header>
       <%= render partial: 'layouts/shop_header' %>
     </header>
-    <div class="wrapper">
-      <%= render partial: 'shared/flash_message' %>
-      <%= yield %>
-      <footer class="center">
-        <%= render partial: "layouts/footer" %>
-      </footer>
-      <% if shop_signed_in? %>
-        <%= render partial: 'layouts/menu_modal' %>
-        <%= render partial: 'shops/menus_modal' %>
-        <%= render partial: 'shops/orders_modal' %>
-        <%= render partial: 'shops/sales_modal' %>
-        <%= render partial: 'shops/shop_modal' %>
-      <% end %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-2" style="padding:0;">
+          <div class="sidebar">
+            <%= render partial: 'layouts/shopSidebar' %>
+          </div>
+        </div>
+        <div class="col-lg-10 mainBox" style="padding:0;">
+          <div class="wrapper">
+            <%= render partial: 'shared/flash_message' %>
+            <%= yield %>
+            <footer class="center">
+              <%= render partial: "layouts/footer" %>
+            </footer>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

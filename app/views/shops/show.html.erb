@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8 offset-md-2">
+    <div class="col-md-12">
       <div class="content_box">
         <h5>店舗情報詳細</h5>
         <div class="back_btn right">
@@ -11,7 +11,7 @@
           <div class="image_box pa-b-30">
             <% if @shop.shop_images.present? %>
               <div class="shop_image-box center ma-b-10">
-                <%= image_tag @shop.shop_images[0].file_name.thumb_width.to_s, class:"wid-100" %>
+                <%= image_tag @shop.shop_images[0].file_name.thumb_width.to_s, class:"wid-50" %>
               </div>
               <div class="shop_image-box center">
                 <% if @shop.shop_images.count >= 2 %>
@@ -22,7 +22,7 @@
               </div>
             <% else %>
               <div class="shop_image-box center ma-b-10 border">
-                <%= image_tag "noimage.png", class:"wid-100" %>
+                <%= image_tag "noimage.png", class:"wid-50" %>
               </div>
             <% end %>
             <div class="add_btn ma-t-30 right">
