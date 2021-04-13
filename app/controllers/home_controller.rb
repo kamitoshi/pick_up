@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-  layout "shop_app", only:[:top]
   before_action :set_menu_ransack
   def index
     if shop_signed_in?
@@ -13,6 +12,7 @@ class HomeController < ApplicationController
   end
 
   def top
+    
   end
 
   def anout

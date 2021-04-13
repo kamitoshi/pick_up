@@ -1,6 +1,7 @@
 class Shops::OrdersController < ApplicationController
   layout "shop_app"
-  before_action :authenticate_shop!
+  before_action :authenticate_shop!, only:[:index, :today_index]
+  before_action :admin_or_shop!
   
   def index
     @orders = Order.where(shop_id: current_shop.id).order(takeaway_datetime: "desc").page(params[:page]).per(20)

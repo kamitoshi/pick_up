@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admins do
+    get 'orders/index'
+  end
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
   end
@@ -37,6 +40,7 @@ Rails.application.routes.draw do
     resources :shops
     resources :menus, only:[:index, :show]
     resources :users, only:[:index, :show, :edit, :update]
+    resources :orders, only:[:index]
   end
   resources :admins, only:[:index, :show, :edit, :update, :destroy]
 
