@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8 offset-md-2">
+    <div class="col-md-12">
       <div class="content_box">
         <h3 class="center">営業時間</h3>
         <div class="back_btn right">
-          <%= link_to "戻る", shop_path(current_shop), class: "arrow2" %>
+          <%= link_to "戻る", shop_path(@shop), class: "arrow2" %>
         </div>
         <hr>
         <% if @business_hours.present? %>
@@ -27,11 +27,11 @@
             </div>
             <hr>
           <% end %>
-          <p class="right ma-b-50"><%= link_to "営業時間を追加する", new_shop_business_hour_path(current_shop) %></p>
+          <p class="right ma-b-50"><%= link_to "営業時間を追加する", new_shop_business_hour_path(@shop) %></p>
         <% else %>
           <div class="content_box_detail center">
             <h5>まだ営業時間が設定されていません。</h5>
-            <p class="right"><%= link_to "営業時間を追加する", new_shop_business_hour_path(current_shop) %></p>
+            <p class="right"><%= link_to "営業時間を追加する", new_shop_business_hour_path(@shop) %></p>
           </div>
         <% end %>
       </div>

@@ -1,39 +1,26 @@
-<div class="container-fluid" style="background-color:#eee">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-12">
-      <div class="width_box">
+    <div class="col-md-12">
+      <div class="content_box">
         <h5>メニュー一覧</h5>
         <div class="content_box_detail">
-          <div class="new_btn right ma-b-20">
-            <%= link_to "メニュー追加", new_menu_path, class: "btn btn-primary" %>
-          </div>
-          <table class="table table-hover">
+          <table class="table table-hover table-striped">
             <thead>
               <tr>
-                <th width="10%"></th>
                 <th>商品名</th>
+                <th>出品店舗</th>
                 <th>価格</th>
-                <th>登録店舗</th>
-                <th width="10%"></th>
-                <th width="10%"></th>
+                <th>タイプ</th>
               </tr>
             </thead>
             <tbody>
               <% if @menus.present? %>
                 <% @menus.each do |menu| %>
                   <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
-                    <td class="center">
-                      <% if menu.menu_images.present? %>
-                        <%= image_tag menu.main_image.file_name.thumb50.to_s %>
-                      <% else %>
-                        <%= image_tag "noimage.png", size:"75x50" %>
-                      <% end %>
-                    </td>
                     <td><%= menu.name %></td>
-                    <td>¥<%= menu.price %></td>
                     <td><%= menu.shop.name %></td>
-                    <td><%= link_to "編集", edit_menu_path(menu) %></td>
-                    <td><%= link_to "削除", menu_path(menu), method: :delete %></td>
+                    <td>¥<%= menu.price %></td>
+                    <td><%= menu.menu_type %></td>
                   </tr>
                 <% end %>
               <% else %>
@@ -47,6 +34,11 @@
           </table>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row center ma-b-20">
+    <div class="col-md-12">
+      <%= paginate @menus %>
     </div>
   </div>
 </div>

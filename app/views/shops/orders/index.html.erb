@@ -21,7 +21,7 @@
                   <tr class="pointer" data-href="<%= shops_order_path(order) %>">
                     <td><%= order.user.full_name %></td>
                     <td><%= order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
-                    <td>¥<%= price(order.total_payment) %></td>
+                    <td class="right">¥<%= price(order.total_payment) %></td>
                   </tr>
                 <% end %>
               <% else %>

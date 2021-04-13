@@ -4,7 +4,7 @@
       <div class="content_box">
         <h5>メニュー詳細</h5>
         <div class="back_btn right">
-          <%= link_to "戻る", shops_menus_path, class: "arrow2" %>
+          <%= link_to "一覧に戻る", shops_menus_path, class: "arrow2" %>
         </div>
         <hr>
         <div class="content_box_detail">
@@ -34,6 +34,10 @@
               <tr>
                 <th width="30%">商品名</th>
                 <td><%= @menu.name %></td>
+              </tr>
+              <tr>
+                <th>タイプ</th>
+                <td><%= @menu.menu_type %></td>
               </tr>
               <tr>
                 <th>価格</th>

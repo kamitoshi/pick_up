@@ -1,99 +1,450 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
       <div class="content_box">
-        <h5>店舗情報詳細</h5>
-        <div class="back_btn right">
-          <%= link_to "戻る", shops_path, class: "arrow2" %>
-        </div>
+        <h5>
+          <%= link_to "本日の受注状況", today_index_shops_orders_path, class:"black" %>
+          <% if today_order_count(@new_orders) >= 1 %>
+            <span class="blinking red">新着</span>
+          <% end %>
+        </h5>
         <hr>
         <div class="content_box_detail">
-          <div class="image_box pa-b-30">
-            <% if @shop.shop_images.present? %>
-              <div class="shop_image-box center ma-b-10">
-                <%= image_tag @shop.shop_images[0].file_name.thumb_width.to_s, class:"wid-50" %>
-              </div>
-              <div class="shop_image-box center">
-                <% if @shop.shop_images.count >= 2 %>
-                  <% @shop.not_main_images.each do |image| %>
-                    <%= image_tag image.file_name.thumb100.to_s %>
-                  <% end %>
-                <% end %>
-              </div>
-            <% else %>
-              <div class="shop_image-box center ma-b-10 border">
-                <%= image_tag "noimage.png", class:"wid-50" %>
-              </div>
-            <% end %>
-            <div class="add_btn ma-t-30 right">
-              <%= link_to "商品画像を追加・編集する", shop_shop_images_path(@shop) %>
-            </div>
-          </div>
-          <table class="table">
+          <table class="table table-borderless">
             <tbody>
-              <tr>
-                <th>店舗名</th>
-                <td><%= @shop.name %></td>
+              <tr data-href="<%= today_index_shops_orders_path %>" class="pointer">
+                <td>新規注文</td>
+                <td><%= today_order_count(@new_orders) %></td>
               </tr>
-              <tr>
-                <th>電話番号</th>
-                <td><%= @shop.phone_number %></td>
+              <tr data-href="<%= today_index_shops_orders_path %>" class="pointer">
+                <td>受付した注文</td>
+                <td><%= today_order_count(@reception_orders) %></td>
               </tr>
-              <tr>
-                <th>メールアドレス</th>
-                <td><%= @shop.email %></td>
-              </tr>
-              <tr>
-                <th>住所</th>
-                <td>
-                  〒<%= @shop.postal_code %><br>
-                  <%= @shop.full_address %>
-                </td>
-              </tr>
-              <tr>
-                <th>営業時間</th>
-                <% if @shop.business_hours.present? %>
-                  <td>
-                    <% @shop.business_hours.each do |business_hour| %>
-                      <p>
-                        <%= business_hour.job_time %><br>
-                        <%= business_hour.opening.strftime("%H:%M") %>〜<%= business_hour.closing.strftime("%H:%M") %><br>
-                        （L.O <%= business_hour.last_order.strftime("%H:%M") %>）</p>
-                    <% end %>
-                    <p class="right"><%= link_to "営業時間を管理する", shop_business_hours_path(current_shop) %></p>
-                  </td>
-                <% else %>
-                  <td>
-                    <p>まだ、営業時間が登録されていません</p>
-                    <p class="right"><%= link_to "営業時間を管理する", shop_business_hours_path(current_shop) %></p>
-                  </td>
-                <% end %>
-              </tr>
-              <tr>
-                <th>検索キーワード</th>
-                <td>
-                  <% if @shop.shop_tags.present? %>
-                    <% @shop.shop_tags.each do |tag| %>
-                      <span class="ma-r-10"><%= tag.content %></span>
-                    <% end %>
-                    <p class="right"><%= link_to "キーワードを管理する", new_shop_shop_tag_path(@shop) %></p>
-                  <% else %>
-                    <p>検索キーワードが設定されていません</p>
-                    <p class="right"><%= link_to "キーワードを管理する", new_shop_shop_tag_path(@shop) %></p>
-                  <% end %>
-                </td>
-              </tr>
-              <tr>
-                <th>店舗紹介文</th>
-                <td style="overflow-wrap: break-word;"><%= introduction(@shop.introduction) %></td>
+              <tr data-href="<%= today_index_shops_orders_path %>" class="pointer">
+                <td>キャンセル済み注文</td>
+                <td><%= today_order_count(@cancel_orders) %></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="return_btn center ma-b-30">
-          <%= link_to "編集する", edit_shop_path(@shop.id), class: "btn btn-outline-success" %>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="content_box">
+        <h5>売上</h5>
+        <div class="content_box_detail center">
+          <hr>
+            <div class="row">
+              <div class="col-md-5 offset-md-1">
+                <h4>
+                  ¥<%= @shop.month_sales_money.to_s(:delimited) %>
+                  <span class="ma-l-10 ma-r-10">/</span>
+                  <%= @shop.month_sales_count %>件
+                </h4>
+                <p>今月の売上金額/売上件数</p>
+              </div>
+              <div class="col-md-5">
+                <h4>
+                  ¥<%= @shop.today_sales_money.to_s(:delimited) %>
+                  <span class="ma-l-10 ma-r-10">/</span>
+                  <%= @shop.today_sales_count %>件
+                </h4>
+                <p>今日の売上金額/売上件数</p>
+              </div>
+            </div>
+          <hr>
+        </div>
+        <div class="chat_box">
+          <!-- タブ部分 -->
+          <ul id="myTab" class="nav nav-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a href="#salesNumber" id="salesNumber-tab" class="nav-link active" role="tab" data-toggle="tab" aria-controls="salesNumber" aria-selected="true">売上件数</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a href="#salesPrice" id="salesPrice-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="salesPrice" aria-selected="false">売上金額</a>
+            </li>
+          </ul>
+
+          <!-- パネル部分 -->
+          <div id="myTabContent" class="tab-content mt-3">
+            <div id="salesNumber" class="tab-pane active" role="tabpanel" aria-labelledby="salesNumber-tab">
+              <canvas id="salesNumberCanvas"></canvas>
+            </div>
+            <div id="salesPrice" class="tab-pane" role="tabpanel" aria-labelledby="salesPrice-tab">
+              <canvas id="salesPriceCanvas"></canvas>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="content_box">
+        <h5>月間データ</h5>
+        <hr>
+        <div class="content_box_detail">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th>売上件数</th>
+                <td class="right"><%= @month_orders_count %>件</td>
+              </tr>
+              <tr>
+                <th>売上金額</th>
+                <td class="right">¥<%= price(@month_orders_price) %></td>
+              </tr>
+              <tr>
+                <th>手数料</th>
+                <td class="right">¥<%= price(@month_orders_fee) %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="content_box">
+        <h5>売上推移</h5>
+        <hr>
+        <div class="content_box_detail">
+          <canvas id="myLineChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content_box">
+        <h5>店舗情報詳細</h5>
+        <hr>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="content_box_detail">
+              <div class="image_box pa-b-30">
+                <% if @shop.shop_images.present? %>
+                  <div class="shop_image-box center ma-b-10">
+                    <%= image_tag @shop.main_image.file_name.thumb_width.to_s, class:"wid-100" %>
+                  </div>
+                  <div class="shop_image-box center">
+                    <% if @shop.shop_images.count >= 2 %>
+                      <% @shop.not_main_images.each do |image| %>
+                        <%= image_tag image.file_name.thumb_square.to_s, size: "100x100" %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <div class="shop_image-box center ma-b-10 border">
+                    <%= image_tag "noimage.png", class:"wid-100" %>
+                  </div>
+                <% end %>
+                <div class="add_btn ma-t-30 right">
+                  <%= link_to "店舗画像を追加・編集する", shop_shop_images_path(@shop) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="content_box_detail">
+              <table class="table table-borderless">
+                <tbody>
+                  <tr>
+                    <th>店舗名</th>
+                    <td><%= @shop.name %></td>
+                  </tr>
+                  <tr>
+                    <th>電話番号</th>
+                    <td><%= @shop.phone_number %></td>
+                  </tr>
+                  <tr>
+                    <th>メールアドレス</th>
+                    <td><%= @shop.email %></td>
+                  </tr>
+                  <tr>
+                    <th>住所</th>
+                    <td>
+                      〒<%= @shop.postal_code %><br>
+                      <%= @shop.full_address %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>営業時間</th>
+                    <% if @shop.business_hours.present? %>
+                      <td>
+                        <% @shop.business_hours.each do |business_hour| %>
+                          <p>
+                            <%= business_hour.job_time %><br>
+                            <%= business_hour.opening.strftime("%H:%M") %>〜<%= business_hour.closing.strftime("%H:%M") %><br>
+                            （L.O <%= business_hour.last_order.strftime("%H:%M") %>）</p>
+                        <% end %>
+                        <p class="right"><%= link_to "営業時間を管理する", shop_business_hours_path(@shop) %></p>
+                      </td>
+                    <% else %>
+                      <td>
+                        <p>まだ、営業時間が登録されていません</p>
+                        <p class="right"><%= link_to "営業時間を管理する", shop_business_hours_path(@shop) %></p>
+                      </td>
+                    <% end %>
+                  </tr>
+                  <tr>
+                    <th>検索キーワード</th>
+                    <td>
+                      <% if @shop.shop_tags.present? %>
+                        <% @shop.shop_tags.each do |tag| %>
+                          <span class="ma-r-10"><%= tag.content %></span>
+                        <% end %>
+                        <p class="right"><%= link_to "キーワードを管理する", new_shop_shop_tag_path(@shop) %></p>
+                      <% else %>
+                        <p>検索キーワードが設定されていません</p>
+                        <p class="right"><%= link_to "キーワードを管理する", new_shop_shop_tag_path(@shop) %></p>
+                      <% end %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>店舗紹介文</th>
+                    <td style="overflow-wrap: break-word;"><%= introduction(@shop.introduction) %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="return_btn center ma-b-30">
+              <%= link_to "基本情報を編集する", edit_shop_path(@shop), class: "btn btn-outline-success" %>
+            </div>
+          </div>
+        </div>
+      </div>
+        
+    </div>
+  </div>
 </div>
+<script>
+jQuery(function ($) {
+  //data-hrefの属性を持つtrを選択しclassにclickableを付加
+  $("tr[data-href]")
+    .addClass("clickable")
+
+  //クリックイベント
+  .click(function (e) {
+    //e.targetはクリックした要素自体、それがa要素以外であれば
+    if (!$(e.target).is("a")) {
+      //その要素の先祖要素で一番近いtrの
+      //data-href属性の値に書かれているURLに遷移する
+      window.location = $(e.target).closest("tr").data("href");
+    }
+  });
+});
+</script>
+<script>
+  // 直近１週間の売上件数をグラフ表示させる
+  var ctx = document.getElementById("salesNumberCanvas").getContext("2d");
+  var myBar = new Chart(ctx, {
+    type: 'bar',                           //◆棒グラフ
+    data: {                                //◆データ
+      labels: [
+        "<%= @week_sales_numbers[0][0][:date] %>",
+        "<%= @week_sales_numbers[1][0][:date] %>",
+        "<%= @week_sales_numbers[2][0][:date] %>",
+        "<%= @week_sales_numbers[3][0][:date] %>",
+        "<%= @week_sales_numbers[4][0][:date] %>",
+        "<%= @week_sales_numbers[5][0][:date] %>",
+        "<%= @week_sales_numbers[6][0][:date] %>"
+      ],     //ラベル名
+      datasets: [{                       //データ設定
+        data: [
+          "<%= @week_sales_numbers[0][0][:count] %>",
+          "<%= @week_sales_numbers[1][0][:count] %>",
+          "<%= @week_sales_numbers[2][0][:count] %>",
+          "<%= @week_sales_numbers[3][0][:count] %>",
+          "<%= @week_sales_numbers[4][0][:count] %>",
+          "<%= @week_sales_numbers[5][0][:count] %>",
+          "<%= @week_sales_numbers[6][0][:count] %>",
+        ],          //データ内容
+        backgroundColor: '#4444FF'   //背景色
+      }]
+    },
+    options: {                             //◆オプション
+      responsive: true,                  //グラフ自動設定
+      legend: {                          //凡例設定
+        display: false                 //表示設定
+      },
+      title: {                           //タイトル設定
+        display: true,                 //表示設定
+        fontSize: 12,                  //フォントサイズ
+        text: '売上件数'                //ラベル
+      },
+      scales: {                          //軸設定
+        yAxes: [{                      //y軸設定
+          display: true,             //表示設定
+          scaleLabel: {              //軸ラベル設定
+              display: true,          //表示設定
+              labelString: '件数',  //ラベル
+              fontSize: 12               //フォントサイズ
+          },
+          ticks: {                      //最大値最小値設定
+              min: 0,                   //最小値
+              max: 20,                  //最大値
+              fontSize: 12,             //フォントサイズ
+              stepSize: 5              //軸間隔
+          },
+        }],
+        xAxes: [{                         //x軸設定
+          display: true,                //表示設定
+          barPercentage: 2,           //棒グラフ幅
+          categoryPercentage: 0.4,      //棒グラフ幅
+          scaleLabel: {                 //軸ラベル設定
+            display: true,             //表示設定
+            labelString: '日付',  //ラベル
+            fontSize: 12               //フォントサイズ
+          },
+          ticks: {
+            fontSize: 12             //フォントサイズ
+          },
+        }],
+      }
+      
+    }
+  });
+  // 直近１週間の売上金額をグラフ表示させる
+  var ctx = document.getElementById("salesPriceCanvas").getContext("2d");
+  var myBar = new Chart(ctx, {
+    type: 'bar',                           //◆棒グラフ
+    data: {                                //◆データ
+      labels: [
+        "<%= @week_sales_prices[0][0][:date] %>",
+        "<%= @week_sales_prices[1][0][:date] %>",
+        "<%= @week_sales_prices[2][0][:date] %>",
+        "<%= @week_sales_prices[3][0][:date] %>",
+        "<%= @week_sales_prices[4][0][:date] %>",
+        "<%= @week_sales_prices[5][0][:date] %>",
+        "<%= @week_sales_prices[6][0][:date] %>"
+      ],     //ラベル名
+      datasets: [{                       //データ設定
+        data: [
+          "<%= @week_sales_prices[0][0][:price] %>",
+          "<%= @week_sales_prices[1][0][:price] %>",
+          "<%= @week_sales_prices[2][0][:price] %>",
+          "<%= @week_sales_prices[3][0][:price] %>",
+          "<%= @week_sales_prices[4][0][:price] %>",
+          "<%= @week_sales_prices[5][0][:price] %>",
+          "<%= @week_sales_prices[6][0][:price] %>",
+        ],          //データ内容
+        backgroundColor: '#4444FF'   //背景色
+      }]
+    },
+    options: {                             //◆オプション
+      responsive: true,                  //グラフ自動設定
+      legend: {                          //凡例設定
+        display: false                 //表示設定
+      },
+      title: {                           //タイトル設定
+        display: true,                 //表示設定
+        fontSize: 12,                  //フォントサイズ
+        text: '売上金額'                //ラベル
+      },
+      scales: {                          //軸設定
+        yAxes: [{                      //y軸設定
+          display: true,             //表示設定
+          scaleLabel: {              //軸ラベル設定
+              display: true,          //表示設定
+              labelString: '金額',  //ラベル
+              fontSize: 12               //フォントサイズ
+          },
+          ticks: {                      //最大値最小値設定
+              min: 0,                   //最小値
+              max: 50000,                  //最大値
+              fontSize: 12,             //フォントサイズ
+              stepSize: 10000              //軸間隔
+          },
+        }],
+        xAxes: [{                         //x軸設定
+          display: true,                //表示設定
+          barPercentage: 2,           //棒グラフ幅
+          categoryPercentage: 0.4,      //棒グラフ幅
+          scaleLabel: {                 //軸ラベル設定
+            display: true,             //表示設定
+            labelString: '日付',  //ラベル
+            fontSize: 12               //フォントサイズ
+          },
+          ticks: {
+            fontSize: 12             //フォントサイズ
+          },
+        }],
+      }
+    }
+  });
+  var ctx = document.getElementById("myLineChart");
+  var myLineChart = new Chart(ctx, {
+    //グラフの種類
+    type: 'line',
+    //データの設定
+    data: {
+        //データ項目のラベル
+        labels: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+        //データセット
+        datasets: [
+            {
+                //凡例
+                label: "売上推移",
+                //面の表示
+                fill: true,
+                //線のカーブ
+                lineTension: 0,
+                //背景色
+                backgroundColor: "rgba(75,192,192,0.4)",
+                //枠線の色
+                borderColor: "rgba(75,192,192,1)",
+                //結合点の枠線の色
+                pointBorderColor: "rgba(75,192,192,1)",
+                //結合点の背景色
+                pointBackgroundColor: "#fff",
+                //結合点のサイズ
+                pointRadius: 5,
+                //結合点のサイズ（ホバーしたとき）
+                pointHoverRadius: 8,
+                //結合点の背景色（ホバーしたとき）
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                //結合点の枠線の色（ホバーしたとき）
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                //結合点より外でマウスホバーを認識する範囲（ピクセル単位）
+                pointHitRadius: 10,
+                //グラフのデータ
+                data: [
+                  <%= @jan_total_payment %>,
+                  <%= @feb_total_payment %>,
+                  <%= @mar_total_payment %>,
+                  <%= @apr_total_payment %>,
+                  <%= @may_total_payment %>,
+                  <%= @jun_total_payment %>,
+                  <%= @jul_total_payment %>,
+                  <%= @aug_total_payment %>,
+                  <%= @sep_total_payment %>,
+                  <%= @oct_total_payment %>,
+                  <%= @nov_total_payment %>,
+                  <%= @dec_total_payment %>
+                ]
+            }
+        ]
+    },
+    //オプションの設定
+    options: {
+        //軸の設定
+        scales: {
+            //縦軸の設定
+            yAxes: [{
+                //目盛りの設定
+                ticks: {
+                    //最小値を0にする
+                    beginAtZero: true
+                }
+            }]
+        },
+        //ホバーの設定
+        hover: {
+            //ホバー時の動作（single, label, dataset）
+            mode: 'single'
+        }
+    }
+  });
+</script>

@@ -26,8 +26,7 @@ class Menu < ApplicationRecord
 
   # メインの画像以外をサムネイルで表示する
   def not_main_images
-    images = self.menu_images
-    return images.drop(1)
+    return self.menu_images.where(is_main: false)
   end
 
 end

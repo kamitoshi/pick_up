@@ -4,7 +4,7 @@
       <div class="form_box">
         <h5>『<%= @shop.name %>』の画像追加</h5>
         <div class="back_btn right">
-          <%= link_to "戻る", shop_shop_images_path(@shop), class: "arrow2" %>
+          <%= link_to "画像一覧に戻る", shop_shop_images_path(@shop), class: "arrow2" %>
         </div>
         <hr>
         <%= form_for @shop_image, url: shop_shop_images_path(@shop.id) do |f|  %>

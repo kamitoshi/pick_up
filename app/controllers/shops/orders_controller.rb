@@ -1,5 +1,6 @@
 class Shops::OrdersController < ApplicationController
   layout "shop_app"
+  before_action :authenticate_shop!, only:[:index, :today_index]
   before_action :admin_or_shop!
   
   def index

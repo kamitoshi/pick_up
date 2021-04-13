@@ -8,12 +8,22 @@ class Order < ApplicationRecord
     新規注文: 0, 受付注文: 1, 完了注文: 2, キャンセル注文: 3
   }
 
-  # 該当のオーダーでいくらの料金が発生したのかを判別するメソッド
+  # 該当のオーダーでいくらの料金が発生したのかを算出する
   def total_payment
     items = self.order_items
     result = 0
     items.each do |item|
       result += item.menu_price * item.menu_amount
+    end
+    return result
+  end
+
+  # 該当のオーダーでいくらの手数料が発生したのかを算出する
+  def total_fee
+    items = self.order_items
+    result = 0
+    items.each do |item|
+      result += (item.menu_price * item.menu_fee / 100) * item.menu_amount
     end
     return result
   end

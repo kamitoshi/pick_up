@@ -139,8 +139,7 @@ class Shop < ApplicationRecord
 
   # ショップの画像を最初のもの以外サムネイルで表示する
   def not_main_images
-    images = self.shop_images
-    return images.drop(1)
+    return self.shop_images.where(is_main: false)
   end
 
 end

@@ -4,7 +4,7 @@
       <div class="form_box">
         <h5>店舗情報編集</h5>
         <div class="back_btn right">
-          <%= link_to "戻る", shop_path(current_shop), class: "arrow2" %>
+          <%= link_to "topに戻る", shop_path(@shop), class: "arrow2" %>
         </div>
         <hr>
         <%= form_for @shop do |f| %>
@@ -30,7 +30,7 @@
 
           <div class="field">
             <%= f.label :prefecture, "都道府県" %><br>
-            <%= f.select :prefecture, Shop.prefectures.keys, {prompt: '選択してください'}, class: '' %>
+            <%= f.select :prefecture, Shop.prefectures.keys, {prompt: '選択してください'}, class: 'form-control' %>
           </div>
 
           <div class="field">

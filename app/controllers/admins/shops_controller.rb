@@ -1,4 +1,5 @@
 class Admins::ShopsController < ApplicationController
+  layout "shop_app"
   before_action :set_shop, only:[:show, :edit, :update, :destroy]
   def index
     @shops = Shop.all
@@ -6,8 +7,9 @@ class Admins::ShopsController < ApplicationController
 
   def show
     @new_orders = Order.where(shop_id: @shop.id, status: 0)
-    @making_orders = Order.where(shop_id: @shop.id, status: 1)
+    @reception_orders = Order.where(shop_id: @shop.id, status: 1)
     @fix_orders = Order.where(shop_id: @shop.id, status: 2)
+    @cancel_orders = Order.where(shop_id: @shop.id, status: 3)
     @week_sales_numbers = []
     @week_sales_prices = []
     @orders = Order.where(shop_id: @shop.id)
