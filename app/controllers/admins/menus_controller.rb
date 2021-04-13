@@ -1,7 +1,7 @@
 class Admins::MenusController < ApplicationController
   layout "shop_app"
   def index
-    @menus = Menu.all
+    @menus = Menu.all.page(params[:page]).per(50)
   end
 
   def show

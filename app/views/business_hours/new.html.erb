@@ -4,10 +4,10 @@
       <div class="form_box">
         <h3 class="center">営業時間設定</h3>
         <div class="back_btn right">
-          <%= link_to "戻る", shop_path(current_shop), class: "arrow2" %>
+          <%= link_to "戻る", shop_path(@shop), class: "arrow2" %>
         </div>
         <hr>
-        <%= form_for @business_hour, url: shop_business_hours_path(current_shop) do |f|  %>
+        <%= form_for @business_hour, url: shop_business_hours_path(@shop) do |f|  %>
           <div class="field">
             <%= f.label :job_time, "営業時間帯" %><br />
             <%= f.select :job_time, BusinessHour.job_times.keys, {include_blank: "選択してください"}, {class: "custom-select"} %>

@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   before_action :set_menu_ransack
   def index
     if shop_signed_in?
-      redirect_to shops_path
+      redirect_to shop_path(current_shop)
     elsif admin_signed_in?
       redirect_to admins_path
     end

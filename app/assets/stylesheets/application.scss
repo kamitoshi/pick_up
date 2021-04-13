@@ -35,10 +35,11 @@ i {
 }
 
 .sidebar{
-  min-height:100vh;
+  height:100vh;
   padding-top:55px;
   background-color: rgba(0, 0, 0, 0.03);
   box-shadow: 0px 0px 4px 4px #eee;
+  overflow: scroll;
 }
 @media (min-width: 768px) {
   .humbargerMenu {

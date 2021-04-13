@@ -1,126 +1,130 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-8 order-md-2">
       <div class="content_box">
-        <h5>全体売上</h5>
+        <h5>全体週間売上</h5>
+        <hr>
         <div class="content_box_detail center">
-          <hr>
-            <div class="row">
-              <div class="col-6">
-                <h4>
-                  ¥<%= month_sales_money(@orders).to_s(:delimited) %>
-                  <span class="ma-l-10 ma-r-10">/</span>
-                  <%= month_sales_count(@orders) %>件
-                </h4>
-                <p>今月の売上金額/売上件数</p>
-              </div>
-              <div class="col-6">
-                <h4>
-                  ¥<%= today_sales_money(@orders).to_s(:delimited) %>
-                  <span class="ma-l-10 ma-r-10">/</span>
-                  <%= today_sales_count(@orders) %>件
-                </h4>
-                <p>今日の売上金額/売上件数</p>
-              </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+              <h4>
+                ¥<%= month_sales_money(@orders).to_s(:delimited) %>
+                <span class="ma-l-10 ma-r-10">/</span>
+                <%= month_sales_count(@orders) %>件
+              </h4>
+              <p>今月の売上金額/売上件数</p>
             </div>
-          <hr>
+            <div class="col-md-6">
+              <h4>
+                ¥<%= today_sales_money(@orders).to_s(:delimited) %>
+                <span class="ma-l-10 ma-r-10">/</span>
+                <%= today_sales_count(@orders) %>件
+              </h4>
+              <p>今日の売上金額/売上件数</p>
+            </div>
+          </div>
         </div>
+
+        <hr>
+
         <div class="chat_box">
           <!-- タブ部分 -->
           <ul id="myTab" class="nav nav-tabs" role="tablist">
             <li class="nav-item" role="presentation">
-              <a href="#salesNumber" id="salesNumber-tab" class="nav-link active" role="tab" data-toggle="tab" aria-controls="salesNumber" aria-selected="true">売上件数</a>
+              <a href="#salesCount" id="salesCount-tab" class="nav-link active" role="tab" data-toggle="tab" aria-controls="salesCount" aria-selected="true">売上件数</a>
             </li>
             <li class="nav-item" role="presentation">
               <a href="#salesPrice" id="salesPrice-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="salesPrice" aria-selected="false">売上金額</a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a href="#monthSalesPrice" id="monthSalesPrice-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="monthSalesPrice" aria-selected="false">コンタクト</a>
             </li>
           </ul>
 
           <!-- パネル部分 -->
           <div id="myTabContent" class="tab-content mt-3">
-            <div id="salesNumber" class="tab-pane active" role="tabpanel" aria-labelledby="salesNumber-tab">
-              <canvas id="salesNumberCanvas"></canvas>
+            <div id="salesCount" class="tab-pane active" role="tabpanel" aria-labelledby="salesCount-tab">
+              <canvas id="salesCountCanvas"></canvas>
             </div>
             <div id="salesPrice" class="tab-pane" role="tabpanel" aria-labelledby="salesPrice-tab">
               <canvas id="salesPriceCanvas"></canvas>
-            </div>
-            <div id="monthSalesPrice" class="tab-pane" role="tabpanel" aria-labelledby="monthSalesPrice-tab">
-              タブパネルのプレースホルダーコンテンツ。...
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-4" style="padding:0">
-      <div class="under_content_box scroll-box">
-        <h5>menu</h5>
-        <hr>
-        <div class="content_box_detail">
-          
-        </div>
-      </div>
-    </div>
-    <div class="col-4" style="padding:0">
-      <div class="under_content_box scroll-box">
-        <h5>menu</h5>
-        <hr>
-        <div class="content_box_detail">
 
+    <div class="col-md-4 order-md-1">
+      <div class="content_box">
+        <h5>タイプ別週間売上件数</h5>
+        <hr>
+        <div class="content_box_detail center">
+          <canvas id="myPieChart"></canvas>
         </div>
       </div>
     </div>
-    <div class="col-4" style="padding:0">
-      <div class="under_content_box scroll-box">
-        <h5>お知らせ</h5>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="content_box">
+        <h5>月間データ</h5>
         <hr>
         <div class="content_box_detail">
-          <table class="table table-hover table-borderless">
+          <table class="table table-borderless">
             <tbody>
               <tr>
-                <td>メニュー</td>
+                <th>売上件数</th>
+                <td class="right"><%= @month_orders_count %>件</td>
               </tr>
               <tr>
-                <td>メニュー</td>
+                <th>売上金額</th>
+                <td class="right">¥<%= price(@month_orders_price) %></td>
               </tr>
               <tr>
-                <td>メニュー</td>
+                <th>手数料</th>
+                <td class="right">¥<%= price(@month_orders_fee) %></td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
+
+    <div class="col-md-8">
+      <div class="content_box">
+        <h5>売上推移</h5>
+        <hr>
+        <div class="content_box_detail">
+          <canvas id="myLineChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
   </div>
 </div>
 <script>
   // 直近１週間の売上件数をグラフ表示させる
-  var ctx = document.getElementById("salesNumberCanvas").getContext("2d");
+  var ctx = document.getElementById("salesCountCanvas").getContext("2d");
   var myBar = new Chart(ctx, {
     type: 'bar',                           //◆棒グラフ
     data: {                                //◆データ
       labels: [
-        "<%= @week_sales_numbers[0][0][:date] %>",
-        "<%= @week_sales_numbers[1][0][:date] %>",
-        "<%= @week_sales_numbers[2][0][:date] %>",
-        "<%= @week_sales_numbers[3][0][:date] %>",
-        "<%= @week_sales_numbers[4][0][:date] %>",
-        "<%= @week_sales_numbers[5][0][:date] %>",
-        "<%= @week_sales_numbers[6][0][:date] %>"
+        "<%= @week_sales_counts[0][0][:date] %>",
+        "<%= @week_sales_counts[1][0][:date] %>",
+        "<%= @week_sales_counts[2][0][:date] %>",
+        "<%= @week_sales_counts[3][0][:date] %>",
+        "<%= @week_sales_counts[4][0][:date] %>",
+        "<%= @week_sales_counts[5][0][:date] %>",
+        "<%= @week_sales_counts[6][0][:date] %>"
       ],     //ラベル名
       datasets: [{                       //データ設定
         data: [
-          "<%= @week_sales_numbers[0][0][:count] %>",
-          "<%= @week_sales_numbers[1][0][:count] %>",
-          "<%= @week_sales_numbers[2][0][:count] %>",
-          "<%= @week_sales_numbers[3][0][:count] %>",
-          "<%= @week_sales_numbers[4][0][:count] %>",
-          "<%= @week_sales_numbers[5][0][:count] %>",
-          "<%= @week_sales_numbers[6][0][:count] %>",
+          "<%= @week_sales_counts[0][0][:count] %>",
+          "<%= @week_sales_counts[1][0][:count] %>",
+          "<%= @week_sales_counts[2][0][:count] %>",
+          "<%= @week_sales_counts[3][0][:count] %>",
+          "<%= @week_sales_counts[4][0][:count] %>",
+          "<%= @week_sales_counts[5][0][:count] %>",
+          "<%= @week_sales_counts[6][0][:count] %>",
         ],          //データ内容
         backgroundColor: '#4444FF'   //背景色
       }]
@@ -215,7 +219,7 @@
               min: 0,                   //最小値
               max: 50000,                  //最大値
               fontSize: 12,             //フォントサイズ
-              stepSize: 5000              //軸間隔
+              stepSize: 10000              //軸間隔
           },
         }],
         xAxes: [{                         //x軸設定
@@ -232,6 +236,111 @@
           },
         }],
       }
+    }
+  });
+  //直近１週間のメニュータイプの売り上げ割合
+  var ctx = document.getElementById("myPieChart");
+  var myPieChart = new Chart(ctx, {
+    //グラフの種類
+    type: 'pie',
+    //データの設定
+    data: {
+        //データ項目のラベル
+        labels: ["フード", "ドリンク", "デザート"],
+        //データセット
+        datasets: [{
+            //背景色
+            backgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ],
+            //背景色(ホバーしたとき)
+            hoverBackgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ],
+            //グラフのデータ
+            data: [
+              <%= @week_sale_food_count %>,
+              <%= @week_sale_drink_count %>,
+              <%= @week_sale_dessert_count %>
+            ]
+        }]
+    }
+  });
+  var ctx = document.getElementById("myLineChart");
+  var myLineChart = new Chart(ctx, {
+    //グラフの種類
+    type: 'line',
+    //データの設定
+    data: {
+        //データ項目のラベル
+        labels: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+        //データセット
+        datasets: [
+            {
+                //凡例
+                label: "売上推移",
+                //面の表示
+                fill: true,
+                //線のカーブ
+                lineTension: 0,
+                //背景色
+                backgroundColor: "rgba(75,192,192,0.4)",
+                //枠線の色
+                borderColor: "rgba(75,192,192,1)",
+                //結合点の枠線の色
+                pointBorderColor: "rgba(75,192,192,1)",
+                //結合点の背景色
+                pointBackgroundColor: "#fff",
+                //結合点のサイズ
+                pointRadius: 5,
+                //結合点のサイズ（ホバーしたとき）
+                pointHoverRadius: 8,
+                //結合点の背景色（ホバーしたとき）
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                //結合点の枠線の色（ホバーしたとき）
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                //結合点より外でマウスホバーを認識する範囲（ピクセル単位）
+                pointHitRadius: 10,
+                //グラフのデータ
+                data: [
+                  <%= @jan_total_payment %>,
+                  <%= @feb_total_payment %>,
+                  <%= @mar_total_payment %>,
+                  <%= @apr_total_payment %>,
+                  <%= @may_total_payment %>,
+                  <%= @jun_total_payment %>,
+                  <%= @jul_total_payment %>,
+                  <%= @aug_total_payment %>,
+                  <%= @sep_total_payment %>,
+                  <%= @oct_total_payment %>,
+                  <%= @nov_total_payment %>,
+                  <%= @dec_total_payment %>
+                ]
+            }
+        ]
+    },
+    //オプションの設定
+    options: {
+        //軸の設定
+        scales: {
+            //縦軸の設定
+            yAxes: [{
+                //目盛りの設定
+                ticks: {
+                    //最小値を0にする
+                    beginAtZero: true
+                }
+            }]
+        },
+        //ホバーの設定
+        hover: {
+            //ホバー時の動作（single, label, dataset）
+            mode: 'single'
+        }
     }
   });
 </script>

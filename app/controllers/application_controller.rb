@@ -14,6 +14,28 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # 今年1年のオーダーを引き出すため
+  def this_year_orders(orders)
+    result = []
+    orders.each do |order|
+      if order.takeaway_datetime.strftime("%Y") == Date.today.strftime("%Y")
+        result.push(order)
+      end
+    end
+  end
+
+  # 今年の月単位での売上を算出するため
+  def month_total_payment(orders, month)
+    result = 0
+    orders.each do |order|
+      if order.takeaway_datetime.strftime("%m") == month
+        result += order.total_payment
+      end
+    end
+    return result
+  end
+
+  # 検索のため
   def set_menu_ransack
     @q = Menu.ransack(params[:q])
   end
