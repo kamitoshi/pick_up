@@ -4,7 +4,7 @@ class ShopImagesController < ApplicationController
   before_action :set_shop
 
   def index
-    @shop_images = @shop.shop_images
+    @shop_images = @shop.shop_images.order(is_main: "desc")
     @main_image = @shop.shop_images.find_by(is_main: true)
   end
   def new
@@ -15,29 +15,52 @@ class ShopImagesController < ApplicationController
     if shop_signed_in?
       if @shop.shop_images.count < 4
         if @shop == current_shop
-          if params[:shop_image][:is_main] == "true"
-            if @shop.shop_images.present?
-              @shop.shop_images.each do |image|
-                if image.is_main?
-                  image.update(is_main: false)
+          if params[:shop_image].present?
+            if params[:shop_image][:is_main] == "true"
+              if @shop.shop_images.present?
+                @shop.shop_images.each do |image|
+                  if image.is_main?
+                    image.update(is_main: false)
+                  end
+                end
+                @shop_image = @shop.shop_images.build(shop_image_params)
+                if @shop_image.save
+                  flash[:success] = "店舗のメイン画像を追加しました"
+                  redirect_to shop_shop_images_path(@shop)
+                else
+                  flash[:danger] = "画像を追加できませんでした。ファイルを選択してください"
+                  render :new
+                end
+              else
+                @shop_image = @shop.shop_images.build(shop_image_params)
+                if @shop_image.save
+                  flash[:success] = "店舗のメイン画像を追加しました"
+                  redirect_to shop_shop_images_path(@shop)
+                else
+                  flash[:danger] = "画像を追加できませんでした。ファイルを選択してください"
+                  render :new
                 end
               end
-              @shop_image = @shop.shop_images.build(shop_image_params)
-              if @shop_image.save
-                flash[:success] = "店舗のメイン画像を追加しました"
-                redirect_to shop_shop_images_path(@shop)
-              else
-                flash[:danger] = "画像を追加できませんでした。ファイルを選択してください"
-                render :new
-              end
             else
-              @shop_image = @shop.shop_images.build(shop_image_params)
-              if @shop_image.save
-                flash[:success] = "店舗のメイン画像を追加しました"
-                redirect_to shop_shop_images_path(@shop)
+              if @shop.shop_images.present?
+                @shop_image = @shop.shop_images.build(shop_image_params)
+                if @shop_image.save
+                  flash[:success] = "店舗の画像を追加しました"
+                  redirect_to shop_shop_images_path(@shop)
+                else
+                  flash[:danger] = "画像を追加できませんでした。"
+                  render :new
+                end
               else
-                flash[:danger] = "画像を追加できませんでした。ファイルを選択してください"
-                render :new
+                @shop_image = @shop.shop_images.build(shop_image_params)
+                @shop_image.is_main = true
+                if @shop_image.save
+                  flash[:success] = "店舗のメイン画像を追加しました"
+                  redirect_to shop_shop_images_path(@shop)
+                else
+                  flash[:danger] = "画像を追加できませんでした。ファイルを選択してください"
+                  render :new
+                end
               end
             end
           else
@@ -129,6 +152,41 @@ class ShopImagesController < ApplicationController
     @shop_image = ShopImage.find(params[:id])
     if shop_signed_in?
       if @shop == current_shop
+        if params[:shop_image].present?
+          if params[:shop_image][:is_main] == "true"
+            @main_image = @shop.shop_images.find_by(is_main: true)
+            if @shop_image.update(shop_image_params)
+              @main_image.update(is_main: false)
+              flash[:success] = "変更を保存しました"
+              redirect_to shop_shop_images_path(@shop)
+            else
+              flash[:danger] = "変更できませんでした"
+              render :edit
+            end
+          else
+            if @shop_image.update(shop_image_params)
+              flash[:success] = "変更を保存しました"
+              redirect_to shop_shop_images_path(@shop)
+            else
+              flash[:danger] = "変更できませんでした"
+              render :edit
+            end
+          end
+        else
+          if @shop_image.update(shop_image_params)
+            flash[:success] = "変更を保存しました"
+            redirect_to shop_shop_images_path(@shop)
+          else
+            flash[:danger] = "変更できませんでした"
+            render :edit
+          end
+        end
+      else
+        flash[:danger] = "多店舗の画像は編集できません"
+        redirect_to root_path
+      end
+    elsif admin_signed_in?
+      if params[:shop_image][:is_main].present?
         if params[:shop_image][:is_main] == "true"
           @main_image = @shop.shop_images.find_by(is_main: true)
           if @shop_image.update(shop_image_params)
@@ -147,21 +205,6 @@ class ShopImagesController < ApplicationController
             flash[:danger] = "変更できませんでした"
             render :edit
           end
-        end
-      else
-        flash[:danger] = "多店舗の画像は編集できません"
-        redirect_to root_path
-      end
-    elsif
-      if params[:shop_image][:is_main] == "true"
-        @main_image = @shop.shop_images.find_by(is_main: true)
-        if @shop_image.update(shop_image_params)
-          @main_image.update(is_main: false)
-          flash[:success] = "変更を保存しました"
-          redirect_to shop_shop_images_path(@shop)
-        else
-          flash[:danger] = "変更できませんでした"
-          render :edit
         end
       else
         if @shop_image.update(shop_image_params)

@@ -126,7 +126,7 @@
               <div class="image_box pa-b-30">
                 <% if @shop.shop_images.present? %>
                   <div class="shop_image-box center ma-b-10">
-                    <%= image_tag @shop.shop_images[0].file_name.thumb_width.to_s, class:"wid-100" %>
+                    <%= image_tag @shop.main_image.file_name.thumb_width.to_s, class:"wid-100" %>
                   </div>
                   <div class="shop_image-box center">
                     <% if @shop.shop_images.count >= 2 %>
@@ -141,7 +141,7 @@
                   </div>
                 <% end %>
                 <div class="add_btn ma-t-30 right">
-                  <%= link_to "商品画像を追加・編集する", shop_shop_images_path(@shop) %>
+                  <%= link_to "店舗画像を追加・編集する", shop_shop_images_path(@shop) %>
                 </div>
               </div>
             </div>
@@ -209,10 +209,10 @@
                 </tbody>
               </table>
             </div>
+            <div class="return_btn center ma-b-30">
+              <%= link_to "基本情報を編集する", edit_shop_path(@shop), class: "btn btn-outline-success" %>
+            </div>
           </div>
-        </div>
-        <div class="return_btn center ma-b-30">
-          <%= link_to "編集する", edit_shop_path(@shop), class: "btn btn-outline-success" %>
         </div>
       </div>
         

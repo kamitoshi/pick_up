@@ -19,7 +19,7 @@
               </div>
               <div class="col-5 center">
                 <% if cart_item.menu.menu_images.present? %>
-                  <%= image_tag cart_item.menu.main_image.file_name.thumb_square.to_s, class: "wid-100" %>
+                  <%= image_tag cart_item.menu.main_image.file_name.thumb_square.to_s, class: "wid-60" %>
                 <% else %>
                   <%= image_tag "noimage.png", size:"100x50" %>
                 <% end %>
