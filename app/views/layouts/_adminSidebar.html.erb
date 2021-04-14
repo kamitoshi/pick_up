@@ -1,0 +1,154 @@
+<div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+  <% if admin_signed_in? %>
+    <div class="card">
+      <div class="card-header" role="tab" id="headingOne">
+        <h5 class="mb-0">
+          <a class="text-body d-block p-3 m-n3" href="<%= admins_path %>" role="button">
+            <i class="fas fa-home"></i><span class="ma-l-10">管理者</span>
+          </a>
+        </h5>
+      </div><!-- /.card-header -->
+    </div><!-- /.card -->
+    <div class="card">
+      <div class="card-header" role="tab" id="headingOne">
+        <h5 class="mb-0">
+          <a class="text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="true" aria-controls="collapseOne">
+            <i class="fas fa-store"></i><span class="ma-l-10">店舗管理</span>
+          </a>
+        </h5>
+      </div><!-- /.card-header -->
+      <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <table class="table table-borderless">
+            <tbody>
+              <tr class="pointer" data-href="<%= shops_path %>">
+                <td>登録店舗一覧</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.card-body -->
+      </div><!-- /.collapse -->
+    </div><!-- /.card -->
+    <div class="card">
+      <div class="card-header" role="tab" id="headingOne">
+        <h5 class="mb-0">
+          <a class="text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseUsers" role="button" aria-expanded="true" aria-controls="collapseUsers">
+            <i class="fas fa-users"></i><span class="ma-l-10">ユーザー管理</span>
+          </a>
+        </h5>
+      </div><!-- /.card-header -->
+      <div id="collapseUsers" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <table class="table table-borderless">
+            <tbody>
+              <tr class="pointer" data-href="<%= admins_users_path %>">
+                <td>登録ユーザー一覧</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.card-body -->
+      </div><!-- /.collapse -->
+    </div><!-- /.card -->
+    <div class="card">
+      <div class="card-header" role="tab" id="headingTwo">
+        <h5 class="mb-0">
+          <a class="collapsed text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">
+            <i class="fas fa-utensils"></i><span class="ma-l-10">商品管理</span>
+          </a>
+        </h5>
+      </div><!-- /.card-header -->
+      <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">
+          <table class="table table-borderless">
+            <tbody>
+              <tr data-href="<%= admins_menus_path %>">
+                <td class="pointer">商品一覧</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.card-body -->
+      </div><!-- /.collapse -->
+    </div><!-- /.card -->
+    <div class="card">
+      <div class="card-header" role="tab" id="headingThree">
+        <h5 class="mb-0">
+          <a class="collapsed text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseThree" role="button" aria-expanded="false" aria-controls="collapseThree">
+            <i class="fas fa-file-alt"></i><span class="ma-l-10">注文管理</span>
+          </a>
+        </h5>
+      </div><!-- /.card-header -->
+      <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+        <div class="card-body">
+          <table class="table table-borderless">
+            <tbody>
+              <tr data-href="#">
+                <td class="pointer">本日の注文</td>
+              </tr>
+              <tr data-href="<%= admins_orders_path %>">
+                <td class="pointer">注文履歴</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.card-body -->
+      </div><!-- /.collapse -->
+    </div><!-- /.card -->
+    <div class="card">
+      <div class="card-header" role="tab" id="headingFour">
+        <h5 class="mb-0">
+          <a class="collapsed text-body d-block p-3 m-n3" data-toggle="collapse" href="#collapseFour" role="button" aria-expanded="false" aria-controls="collapseFour">
+            <i class="far fa-chart-bar"></i><span class="ma-l-10">売上管理</span>
+          </a>
+        </h5>
+      </div><!-- /.card-header -->
+      <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
+        <div class="card-body">
+          <table class="table table-borderless">
+            <tbody>
+              <tr class="pointer" data-href="#">
+                <td>本日の売上</td>
+              </tr>
+              <tr class="pointer" data-href="#">
+                <td>月間売上</td>
+              </tr>
+              <tr class="pointer" data-href="#">
+                <td>年間売上</td>
+              </tr>
+              <tr class="pointer" data-href="#">
+                <td>タイプ別売上</td>
+              </tr>
+              <tr class="pointer" data-href="#">
+                <td>販売手数料管理</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.card-body -->
+      </div><!-- /.collapse -->
+    </div><!-- /.card -->
+    <div class="card">
+      <div class="card-header" role="tab" id="headingOne">
+        <h5 class="mb-0">
+          <a class="text-body d-block p-3 m-n3" href="<%= destroy_admin_session_path %>" data-method="delete" role="button">
+            <i class="fas fa-sign-out-alt"></i><span class="ma-l-10">ログアウト</span>
+          </a>
+        </h5>
+      </div><!-- /.card-header -->
+    </div><!-- /.card -->
+  <% end %>
+</div><!-- /#accordion -->
+<script>
+jQuery(function ($) {
+  //data-hrefの属性を持つtrを選択しclassにclickableを付加
+  $("tr[data-href]")
+    .addClass("clickable")
+
+  //クリックイベント
+  .click(function (e) {
+    //e.targetはクリックした要素自体、それがa要素以外であれば
+    if (!$(e.target).is("a")) {
+      //その要素の先祖要素で一番近いtrの
+      //data-href属性の値に書かれているURLに遷移する
+      window.location = $(e.target).closest("tr").data("href");
+    }
+  });
+});
+</script>

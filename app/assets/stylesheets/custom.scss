@@ -552,3 +552,26 @@
     opacity: 1;
   }
 }
+
+.ribon {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.ribon .caption {
+  display: inline;
+}
+
+.ribon span {
+  position: absolute;
+  display: inline-block;
+  top: 10px;
+  left: -25px;
+  width: 100px;
+  padding: 2px 10px;
+  background: #cc0c0c;
+  color: #fff;
+  text-align: center;
+  transform: rotate(-45deg);
+}

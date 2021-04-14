@@ -1,0 +1,16 @@
+<div class="field">
+  
+  <%= image_tag img, class: "wid-100" %>
+  <%= f.file_field :file_name, class: "font-10" %>
+</div>
+
+<% unless shop_image.is_main? %>
+  <div class="field">
+    <%= f.check_box :is_main, {class: "check_box"}, true, false %>
+    <%= f.label :is_main, "この画像をメインにする" %>
+  </div>
+<% end %>
+
+<div class="actions center">
+  <%= f.submit btn, class: "button-fill" %>
+</div>

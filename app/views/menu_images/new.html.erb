@@ -7,7 +7,7 @@
           <%= link_to "戻る", menu_menu_images_path(@menu), class: "arrow2" %>
         </div>
         <hr>
-        <%= form_for @menu_image, url: menu_menu_images_path(@menu.id) do |f|  %>
+        <%= form_for @menu_image, url: menu_menu_images_path(@menu) do |f|  %>
           
           <div class="field">
             <%= image_tag "noimage.png", class:"wid-100" %>

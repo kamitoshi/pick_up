@@ -1,14 +1,14 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8 offset-md-2">
+    <div class="col-md-12">
       <div class="form_box">
         <h5>店舗検索キーワード追加</h5>
         <div class="back_btn right">
-          <%= link_to "戻る", shop_path(current_shop), class: "arrow2" %>
+          <%= link_to "戻る", shop_path(@shop), class: "arrow2" %>
         </div>
         <hr>
-        <%= form_for @shop_tag, url: shop_shop_tags_path(current_shop) do |f|  %>
-          <%= f.hidden_field :shop_id, value: current_shop.id %>
+        <%= form_for @shop_tag, url: shop_shop_tags_path(@shop) do |f|  %>
+          <%= f.hidden_field :shop_id, value: @shop.id %>
           <div class="field">
             <%= f.text_field :content, class: "form-control", placeholder: "追加したいキーワードを入力" %>
           </div>

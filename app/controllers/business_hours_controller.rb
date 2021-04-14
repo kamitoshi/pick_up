@@ -5,7 +5,7 @@ class BusinessHoursController < ApplicationController
   def index
     @business_hours = @shop.business_hours.order(job_time: "asc")
     unless @business_hours.present?
-      redirect_to new_shop_business_hour_path(current_shop)
+      redirect_to new_shop_business_hour_path(@shop)
     end
   end
   def new
@@ -81,7 +81,7 @@ class BusinessHoursController < ApplicationController
     if @shop == current_shop
       @business_hour = BusinessHour.find(params[:id])
     else
-      redirect_to edit_shop_business_hour_path(current_shop)
+      redirect_to edit_shop_business_hour_path(@shop)
     end
   end
   
@@ -90,14 +90,14 @@ class BusinessHoursController < ApplicationController
     if @shop == current_shop
       if @business_hour.update(business_hour_params)
         flash[:success] = "営業時間を変更しました"
-        redirect_to shop_business_hours_path(current_shop)
+        redirect_to shop_business_hours_path(@shop)
       else
         flash[:danger] = "変更できませんでした"
         render :edit
       end
     else
       flash[:danger] = "多店舗の営業時間は変更できません"
-      redirect_to edit_shop_business_hour_path(current_shop)
+      redirect_to edit_shop_business_hour_path(@shop)
     end
   end
 
@@ -106,14 +106,14 @@ class BusinessHoursController < ApplicationController
     if @shop == current_shop
       if @business_hour.destroy
         flash[:success] = "営業時間を削除しました"
-        redirect_to shop_business_hours_path(current_shop)
+        redirect_to shop_business_hours_path(@shop)
       else
         flash[:danger] = "削除できませんでした"
-        redirect_to shop_business_hours_path(current_shop)
+        redirect_to shop_business_hours_path(@shop)
       end
     else
       flash[:danger] = "多店舗の営業時間は削除できません"
-      redirect_to shop_business_hours_path(current_shop)
+      redirect_to shop_business_hours_path(@shop)
     end
   end
 

@@ -2,7 +2,10 @@
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <div class="form_box">
-        <h3 class="center">パスワード変更</h3>
+        <h5>パスワード変更</h5>
+        <div class="back_btn right">
+          <%= link_to "戻る", :back, class: "arrow2" %>
+        </div>
         <hr>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
@@ -15,7 +18,7 @@
 
           <div class="field">
             <%= f.label :current_password, "現在のパスワード" %><br />
-            <%= f.password_field :current_password, autocomplete: "current-password", class:"form-under" %>
+            <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "入力してください", class:"form-under" %>
           </div>
 
           <div class="field">
@@ -23,22 +26,18 @@
             <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %>文字以上)</em>
             <% end %><br />
-            <%= f.password_field :password, autocomplete: "new-password", class:"form-under" %>
+            <%= f.password_field :password, autocomplete: "new-password", placeholder: "入力してください", class:"form-under" %>
           </div>
 
           <div class="field">
             <%= f.label :password_confirmation, "新しいパスワード確認" %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-under" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "入力してください", class:"form-under" %>
           </div>
 
           <div class="actions center">
             <%= f.submit "パスワード変更", class: "button-fill" %>
           </div>
         <% end %>
-
-        <div class="back_btn right">
-          <%= link_to "戻る", :back, class: "arrow2" %>
-        </div>
 
       </div>     
     </div>

@@ -3,6 +3,9 @@
     <div class="col-md-8 offset-md-2">
       <div class="form_box">
         <h4 class="center">本人確認メールの再送信</h4>
+        <div class="back_btn right">
+          <%= link_to "戻る", :back, class: "arrow2" %>
+        </div>
         <hr>
         <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
 
@@ -15,10 +18,6 @@
             <%= f.submit "再送信する", class: "button-fill" %>
           </div>
         <% end %>
-
-        <div class="back_btn right">
-          <%= link_to "戻る", :back, class: "arrow2" %>
-        </div>
 
       </div>     
     </div>
