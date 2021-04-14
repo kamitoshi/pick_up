@@ -16,80 +16,71 @@ class ShopImagesController < ApplicationController
       if @shop.shop_images.count < 4
         if @shop == current_shop
           if params[:shop_image].present?
-            if params[:shop_image][:is_main] == "true"
-              if @shop.shop_images.present?
-                @shop.shop_images.each do |image|
-                  if image.is_main?
-                    image.update(is_main: false)
+            if params[:shop_image][:file_name].present?
+              if params[:shop_image][:is_main] == "true"
+                if @shop.shop_images.present?
+                  @shop.shop_images.each do |image|
+                    if image.is_main?
+                      image.update(is_main: false)
+                    end
+                  end
+                  @shop_image = @shop.shop_images.build(shop_image_params)
+                  if @shop_image.save
+                    flash[:success] = "店舗のメイン画像を追加しました"
+                    redirect_to shop_shop_images_path(@shop)
+                  else
+                    flash[:danger] = "画像を追加できませんでした。ファイルを選択してください"
+                    render :new
+                  end
+                else
+                  @shop_image = @shop.shop_images.build(shop_image_params)
+                  if @shop_image.save
+                    flash[:success] = "店舗のメイン画像を追加しました"
+                    redirect_to shop_shop_images_path(@shop)
+                  else
+                    flash[:danger] = "画像を追加できませんでした。ファイルを選択してください"
+                    render :new
                   end
                 end
-                @shop_image = @shop.shop_images.build(shop_image_params)
-                if @shop_image.save
-                  flash[:success] = "店舗のメイン画像を追加しました"
-                  redirect_to shop_shop_images_path(@shop)
-                else
-                  flash[:danger] = "画像を追加できませんでした。ファイルを選択してください"
-                  render :new
-                end
               else
-                @shop_image = @shop.shop_images.build(shop_image_params)
-                if @shop_image.save
-                  flash[:success] = "店舗のメイン画像を追加しました"
-                  redirect_to shop_shop_images_path(@shop)
+                if @shop.shop_images.present?
+                  @shop_image = @shop.shop_images.build(shop_image_params)
+                  if @shop_image.save
+                    flash[:success] = "店舗の画像を追加しました"
+                    redirect_to shop_shop_images_path(@shop)
+                  else
+                    flash[:danger] = "画像を追加できませんでした。"
+                    render :new
+                  end
                 else
-                  flash[:danger] = "画像を追加できませんでした。ファイルを選択してください"
-                  render :new
+                  @shop_image = @shop.shop_images.build(shop_image_params)
+                  @shop_image.is_main = true
+                  if @shop_image.save
+                    flash[:success] = "店舗のメイン画像を追加しました"
+                    redirect_to shop_shop_images_path(@shop)
+                  else
+                    flash[:danger] = "画像を追加できませんでした。ファイルを選択してください"
+                    render :new
+                  end
                 end
               end
             else
-              if @shop.shop_images.present?
-                @shop_image = @shop.shop_images.build(shop_image_params)
-                if @shop_image.save
-                  flash[:success] = "店舗の画像を追加しました"
-                  redirect_to shop_shop_images_path(@shop)
-                else
-                  flash[:danger] = "画像を追加できませんでした。"
-                  render :new
-                end
-              else
-                @shop_image = @shop.shop_images.build(shop_image_params)
-                @shop_image.is_main = true
-                if @shop_image.save
-                  flash[:success] = "店舗のメイン画像を追加しました"
-                  redirect_to shop_shop_images_path(@shop)
-                else
-                  flash[:danger] = "画像を追加できませんでした。ファイルを選択してください"
-                  render :new
-                end
-              end
+              @shop_image = @shop.shop_images.build
+              flash[:danger] = "画像が選択されていません"
+              render :new
             end
           else
-            if @shop.shop_images.present?
-              @shop_image = @shop.shop_images.build(shop_image_params)
-              if @shop_image.save
-                flash[:success] = "店舗の画像を追加しました"
-                redirect_to shop_shop_images_path(@shop)
-              else
-                flash[:danger] = "画像を追加できませんでした。"
-                render :new
-              end
-            else
-              @shop_image = @shop.shop_images.build(shop_image_params)
-              @shop_image.is_main = true
-              if @shop_image.save
-                flash[:success] = "店舗のメイン画像を追加しました"
-                redirect_to shop_shop_images_path(@shop)
-              else
-                flash[:danger] = "画像を追加できませんでした。ファイルを選択してください"
-                render :new
-              end
-            end
+            @shop_image = @shop.shop_images.build
+            flash[:danger] = "画像が選択されていません"
+            render :new
           end
         else
+          @shop_image = @shop.shop_images.build
           flash[:danger] = "他店の画像は追加できません"
           redirect_to root_path
         end
       else
+        @shop_image = @shop.shop_images.build
         flash[:danger] = "店舗イメージは４枚までしか登録できません"
         redirect_to shop_path(current_shop)
       end
@@ -173,13 +164,8 @@ class ShopImagesController < ApplicationController
             end
           end
         else
-          if @shop_image.update(shop_image_params)
-            flash[:success] = "変更を保存しました"
-            redirect_to shop_shop_images_path(@shop)
-          else
-            flash[:danger] = "変更できませんでした"
-            render :edit
-          end
+          flash[:danger] = "画像が選択されていません"
+          render :edit
         end
       else
         flash[:danger] = "多店舗の画像は編集できません"

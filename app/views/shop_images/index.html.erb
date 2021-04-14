@@ -9,22 +9,22 @@
         <hr>
         <% if @shop_images.present? %>
           <% 4.times do |i| %>
-            <div class="content_box_detail">
+            <div class="content_box_detail ribon">
               <% if @shop_images[i].present? %>
+                <%= image_tag @shop_images[i].file_name.thumb_width.to_s %>
                 <% if @shop_images[i].is_main? %>
-                  <h6 class="center ma-b-20">〜メイン画像〜</h6>
+                  <div class="caption"><span>メイン</span></div>
                 <% end %>
-                <%= image_tag @shop_images[i].file_name.thumb_width.to_s, class: "wid-100" %>
                 <div class="edit_btn ma-t-50">
-                  <%= link_to "この画像を編集する", edit_shop_shop_image_path(@shop, @shop_images[i]), class: "btn btn-primary" %>
+                  <%= link_to "この画像を編集する", edit_shop_shop_image_path(@shop, @shop_images[i]), class: "btn btn-primary btn-sm" %>
                   <% unless @shop_images[i] == @main_image %>
-                    <%= link_to "この画像を削除する", shop_shop_image_path(@shop, @shop_images[i]), method: :delete, class: "btn btn-danger" %>
+                    <%= link_to "この画像を削除する", shop_shop_image_path(@shop, @shop_images[i]), method: :delete, class: "btn btn-danger btn-sm" %>
                   <% end %>
                 </div>
               <% else %>
                 <%= image_tag "noimage.png", class:"wid-100" %>
                 <div class="add_btn ma-t-50">
-                  <%= link_to "画像を追加する", new_shop_shop_image_path(@shop), class: "btn btn-primary" %>
+                  <%= link_to "画像を追加する", new_shop_shop_image_path(@shop), class: "btn btn-primary btn-sm" %>
                 </div>
               <% end %>
             </div>
@@ -35,7 +35,7 @@
             <div class="content_box_detail">
               <%= image_tag "noimage.png", class:"wid-100" %>
               <div class="add_btn ma-t-50">
-                <%= link_to "画像を追加する", new_shop_shop_image_path(@shop), class: "btn btn-primary" %>
+                <%= link_to "画像を追加する", new_shop_shop_image_path(@shop), class: "btn btn-primary btn-sm" %>
               </div>
             </div>
             <hr>

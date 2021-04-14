@@ -131,7 +131,7 @@
                   <div class="shop_image-box center">
                     <% if @shop.shop_images.count >= 2 %>
                       <% @shop.not_main_images.each do |image| %>
-                        <%= image_tag image.file_name.thumb_square.to_s, size: "100x100" %>
+                        <%= image_tag image.file_name.thumb_square.to_s, size: "50x50" %>
                       <% end %>
                     <% end %>
                   </div>
@@ -148,7 +148,7 @@
           </div>
           <div class="col-md-8">
             <div class="content_box_detail">
-              <table class="table table-borderless">
+              <table class="table table-borderless table-sm">
                 <tbody>
                   <tr>
                     <th>店舗名</th>
@@ -210,7 +210,7 @@
               </table>
             </div>
             <div class="return_btn center ma-b-30">
-              <%= link_to "基本情報を編集する", edit_shop_path(@shop), class: "btn btn-outline-success" %>
+              <%= link_to "基本情報を編集する", edit_shop_path(@shop), class: "btn btn-outline-success btn-sm" %>
             </div>
           </div>
         </div>
