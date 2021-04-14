@@ -1,4 +1,4 @@
-<div class="row row-cols-2 row-cols-lg-4 row-cols-md-3">
+<div class="row row-cols-2 row-cols-md-4">
   <% menus.each do |menu| %>
     <div class="col mb-4">
       <div class="card scale-box" data-toggle="modal" data-target="#modal<%= menu.id %>">
@@ -18,11 +18,7 @@
     </div>
   <% end %>
 </div>
-<div class="row right ma-b-20">
-  <div class="col-md-12">
-    <%= link_to "商品をもっと見る", menus_path, class: "arrow2" %>
-  </div>
-</div>
+
 <% if menus.present? %>
   <% menus.each do |menu| %>
     <%= render partial: "menus/modal", locals: {menu: menu} %>

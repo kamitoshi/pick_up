@@ -2,7 +2,10 @@
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <div class="form_box">
-        <h4 class="center">パスワード再設定メールの送信</h4>
+        <h5>パスワード再設定メールの送信</h5>
+        <div class="back_btn right">
+          <%= link_to "戻る", :back, class: "arrow2" %>
+        </div>
         <hr>
         <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
           <%= render "shops/shared/error_messages", resource: resource %>
@@ -16,10 +19,6 @@
             <%= f.submit "メールを送信する", class: "button-fill" %>
           </div>
         <% end %>
-
-        <div class="back_btn right">
-          <%= link_to "戻る", :back, class: "arrow2" %>
-        </div>
 
       </div>     
     </div>

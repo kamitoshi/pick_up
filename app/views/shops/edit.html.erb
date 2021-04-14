@@ -35,17 +35,17 @@
 
           <div class="field">
             <%= f.label :city, "市区町村" %><br />
-            <%= f.text_field :city, autofocus: true, autocomplete: "city", class:"form-under", placeholder: "例:新宿区三丁目" %>
+            <%= f.text_field :city, autofocus: true, autocomplete: "city", class:"form-under", placeholder: "例:新宿区" %>
           </div>
 
           <div class="field">
             <%= f.label :address, "住所" %><br />
-            <%= f.text_field :address, autofocus: true, autocomplete: "address", class:"form-under", placeholder: "例:1−1−34" %>
+            <%= f.text_field :address, autofocus: true, autocomplete: "address", class:"form-under", placeholder: "例:三丁目1−34" %>
           </div>
 
           <div class="field">
             <%= f.label :introduction, "店舗紹介文" %><br />
-            <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", class:"form-control" %>
+            <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", class:"form-control", style: "height:200px" %>
           </div>
 
           <div class="field">
@@ -57,8 +57,8 @@
             <%= f.submit "編集", class: "button-fill" %>
           </div>
         <% end %>
-        <div class="edit_btn wid-50 ma-a">
-          <%= link_to "パスワード変更", edit_shop_registration_path, class:"btn btn-primary wid-100 ma-y-50 btn-sm" %>
+        <div class="edit_btn ma-t-30 right">
+          <%= link_to "パスワードを変更する", edit_shop_registration_path %>
         </div>
       </div>
     </div>
