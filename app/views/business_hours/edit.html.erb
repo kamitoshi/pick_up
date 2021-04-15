@@ -1,6 +1,6 @@
 <div class="container-fluid background">
   <div class="row">
-    <div class="col-8 offset-2">
+    <div class="col-md-8 offset-md-2">
       <div class="form_box">
         <h5 class="center">営業時間編集</h5>
         <div class="back_btn right">
@@ -15,17 +15,17 @@
 
           <div class="field ma-b-50">
             <%= f.label :opening, "開店時間" %><br>
-            <%= f.time_select :opening, prompt:true, ignore_data:true %>
+            <%= f.time_select :opening %>
           </div>
 
           <div class="field ma-b-50">
             <%= f.label :closing, "閉店時間" %><br>
-            <%= f.time_select :closing, prompt:true, ignore_data:true %>
+            <%= f.time_select :closing %>
           </div>
 
           <div class="field ma-b-50">
             <%= f.label :last_order, "ラストオーダー" %><br>
-            <%= f.time_select :last_order, prompt:true, ignore_data:true %>
+            <%= f.time_select :last_order %>
           </div>
 
           <div class="actions center">

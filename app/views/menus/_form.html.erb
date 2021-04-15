@@ -1,7 +1,7 @@
 <%= form_for menu do |f| %>
   <div class="field ma-b-50">
     <%= f.label :name, "商品名" %><br>
-    <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-under", placeholder: "商品名を入力してください" %>
+    <%= f.text_field :name, autocomplete: "name", class:"form-under", placeholder: "商品名を入力してください" %>
   </div>
 
   <div class="field ma-b-50">
@@ -11,12 +11,12 @@
 
   <div class="field ma-b-50">
     <%= f.label :price, "価格" %><br />
-    <%= f.number_field :price, autofocus: true, autocomplete: "price", class:"form-under", placeholder: "商品の価格を入力してください" %>
+    <%= f.number_field :price, autocomplete: "price", class:"form-under", placeholder: "商品の価格を入力してください" %>
   </div>
 
   <div class="field ma-b-50">
     <%= f.label :fee, "手数料（％）" %><span class="font-10">※商品が売れた時の販売手数料です</span><br />
-    <%= f.number_field :fee, autofocus: true, autocomplete: "fee", class:"form-under", placeholder: "販売手数料を入力してください" %>
+    <%= f.number_field :fee, autocomplete: "fee", class:"form-under", placeholder: "販売手数料を入力してください" %>
   </div>
 
   <div class="field ma-b-50">
@@ -26,7 +26,7 @@
 
   <div class="field ma-b-50">
     <%= f.label :introduction, "商品紹介文" %><br />
-    <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", class:"form-control", placeholder: "商品の紹介文を記入してください", style: "height:200px" %>
+    <%= f.text_area :introduction, autocomplete: "introduction", class:"form-control", placeholder: "商品の紹介文を記入してください", style: "height:200px" %>
   </div>
   
   <% if admin_signed_in? %>
