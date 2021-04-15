@@ -11,10 +11,15 @@
 <% end %>
 
 <div class="actions center">
-  <%= f.submit btn, class: "button-fill load_btn" %>
+  <%= f.submit btn, class: "button-fill", id:"load_btn" %>
+</div>
+<div id="overlay">
+  <div class="spinner-border text-light" role="status" id="load_spinner">
+    <span class="sr-only">Loading...</span>
+  </div>
 </div>
 <script>
-  $(".load_btn").click(function(){
+  $("#load_btn").click(function(){
     $("#overlay").fadeIn(500);
   });
 </script>
