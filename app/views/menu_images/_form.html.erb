@@ -11,5 +11,10 @@
 <% end %>
 
 <div class="actions center">
-  <%= f.submit "編集", class: "button-fill load_btn" %>
+  <%= f.submit btn, class: "button-fill load_btn" %>
 </div>
+<script>
+  $(".load_btn").click(function(){
+    $("#overlay").fadeIn(500);
+  });
+</script>
