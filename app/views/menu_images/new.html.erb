@@ -8,20 +8,7 @@
         </div>
         <hr>
         <%= form_for @menu_image, url: menu_menu_images_path(@menu) do |f|  %>
-          
-          <div class="field">
-            <%= image_tag "noimage.png", class:"wid-100" %>
-            <%= f.file_field :file_name, class: "font-10" %>
-          </div>
-          
-          <div class="field">
-            <%= f.check_box :is_main, {class: "check_box"}, true, false %>
-            <%= f.label :is_main, "この画像をメインにする" %>
-          </div>
-
-          <div class="actions center">
-            <%= f.submit "追加する", class: "button-fill" %>
-          </div>
+          <%= render partial: "menu_images/form", locals:{f:f, menu_image: @menu_image, img: "noimage.png", btn: "追加する"} %>
         <% end %>
 
       </div>

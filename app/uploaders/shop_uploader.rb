@@ -34,9 +34,17 @@ class ShopUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process resize_to_fit: [50, 50]
-  # end
+  process resize_to_fit: [800, 800]
+  
+  version :thumb100 do 
+    process resize_to_fill: [100, 100, "center"] 
+  end
+  version :thumb_width do 
+    process resize_to_fill: [320, 180, "center"] 
+  end
+  version :thumb_square do 
+    process resize_to_fill: [300, 250, "center"] 
+  end
 
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -49,15 +57,4 @@ class ShopUploader < CarrierWave::Uploader::Base
   # def filename
   #   "#{SecureRandom.uuid}.#{file.extension}" if original_filename
   # end
-
-  #サムネイルの為に画像をリサイズ
-  version :thumb_width do 
-    process resize_to_fill: [320, 180, "center"] 
-  end 
-  version :thumb_vertical do 
-    process resize_to_fill: [250, 320, "center"] 
-  end 
-  version :thumb_square do 
-    process resize_to_fill: [300, 250, "center"] 
-  end
 end
