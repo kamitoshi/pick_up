@@ -7,7 +7,7 @@
       <div class="col-6 right">
         <p>
           <a class="white ma-r-30" data-toggle="collapse" href="#shopSearchBar" role="button" aria-expanded="false" aria-controls="shopSearchBar">
-            <i class="fas fa-search"></i>店舗検索
+            <i class="fas fa-search"></i>店舗検索<i class="fas fa-angle-down"></i>
           </a>
         </p>
       </div>
@@ -35,13 +35,11 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-4" id="detailSearch">
-          <div class="detail_search__btns center">
-            <%= f.submit "検索", class:"button-fill" %>
-          </div>
-        </div>
       </div>
 
+      <div class="detail_search__btns center ma-y-30">
+        <%= f.submit "検索", class:"button-fill" %>
+      </div>
     </div>
   <% end %>
 </div>

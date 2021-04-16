@@ -131,7 +131,7 @@
                   <div class="shop_image-box center">
                     <% if @shop.shop_images.count >= 2 %>
                       <% @shop.not_main_images.each do |image| %>
-                        <%= image_tag image.file_name.thumb_square.to_s, size: "50x50" %>
+                        <%= image_tag image.file_name.thumb_square.to_s, size: "75x75" %>
                       <% end %>
                     <% end %>
                   </div>
