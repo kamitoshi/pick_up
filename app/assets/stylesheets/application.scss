@@ -241,3 +241,10 @@ i {
   border-radius: 15px;
   /*角を丸くする*/
 }
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color:#EFAA29;
+  border-color: #007bff;
+}

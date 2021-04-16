@@ -21,10 +21,12 @@
 
 <!-- サーチバー  -->
 <div class="menu_bar center">
-  <li class="dis-ib pa-x-10"><a href="#">人気メニュー</a></li>
-  <li class="dis-ib pa-x-10"><a href="#">フード</a></li>
-  <li class="dis-ib pa-x-10"><a href="#">ドリンク</a></li>
-  <li class="dis-ib pa-x-10"><a href="#">デザート</a></li>
+<ul id="myTab" class="nav nav-tabs" role="tablist" style="display:block">
+  <li class="dis-ib ma-x-10" role="presentation"><a href="#infomation" id="infomation-tab" role="tab" data-toggle="tab" aria-controls="infomation" aria-selected="true"><%= @shop.name %></a></li>
+  <li class="dis-ib ma-x-10" role="presentation"><a href="#food" id="food-tab" role="tab" data-toggle="tab" aria-controls="food" aria-selected="false">フード</a></li>
+  <li class="dis-ib ma-x-10" role="presentation"><a href="#drink" id="drink-tab" role="tab" data-toggle="tab" aria-controls="drink" aria-selected="false">ドリンク</a></li>
+  <li class="dis-ib ma-x-10" role="presentation"><a href="#dessert" id="dessert-tab" role="tab" data-toggle="tab" aria-controls="dessert" aria-selected="false">デザート</a></li>
+</ul>
 </div>
 <!-- / サーチバー  -->
 
@@ -34,44 +36,91 @@
       <%= link_to "戻る", :back, class: "arrow2" %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="gridWrapperTitle">
-        <h6>人気メニュー</h6>
+  <div id="myTabContent" class="tab-content mt-3">
+    <div id="infomation" class="tab-pane active" role="tabpanel" aria-labelledby="infomation-tab">
+      <div class="row ma-b-30">
+        <div class="col-md-12">
+          <div class="gridWrapperTitle">
+            <h6>人気メニュー</h6>
+          </div>
+          <% if @menus.present? %>
+            <%= render partial: "menus/recommend_menus", locals:{menus: @popular_menus} %>
+          <% else %>
+            <h6 class="center">登録メニューがありません</h6>
+          <% end %>
+        </div>
       </div>
-      <% if @menus.present? %>
-        <%= render partial: "menus/recommend_menus", locals:{menus: @popular_menus} %>
-      <% end %>
+      <div class="row ma-b-30">
+        <div class="col-md-12">
+          <h6>店舗情報</h6>
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>店舗名</th>
+                <td><%= @shop.name %></td>
+              </tr>
+              <tr>
+                <th>電話番号</th>
+                <td><a href="tel:<%= @shop.phone_number %>" class="blue"><%= @shop.phone_number %></a></td>
+              </tr>
+              <tr>
+                <th>住所</th>
+                <td>〒<%= @shop.postal_code %><br><%= @shop.full_address %></td>
+              </tr>
+              <tr>
+                <th>公式HP</th>
+                <td><%= link_to @shop.url, @shop.url, class: "blue" if @shop.url.present? %></td>
+              </tr>
+              <tr>
+                <th>お店紹介</th>
+                <td><%= introduction(@shop.introduction) %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="gridWrapperTitle">
-        <h6>フード</h6>
+    <div id="food" class="tab-pane" role="tabpanel" aria-labelledby="food-tab">
+      <div class="row ma-b-30">
+        <div class="col-md-12">
+          <div class="gridWrapperTitle">
+            <h6>フード</h6>
+          </div>
+          <% if @food_menus.present? %>
+            <%= render partial: "menus/menus", locals:{menus: @food_menus} %>
+          <% else %>
+            <h6 class="center">登録メニューがありません</h6>
+          <% end %>
+        </div>
       </div>
-      <% if @food_menus.present? %>
-        <%= render partial: "menus/menus", locals:{menus: @food_menus} %>
-      <% end %>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="gridWrapperTitle">
-        <h6>ドリンク</h6>
+    <div id="drink" class="tab-pane" role="tabpanel" aria-labelledby="drink-tab">
+      <div class="row ma-b-30">
+        <div class="col-md-12">
+          <div class="gridWrapperTitle">
+            <h6>ドリンク</h6>
+          </div>
+          <% if @drink_menus.present? %>
+            <%= render partial: "menus/menus", locals:{menus: @drink_menus} %>
+          <% else %>
+            <h6 class="center">登録メニューがありません</h6>
+          <% end %>
+        </div>
       </div>
-      <% if @drink_menus.present? %>
-        <%= render partial: "menus/menus", locals:{menus: @drink_menus} %>
-      <% end %>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="gridWrapperTitle">
-        <h6>デザート</h6>
+    <div id="dessert" class="tab-pane" role="tabpanel" aria-labelledby="dessert-tab">
+      <div class="row ma-b-30">
+        <div class="col-md-12">
+          <div class="gridWrapperTitle">
+            <h6>デザート</h6>
+          </div>
+          <% if @dessert_menus.present? %>
+            <%= render partial: "menus/menus", locals:{menus: @dessert_menus} %>
+          <% else %>
+            <h6 class="center">登録メニューがありません</h6>
+          <% end %>
+        </div>
       </div>
-      <% if @dessert_menus.present? %>
-        <%= render partial: "menus/menus", locals:{menus: @dessert_menus} %>
-      <% end %>
     </div>
   </div>
 </div>

@@ -6,9 +6,9 @@ class HomeController < ApplicationController
     elsif admin_signed_in?
       redirect_to admins_path
     end
-    @recommend_menus = Menu.all.page(params[:page]).per(10)
+    @recommend_menus = Menu.all.page(params[:page]).per(8)
     @popular_menus = Menu.all.page(params[:page]).per(15)
-    @popular_shops = Shop.all.page(params[:page]).per(6)
+    @popular_shops = Shop.all.page(params[:page]).per(8)
   end
 
   def top
