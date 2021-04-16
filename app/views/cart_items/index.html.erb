@@ -5,40 +5,30 @@
         <h3 class="center">まとめて注文</h3>
         <hr>
         <% if @cart_items.present? %>
-          <div class="row ma-b-30">
-            <div class="col-md-12">
-              <h4 class="center"><%= @cart_items[0].menu.shop.name %>へのオーダー</h4>
-            </div>
-          </div>
           <% @cart_items.each do |cart_item| %>
             <div class="row">
               <div class="col-7">
+                <p class="m-text"><%= link_to cart_item.menu.shop.name, users_shop_path(cart_item.menu.shop), class:"gray" %></p>
                 <h5><%= cart_item.menu.name %></h5>
                 <h6>¥<%= price(cart_item.menu.price) %></h6>
-                <div class="intro_box font-10">
-                  <%= introduction(cart_item.menu.introduction.truncate(40)) %>
+                <div class="amount_counter ma-t-10">
+                  <% if cart_item.amount == 1 %>
+                    <span id="minusButton" class="pointer minusBtn"><a href="<%= cart_item_path(cart_item) %>" data-method="delete"><i class="fas fa-minus-circle minusBtn"></i></a></span>
+                  <% else %>
+                    <span id="minusButton" class="pointer minusBtn"><a href="<%= menu_cart_item_path(cart_item.menu, cart_item, amount:"minus") %>" data-method="patch"><i class="fas fa-minus-circle minusBtn"></i></a></span>
+                  <% end %>
+                  <span class="ma-x-20"><%= cart_item.amount %></span>
+                  <span id="plusButton" class="pointer plusBtn"><a href="<%= menu_cart_item_path(cart_item.menu, cart_item, amount:"plus") %>" data-method="patch"><i class="fas fa-plus-circle plusBtn"></i></a></span>
                 </div>
               </div>
               <div class="col-5 center">
                 <% if cart_item.menu.menu_images.present? %>
-                  <%= image_tag cart_item.menu.main_image.file_name.thumb_square.to_s, class: "wid-60" %>
+                  <%= image_tag cart_item.menu.main_image.file_name.thumb_square.to_s, class: "wid-70" %>
                 <% else %>
-                  <%= image_tag "noimage.png", class: "wid-100" %>
+                  <%= image_tag "noimage.png", class: "wid-70" %>
                 <% end %>
               </div>
             </div>
-            <div class="row pa-l-30 pa-t-30">
-              <div class="amount_counter">
-                <% if cart_item.amount == 1 %>
-                  <span id="minusButton" class="pointer minusBtn"><%= link_to "-", cart_item_path(cart_item), method: :delete %></span>
-                <% else %>
-                  <span id="minusButton" class="pointer minusBtn"><%= link_to "-", menu_cart_item_path(cart_item.menu, cart_item, amount:"minus"), method: :patch %></span>
-                <% end %>
-                <span class="ma-x-20"><%= cart_item.amount %></span>
-                <span id="plusButton" class="pointer plusBtn"><%= link_to "+", menu_cart_item_path(cart_item.menu, cart_item, amount:"plus"), method: :patch %></span>
-              </div>
-            </div>
-
             <hr>
           <% end %>
         <% else %>

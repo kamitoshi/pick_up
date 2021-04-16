@@ -68,6 +68,9 @@ Rails.application.routes.draw do
 
   namespace :users do
     resources :shops, only:[:index, :show] do
+      member do
+        get :infomation
+      end
       collection do
         get :search
       end

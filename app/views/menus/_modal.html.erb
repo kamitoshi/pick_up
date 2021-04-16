@@ -15,10 +15,15 @@
                 </div>
               </div>
               <div class="row">
+                <div class="col-md-12 ma-b-20">
+                  <p class="m-text"><%= link_to menu.shop.name, users_shop_path(menu.shop), class:"gray" %></p>
+                </div>
+              </div>
+              <div class="row">
                 <div class="col-md-4">
                   <p class="m-title"><%= menu.name %></p>
-                  <p class="m-text">【<%= link_to menu.shop.name, users_shop_path(menu.shop), class:"blue" %>】</p>
                   <p class="m-text ma-y-10">¥<%= price(menu.price) %></p>
+                  <p class="m-text right ma-b-20">提供予定：<%= menu.estimated_time %><span>-</span><%= menu.estimated_time + 10 %>分</p>
                 </div>
                 <div class="col-md-8">
                   <p class="m-text"><%= introduction(menu.introduction) %></p>
@@ -31,11 +36,17 @@
               <%= form_for CartItem.new, url: menu_cart_items_path(menu) do |f| %>
                 <%= f.hidden_field :menu_id, value: menu.id %>
                 <div class="row">
-                  <div class="col-sm-7 right">
-                    <span id="minusButton<%= menu.id %>" class="pointer minusBtn">-</span><%= f.text_field :amount, id: "counterOutput#{menu.id}", class:"amount_input", value:1 %><span id="plusButton<%= menu.id %>" class="pointer plusBtn">+</span>
+                  <div class="col-sm-12 center">
+                    <h6 class="left">注文数</h6>
+                    <span id="minusButton<%= menu.id %>" class="pointer minusBtn"><i class="fas fa-minus-circle"></i></span><%= f.text_field :amount, id: "counterOutput#{menu.id}", class:"amount_input", value:1 %><span id="plusButton<%= menu.id %>" class="pointer plusBtn"><i class="fas fa-plus-circle"></i></span>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-6 center">
                     <%= f.submit "カートに追加する", class: "button-fill" %>
                   </div>
-                  <div class="col-sm-4 right">
+                  <div class="col-6 center">
                     <%= link_to "今すぐ注文する", new_menu_order_path(menu), class: "button-fill" %>
                   </div>
                 </div>
