@@ -1,0 +1,32 @@
+<div id="mainBanner" class="mainImg">
+  <% if @shop.shop_images.present? %>
+    <div class="shopImage" style="background-image:url(<%= @shop.main_image.file_name.to_s %>);" alt="店舗画像"></div>
+  <% else %>
+    <span class="shopImage" style="background-image:url(<%= asset_path('shops_img.jpg') %>);" alt="店舗画像"></span>
+  <% end %>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="content_box">
+        <h5 class="ma-b-20"><%= @shop.name %>店舗情報</h5>
+        <i class="fas fa-angle-left blue"></i><%= link_to "メニューページに戻る", users_shop_path(@shop), class: "blue" %>
+        <hr>
+        <div class="content_box_detail">
+          <p>電話番号</p>
+          <h6><a href="tel:<%= @shop.phone_number %>" class="blue"><%= @shop.phone_number %></a></h6>
+          <hr>
+          <p>住所</p>
+          <h6>〒<%= @shop.postal_code %><br><%= @shop.full_address %></h6>
+          <hr>
+          <p>公式HP</p>
+          <h6><%= link_to @shop.url, @shop.url, class: "blue" if @shop.url.present? %></h6>
+          <hr>
+          <p>お店の紹介</p>
+          <p style="font-size:12px;"><%= introduction(@shop.introduction) %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

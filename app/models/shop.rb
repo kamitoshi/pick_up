@@ -30,6 +30,45 @@ class Shop < ApplicationRecord
     self.prefecture + self.city + self.address
   end
 
+  # ショップが持っているメニューの最小値段を算出する
+  def menus_min_price
+    result = 0
+    self.menus.each do |menu|
+      if result == 0
+        result = menu.price
+      elsif result > menu.price
+        result = menu.price
+      end
+    end
+    return result
+  end
+
+  # ショップが持っているメニューの最短提供時間を算出
+  def menus_min_serve_time
+    result = 0
+    self.menus.each do |menu|
+      if result == 0
+        result = menu.estimated_time
+      elsif result > menu.estimated_time
+        result = menu.estimated_time
+      end
+    end
+    return result
+  end
+
+  # ショップが持っているメニューの最大提供時間を算出
+  def menus_max_serve_time
+    result = 0
+    self.menus.each do |menu|
+      if result == 0
+        result = menu.estimated_time
+      elsif result < menu.estimated_time
+        result = menu.estimated_time
+      end
+    end
+    return result
+  end
+
   # 今月の集計(今月の今日までの売り上げ金額と件数)
   def month_sales_money
     orders = self.orders

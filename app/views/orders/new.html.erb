@@ -10,33 +10,28 @@
 
           <div class="row">
             <div class="col-7">
+              <p class="m-text"><%= link_to @menu.shop.name, users_shop_path(@menu.shop), class:"gray" %></p>
               <h5><%= @menu.name %></h5>
-              <h6>【<%= @menu.shop.name %>】</h6>
               <h6>¥<%= price(@menu.price) %></h6>
-              <div class="intro_box font-10">
-                <%= @menu.introduction.truncate(40) %>
+              <div class="amount_counter ma-t-10">
+                <span id="minusButton" class="pointer minusBtn"><i class="fas fa-minus-circle"></i></span>
+                <%= f.text_field :amount, id: "counterOutput", class:"amount_input", value: @amount %>
+                <span id="plusButton" class="pointer plusBtn"><i class="fas fa-plus-circle"></i></span>
               </div>
             </div>
             <div class="col-5 center">
               <% if @menu.menu_images.present? %>
-                <%= image_tag @menu.main_image.file_name.thumb_square.to_s, class: "wid-100" %>
+                <%= image_tag @menu.main_image.file_name.thumb_square.to_s, class: "wid-70" %>
               <% else %>
-                <%= image_tag "noimage.png", class: "wid-100" %>
+                <%= image_tag "noimage.png", class: "wid-70" %>
               <% end %>
-            </div>
-          </div>
-          <div class="row pa-30">
-            <div class="amount_counter">
-              <span id="minusButton" class="pointer minusBtn">-</span>
-              <%= f.text_field :amount, id: "counterOutput", class:"amount_input", value: @amount %>
-              <span id="plusButton" class="pointer plusBtn">+</span>
             </div>
           </div>
 
           <hr>
 
           <div class="field">
-            <h4>お会計金額:<span class="ma-l-30">¥</span><span id="menu_price"><%= price(@menu.price) %></span></h4>
+            <h4>お会計金額：<span class="ma-l-30">¥</span><span id="menu_price"><%= price(@menu.price) %></span></h4>
           </div>
 
           <div class="field">
@@ -97,9 +92,9 @@
           </script>
           <script src="//maps.google.com/maps/api/js?key=<%= ENV["GOOGLE_MAP_API"] %>&callback=initMap"></script>
 
-          <div class="field">
+          <div class="">
             <%= f.label :requested, "要望（あれば記入ください）" %><br />
-            <%= f.text_area :requested, autocomplete: "requested", class:"form-control" %>
+            <%= f.text_area :requested, autocomplete: "requested", class:"form-control", style: "height:200px" %>
           </div>
 
           <div class="actions center">

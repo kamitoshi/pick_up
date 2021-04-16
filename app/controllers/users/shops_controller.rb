@@ -18,4 +18,8 @@ class Users::ShopsController < ApplicationController
     @drink_menus = @menus.where(menu_type: "ドリンク")
     @dessert_menus = @menus.where(menu_type: "デザート")
   end
+
+  def infomation
+    @shop = Shop.find(params[:id])
+  end
 end

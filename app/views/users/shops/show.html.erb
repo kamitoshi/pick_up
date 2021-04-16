@@ -5,78 +5,63 @@
   <% else %>
     <span class="shopImage" style="background-image:url(<%= asset_path('shops_img.jpg') %>);" alt="店舗画像"></span>
   <% end %>
-  <div id="shopImage"></div>
-  <div id="shopInfo">
-    <h3 class="center ma-t-50"><%= @shop.name %></h3>
-    <h6 class="center ma-t-10" style="color: #ddd">
-      <% if @shop.shop_tags.present? %>
-        <% @shop.shop_tags.each do |tag| %>
-          <span class="ma-10"><%= tag.content %></span>
-        <% end %>
-      <% end %>
-    </h6>
-  </div>
 </div>
 <!-- / メイン画像 -->
-
+<div class="container">
+    <div class="row">
+      <div id="shopInfo">
+        <table class="table table-borderless table-sm">
+          <tbody>
+            <tr>
+              <td colspan=2><h5><%= @shop.name %></h5></td>
+            </tr>
+            <tr style="padding:0">
+              <td colspan=2 style="padding:0;font-size:12px;color:#aaa;" >
+                <% if @shop.shop_tags.present? %>
+                  <% @shop.shop_tags.each do |tag| %>
+                    <span style="padding:0 5px;"><%= tag.content %></span>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td>注文金額：¥<%= @shop.menus_min_price %>〜</td>
+              <td class="right"><h5 class="red"><%= @shop.menus_min_serve_time %>-<%= @shop.menus_max_serve_time %>分</h5></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row right">
+      <div class="col-md-12">
+        <%= link_to "店舗詳細を見る", infomation_users_shop_path(@shop), class: "blue" %><i class="fas fa-angle-right blue"></i>
+      </div>
+    </div>
+  </div>
 <!-- サーチバー  -->
 <div class="menu_bar center">
-<ul id="myTab" class="nav nav-tabs" role="tablist" style="display:block">
-  <li class="dis-ib ma-x-10" role="presentation"><a href="#infomation" id="infomation-tab" role="tab" data-toggle="tab" aria-controls="infomation" aria-selected="true"><%= @shop.name %></a></li>
-  <li class="dis-ib ma-x-10" role="presentation"><a href="#food" id="food-tab" role="tab" data-toggle="tab" aria-controls="food" aria-selected="false">フード</a></li>
-  <li class="dis-ib ma-x-10" role="presentation"><a href="#drink" id="drink-tab" role="tab" data-toggle="tab" aria-controls="drink" aria-selected="false">ドリンク</a></li>
-  <li class="dis-ib ma-x-10" role="presentation"><a href="#dessert" id="dessert-tab" role="tab" data-toggle="tab" aria-controls="dessert" aria-selected="false">デザート</a></li>
-</ul>
+  <ul id="myTab" class="nav nav-tabs" role="tablist" style="display:block">
+    <li class="dis-ib ma-x-10" role="presentation"><a href="#popular" id="popular-tab" role="tab" data-toggle="tab" aria-controls="popular" aria-selected="true">人気メニュー</a></li>
+    <li class="dis-ib ma-x-10" role="presentation"><a href="#food" id="food-tab" role="tab" data-toggle="tab" aria-controls="food" aria-selected="false">フード</a></li>
+    <li class="dis-ib ma-x-10" role="presentation"><a href="#drink" id="drink-tab" role="tab" data-toggle="tab" aria-controls="drink" aria-selected="false">ドリンク</a></li>
+    <li class="dis-ib ma-x-10" role="presentation"><a href="#dessert" id="dessert-tab" role="tab" data-toggle="tab" aria-controls="dessert" aria-selected="false">デザート</a></li>
+  </ul>
 </div>
 <!-- / サーチバー  -->
 
 <div class="container-fluid">
-  <div class="row right ma-b-20">
-    <div class="col-md-12">
-      <%= link_to "戻る", :back, class: "arrow2" %>
-    </div>
-  </div>
   <div id="myTabContent" class="tab-content mt-3">
-    <div id="infomation" class="tab-pane active" role="tabpanel" aria-labelledby="infomation-tab">
+    <div id="popular" class="tab-pane active" role="tabpanel" aria-labelledby="popular-tab">
       <div class="row ma-b-30">
         <div class="col-md-12">
           <div class="gridWrapperTitle">
             <h6>人気メニュー</h6>
           </div>
           <% if @menus.present? %>
-            <%= render partial: "menus/recommend_menus", locals:{menus: @popular_menus} %>
+            <%= render partial: "users/shops/menus", locals:{menus: @popular_menus} %>
           <% else %>
             <h6 class="center">登録メニューがありません</h6>
           <% end %>
-        </div>
-      </div>
-      <div class="row ma-b-30">
-        <div class="col-md-12">
-          <h6>店舗情報</h6>
-          <table class="table">
-            <tbody>
-              <tr>
-                <th>店舗名</th>
-                <td><%= @shop.name %></td>
-              </tr>
-              <tr>
-                <th>電話番号</th>
-                <td><a href="tel:<%= @shop.phone_number %>" class="blue"><%= @shop.phone_number %></a></td>
-              </tr>
-              <tr>
-                <th>住所</th>
-                <td>〒<%= @shop.postal_code %><br><%= @shop.full_address %></td>
-              </tr>
-              <tr>
-                <th>公式HP</th>
-                <td><%= link_to @shop.url, @shop.url, class: "blue" if @shop.url.present? %></td>
-              </tr>
-              <tr>
-                <th>お店紹介</th>
-                <td><%= introduction(@shop.introduction) %></td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
@@ -87,7 +72,7 @@
             <h6>フード</h6>
           </div>
           <% if @food_menus.present? %>
-            <%= render partial: "menus/menus", locals:{menus: @food_menus} %>
+            <%= render partial: "users/shops/menus", locals:{menus: @food_menus} %>
           <% else %>
             <h6 class="center">登録メニューがありません</h6>
           <% end %>
@@ -101,7 +86,7 @@
             <h6>ドリンク</h6>
           </div>
           <% if @drink_menus.present? %>
-            <%= render partial: "menus/menus", locals:{menus: @drink_menus} %>
+            <%= render partial: "users/shops/menus", locals:{menus: @drink_menus} %>
           <% else %>
             <h6 class="center">登録メニューがありません</h6>
           <% end %>
@@ -115,7 +100,7 @@
             <h6>デザート</h6>
           </div>
           <% if @dessert_menus.present? %>
-            <%= render partial: "menus/menus", locals:{menus: @dessert_menus} %>
+            <%= render partial: "users/shops/menus", locals:{menus: @dessert_menus} %>
           <% else %>
             <h6 class="center">登録メニューがありません</h6>
           <% end %>

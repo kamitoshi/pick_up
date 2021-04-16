@@ -43,7 +43,7 @@ height:auto;
 .shopImage{
 	display: block;
 	width: 100%;
-	height: 200px;
+	height: 250px;
 	background-size: cover;
 	background-position: center center;
 }
@@ -67,11 +67,9 @@ height:auto;
 	background: rgba(0, 0, 0, 0.3);
 }
 #shopInfo{
-	position: absolute;
-	top: 0;
 	width: 100%;
-	height: 100%;
-	color: #eee;
+	padding:10px;
+	border-radius: 10px;
 }
 
 .slogan{

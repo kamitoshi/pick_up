@@ -12,19 +12,19 @@
             <thead>
               <tr>
                 <th>予約店舗</th>
-                <td colspan=3><%= @order.shop.name %></td>
+                <td><%= @order.shop.name %></td>
               </tr>
               <tr>
                 <th>予約番号</th>
-                <td colspan=3><%= @order.reserve_number %></td>
+                <td><%= @order.reserve_number %></td>
               </tr>
               <tr>
                 <th>予約日</th>
-                <td colspan=3><%= @order.updated_at.strftime("%Y年%m月%d日") %></td>
+                <td><%= @order.updated_at.strftime("%Y年%m月%d日") %></td>
               </tr>
               <tr>
                 <th>受取日時</th>
-                <td colspan=3><%= @order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
+                <td><%= @order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
               </tr>
               <tr>
                 <th>要望</th>
@@ -32,20 +32,26 @@
               </tr>
             </tbody>
           </table>
+          <h6>注文商品</h6>
           <table class="table table-striped">
             <tbody>
               <tr>
-                <th>注文商品</th>
                 <td>商品名</td>
                 <td>数量</td>
+                <td>金額</td>
               </tr>
               <% @order.order_items.each do |item| %>
                 <tr>
-                  <th></th>
                   <td><%= item.menu_name %></td>
                   <td><%= item.menu_amount %>個</td>
+                  <td><%= price(item.menu_price * item.menu_amount) %></td>
                 </tr>
               <% end %>
+              <tr>
+                <td></td>
+                <th>合計</th>
+                <td><%= price(@order.total_payment) %></td>
+              </tr>
             </tbody>
           </table>
         </div>
