@@ -10,29 +10,27 @@
 
             <div class="row">
               <div class="col-7">
+                <p class="m-text"><%= link_to cart_item.menu.shop.name, users_shop_path(cart_item.menu.shop), class:"gray" %></p>
                 <h5><%= cart_item.menu.name %></h5>
                 <h6>¥<%= price(cart_item.menu.price) %></h6>
-                <div class="intro_box font-10">
-                  <%= introduction(cart_item.menu.introduction.truncate(30)) %>
-                </div>
-                <h6 class="ma-t-10">数量<span class="ma-x-20">：</span><%= cart_item.amount %></h6>
+                <h6 class="ma-t-10">数量<span class="ma-x-10">：</span><%= cart_item.amount %></h6>
               </div>
               <div class="col-5 center">
                 <% if cart_item.menu.menu_images.present? %>
-                  <%= image_tag cart_item.menu.main_image.file_name.thumb_square.to_s, class: "wid-60" %>
+                  <%= image_tag cart_item.menu.main_image.file_name.thumb_square.to_s, class: "wid-70" %>
                 <% else %>
-                  <%= image_tag "noimage.png", size:"100x50" %>
+                  <%= image_tag "noimage.png", class: "wid-70" %>
                 <% end %>
               </div>
             </div>
             <hr>
           <% end %>
 
-          <div class="field ma-b-50">
-            <h4>お会計金額:<span class="ma-l-30">¥</span><span id="menu_price"><%= price(current_user.cart_items_total_price) %></span></h4>
+          <div class="field">
+            <h5>お会計金額:<span class="ma-l-30">¥</span><span id="menu_price"><%= price(current_user.cart_items_total_price) %></span></h5>
           </div>
 
-          <div class="field ma-b-50">
+          <div class="field">
             <h5>完成予定時間</h5>
             <h6><%= current_user.max_estimated_time %><span class="ma-x-10">〜</span><%= current_user.max_estimated_time + 10 %>分</h6>
           </div>
@@ -92,7 +90,7 @@
 
           <div class="field ma-b-50">
             <%= f.label :requested, "要望（あれば記入ください）" %><br />
-            <%= f.text_area :requested, autocomplete: "requested", class:"form-control" %>
+            <%= f.text_area :requested, autocomplete: "requested", class:"form-control", style: "height:200px" %>
           </div>
 
           <div class="actions center">
