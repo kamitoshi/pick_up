@@ -98,7 +98,7 @@
           </div>
 
           <div class="actions center">
-            <%= f.submit "注文する", class: "button-fill" %>
+            <%= f.submit "注文する", class: "button-fill", data: { disabled_with: '注文中' } %>
           </div>
 
         <% end %>

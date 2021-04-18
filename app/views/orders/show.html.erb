@@ -11,12 +11,18 @@
           <table class="table table-borderless">
             <thead>
               <tr>
-                <th>予約店舗</th>
+                <th>店舗名</th>
                 <td><%= @order.shop.name %></td>
               </tr>
               <tr>
                 <th>予約番号</th>
-                <td><%= @order.reserve_number %></td>
+                <% if @order.status == "新規注文" %>
+                  <td>まだ注文が確定していません</td>
+                <% elsif @order.status == "受付注文" %>
+                  <td><%= @order.reserve_number %></td>
+                <% elsif @order.status == "キャンセル注文" %>
+                  <td>キャンセル</td>
+                <% end %>
               </tr>
               <tr>
                 <th>予約日</th>

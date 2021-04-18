@@ -35,6 +35,8 @@
                   <% @shop.holidays.each do |holiday| %>
                     <span style="padding:0 5px;"><%= holiday.weekday %></span>
                   <% end %>
+                <% else %>
+                  <span style="padding:0 5px;">定休日なし</span>
                 <% end %>
               </td>
             </tr>
