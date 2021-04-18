@@ -17,13 +17,10 @@ class Shop < ApplicationRecord
   }
 
   has_many :shop_images, dependent: :destroy
-
   has_many :shop_tags, dependent: :destroy
-
   has_many :menus, dependent: :destroy
-
   has_many :orders, dependent: :nullify
-
+  has_many :holidays, dependent: :destroy
   has_many :business_hours, dependent: :destroy
 
   def full_address
@@ -67,6 +64,17 @@ class Shop < ApplicationRecord
       end
     end
     return result
+  end
+
+  # すでに定休日として設定されているか判断する
+  def already_set_holiday?(weekday)
+    holidays = self.holidays
+    holidays.each do |holiday|
+      if holiday.weekday == weekday
+        return true
+      end
+    end
+    return false
   end
 
   # 今月の集計(今月の今日までの売り上げ金額と件数)

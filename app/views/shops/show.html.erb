@@ -170,21 +170,38 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>営業時間</th>
-                    <% if @shop.business_hours.present? %>
+                    <th>定休日</th>
+                    <% if @shop.holidays.present? %>
                       <td>
-                        <% @shop.business_hours.each do |business_hour| %>
-                          <p>
-                            <%= business_hour.job_time %><br>
-                            <%= business_hour.opening.strftime("%H:%M") %>〜<%= business_hour.closing.strftime("%H:%M") %><br>
-                            （L.O <%= business_hour.last_order.strftime("%H:%M") %>）</p>
+                        <% @shop.holidays.each do |holiday| %>
+                          <span class="ma-r-10"><%= holiday.weekday %></span>
                         <% end %>
-                        <p class="right"><%= link_to "営業時間を管理する", shop_business_hours_path(@shop) %></p>
+                        <p class="right"><%= link_to "定休日を設定する", shop_holidays_path(@shop),class: "blue" %><i class="fas fa-angle-right blue"></i></p>
                       </td>
                     <% else %>
                       <td>
                         <p>まだ、営業時間が登録されていません</p>
-                        <p class="right"><%= link_to "営業時間を管理する", shop_business_hours_path(@shop) %></p>
+                        <p class="right"><%= link_to "定休日を設定する", shop_business_hours_path(@shop),class: "blue" %><i class="fas fa-angle-right blue"></i></p>
+                      </td>
+                    <% end %>
+                  </tr>
+                  <tr>
+                    <th>営業時間</th>
+                    <% if @shop.business_hours.present? %>
+                      <td>
+                        <% @shop.business_hours.order(job_time: "asc").each do |business_hour| %>
+                          <p>
+                            <%= business_hour.job_time %>
+                            <%= business_hour.opening.strftime("%H:%M") %>〜<%= business_hour.closing.strftime("%H:%M") %><br>
+                            （L.O <%= business_hour.last_order.strftime("%H:%M") %>）
+                          </p>
+                        <% end %>
+                        <p class="right"><%= link_to "営業時間を設定する", shop_business_hours_path(@shop),class: "blue" %><i class="fas fa-angle-right blue"></i></p>
+                      </td>
+                    <% else %>
+                      <td>
+                        <p>まだ、営業時間が登録されていません</p>
+                        <p class="right"><%= link_to "営業時間を設定する", shop_business_hours_path(@shop),class: "blue" %><i class="fas fa-angle-right blue"></i></p>
                       </td>
                     <% end %>
                   </tr>
@@ -195,10 +212,10 @@
                         <% @shop.shop_tags.each do |tag| %>
                           <span class="ma-r-10"><%= tag.content %></span>
                         <% end %>
-                        <p class="right"><%= link_to "キーワードを管理する", new_shop_shop_tag_path(@shop) %></p>
+                        <p class="right"><%= link_to "キーワードを設定する", new_shop_shop_tag_path(@shop),class: "blue" %><i class="fas fa-angle-right blue"></i></p>
                       <% else %>
                         <p>検索キーワードが設定されていません</p>
-                        <p class="right"><%= link_to "キーワードを管理する", new_shop_shop_tag_path(@shop) %></p>
+                        <p class="right"><%= link_to "キーワードを設定する", new_shop_shop_tag_path(@shop),class: "blue" %><i class="fas fa-angle-right blue"></i></p>
                       <% end %>
                     </td>
                   </tr>

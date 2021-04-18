@@ -20,40 +20,64 @@ class OrdersController < ApplicationController
   def create
     @menu = Menu.find(params[:menu_id])
     @shop = @menu.shop
-    orders = Order.where(shop_id: @menu.shop_id)
     @order = Order.new(order_params)
-    if @order.is_business_time_order?
-      if params[:order][:amount].blank? || params[:order][:amount] == "0"
-        @amount = params[:order][:amount]
-        flash.now[:danger] = "注文できませんでした。注文品の個数を確認してください。"
-        render :new
-      else
-        if @order.save
-          order_item = @order.order_items.build(
-            menu_id: @menu.id,
-            menu_name: @menu.name,
-            menu_price: @menu.price,
-            menu_fee: @menu.fee,
-            menu_amount: params[:order][:amount].to_i
-          )
-          if order_item.save
-            OrderMailer.send_user_order(@order).deliver_later
-            redirect_to orders_fix_path
-          else
+    if @order.is_holiday_order?
+      @amount = params[:order][:amount]
+      flash.now[:danger] = "受け取り希望日は定休日です"
+      render :new
+    else
+      if @order.is_now_after?
+        if @order.is_business_hour_order?
+          if @order.is_between_lastOrder_to_close?
             @amount = params[:order][:amount]
-            flash.now[:danger] = "注文できませんでした。注文品の個数を確認してください。"
+            flash.now[:danger] = "注文できませんでした。ラストオーダーを過ぎています"
             render :new
+          else
+            if params[:order][:amount].blank? || params[:order][:amount] == "0"
+              @amount = params[:order][:amount]
+              flash.now[:danger] = "注文できませんでした。注文品の個数を確認してください。"
+              render :new
+            else
+              if @order.save
+                order_item = @order.order_items.build(
+                  menu_id: @menu.id,
+                  menu_name: @menu.name,
+                  menu_price: @menu.price,
+                  menu_fee: @menu.fee,
+                  menu_amount: params[:order][:amount].to_i
+                )
+                if @order.is_after_long_serve_time?
+                  if order_item.save
+                    OrderMailer.send_user_order(@order).deliver_later
+                    redirect_to orders_fix_path
+                  else
+                    @amount = params[:order][:amount]
+                    flash.now[:danger] = "注文できませんでした。注文品の個数を確認してください。"
+                    render :new
+                  end
+                else
+                  @amount = params[:order][:amount]
+                  @order.destroy 
+                  flash.now[:danger] = "注文できませんでした。受け取り時間を商品の提供目安より後に設定してください"
+                  render :new
+                end
+              else
+                @amount = params[:order][:amount]
+                flash.now[:danger] = "注文できませんでした。入力内容を確認してください。"
+                render :new
+              end
+            end
           end
         else
           @amount = params[:order][:amount]
-          flash.now[:danger] = "注文できませんでした。入力内容を確認してください"
+          flash.now[:danger] = "注文できませんでした。受け取り日時が営業時間外になっています"
           render :new
         end
+      else
+        @amount = params[:order][:amount]
+        flash.now[:danger] = "注文できませんでした。受け取り日時が過去になっています"
+        render :new
       end
-    else
-      @amount = params[:order][:amount]
-      flash.now[:danger] = "受け取り希望時間をご確認ください"
-      render :new
     end
   end
 

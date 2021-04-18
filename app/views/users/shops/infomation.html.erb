@@ -14,17 +14,89 @@
         <i class="fas fa-angle-left blue"></i><%= link_to "メニューページに戻る", users_shop_path(@shop), class: "blue" %>
         <hr>
         <div class="content_box_detail">
-          <p>電話番号</p>
-          <h6><a href="tel:<%= @shop.phone_number %>" class="blue"><%= @shop.phone_number %></a></h6>
+          <div class="detail_box">
+            <h5>定休日</h5>
+            <p>
+              <% if @shop.holidays.present? %>
+                <% @shop.holidays.each do |holiday| %>
+                  <span class="ma-r-10"><%= holiday.weekday %></span>
+                <% end %>
+              <% else %>
+                <span class="ma-r-10">定休日なし</span>
+              <% end %>
+            </p>
+          </div>
           <hr>
-          <p>住所</p>
-          <h6>〒<%= @shop.postal_code %><br><%= @shop.full_address %></h6>
+          <div class="detail_box">
+            <h5>営業時間</h5>
+            <p>
+              <% if @shop.business_hours.present? %>
+                <% @shop.business_hours.each do |business_hour| %>
+                  <p><%= business_hour.job_time %>：<%= business_hour.opening.strftime("%H:%M") %><span class="ma-x-10">〜</span><%= business_hour.closing.strftime("%H:%M") %>（L.O <%= business_hour.last_order.strftime("%H:%M") %>）</p>
+                <% end %>
+              <% end %>
+            </p>
+          </div>
           <hr>
-          <p>公式HP</p>
-          <h6><%= link_to @shop.url, @shop.url, class: "blue" if @shop.url.present? %></h6>
+          <div class="detail_box">
+            <h5>電話番号</h5>
+            <p>
+              <a href="tel:<%= @shop.phone_number %>" class="blue"><%= @shop.phone_number %></a>
+            </p>
+          </div>
           <hr>
-          <p>お店の紹介</p>
-          <p style="font-size:12px;"><%= introduction(@shop.introduction) %></p>
+          <div class="detail_box">
+            <h5>お店の紹介</h5>
+            <p style="font-size:12px;"><%= introduction(@shop.introduction) %></p>
+          </div>
+          <hr>
+          <div class="detail_box">
+            <h5>住所</h5>
+            <p>
+              〒<%= @shop.postal_code %><br><%= @shop.full_address %>
+            </p>
+            <div id="map" style="margin:0"></div>
+          
+            <script>
+              function initMap() {
+              
+                var target = document.getElementById('map'); //マップを表示する要素を指定
+                var address = "<%= @shop.full_address %>"; //住所を指定
+                var geocoder = new google.maps.Geocoder();  
+
+                geocoder.geocode({ address: address }, function(results, status){
+                  if (status === 'OK' && results[0]){
+
+                    console.log(results[0].geometry.location);
+
+                    var map = new google.maps.Map(target, {  
+                      center: results[0].geometry.location,
+                      zoom: 18
+                    });
+
+                    var marker = new google.maps.Marker({
+                      position: results[0].geometry.location,
+                      map: map,
+                      animation: google.maps.Animation.DROP
+                    });
+
+                  }else{ 
+                    //住所が存在しない場合の処理
+                    alert('住所が正しくないか存在しません。');
+                    target.style.display='none';
+                  }
+                });
+              }
+            </script>
+            <script src="//maps.google.com/maps/api/js?key=<%= ENV["GOOGLE_MAP_API"] %>&callback=initMap"></script>
+          </div>
+          <hr>
+          <div class="detail_box">
+            <h5>公式HP</h5>
+            <p>
+              <%= link_to @shop.url, @shop.url, class: "blue" if @shop.url.present? %>
+            </p>
+          </div>
         </div>
       </div>
     </div>

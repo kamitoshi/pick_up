@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_21_104920) do
+ActiveRecord::Schema.define(version: 2021_04_16_103447) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -43,6 +43,14 @@ ActiveRecord::Schema.define(version: 2021_03_21_104920) do
     t.datetime "updated_at", null: false
     t.index ["menu_id"], name: "index_cart_items_on_menu_id"
     t.index ["user_id"], name: "index_cart_items_on_user_id"
+  end
+
+  create_table "holidays", force: :cascade do |t|
+    t.integer "shop_id"
+    t.integer "weekday", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_holidays_on_shop_id"
   end
 
   create_table "menu_images", force: :cascade do |t|
