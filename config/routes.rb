@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'sales/index'
-  get 'sales/show'
   namespace :admins do
     get 'orders/index'
   end
@@ -57,6 +55,7 @@ Rails.application.routes.draw do
   resources :shops, only:[:index, :show, :edit, :update, :destroy] do
     resources :shop_images, only:[:index, :new, :create, :edit, :update, :destroy]
     resources :shop_tags, only:[:new, :create, :edit, :update, :destroy]
+    resources :holidays, only:[:index, :new, :create, :destroy]
     resources :business_hours, only:[:index, :new, :create, :edit, :update, :destroy]
     resources :sales, only:[:index, :show] do
       collection do

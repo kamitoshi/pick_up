@@ -1,0 +1,215 @@
+.main-image {
+  height:100vh;
+}
+@media (max-width: 768px) {
+  .main-image{
+    height:100%;
+  }
+}
+
+.lp-text_box__concept{
+  position:relative;
+  width:100%;
+  height:200px;
+}
+.lp-text_box{
+  position:relative;
+  width:100%;
+  height:300px;
+}
+.lp-text_content {
+  position: absolute;
+  bottom: 0;
+}
+@media (max-width: 768px) {
+  .lp-text_box {
+    height: 100%;
+  }
+  .lp-text_content {
+    position: relative;
+    padding: 20px 0;
+  }
+}
+
+.lp-image_box {
+  box-shadow: 0 0 8px gray;
+}
+
+.image1 {
+  width: 100%;
+  height: 200px;
+  background-image: url("LP/hamburger.jpg");
+  background-size: cover;
+  background-position: bottom;
+  margin-left: auto;
+}
+
+.image2 {
+  width: 100%;
+  height: 300px;
+  box-shadow: 0 0 8px gray;
+  background-image: url("LP/takeout.jpg");
+  background-size: cover;
+  background-position: center;
+  margin-left: auto;
+}
+
+.image3 {
+  width: 100%;
+  height: 300px;
+  box-shadow: 0 0 8px gray;
+  background-image: url("LP/LP5.jpg");
+  background-size: cover;
+  margin-left: auto;
+}
+
+.image4 {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 8px gray;
+  background-image: url("LP/select_shop.jpg");
+  background-size: cover;
+  margin-left: auto;
+}
+
+.image5 {
+  width: 100%;
+  height: 300px;
+  background-image: url("LP/iphone.jpg");
+  background-size: cover;
+  background-position: center;
+  margin-left: auto;
+}
+
+.image6 {
+  width: 100%;
+  height: 300px;
+  box-shadow: 0 0 8px gray;
+  background-image: url("LP/food.jpg");
+  background-size: cover;
+  background-position: center;
+  margin-left: auto;
+}
+
+.image7 {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 8px gray;
+  background-image: url("LP/telling.jpg");
+  background-size: cover;
+  background-position: center;
+  margin-left: auto;
+}
+
+.wid-image {
+  margin: 0 calc(50% - 50vw);
+  height: 60vh;
+  background-image: url("LP/logoin.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.image9 {
+  width: 90%;
+  height: 300px;
+  box-shadow: 0 0 8px gray;
+  background-image: url(images/30aeb8f8b3c12fca0a3587f1617ee6cb.jpg);
+  background-size: cover;
+  margin: 0 auto;
+}
+
+.over {
+  margin: 0 calc(50% - 50vw);
+  background-color: white;
+  height: 100vh;
+}
+
+.image10 {
+  width: 90%;
+  height: 300px;
+  box-shadow: 0 0 8px gray;
+  background-image: url(images/30aeb8f8b3c12fca0a3587f1617ee6cb.jpg);
+  background-size: cover;
+  margin: 0 auto;
+}
+
+.footer {
+  margin: 0 calc(50% - 50vw);
+  background-color: black;
+  color: white;
+  padding: 50px 0 0 0;
+}
+
+.list ul li {
+  display: inline;
+  list-style: none;
+  margin: 0 20px;
+}
+
+.copyright {
+  margin: 0 auto;
+  font-size: 10px;
+}
+
+.bottom_border {
+  font-size: 1em;
+  padding-top: .5em;
+  position: relative;
+  color: #687614;
+  /* フォント色 */
+}
+
+.bottom_border:before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #687614 0%, rgba(255, 255, 255, 0) 100%);
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.left-border {
+  display: flex;
+  align-items: center;
+  color: #687614;
+}
+
+.left-border:before {
+  border-top: 1px solid;
+  content: "";
+  width: 5em;
+  /* 線の長さ */
+  color: #687614;
+}
+
+.left-border:before {
+  margin-right: .3em;
+  /* 文字の右隣 */
+}
+
+@media (max-width: 768px) {
+  .non-dis {
+    display: none;
+  }
+  .image1 {
+    height: 200px;
+  }
+  .image2 {
+    height: 200px;
+  }
+  .image3 {
+    height: 200px;
+  }
+  .image4 {
+    height: 200px;
+  }
+  .image6 {
+    height: 200px;
+  }
+  .image7 {
+    height: 200px;
+  }
+}

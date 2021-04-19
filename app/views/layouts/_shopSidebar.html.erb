@@ -45,10 +45,13 @@
           <table class="table table-borderless">
             <tbody>
               <tr class="pointer" data-href="<%= edit_shop_path(current_shop) %>">
-                <td>店舗情報編集</td>
+                <td>基本情報編集</td>
               </tr>
               <tr class="pointer" data-href="<%= shop_shop_images_path(current_shop) %>">
-                <td>店舗画像追加・編集</td>
+                <td>店舗画像管理</td>
+              </tr>
+              <tr class="pointer" data-href="<%= shop_holidays_path(current_shop) %>">
+                <td>定休日管理</td>
               </tr>
               <tr class="pointer" data-href="<%= shop_business_hours_path(current_shop) %>">
                 <td>営業時間管理</td>
@@ -71,7 +74,7 @@
           <table class="table table-borderless">
             <tbody>
               <tr data-href="<%= today_index_shops_orders_path %>">
-                <td class="pointer">本日の注文履歴</td>
+                <td class="pointer">本日の注文</td>
               </tr>
               <tr data-href="<%= shops_orders_path %>">
                 <td class="pointer">注文履歴</td>

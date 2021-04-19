@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form_box">
+        <h4 class="center">定休日設定</h4>
+        <div class="back_btn">
+          <i class="fas fa-angle-left fa-lg"></i><%= link_to "戻る", shop_path(@shop), class: "font-20" %>
+        </div>
+        <hr>
+        <%= form_for @holiday, url: shop_holidays_path(@shop) do |f|  %>
+          <div class="field">
+            <%= f.label :weekday, "定休日" %><br>
+            <%= f.select :weekday, Holiday.weekdays.keys, {prompt: '選択してください'}, class: 'form-control' %>
+          </div>
+
+          <div class="actions center">
+            <%= f.submit "登録", class: "button-fill" %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

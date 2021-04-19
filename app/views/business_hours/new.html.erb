@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8 offset-md-2">
+    <div class="col-md-12">
       <div class="form_box">
-        <h3 class="center">営業時間設定</h3>
-        <div class="back_btn right">
-          <%= link_to "戻る", shop_path(@shop), class: "arrow2" %>
+        <h4 class="center">営業時間設定</h4>
+        <div class="back_btn">
+          <i class="fas fa-angle-left fa-lg"></i><%= link_to "戻る", shop_path(@shop), class: "font-20" %>
         </div>
         <hr>
         <%= form_for @business_hour, url: shop_business_hours_path(@shop) do |f|  %>
@@ -14,18 +14,20 @@
           </div>
 
           <div class="field">
-            <%= f.label :opening, "開店時間" %><br>
-            <%= f.time_select :opening, {prompt:true}, class: "wid-30" %>
-          </div>
-
-          <div class="field">
-            <%= f.label :closing, "閉店時間" %><br>
-            <%= f.time_select :closing, {prompt:true}, class: "wid-30" %>
-          </div>
-
-          <div class="field">
-            <%= f.label :last_order, "ラストオーダー" %><br>
-            <%= f.time_select :last_order, {prompt:true}, class: "wid-30" %>
+            <div class="row">
+              <div class="col-sm-4">
+                <%= f.label :opening, "開店時間" %><br>
+                <%= f.time_select :opening, {prompt:true} %>
+              </div>
+              <div class="col-sm-4">
+                <%= f.label :closing, "閉店時間" %><br>
+                <%= f.time_select :closing, {prompt:true} %>
+              </div>
+              <div class="col-sm-4">
+                <%= f.label :last_order, "ラストオーダー" %><br>
+                <%= f.time_select :last_order, {prompt:true} %>
+              </div>
+            </div>
           </div>
 
           <div class="actions center">
