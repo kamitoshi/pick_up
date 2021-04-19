@@ -190,6 +190,15 @@
   /* 文字の右隣 */
 }
 
+.fix-box{
+  position: fixed;
+  bottom:0;
+  width:100%;
+  padding:10px 40px;
+  background-color: #000;
+  opacity: 0.5;
+}
+
 @media (max-width: 768px) {
   .non-dis {
     display: none;
