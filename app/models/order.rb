@@ -53,6 +53,23 @@ class Order < ApplicationRecord
     end
     return result
   end
+
+  # オーダーが定休日の注文だった場合を判断する
+  def is_holiday_order?
+    shop = self.shop
+    holidays = shop.holidays
+    takeaway_datetime = self.takeaway_datetime
+    if holidays.present?
+      holidays.each do |holiday|
+        if holiday.weekday_before_type_cast == takeaway_datetime.wday
+          return true
+        end
+      end
+      return false
+    else
+      return false
+    end
+  end
   
   # 受け取り時間が営業時間中のオーダーか判断する
   def is_business_time_order?
@@ -68,6 +85,93 @@ class Order < ApplicationRecord
       end
     end
     return false
+  end
+
+  # 受け取り希望時間が現在時刻より後になっているか
+  def is_now_after?
+    now = Time.now
+    if now < takeaway_datetime
+      return true
+    else
+      return false
+    end
+  end
+
+  # 受け取り時間が、最低提供目安の時間より後か判断する
+  def is_after_long_serve_time?
+    now = Time.now
+    if now + self.long_serve_time * 60 <= takeaway_datetime
+      return true
+    else
+      return false
+    end
+  end
+
+  # 受け取り時間が営業時間中のオーダーか判断する
+  def is_business_hour_order?
+    shop = self.shop
+    business_hours = shop.business_hours
+    takeaway_datetime = self.takeaway_datetime
+    business_hours.each do |business_hour|
+      openTime = business_hour.opening
+      closeTime = business_hour.closing
+      n = takeaway_datetime.strftime("%H%M").to_i
+      if openTime == closeTime # 24時間営業の店の場合はこのパターン
+        return true
+      elsif openTime < closeTime
+        if [*openTime.strftime("%H%M").to_i..closeTime.strftime("%H%M").to_i].include?(n)
+          return true
+        end
+      else
+        if [*0..closeTime.strftime("%H%M").to_i, *openTime.strftime("%H%M").to_i..2359].include?(n)
+          return true
+        end
+      end
+    end
+    return false
+  end
+
+  # ラストオーダーを過ぎてからの営業中の注文の場合
+  def is_between_lastOrder_to_close?
+    shop = self.shop
+    business_hours = shop.business_hours
+    now = Time.now
+    n = now.strftime("%H%M").to_i
+    business_hours.each do |business_hour|
+      lastOrder = business_hour.last_order
+      closeTime = business_hour.closing
+      if lastOrder == closeTime #ラストオーダーの概念が存在しない場合
+        return false
+      elsif lastOrder < closeTime
+        if [*lastOrder.strftime("%H%M").to_i..closeTime.strftime("%H%M").to_i].include?(n)
+          if self.takeaway_datetime.strftime("%Y年%m月%d日") == now.strftime("%Y年%m月%d日") && self.takeaway_datetime.strftime("%H%M").to_i <= closeTime.strftime("%H%M").to_i
+            return true
+          else
+            return false
+          end
+        end
+      else
+        if [*0..closeTime.strftime("%H%M").to_i].include?(n)
+          if self.takeaway_datetime.strftime("%Y年%m月%d日") == now.strftime("%Y年%m月%d日") && self.takeaway_datetime.strftime("%H%M").to_i <= closeTime.strftime("%H%M").to_i
+            return true
+          else
+            return false
+          end
+        elsif [*lastOrder.strftime("%H%M").to_i..2359].include?(n)
+          if self.takeaway_datetime.strftime("%Y年%m月%d日") == now.strftime("%Y年%m月%d日") && self.takeaway_datetime.strftime("%H%M").to_i <= closeTime.strftime("%H%M").to_i
+            return true
+          else
+            return false
+          end
+        end
+      end
+    end
+    return false
+  end
+
+  # 今の時間が現時刻の営業時間のラストオーダーを過ぎていいないか
+  def is_after_last_order?
+    
   end
 
   def order_items_name

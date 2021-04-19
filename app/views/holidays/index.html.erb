@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content_box">
+        <h4 class="center">定休日設定</h4>
+        <div class="back_btn">
+          <i class="fas fa-angle-left fa-lg"></i><%= link_to "戻る", shop_path(@shop), class: "font-20" %>
+        </div>
+        <hr>
+        <% if @holidays.present? %>
+          <% @holidays.each do |holiday| %>
+            <div class="row content_box_detail">
+              <div class="col-8">
+                <p>
+                  <%= holiday.weekday %>
+                </p>
+              </div>
+              <div class="col-4">
+                <div class="edit_btn">
+                  <%= link_to "削除", shop_holiday_path(@shop, holiday), method: :delete, class: "btn btn-danger btn-sm" %>
+                </div>
+              </div>
+            </div>
+            <hr>
+          <% end %>
+          <p class="right ma-b-50"><%= link_to "定休日を追加する", new_shop_holiday_path(@shop) %></p>
+        <% else %>
+          <div class="content_box_detail center">
+            <h5>まだ定休日が設定されていません。</h5>
+            <p class="right"><%= link_to "定休日を追加する", new_shop_holiday_path(@shop) %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <div class="form_box">
-        <h5>パスワードを新しく設定</h5>
-        <div class="back_btn right">
-          <%= link_to "戻る", :back, class: "arrow2" %>
+        <h4 class="center">パスワードを新しく設定</h4>
+        <div class="back_btn">
+          <i class="fas fa-angle-left fa-lg"></i><%= link_to "戻る", :back, class: "font-20" %>
         </div>
         <hr>
         <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>

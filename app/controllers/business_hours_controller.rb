@@ -20,12 +20,17 @@ class BusinessHoursController < ApplicationController
         flash[:danger] = "すでに終日の営業時間が設定されています。編集から営業時間の変更をお願いします。"
         redirect_to shop_business_hours_path(@shop)
       else
-        if @business_hour.save
-          flash[:success] = "#{@business_hour.job_time}の営業時間を設定しました"
+        if already_set_business_hour?(@shop.business_hours)
+          flash[:danger] = "終日の営業時間を設定する場合は、他の営業時間を消してください。"
           redirect_to shop_business_hours_path(@shop)
         else
-          flash[:danger] = "設定に失敗しました"
-          render :new
+          if @business_hour.save
+            flash[:success] = "#{@business_hour.job_time}の営業時間を設定しました"
+            redirect_to shop_business_hours_path(@shop)
+          else
+            flash[:danger] = "設定に失敗しました"
+            render :new
+          end
         end
       end
     else
@@ -125,6 +130,19 @@ class BusinessHoursController < ApplicationController
 
   def set_shop
     @shop = Shop.find(params[:shop_id])
+  end
+
+  def already_set_business_hour?(business_hours)
+    if business_hours.present?
+      business_hours.each do |business_hour|
+        if business_hour.job_time == "モーニング" || business_hour.job_time == "ランチ" ||business_hour.job_time == "ディナー"
+          return true
+        end
+      end
+      return false
+    else
+      return false
+    end
   end
   
 end

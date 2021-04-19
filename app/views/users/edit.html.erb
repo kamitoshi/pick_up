@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <div class="form_box">
-        <h3 class="center">編集</h3>
-        <div class="back_btn right">
-          <%= link_to "戻る", root_path, class: "arrow2" %>
+        <h4 class="center">基本情報編集</h4>
+        <div class="back_btn">
+          <i class="fas fa-angle-left fa-lg"></i><%= link_to "戻る", root_path, class: "font-20" %>
         </div>
         <hr>
         <%= form_for @user do |f| %>

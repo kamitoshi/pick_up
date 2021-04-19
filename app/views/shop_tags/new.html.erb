@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-md-12">
       <div class="form_box">
-        <h5>店舗検索キーワード追加</h5>
-        <div class="back_btn right">
-          <%= link_to "戻る", shop_path(@shop), class: "arrow2" %>
+        <h4 class="center">店舗検索キーワード追加</h4>
+        <div class="back_btn">
+          <i class="fas fa-angle-left fa-lg"></i><%= link_to "戻る", shop_path(@shop), class: "font-20" %>
         </div>
         <hr>
         <%= form_for @shop_tag, url: shop_shop_tags_path(@shop) do |f|  %>

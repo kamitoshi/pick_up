@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <div class="content_box">
-        <h5>注文履歴詳細</h5>
-        <div class="back_btn right">
-          <%= link_to "戻る", :back, class: "arrow2" %>
+        <h4 class="center">注文履歴詳細</h4>
+        <div class="back_btn">
+          <i class="fas fa-angle-left fa-lg"></i><%= link_to "戻る", :back, class: "font-20" %>
         </div>
         <hr>
         <div class="content_box_detail">
@@ -16,7 +16,13 @@
               </tr>
               <tr>
                 <th>予約番号</th>
-                <td colspan=3><%= @order.reserve_number %></td>
+                <% if @order.status == "新規注文" %>
+                  <td colspan=3>未処理</td>
+                <% elsif @order.status == "受付注文" %>
+                  <td colspan=3><%= @order.reserve_number %></td>
+                <% elsif @order.status == "キャンセル注文" %>
+                  <td colspan=3>キャンセル済み</td>
+                <% end %>
               </tr>
               <tr>
                 <th>受取希望日時</th>
@@ -55,7 +61,7 @@
         <% if @order.status == "新規注文" %>
           <div class="return_btn center ma-b-50">
             <%= link_to "注文を受け付ける", shops_order_path(status: 1), method: :patch, data: { confirm: '注文を受け付けてよろしいですか?' }, class: "btn btn-success btn-sm ma-10" %>
-            <%= link_to "注文を断る", shops_order_path(status: 3), method: :patch, data: { confirm: '注文をキャンセルしてもよろしいですか?' }, class: "btn btn-danger btn-sm ma-10" %>
+            <%= link_to "注文を断る", shops_order_path(status: 3), method: :patch, data: { confirm: '注文を断ってもよろしいですか?' }, class: "btn btn-danger btn-sm ma-10" %>
           </div>
         <% end %>
       </div>
