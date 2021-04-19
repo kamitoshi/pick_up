@@ -8,60 +8,46 @@
 <h3 class="user_name"><%= @user.full_name %>様</h3>
 
 <p>『Pickup』をご利用いただき、誠にありがとうございます。</p>
-<br>
 <p>
   ご注文が確定いたしました。<br>
-  受け取り時間になりましたら、<br>
-  商品を受け取りに行ってください。
+  受け取り時間に、商品を受け取りに行ってください。
 </p>
 <p>
-  なお、この受付完了によりアプリ上でのキャンセルを<br>
-  承ることができなくなりました。<br>
-  止むを得ずキャンセルしなければならない場合は<br>
+  なお、当メールにてご注文を確定いたしましたので、<br>
+  アプリ上でのキャンセルを承ることができなくなります。<br>
+  止むを得ずキャンセルしなければならない場合につきましては、<br>
   直接ご連絡いただきますようお願い申し上げます。
 </p>
 <br>
-<p><%= @shop.name %>の電話番号：<%= link_to @shop.phone_number, "tel:" + @shop.phone_number %></p>
+<p><%= @shop.name %>の電話番号：<span class="ma-x-20"><%= link_to @shop.phone_number, "tel:" + @shop.phone_number %></span></p>
 <br>
-<p class="ma-y-20">============【注文情報を記載】============</p>
+<p class="ma-y-20">----------【注文情報を記載】----------</p>
 <p>［注文日時］<%= @order.created_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
-<p>［ご注文者］<%= @user.full_name %></p>
+<p>［ご注文者］<%= @user.full_name %> 様</p>
 <p>［受け取り店舗］<%= @shop.name %></p>
 <p>［受け取り日時］<%= @order.takeaway_datetime.strftime("%Y年%m月%d日 %H時%M分") %></p>
+<br>
 <table class="table ma-y-20">
-  <thead>
-    <tr>
-      <td width="20%">商品名</td>
-      <td width="10%">数量</td>
-      <td width="20%">金額</td>
-    </tr>
-  </thead>
   <tbody>
-    <tr>
-      <td width="20%"></td>
-      <td width="10%"></td>
-      <td width="20%"></td>
-    </tr>
     <% @order.order_items.each do |item| %>
       <tr>
         <td><%= item.menu_name %></td>
         <td><%= item.menu_amount %></td>
-        <td><%= item.menu_price * item.menu_amount %></td>
+        <td>¥<%= price(item.menu_price * item.menu_amount) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<p>［合計金額］<%= @order.total_payment %>円</p>
+<p>［合計金額］¥<%= price(@order.total_payment) %></p>
 
 <br>
 <a href="https://pickup.circrest.com/">Pickupへ</a>
 
+<br>
+<p>ご不明な点などございましたら、下記までお問い合わせください。</p>
 
-<p>□■□■□■□■□■□■□■□■□■□■□■□■□■□■□</p>
-<h3>Pickup</h3>
-<p>運営：Circrest</p>
-<p>住所：〒446−0072 愛知県安城市住吉町3−1−18</p>
-<p>TEL：080−5113−4214</p>
-<p>問い合わせ先：info@circrest.com</p>
-<p>対応時間：9:00〜20:00</p>
-<p>□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■</p>
+<h3>Pickup運営</h3>
+<p>
+  問い合わせ先：pickup@circrest.com<br>
+  対応時間：9:00〜20:00
+</p>

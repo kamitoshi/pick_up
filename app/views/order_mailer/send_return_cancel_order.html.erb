@@ -8,10 +8,9 @@
 <h3 class="user_name"><%= @user.full_name %>様</h3>
 
 <p>『Pickup』をご利用いただき、誠にありがとうございます。</p>
-<br>
 <p>
   大変申し訳ございません。<br>
-  ご希望の時間でのご用意が難しいため<br>
+  ご希望の時間でのご用意が難しいため、<br>
   注文を受け付けることができませんでした。
 </p>
 <p>
@@ -26,41 +25,30 @@
 <p>［ご注文者］<%= @user.full_name %></p>
 <p>［受け取り店舗］<%= @shop.name %></p>
 <p>［受け取り日時］<%= @order.takeaway_datetime.strftime("%Y年%m月%d日 %H時%M分") %></p>
-<table class="table ma-y-20">
-  <thead>
-    <tr>
-      <td width="20%">商品名</td>
-      <td width="10%">数量</td>
-      <td width="20%">金額</td>
-    </tr>
-  </thead>
+<br>
+<table class="table ma-y-20"> 
   <tbody>
-    <tr>
-      <td width="20%"></td>
-      <td width="10%"></td>
-      <td width="20%"></td>
-    </tr>
     <% @order.order_items.each do |item| %>
       <tr>
         <td><%= item.menu_name %></td>
         <td><%= item.menu_amount %></td>
-        <td><%= item.menu_price * item.menu_amount %></td>
+        <td>¥<%= price(item.menu_price * item.menu_amount) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<p>［合計金額］<%= @order.total_payment %>円</p>
+<p>［合計金額］¥<%= price(@order.total_payment) %></p>
 
 <br>
 <a href="https://pickup.circrest.com/">Pickupへ</a>
 
 
-<p>□■□■□■□■□■□■□■□■□■□■□■□■□■□■□</p>
-<h3>Pickup</h3>
-<p>運営：Circrest</p>
-<p>住所：〒446−0072 愛知県安城市住吉町3−1−18</p>
-<p>TEL：080−5113−4214</p>
-<p>問い合わせ先：info@circrest.com</p>
-<p>対応時間：9:00〜20:00</p>
-<p>□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■</p>
+<br>
+<p>ご不明な点などございましたら、下記までお問い合わせください。</p>
+
+<h3>Pickup運営</h3>
+<p>
+  問い合わせ先：pickup@circrest.com<br>
+  対応時間：9:00〜20:00
+</p>
 
