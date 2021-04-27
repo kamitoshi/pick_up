@@ -12,23 +12,33 @@
               <tr>
                 <th width="35%">注文者</th>
                 <th>受取日時</th>
-                <th>金額</th>
+                <th class="dis-non">金額</th>
+                <th class="dis-non">状態</th>
               </tr>
             </thead>
             <tbody>
               <% if @orders.present? %>
                 <% @orders.each do |order| %>
-                  <% if order.status == "新規注文" %>
-                    <tr class="pointer table-danger" data-href="<%= shops_order_path(order) %>">
-                      <td><%= order.user.full_name %></td>
-                      <td><%= order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
-                      <td class="right">¥<%= price(order.total_payment) %></td>
-                    </tr>
-                  <% else %>
+                  <% if order.status == "受付注文" %>
                     <tr class="pointer" data-href="<%= shops_order_path(order) %>">
                       <td><%= order.user.full_name %></td>
                       <td><%= order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
-                      <td class="right">¥<%= price(order.total_payment) %></td>
+                      <td class="dis-non">¥<%= price(order.total_payment) %></td>
+                      <td class="dis-non">受付済</td>
+                    </tr>
+                  <% elsif order.status == "キャンセル注文" %>
+                    <tr class="pointer" data-href="<%= shops_order_path(order) %>">
+                      <td><%= order.user.full_name %></td>
+                      <td><%= order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
+                      <td class="dis-non">¥<%= price(order.total_payment) %></td>
+                      <td class="dis-non">キャンセル済</td>
+                    </tr>
+                  <% else %>
+                    <tr class="pointer table-danger" data-href="<%= shops_order_path(order) %>">
+                      <td><%= order.user.full_name %></td>
+                      <td><%= order.takeaway_datetime.strftime("%Y年%m月%d日 %H:%M") %></td>
+                      <td class="dis-non">¥<%= price(order.total_payment) %></td>
+                      <td class="dis-non">未対応</td>
                     </tr>
                   <% end %>
                 <% end %>
