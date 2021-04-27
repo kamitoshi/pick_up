@@ -1,0 +1,151 @@
+<div class="background"></div>
+<div class="container-fluid" style="padding:0;background-color:#fff;">
+  <div class="logo center">
+    <a href="/">
+      <%= image_tag "logo2.png", size:"80x55" %>
+    </a>
+  </div>
+</div>
+<div class="container" style="padding-top:50px;padding-bottom:50px;">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="white">飲食店 募集中！</h2>
+      <h3 class="white ma-b-30">自慢の料理をより多くの人に届けませんか？</h3>
+      <p class="white">
+        「Pickup」は、地方の飲食店のテイクアウトを全力で応援します。
+        テイクアウトを始めたけど、注文が来ない。始めたいけど、広告する資金がなく集客できるか心配など
+        様々な悩みを解決することが可能であると思っています。<br>
+        導入メリットについては、下の方で詳しく掲載しています。
+      </p>
+    </div>
+    <div class="col-md-6">
+      <div class="lp-form_box">
+        <h6 class="ma-b-30">検討中の方やご不明な点がある方は下記フォームより気軽にお問い合わせください。</h6>
+        <%= form_for ShopContact.new do |f| %>
+          <div class="field">
+            <%= f.label :shop_name, "店名" %><br>
+            <%= f.text_field :shop_name, class:"form-under", placeholder: "店名を入力してください" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :staff_name, "担当者名" %><br />
+            <%= f.text_field :staff_name, class:"form-under", placeholder: "担当者名を入力してください（任意）" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :phone_number, "電話番号" %><br />
+            <%= f.text_field :phone_number, class:"form-under", placeholder: "電話番号を入力してください" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :email, "メールアドレス" %><br />
+            <%= f.email_field :email, class:"form-under", placeholder: "メールアドレスを入力してください" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :shop_address, "店舗住所" %><br />
+            <%= f.text_field :shop_address, class:"form-under", placeholder: "住所を入力してください" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :content, "内容" %><br />
+            <%= f.text_area :content, class:"form-control", placeholder: "お問い合わせの内容を記入してください", style: "height:150px" %>
+          </div>
+
+          <div class="actions center">
+            <%= f.submit "送信", class: "lp-button-fill" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row lp-method_box">
+    <div class="col-md-12">
+      <h4 class="pa-b-30">ご利用手順</h4>
+    </div>
+    <div class="col-md-4">
+      <h5 class="pa-y-10"><span class="pa-r-20">1</span>お客様から注文が来ます</h5>
+      <%= image_tag "LP/smapho_logo.png", class: "wid-100" %>
+      <p>
+        受け取り希望時間を確認していただき、提供が難しいと判断した場合にはキャンセルすることも可能です。
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h5 class="pa-y-10"><span class="pa-r-20">2</span>注文の商品を用意します</h5>
+      <%= image_tag "LP/food_logo.png", class: "wid-100" %>
+      <p>
+        受付をしたら、受け取り時間に間に合うように注文商品を準備します。
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h5 class="pa-y-10"><span class="pa-r-20">3</span>お客様が取りに来ます</h5>
+      <%= image_tag "LP/takeout_logo.png", class: "wid-100" %>
+      <p>
+        お客様が取りにこられたら、商品の受け渡しを行ってください。<br>
+        <span class="red">注：決済は代行しないので、それぞれの店舗でお願いいたします。</span>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="background-color:#fff; padding:0;">
+  <div class="row">
+    <div class="col-md-7 order-md-2" style="padding:0">
+      <div class="lp-content_box">
+        <h4 class="pa-b-20">導入手順</h4>
+        <div class="lp-content_box_detail">
+          <h5>Step.1<span class="ma-l-30">必要事項を記入して送信</span></h5>
+        </div>
+        <div class="lp-content_box_detail">
+          <h5>Step.2<span class="ma-l-30">契約書の取り交わし</span></h5>
+        </div>
+        <div class="lp-content_box_detail">
+          <h5>Step.3<span class="ma-l-30">各種設定と商品の掲載</span></h5>
+        </div>
+        <div class="lp-content_box_detail">
+          <h5>Step.4<span class="ma-l-30">テイクアウト開始</span></h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5 order-md-1" style="padding:0">
+      <div class="lp-image_field"></div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="pa-y-30">導入メリットのご紹介</h4>
+      </div>
+      <div class="col-md-6 pa-20">
+        <h5 class="pa-b-10"><i class="fas fa-check-circle pa-r-40"></i>売り上げアップ</h5>
+        <p>
+          「Pickup」は、貴店に新しい販路を提供します。<br>
+          様々なお店がテイクアウトメニューを掲載しているため、より多くのお客様に見てもらうことができます。
+        </p>
+      </div>
+      <div class="col-md-6 pa-20">
+        <h5 class="pa-b-10"><i class="fas fa-check-circle pa-r-40"></i>広告いらず</h5>
+        <p>
+          当サイトに掲載していれば、常に多くのお客様の目に触れることになるため、あえて広告する必要がなくなります。<br>
+          <span class="font-10">※商品の掲載順序に関しては、弊社でルールを設けているため、詳しくはお問い合わせください。</span>
+        </p>
+      </div>
+      <div class="col-md-6 pa-20">
+        <h5 class="pa-b-10"><i class="fas fa-check-circle pa-r-40"></i>売上が一目でわかる</h5>
+        <p>
+          当サイトの管理画面では、一月の売上件数・金額や1年分の売上推移など様々なデータをみることができます。<br>
+          もちろん商品ごとの売り上げも確認することができるため、メニュー開発や改善点の発見に役立つこと間違いなしです。
+        </p>
+      </div>
+      <div class="col-md-6 pa-20">
+        <h5 class="pa-b-10"><i class="fas fa-check-circle pa-r-40"></i>決済を代行しない</h5>
+        <p>
+          一見デメリットにも聞こえますが、弊社はあくまでも飲食店ファースト。<br>
+          決済を代行しないことで、売り上げの入金にタイムラグがないため、資金の回転率をあげることができます。
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>

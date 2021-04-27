@@ -1,3 +1,49 @@
+.background{
+  position: fixed;
+  width:100vw;
+  height:100vh;
+  z-index:-10;
+  background-image: url("LP/background.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.lp-form_box{
+  background-color:#fff;
+  padding:30px;
+  border-radius: 10px;
+}
+
+.lp-content_box{
+  background-color:#EFAA29;
+  padding:30px;
+  color:#fff;
+}
+.lp-content_box_detail{
+  padding:10px;
+}
+
+.lp-image_field{
+  height:100%;
+  min-height:200px;
+  background-image: url("LP/roll_sand.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.lp-method_box{
+  background-color: #fff;
+  opacity: 0.9;
+  border-radius: 15px;
+  padding:30px;
+  margin-bottom: 20px;
+}
+
+.containe{
+  width:100%;
+  overflow: hidden;
+}
+
 .main-image {
   height:100vh;
 }
@@ -196,12 +242,36 @@
   width:100%;
   padding:10px 40px;
   background-color: #000;
-  opacity: 0.5;
+  opacity: 0.9;
+}
+
+.lp-button-fill {
+  position: relative;
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0.8rem;
+  font-size: 20px;
+  color: #fff;
+  background-color: #EFAA29;
+  text-decoration: none;
+  user-select: none;
+  border: 1px #EFAA29 solid;
+  box-shadow: inset #EFAA29 0 0 0 0;
+  transition: 0.3s;
+  min-width: 120px;
+  border-radius: 50px;
+  &:hover{
+    opacity: .7;
+    color: #fff;
+  }
 }
 
 @media (max-width: 768px) {
   .non-dis {
     display: none;
+  }
+  .lp-text_box__concept{
+    height:100%;
   }
   .image1 {
     height: 200px;

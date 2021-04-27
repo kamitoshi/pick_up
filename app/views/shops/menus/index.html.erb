@@ -14,6 +14,7 @@
               <tr>
                 <th>商品名</th>
                 <th>価格</th>
+                <th>販売状態</th>
               </tr>
             </thead>
             <tbody>
@@ -26,6 +27,7 @@
                     <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
                       <td><%= menu.name %></td>
                       <td>¥<%= price(menu.price) %></td>
+                      <td><%= menu.public_status %></td>
                     </tr>
                   <% end %>
                 <% end %>
@@ -37,6 +39,7 @@
                     <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
                       <td><%= menu.name %></td>
                       <td>¥<%= price(menu.price) %></td>
+                      <td><%= menu.public_status %></td>
                     </tr>
                   <% end %>
                 <% end %>
@@ -48,6 +51,7 @@
                     <tr class="pointer" data-href="<%= shops_menu_path(menu) %>">
                       <td><%= menu.name %></td>
                       <td>¥<%= price(menu.price) %></td>
+                      <td><%= menu.public_status %></td>
                     </tr>
                   <% end %>
                 <% end %>

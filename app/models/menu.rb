@@ -19,8 +19,21 @@ class Menu < ApplicationRecord
     フード: 0, ドリンク: 1, デザート: 2
   }
 
+  # 公開中か公開停止中かを表示する
+  def public_status
+    if self.is_active?
+      return "公開中"
+    else
+      return "非公開"
+    end
+  end
+
   def main_image
     return self.menu_images.find_by(is_main: true)
+  end
+
+  def images
+    return self.menu_images.order(is_main: "desc")
   end
 
 
