@@ -1,7 +1,7 @@
 <div class="field">
   
-  <%= image_tag img, class: "wid-100" %>
-  <%= f.file_field :file_name, class: "font-10" %>
+  <%= image_tag img, class: "wid-100", id: "img_prev" %>
+  <%= f.file_field :file_name, class: "font-10", id: "input_img" %>
 </div>
 
 <% unless shop_image.is_main? %>
@@ -24,6 +24,20 @@ jQuery(function ($) {
   $("#load_btn").click(function(){
     $("#overlay").fadeIn(500);
     console.log("画像を保存しています");
+  });
+});
+$(function () {
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $("#img_prev").attr("src", e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $("#input_img").change(function () {
+    readURL(this);
   });
 });
 </script>

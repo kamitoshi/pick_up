@@ -14,6 +14,11 @@
   </head>
 
   <body>
-    <%= yield %>  
+    <div class="containe">
+      <%= yield %>
+      <footer style="background-color:#fff;">
+        <%= render partial: "layouts/footer" %>
+      </footer>
+    </div>
   </body>
 </html>

@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="form_box">
+        <h4 class="center">お問い合わせ</h4>
+        <div class="back_btn">
+          <i class="fas fa-angle-left fa-lg"></i><%= link_to "戻る", :back, class: "font-20" %>
+        </div>
+        <hr>
+        <%= form_for @shop_contact do |f| %>
+          <div class="field">
+            <%= f.label :shop_name, "店名" %><br>
+            <%= f.text_field :shop_name, class:"form-under", placeholder: "店名を入力してください" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :staff_name, "担当者名" %><br />
+            <%= f.text_field :staff_name, class:"form-under", placeholder: "担当者名を入力してください（任意）" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :phone_number, "電話番号" %><br />
+            <%= f.text_field :phone_number, class:"form-under", placeholder: "電話番号を入力してください" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :email, "メールアドレス" %><br />
+            <%= f.email_field :email, class:"form-under", placeholder: "メールアドレスを入力してください" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :shop_address, "店舗住所" %><br />
+            <%= f.text_field :shop_address, class:"form-under", placeholder: "住所を入力してください" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :content, "内容" %><br />
+            <%= f.text_area :content, class:"form-control", placeholder: "お問い合わせの内容を記入してください", style: "height:150px" %>
+          </div>
+
+          <div class="actions center">
+            <%= f.submit "送信", class: "button-fill" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

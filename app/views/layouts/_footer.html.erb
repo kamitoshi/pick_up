@@ -1,19 +1,32 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <ul class="footerMenu" style="padding:20px 0">
-        <li class="dis-ib ma-x-10">
-          <%= link_to "プライバシーポリシー", privacy_path %>
-        </li>
-        <li class="dis-ib ma-x-10">
-          <%= link_to "利用規約", term_path %>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <p class="font-10">©PickUp from Circrest 2021</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h6 class="ma-t-10">利用者様向け</h6>
+        <ul class="footerMenu" style="padding:20px 0">
+          <li class="ma-10">
+            <%= link_to "プライバシーポリシー", privacy_path %>
+          </li>
+          <li class="ma-10">
+            <%= link_to "利用規約", term_path %>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h6 class="ma-t-10">店舗様向け</h6>
+        <ul class="footerMenu" style="padding:20px 0">
+          <li class="ma-10">
+            <%= link_to "Pickupとは", shop_path %>
+          </li>
+          <li class="ma-10">
+            <%= link_to "お問い合わせ", new_shop_contact_path %>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4 center">
+        <%= image_tag "logo2.png", size:"80x55" %>
+        <p class="font-10 center" style="line-height:100px">©PickUp from Circrest 2021</p>
+      </div>
     </div>
   </div>
 </div>

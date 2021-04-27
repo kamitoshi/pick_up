@@ -1,14 +1,9 @@
 Rails.application.routes.draw do
-  namespace :admins do
-    get 'orders/index'
-  end
-  if Rails.env.development?
-    mount LetterOpenerWeb::Engine, at: '/letter_opener'
-  end
   root "home#index"
   get "top", to: "home#top"
   get "about", to: "home#about"
   get "method", to: "home#method"
+  get "shop", to: "home#shop"
   get "privacy", to: "home#privacy"
   get "term", to: "home#term"
 
@@ -94,8 +89,18 @@ Rails.application.routes.draw do
   namespace :cart_items do
     resources :orders, only:[:new, :create]
   end
+
   get "orders/fix", to: "orders#fix"
   resources :cart_items, only:[:destroy]
   resources :categories, only:[:index,:new, :create, :edit, :update, :destroy]
+  resources :shop_contacts, only:[:index, :show, :new, :create] do
+    collection do
+      get :fix
+    end
+  end
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: '/letter_opener'
+  end
 
 end
