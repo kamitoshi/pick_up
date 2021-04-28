@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-6">
       <div class="lp-form_box">
-        <h6 class="ma-b-30">検討中の方やご不明な点がある方は下記フォームより気軽にお問い合わせください。</h6>
+        <h6 class="ma-b-30">導入検討中やご不明な点がある方は下記フォームより気軽にお問い合わせください。</h6>
         <%= form_for ShopContact.new do |f| %>
           <div class="field">
             <%= f.label :shop_name, "店名" %><br>
@@ -61,35 +61,39 @@
   </div>
 </div>
 <div class="container">
-  <div class="row lp-method_box">
+  <div class="row">
     <div class="col-md-12">
-      <h4 class="pa-b-30">ご利用手順</h4>
-    </div>
-    <div class="col-md-4">
-      <h5 class="pa-y-10"><span class="pa-r-20">1</span>お客様から注文が来ます</h5>
-      <%= image_tag "LP/smapho_logo.png", class: "wid-100" %>
-      <p>
-        受け取り希望時間を確認していただき、提供が難しいと判断した場合にはキャンセルすることも可能です。
-      </p>
-    </div>
-    <div class="col-md-4">
-      <h5 class="pa-y-10"><span class="pa-r-20">2</span>注文の商品を用意します</h5>
-      <%= image_tag "LP/food_logo.png", class: "wid-100" %>
-      <p>
-        受付をしたら、受け取り時間に間に合うように注文商品を準備します。
-      </p>
-    </div>
-    <div class="col-md-4">
-      <h5 class="pa-y-10"><span class="pa-r-20">3</span>お客様が取りに来ます</h5>
-      <%= image_tag "LP/takeout_logo.png", class: "wid-100" %>
-      <p>
-        お客様が取りにこられたら、商品の受け渡しを行ってください。<br>
-        <span class="red">注：決済は代行しないので、それぞれの店舗でお願いいたします。</span>
-      </p>
+      <div class="lp-method_box">
+        <h4 class="pa-b-30">ご利用手順</h4>
+        <div class="row">
+          <div class="col-md-4">
+            <h5 class="pa-y-10"><span class="pa-r-20">1</span>お客様から注文が来ます</h5>
+            <%= image_tag "LP/smapho_logo.png", class: "wid-100" %>
+            <p>
+              受け取り希望時間を確認していただき、提供が難しいと判断した場合にはキャンセルすることも可能です。
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h5 class="pa-y-10"><span class="pa-r-20">2</span>注文の商品を用意します</h5>
+            <%= image_tag "LP/food_logo.png", class: "wid-100" %>
+            <p>
+              受付をしたら、受け取り時間に間に合うように注文商品を準備します。
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h5 class="pa-y-10"><span class="pa-r-20">3</span>お客様が取りに来ます</h5>
+            <%= image_tag "LP/takeout_logo.png", class: "wid-100" %>
+            <p>
+              お客様が取りにこられたら、商品の受け渡しを行ってください。<br>
+              <span class="red">注：決済は代行しないので、それぞれの店舗でお願いいたします。</span>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="container-fluid" style="background-color:#fff; padding:0;">
+<div class="container-fluid" style="background-color:#fff">
   <div class="row">
     <div class="col-md-7 order-md-2" style="padding:0">
       <div class="lp-content_box">
@@ -147,5 +151,9 @@
       </div>
     </div>
   </div>
-
+</div>
+<div class="container-fluid">
+  <div class="row" style="padding:0;">
+    <div class="image"><%= image_tag "LP/logoin.jpg", class: "wid-100 main-image" %></div>
+  </div>
 </div>

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "top", to: "home#top"
   get "about", to: "home#about"
   get "method", to: "home#method"
-  get "shop", to: "home#shop"
+  get "store", to: "home#store"
   get "privacy", to: "home#privacy"
   get "term", to: "home#term"
 

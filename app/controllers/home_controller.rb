@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  layout "no_header", only:[:about, :shop]
+  layout "no_header", only:[:about, :store]
   before_action :set_menu_ransack
   def index
     if shop_signed_in?
@@ -31,7 +31,7 @@ class HomeController < ApplicationController
 
   end
 
-  def shop
+  def store
 
   end
 
