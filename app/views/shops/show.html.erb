@@ -118,7 +118,22 @@
   <div class="row">
     <div class="col-md-12">
       <div class="content_box">
-        <h5>店舗情報詳細</h5>
+        <h5>店舗情報</h5>
+        <div class="right">
+          <%= form_for @shop, url: shop_path(@shop), method: :patch do |f| %>
+            <div class="detail">
+              <%= f.select :is_active, { '公開中': true, '非公開': false } , { onchange: 'this.form.submit()'} , {id: "public_submit_select"} %>
+            </div>
+          <% end %>
+          <script type="text/javascript">
+            $(function(){
+              $("#public_submit_select").change(function(){
+                $("#edit_shop_<%= @shop.id %>").submit();
+                console.log("変更しました");
+              });
+            });
+          </script>
+        </div>
         <hr>
         <div class="row">
           <div class="col-md-4">

@@ -4,13 +4,13 @@ class MenusController < ApplicationController
   before_action :set_menu_ransack
 
   def index
-    @menus = Menu.all.page(params[:page]).per(20)
+    @menus = Menu.joins(:shop).where(shops:{is_active: true}).where(is_active: true).page(params[:page]).per(20)
   end
 
   def search
     @search_menu = Menu.ransack(params[:q]) 
-    @search_menus = @search_menu.result
-    @menus = @search_menu.result.page(params[:page]).per(20)
+    @search_menus = @search_menu.result.joins(:shop).where(shops:{is_active: true}).where(is_active: true)
+    @menus = @search_menus.page(params[:page]).per(20)
   end
 
   def show
