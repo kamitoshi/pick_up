@@ -1,13 +1,13 @@
 class Users::ShopsController < ApplicationController
   before_action :set_shop_ransack
   def index
-    @shops = Shop.all.page(params[:page]).per(20)
+    @shops = Shop.where(is_active: true).page(params[:page]).per(20)
   end
 
   def search
     @search_shop = Shop.ransack(params[:q]) 
-    @search_shops = @search_shop.result
-    @shops = @search_shop.result.page(params[:page]).per(20)
+    @search_shops = @search_shop.result.where(is_active: true)
+    @shops = @search_shops.page(params[:page]).per(20)
   end
 
   def show

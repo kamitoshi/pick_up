@@ -1,2 +1,48 @@
-<h1>ShopContacts#show</h1>
-<p>Find me in app/views/shop_contacts/show.html.erb</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content_box">
+        <h4 class="center">問い合わせ詳細</h4>
+        <div class="back_btn">
+          <i class="fas fa-angle-left fa-lg"></i><%= link_to "一覧に戻る", shop_contacts_path, class: "font-20" %>
+        </div>
+        <div class="content_box_detail">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <th>問い合わせ日時</th>
+                <td><%= @shop_contact.created_at.strftime("%Y年%m月%d日 %H:%M") %></td>
+              </tr>
+              <tr>
+                <th>店舗名</th>
+                <td><%= @shop_contact.shop_name %></td>
+              </tr>
+              <tr>
+                <th>担当者名</th>
+                <td><%= @shop_contact.staff_name %></td>
+              </tr>
+              <tr>
+                <th>電話番号</th>
+                <td><%= @shop_contact.phone_number %></td>
+              </tr>
+              <tr>
+                <th>メールアドレス</th>
+                <td><%= mail_to @shop_contact.email %></td>
+              </tr>
+              <tr>
+                <th>店舗住所</th>
+                <td><%= @shop_contact.shop_address %></td>
+              </tr>
+              <tr>
+                <th colspan=2>内容</th>
+              </tr>
+              <tr>
+                <td colspan=2><%= introduction(@shop_contact.content) %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

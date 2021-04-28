@@ -1,2 +1,68 @@
-<h1>ShopContacts#index</h1>
-<p>Find me in app/views/shop_contacts/index.html.erb</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content_box">
+        <h4 class="center">問い合わせ一覧</h4>
+        <div class="back_btn">
+          <i class="fas fa-angle-left fa-lg"></i><%= link_to "戻る", root_path, class: "font-20" %>
+        </div>
+        <div class="content_box_detail">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>店舗名</th>
+                <th>問い合わせ時刻</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @shop_contacts.present? %>
+                <% @shop_contacts.each do |contact| %>
+                  <tr class="pointer" data-href="<%= shop_contact_path(contact) %>">
+                    <td><%= contact.shop_name %></td>
+                    <td><%= contact.created_at.strftime("%Y年%m月%d日 %H:%M") %></td>
+                    <td>
+                      <% if contact.is_open? %>
+                        確認済
+                      <% else %>
+                        <span class="red">未確認</span>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr>
+                  <td colspan="3">
+                    問い合わせがありません
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row center ma-b-20">
+    <div class="col-md-12">
+      <%= paginate @shop_contacts %>
+    </div>
+  </div>
+</div>
+<script>
+jQuery(function ($) {
+  //data-hrefの属性を持つtrを選択しclassにclickableを付加
+  $("tr[data-href]")
+    .addClass("clickable")
+
+  //クリックイベント
+  .click(function (e) {
+    //e.targetはクリックした要素自体、それがa要素以外であれば
+    if (!$(e.target).is("a")) {
+      //その要素の先祖要素で一番近いtrの
+      //data-href属性の値に書かれているURLに遷移する
+      window.location = $(e.target).closest("tr").data("href");
+    }
+  });
+});
+</script>

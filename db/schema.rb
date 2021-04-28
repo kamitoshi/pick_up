@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 2021_04_26_021535) do
     t.string "email", null: false
     t.string "shop_address"
     t.text "content"
+    t.boolean "is_open", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

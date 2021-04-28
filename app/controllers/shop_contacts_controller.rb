@@ -1,11 +1,16 @@
 class ShopContactsController < ApplicationController
   layout "shop_app"
-  before_action :admin_or_shop!, only:[:index, :show]
+  before_action :authenticate_admin!, only:[:index, :show]
 
   def index
+    @shop_contacts = ShopContact.all.order(created_at:"desc").page(params[:page]).per(20)
   end
 
   def show
+    @shop_contact = ShopContact.find(params[:id])
+    unless @shop_contact.is_open?
+      @shop_contact.update(is_open: true)
+    end
   end
 
   def new
