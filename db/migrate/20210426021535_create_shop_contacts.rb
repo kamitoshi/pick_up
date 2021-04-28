@@ -7,6 +7,7 @@ class CreateShopContacts < ActiveRecord::Migration[5.2]
       t.string :email, null: false
       t.string :shop_address
       t.text :content
+      t.boolean :is_open, default: false
 
       t.timestamps
     end

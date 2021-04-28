@@ -12,21 +12,24 @@
           <h3 class="center">新規登録</h3>
         <% end %>
 
-        <div class="back_btn right">
-          <%= link_to "戻る", :back, class: "arrow2" %>
+        <div class="back_btn">
+          <i class="fas fa-angle-left fa-lg"></i><%= link_to "戻る", :back %>
         </div>
 
         <hr>
         <% unless params[:data] %>
           <div class="row ma-y-30">
             <div class="col-md-12 center">
-              <h6 class="ma-b-20">SNS連携</h6>
+              <h6 class="ma-b-20">SNSアカウントで新規登録</h6>
               <a href="/users/auth/facebook">
                 <%= image_tag "f_logo.png", size:"40x40", class:"ma-x-20" %>
               </a>
               <a href="/users/auth/google_oauth2">
                 <%= image_tag "g_logo.png", size:"40x40", class:"ma-x-20" %>
               </a>
+              <p class="red font-10 left ma-t-20">
+                SNSアカウントで新規登録を行っても初回は全ての項目を入力していただきます。<br>
+              </p>
             </div>
           </div>
           <div class="title-border">または</div>
