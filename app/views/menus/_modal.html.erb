@@ -8,7 +8,7 @@
               <div class="row">
                 <div class="col-md-12 center ma-b-20">
                   <% if menu.menu_images.present? %>
-                    <div id="carousel<%= menu.id %>" class="carousel slide" data-ride="carousel">
+                    <div id="carousel<%= menu.id %>" class="carousel slide">
                       <!-- インジケータの設定 -->
                       <ol class="carousel-indicators">
                         <% menu.menu_images.count.times do |i| %>
@@ -24,11 +24,11 @@
                       <div class="carousel-inner">
                         <% menu.menu_images.count.times do |i| %>
                           <% if i == 0 %>
-                            <div class="carousel-item active">
+                            <div class="carousel-item active" data-interval="false">
                               <%= image_tag menu.images[i].file_name.thumb_square.to_s, id:"sample_img", class: "wid-100" %>
                             </div><!-- /.carousel-item -->
                           <% else %>
-                            <div class="carousel-item">
+                            <div class="carousel-item" data-interval="false">
                               <%= image_tag menu.images[i].file_name.thumb_square.to_s, id:"sample_img", class: "wid-100" %>
                             </div><!-- /.carousel-item -->
                           <% end %>
