@@ -12,7 +12,10 @@ class Users::ShopsController < ApplicationController
 
   def show
     @shop = Shop.find(params[:id])
-    @menus = @shop.menus
+    unless @shop.is_active?
+      redirect_to root_path
+    end
+    @menus = @shop.menus.where(is_active: true)
     @popular_menus = @menus.shuffle.first(4)
     @food_menus = @menus.where(menu_type: "フード")
     @drink_menus = @menus.where(menu_type: "ドリンク")

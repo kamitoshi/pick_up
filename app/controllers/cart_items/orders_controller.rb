@@ -3,6 +3,9 @@ class CartItems::OrdersController < ApplicationController
     @order = Order.new
     @order_item = OrderItem.new
     @cart_items = current_user.cart_items
+    unless @cart_items.present?
+      redirect_to root_path
+    end
     @shop = @cart_items[0].menu.shop
   end
 
