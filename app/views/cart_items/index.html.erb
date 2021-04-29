@@ -3,6 +3,9 @@
     <div class="col-md-8 offset-md-2">
       <div class="content_box">
         <h4 class="center">まとめて注文</h4>
+        <div class="back_btn">
+          <i class="fas fa-angle-left fa-lg"></i><%= link_to "戻る", 'javascript:history.back()', class: "font-20" %>
+        </div>
         <hr>
         <% if @cart_items.present? %>
           <% @cart_items.each do |cart_item| %>
