@@ -26,22 +26,30 @@ class HomeController < ApplicationController
   end
 
   def anout
-
+    # ユーザー向けのLPページ
   end
 
   def method
-
+    # ユーザー向けのご利用方法
   end
 
   def store
-
+    # 店舗用のご利用紹介ページ
   end
 
   def privacy
-
+    # ユーザー向けのプライバシーポリシーページ
   end
 
   def term
-    
+    # ユーザー向けの利用規約ページ
+  end
+
+  def faq_user
+    # よくある質問ページ（ユーザー）
+  end
+
+  def faq_shop
+    # よくある質問ページ（店舗）
   end
 end

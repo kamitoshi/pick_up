@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "store", to: "home#store"
   get "privacy", to: "home#privacy"
   get "term", to: "home#term"
+  get "faq_user", to: "home#faq_user"
+  get "faq_shop", to: "home#faq_shop"
 
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',
