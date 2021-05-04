@@ -4,7 +4,7 @@
     <title>PickUp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= favicon_link_tag('logo.png') %>
+    <%= favicon_link_tag('pickup_logo.png') %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
 
@@ -18,7 +18,7 @@
     <div class="wrapper">
       <%= render partial: 'shared/flash_message' %>
       <%= yield %>
-      <footer>
+      <footer style="margin-top:50px">
         <%= render partial: "layouts/footer" %>
       </footer>
       <%= render partial: 'users/auth_modal' %>

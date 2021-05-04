@@ -77,6 +77,29 @@ class Shop < ApplicationRecord
     return false
   end
 
+  # お店が営業時間中か営業時間外の表示切り替え用
+  def on_business_time?
+    business_hours = self.business_hours
+    now = Time.now
+    business_hours.each do |business_hour|
+      openTime = business_hour.opening
+      closeTime = business_hour.closing
+      n = now.strftime("%H%M").to_i
+      if openTime == closeTime # 24時間営業の店の場合はこのパターン
+        return "営業中"
+      elsif openTime < closeTime
+        if [*openTime.strftime("%H%M").to_i..closeTime.strftime("%H%M").to_i].include?(n)
+          return "営業中"
+        end
+      else
+        if [*0..closeTime.strftime("%H%M").to_i, *openTime.strftime("%H%M").to_i..2359].include?(n)
+          return "営業中"
+        end
+      end
+    end
+    return "営業時間外"
+  end
+
   # 今月の集計(今月の今日までの売り上げ金額と件数)
   def month_sales_money
     orders = self.orders

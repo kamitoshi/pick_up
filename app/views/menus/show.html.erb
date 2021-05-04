@@ -1,37 +1,86 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-8 offset-md-2 center ma-y-20">
+<div class="container">
+  <div class="row ma-t-20">
+    <div class="col-12">
+      <div class="back_btn">
+        <i class="fas fa-angle-left fa-lg"></i><%= link_to "戻る", 'javascript:history.back()', class: "font-20" %>
+      </div>
+      <hr>
+    </div>
+    <div class="col-md-4">
       <% if @menu.menu_images.present? %>
-        <%= image_tag @menu.main_image.file_name.thumb_square.to_s, id:"sample_img", class: "wid-70" %>
+        <div id="carousel<%= @menu.id %>" class="carousel slide">
+          <!-- インジケータの設定 -->
+          <ol class="carousel-indicators">
+            <% @menu.menu_images.count.times do |i| %>
+              <% if i == 0 %>
+                <li data-target="#carousel<%= @menu.id %>" data-slide-to="#{i}" class="active"></li>
+              <% else %>
+                <li data-target="#carousel<%= @menu.id %>" data-slide-to="#{i}"></li>
+              <% end %>
+            <% end %>
+          </ol>
+        
+          <!-- スライドさせる画像の設定 -->
+          <div class="carousel-inner">
+            <% @menu.menu_images.count.times do |i| %>
+              <% if i == 0 %>
+                <div class="carousel-item active" data-interval="false">
+                  <%= image_tag @menu.images[i].file_name.thumb_square.to_s, id:"sample_img", class: "wid-100" %>
+                </div><!-- /.carousel-item -->
+              <% else %>
+                <div class="carousel-item" data-interval="false">
+                  <%= image_tag @menu.images[i].file_name.thumb_square.to_s, id:"sample_img", class: "wid-100" %>
+                </div><!-- /.carousel-item -->
+              <% end %>
+            <% end %>
+          </div><!-- /.carousel-inner -->
+          <!-- スライドコントロールの設定 -->
+          <a class="carousel-control-prev" href="#carousel<%= @menu.id %>" role="button" data-slide="prev">
+            <i class="fas fa-angle-left fa-2x"></i>
+          </a>
+          <a class="carousel-control-next" href="#carousel<%= @menu.id %>" role="button" data-slide="next">
+            <i class="fas fa-angle-right fa-2x"></i>
+          </a>
+        </div><!-- /.carousel -->
       <% else %>
         <%= image_tag "noimage.png", class: "wid-100" %>
       <% end %>
     </div>
-    <div class="col-md-4 offset-md-2">
-      <h5><%= @menu.name %></h5>
-      <h6><%= @menu.shop.name %></h6>
-      <br>
-      <h6>¥<%= price(@menu.price) %></h6>
-    </div>
-    <div class="col-md-4">
-      <p><%= introduction(@menu.introduction) %></p>
+    <div class="col-md-8">
+      <p class="m-text"><%= link_to @menu.shop.name, users_shop_path(@menu.shop), class:"gray" %></p>
+      <p class="m-title"><%= @menu.name %></p>
+      <p class="m-text ma-y-10">¥<%= price(@menu.price) %></p>
+      <p class="m-text right ma-b-20">目安時間：<%= @menu.estimated_time %><span>-</span><%= @menu.estimated_time + 10 %>分</p>
+      <p class="m-text"><%= introduction(@menu.introduction) %></p>
     </div>
   </div>
   <hr>
-  <div class="row">
-    <div class="col-md-8 offset-md-2 center" style="padding-top: 0.8rem;">
-      <%= form_for CartItem.new, url: menu_cart_items_path(@menu) do |f| %>
-        <%= f.hidden_field :shop_id, value: @menu.shop_id %>
-        <span id="minusButton<%= @menu.id %>" class="pointer minusBtn">-</span>
-        <%= f.text_field :amount, id: "counterOutput#{@menu.id}", class:"amount_input", value:1 %>
-        <span id="plusButton<%= @menu.id %>" class="pointer plusBtn">+</span>
-        <div class="actions center">
-          <%= f.submit "カートに追加する", class: "button-fill" %>
-          <%= link_to "今すぐ注文する", new_menu_order_path(@menu), class: "button-fill" %>
+  <%= form_for CartItem.new, url: menu_cart_items_path(@menu) do |f| %>
+    <%= f.hidden_field :menu_id, value: @menu.id %>
+    <div class="row">
+      <div class="col-md-8 offset-md-2 center">
+        <div class="row">
+          <div class="col-md-12 center">
+            <h6 class="left">注文数</h6>
+            <span id="minusButton<%= @menu.id %>" class="pointer minusBtn"><i class="fas fa-minus-circle fa-lg"></i></span><%= f.text_field :amount, id: "counterOutput#{@menu.id}", class:"amount_input", value:1 %><span id="plusButton<%= @menu.id %>" class="pointer plusBtn"><i class="fas fa-plus-circle fa-lg"></i></span>
+          </div>
         </div>
-      <% end %>
+      </div>
     </div>
-  </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-8 offset-md-2 center">
+        <div class="row">
+          <div class="col-6 center">
+            <%= f.submit "カートに追加する", class: "button-fill" %>
+          </div>
+          <div class="col-6 center">
+            <%= link_to "単品注文する", new_menu_order_path(@menu), class: "button-fill" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 <script>
   let counterOutput<%= @menu.id %> = document.getElementById("counterOutput<%= @menu.id %>");

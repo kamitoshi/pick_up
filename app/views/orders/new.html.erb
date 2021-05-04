@@ -44,7 +44,7 @@
 
           <div class="field">
             <%= f.label :takeaway_datetime, "受け取り日時" %><br />
-            <span class="pa-r-10">日付</span><%= f.datetime_select :takeaway_datetime, {minute_step: 10, default: Time.now.ceil_to(10.minutes) + (current_user.max_estimated_time*60), use_month_numbers: true, start_year: Date.today.year, date_separator: '<span class="ma-x-10">/</span>', datetime_separator: '<p class="pa-t-10"></p><span class="pa-r-10">時間</span>'}, {id: 'ymd-date'} %>
+            <span class="pa-r-10">日付</span><%= f.datetime_select :takeaway_datetime, {minute_step: 10, default: Time.now.ceil_to(10.minutes) + (@menu.estimated_time*60), use_month_numbers: true, start_year: Date.today.year, date_separator: '<span class="ma-x-10">/</span>', datetime_separator: '<p class="pa-t-10"></p><span class="pa-r-10">時間</span>'}, {id: 'ymd-date'} %>
           </div>
 
           <div class="row">

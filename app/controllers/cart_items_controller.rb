@@ -43,7 +43,7 @@ class CartItemsController < ApplicationController
         end
       end
     else
-      flash[:danger] = "すでにカートの中に多店舗の商品があるため追加できません"
+      flash[:danger] = "すでにカートの中に他店舗の商品があるため追加できません"
       redirect_to user_cart_items_path(current_user)
     end
 
