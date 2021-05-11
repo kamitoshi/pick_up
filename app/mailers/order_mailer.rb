@@ -4,21 +4,21 @@ class OrderMailer < ApplicationMailer
     @user = order.user #ユーザー情報
     @shop = order.shop #ショップ情報
     @order = order
-    mail to: @shop.email, subject: '【PickUp】 注文が入りました'
+    mail to: @shop.email, subject: '注文が入りました'
   end
   
   def send_return_reception_order(order)
     @user = order.user #ユーザー情報
     @shop = order.shop #ショップ情報
     @order = order
-    mail to: @user.email, subject: '【PickUp】 注文の受付が完了しました'
+    mail to: @user.email, subject: 'ご注文の受付が確定しました'
   end
 
   def send_return_cancel_order(order)
     @user = order.user #ユーザー情報
     @shop = order.shop #ショップ情報
     @order = order
-    mail to: @user.email, subject: '【PickUp】 注文がキャンセルされました'
+    mail to: @user.email, subject: 'ご注文がキャンセルになりました'
   end
 
 end

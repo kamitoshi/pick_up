@@ -1,54 +1,57 @@
-<p>==========================================</p>
-<p>
-  このメールはご注文に関する大切なご連絡です。<br>
-  必ず内容をご確認ください。
-</p>
-<p>==========================================</p>
-
 <h3 class="user_name"><%= @user.full_name %>様</h3>
 
-<p>『Pickup』をご利用いただき、誠にありがとうございます。</p>
 <p>
-  大変申し訳ございません。<br>
-  ご希望の時間でのご用意が難しいため、<br>
-  注文を受け付けることができませんでした。
+  このたびは『Pickup』をご利用いただき、誠にありがとうございます。<br>
+  ご注文いただいておりました商品につきまして、<br>
+  店舗様によりキャンセルのご連絡をいただきましたので」ご報告いたします。
 </p>
 <p>
-  お手数ですが、受け取り時間を変更してご注文いただくか、<br>
-  直接店舗にご連絡いただきますようお願い申し上げます。
+  キャンセルの理由につきましては、<br>
+  お手数ですが、店舗に直接ご連絡いただきますようお願いいたします。<br>
 </p>
 <br>
 <p><%= @shop.name %>の電話番号：<%= link_to @shop.phone_number, "tel:" + @shop.phone_number %></p>
 <br>
-<p class="ma-y-20">============【注文情報を記載】============</p>
-<p>［注文日時］<%= @order.created_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
+<p>============【注文情報】============</p>
+<p>［注文送信日時］<%= @order.created_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
 <p>［ご注文者］<%= @user.full_name %></p>
 <p>［受け取り店舗］<%= @shop.name %></p>
 <p>［受け取り日時］<%= @order.takeaway_datetime.strftime("%Y年%m月%d日 %H時%M分") %></p>
+<p>［合計金額］¥<%= @order.total_payment %></p>
 <br>
-<table class="table ma-y-20"> 
+<table class="table">
   <tbody>
     <% @order.order_items.each do |item| %>
       <tr>
-        <td><%= item.menu_name %></td>
-        <td><%= item.menu_amount %></td>
-        <td>¥<%= price(item.menu_price * item.menu_amount) %></td>
+        <td width="100px"><%= item.menu_name %></td>
+        <td width="50px"><%= item.menu_amount %>個</td>
+        <td width="100px"><%= item.menu_price * item.menu_amount %>円</td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<p>［合計金額］¥<%= price(@order.total_payment) %></p>
-
 <br>
 <a href="https://pickup.circrest.com/">Pickupへ</a>
 
+<hr>
+<p>ご不明点などございましたら、お気軽にご連絡ください。</p>
+<p>
+  なお、本メールは配信専用のメールアドレスから配信しております。<br>
+  ご返信いただいても確認することができませんので、<br>
+  ご連絡は下記メールアドレスにお問い合わせください。<br>
+  <a href="mailto:pickup@circrest.com">pickup@circrest.com</a>
+</p>
+<hr>
 
-<br>
-<p>ご不明な点などございましたら、下記までお問い合わせください。</p>
+<p>今後とも、Pickupをよろしくお願いいたします。</p>
+
+<p>
+  テイクアウトは、これからの外食の形。<br>
+  テイクアウトをもっと身近に　<a href="https://pickup.circrest.com/">Pickup（ピックアップ）</a>
+</p>
 
 <h3>Pickup運営</h3>
 <p>
-  問い合わせ先：pickup@circrest.com<br>
+  問い合わせ先：<a href="mailto:pickup@circrest.com">pickup@circrest.com</a><br>
   対応時間：9:00〜20:00
 </p>
-

@@ -3,8 +3,8 @@
     <div class="col-md-4">
       <div class="content_box">
         <h5>
-          <%= link_to "本日の受注状況", today_index_shops_orders_path, class:"black" %>
-          <% if today_order_count(@new_orders) >= 1 %>
+          <%= link_to "新規注文", new_orders_shops_orders_path, class:"black" %>
+          <% if @new_orders.count >= 1 %>
             <span class="blinking red">新着</span>
           <% end %>
         </h5>
@@ -12,16 +12,28 @@
         <div class="content_box_detail">
           <table class="table table-borderless">
             <tbody>
-              <tr data-href="<%= today_index_shops_orders_path %>" class="pointer">
+              <tr data-href="<%= new_orders_shops_orders_path %>" class="pointer">
                 <td>新規注文</td>
-                <td><%= today_order_count(@new_orders) %></td>
+                <td><%= @new_orders.count %></td>
               </tr>
-              <tr data-href="<%= today_index_shops_orders_path %>" class="pointer">
-                <td>受付した注文</td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="content_box">
+        <h5>
+          <%= link_to "本日の受注状況", today_orders_shops_orders_path, class:"black" %>
+        </h5>
+        <hr>
+        <div class="content_box_detail">
+          <table class="table table-borderless">
+            <tbody>
+              <tr data-href="<%= today_orders_shops_orders_path %>" class="pointer">
+                <td>本日の受付注文</td>
                 <td><%= today_order_count(@reception_orders) %></td>
               </tr>
-              <tr data-href="<%= today_index_shops_orders_path %>" class="pointer">
-                <td>キャンセル済み注文</td>
+              <tr data-href="<%= today_orders_shops_orders_path %>" class="pointer">
+                <td>本日のキャンセル注文</td>
                 <td><%= today_order_count(@cancel_orders) %></td>
               </tr>
             </tbody>
@@ -134,21 +146,23 @@
             });
           </script>
         </div>
-        <hr>
         <div class="row">
           <div class="col-md-4">
             <div class="content_box_detail">
               <div class="image_box pa-b-30">
                 <% if @shop.shop_images.present? %>
-                  <div class="shop_image-box center ma-b-10">
+                  <div class="shop_image-box center ma-b-10" id="mainImg">
                     <%= image_tag @shop.main_image.file_name.thumb_width.to_s, class:"wid-100" %>
                   </div>
                   <div class="shop_image-box center">
-                    <% if @shop.shop_images.count >= 2 %>
-                      <% @shop.not_main_images.each do |image| %>
-                        <%= image_tag image.file_name.thumb_square.to_s, size: "75x75" %>
+                    <ul id="subImg" style="list-style:none;padding:0;">
+                      <li class="dis-ib"><%= image_tag @shop.main_image.file_name.thumb_width.to_s, size: "60x60", class: "current" %></li>
+                      <% if @shop.shop_images.count >= 2 %>
+                        <% @shop.not_main_images.each do |image| %>
+                          <li class="dis-ib"><%= image_tag image.file_name.thumb_width.to_s, size: "60x60" %></li>
+                        <% end %>
                       <% end %>
-                    <% end %>
+                    </ul>
                   </div>
                 <% else %>
                   <div class="shop_image-box center ma-b-10 border">
@@ -266,6 +280,21 @@ jQuery(function ($) {
       window.location = $(e.target).closest("tr").data("href");
     }
   });
+});
+$(function(){
+    $('#subImg img').on('click',function(){
+        //mainに切り替えるimgのsrc取得
+        img = $(this).attr('src');
+        //currentクラス付け替え
+        $('#subImg li').removeClass('current');
+        $(this).parent().addClass('current');
+        //fadeOutできたらsrc変更してfadeIn
+        $('#mainImg img').fadeOut(50, function() {
+            $('#mainImg img').attr('src', img).on('load', function() {
+                 $(this).fadeIn();
+            })
+       })
+    });
 });
 </script>
 <script>
