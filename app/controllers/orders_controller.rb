@@ -90,12 +90,24 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update
+    @order = Order.find(params[:id])
+    if @order.user == current_user && @order.status == "新規注文"
+      @order.update(status: "キャンセル注文")
+      flash[:success] = "キャンセルしました"
+      redirect_to user_order_path(@order)
+    else
+      flash[:danger] = "キャンセルできませんでした"
+      redirect_to user_order_path(@order)
+    end
+  end
+
   def fix
 
   end
 
   def destroy
-
+    
   end
 
   private

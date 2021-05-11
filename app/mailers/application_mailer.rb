@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: '<pickup.circrest@gmail.com>'
+  default from: 'Pickup'
   layout 'mailer'
 end

@@ -73,11 +73,14 @@
         <div class="card-body">
           <table class="table table-borderless">
             <tbody>
-              <tr data-href="<%= today_index_shops_orders_path %>">
+              <tr data-href="<%= new_orders_shops_orders_path %>">
+                <td class="pointer">新規注文</td>
+              </tr>
+              <tr data-href="<%= today_orders_shops_orders_path %>">
                 <td class="pointer">本日の注文</td>
               </tr>
               <tr data-href="<%= shops_orders_path %>">
-                <td class="pointer">注文履歴</td>
+                <td class="pointer">受注履歴</td>
               </tr>
             </tbody>
           </table>

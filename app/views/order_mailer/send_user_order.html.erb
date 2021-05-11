@@ -7,26 +7,18 @@
 </p>
 
 <p class="ma-y-20">-----------【注文情報】------------</p>
-<p>［注文日時］<%= @order.created_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
 <p>［ご注文者］<%= @user.full_name %></p>
 <p>［受け取り日時］<%= @order.takeaway_datetime.strftime("%Y年%m月%d日 %H時%M分") %></p>
 <p>［合計金額］<%= @order.total_payment %>円</p>
 <p>［商品一覧］</p>
 
-<table class="table ma-y-20">
-  <thead>
-    <tr>
-      <th width="100px">商品名</th>
-      <th width="100px" style="text-arign:right">数量</th>
-      <th width="100px" style="text-arign:right">金額</th>
-    </tr>
-  </thead>
+<table class="table">
   <tbody>
     <% @order.order_items.each do |item| %>
       <tr>
-        <td><%= item.menu_name %></td>
-        <td><%= item.menu_amount %></td>
-        <td><%= item.menu_price * item.menu_amount %>円</td>
+        <td width="100px"><%= item.menu_name %></td>
+        <td width="50px"><%= item.menu_amount %>個</td>
+        <td width="100px"><%= item.menu_price * item.menu_amount %>円</td>
       </tr>
     <% end %>
   </tbody>
@@ -36,10 +28,22 @@
 <br>
 <a href="https://pickup.circrest.com/shops/orders/<%= @order.id %>">受付処理をする</a>
 <br>
-<br>
+<hr>
+<p>ご不明点などございましたら、お気軽にご連絡ください。</p>
+<p>
+  なお、本メールは配信専用のメールアドレスから配信しております。<br>
+  ご返信いただいても確認することができませんので、<br>
+  ご連絡は下記メールアドレスにお問い合わせください。<br>
+  <a href="mailto:pickup@circrest.com">pickup@circrest.com</a>
+</p>
+<hr>
 
-<p>ご不明な点などございましたら、下記までお問い合わせください。</p>
-<p>↓↓↓↓↓↓↓↓↓↓↓↓↓</p>
+<p>今後とも、Pickupをよろしくお願いいたします。</p>
+
+<p>
+  テイクアウトは、これからの外食の形。<br>
+  テイクアウトをもっと身近に　<a href="https://pickup.circrest.com/">Pickup（ピックアップ）</a>
+</p>
 
 <h3>Pickup運営</h3>
 <p>

@@ -45,7 +45,8 @@ Rails.application.routes.draw do
     resources :menus, only:[:index, :show]
     resources :orders, only:[:index, :show, :update, :destroy] do
       collection do
-        get :today_index
+        get :new_orders
+        get :today_orders
       end
     end
   end
@@ -84,7 +85,7 @@ Rails.application.routes.draw do
     end
     resources :menu_images, only:[:index, :new, :create, :edit, :update, :destroy]
     resources :menu_tags, only:[:new, :create, :destroy]
-    resources :orders, only:[:new, :create, :destroy]
+    resources :orders, only:[:new, :create, :update, :destroy]
     resources :cart_items, only:[:create, :update]
   end
 
@@ -92,6 +93,7 @@ Rails.application.routes.draw do
     resources :orders, only:[:new, :create]
   end
 
+  resources :orders, only:[:update]
   get "orders/fix", to: "orders#fix"
   resources :cart_items, only:[:destroy]
   resources :categories, only:[:index,:new, :create, :edit, :update, :destroy]
