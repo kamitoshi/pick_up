@@ -30,7 +30,8 @@ class Order < ApplicationRecord
 
   # 予約番号を採番するメソッド
   def numbering_reserve_number(count)
-    self.reserve_number = count + 1
+    date = Date.today
+    self.reserve_number = "#{date.strftime("%Y%m%d").to_s}-#{(count + 1).to_s}"
   end
 
   # 本日中のオーダーかどうか判断

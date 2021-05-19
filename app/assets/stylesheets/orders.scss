@@ -1,3 +1,26 @@
 // Place all the styles related to the orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.reception_btn {
+  width:80%;
+  margin:0 auto;
+  height:50px;
+  background-color: #EFAA29;
+  text-align: center;
+  .rece-btn{
+    line-height: 50px;
+    color: #fff;
+  }
+}
+.cancel_btn {
+  width:80%;
+  margin:0 auto;
+  height:50px;
+  background-color: red;
+  text-align: center;
+  .cancel-btn{
+    line-height: 50px;
+    color: #fff;
+  }
+}
